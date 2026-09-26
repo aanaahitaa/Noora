@@ -4,37 +4,1133 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>جشن تولد نورا نیک نفس</title>
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
 
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
 
 
-<link rel="stylesheet" href="css/style.css">
+:root{
 
+--pearl:#fffaf7;
+--milk:#fffdfb;
+--blush:#f3dce0;
+--gold:#c9a45c;
+--gold-light:#efdcae;
+--ink:#66565a;
+
+--shadow:
+0 20px 60px rgba(185,145,115,.18);
+
+}
+
+
+
+*{
+
+box-sizing:border-box;
+margin:0;
+padding:0;
+
+}
+
+
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+
+
+body{
+
+background:
+
+radial-gradient(circle at top,#fff,#fff7f3);
+
+font-family:"Noto Naskh Arabic",serif;
+
+color:var(--ink);
+
+text-align:center;
+
+overflow-x:hidden;
+
+}
+
+
+
+/* ستاره های پس زمینه */
+
+.star{
+
+position:fixed;
+
+color:#e8c976;
+
+opacity:.5;
+
+animation: sparkle 3s infinite;
+
+z-index:-1;
+
+}
+
+
+
+@keyframes sparkle{
+
+50%{
+
+opacity:1;
+
+transform:scale(1.5);
+
+}
+
+}
+
+
+
+
+section{
+
+padding:80px 20px;
+
+min-height:70vh;
+
+}
+
+
+
+
+.section-inner{
+
+max-width:850px;
+
+margin:auto;
+
+}
+
+
+
+
+/* HERO */
+
+
+.photo-frame{
+
+position:relative;
+
+width:300px;
+
+height:430px;
+
+margin:auto;
+
+}
+
+
+
+.photo-glow{
+
+position:absolute;
+
+inset:-40px;
+
+background:
+
+radial-gradient(circle,
+rgba(231,201,120,.6),
+transparent 65%);
+
+filter:blur(25px);
+
+}
+
+
+
+.photo-inner{
+
+width:100%;
+
+height:100%;
+
+overflow:hidden;
+
+border-radius:
+
+50% 50% 45% 45%;
+
+
+border:10px solid white;
+
+box-shadow:var(--shadow);
+
+}
+
+
+
+.photo-inner img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+
+
+.photo-frame:after{
+
+content:"";
+
+position:absolute;
+
+inset:-15px;
+
+border-radius:
+
+50% 50% 45% 45%;
+
+border:2px solid var(--gold);
+
+}
+
+
+
+.photo-star{
+
+position:absolute;
+
+font-size:35px;
+
+color:var(--gold);
+
+animation:sparkle 2s infinite;
+
+}
+
+
+
+.star-one{
+
+right:-15px;
+
+top:40px;
+
+}
+
+
+.star-two{
+
+left:-15px;
+
+bottom:100px;
+
+}
+
+
+.star-three{
+
+right:20px;
+
+bottom:20px;
+
+}
+
+
+
+.hero-title{
+
+
+margin-top:40px;
+
+font-size:70px;
+
+font-weight:400;
+
+
+background:
+
+linear-gradient(
+120deg,
+#b88942,
+#ffe5a2,
+#b88942
+);
+
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+
+
+.hero-text{
+
+font-size:22px;
+
+line-height:2;
+
+}
+
+
+
+
+
+/* scroll */
+
+
+.scroll-down{
+
+margin-top:50px;
+
+color:var(--gold);
+
+}
+
+
+
+.scroll-circle{
+
+margin:15px auto;
+
+width:50px;
+
+height:50px;
+
+border-radius:50%;
+
+border:1px solid var(--gold);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+animation:down 2s infinite;
+
+}
+
+
+
+@keyframes down{
+
+50%{
+
+transform:translateY(12px);
+
+}
+
+}
+
+
+
+
+
+/* quote */
+
+
+.quote-card{
+
+background:
+
+rgba(255,255,255,.65);
+
+backdrop-filter:blur(15px);
+
+border-radius:35px;
+
+padding:40px;
+
+box-shadow:var(--shadow);
+
+}
+
+
+
+.quote-mark{
+
+font-size:60px;
+
+color:var(--gold);
+
+}
+
+
+
+.quote-card p{
+
+font-size:25px;
+
+}
+
+
+
+
+
+/* glass */
+
+
+.glass{
+
+background:
+
+rgba(255,255,255,.6);
+
+backdrop-filter:blur(20px);
+
+border-radius:30px;
+
+box-shadow:var(--shadow);
+
+padding:30px;
+
+}
+
+
+
+
+
+.event{
+
+display:flex;
+
+justify-content:center;
+
+gap:35px;
+
+flex-wrap:wrap;
+
+}
+
+
+
+.icon{
+
+font-size:40px;
+
+}
+
+
+
+
+
+/* countdown */
+
+
+.countdown{
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+
+
+.time{
+
+width:110px;
+
+padding:25px;
+
+}
+
+
+
+.time strong{
+
+display:block;
+
+font-family:Vazirmatn;
+
+font-size:40px;
+
+color:var(--gold);
+
+}
+
+
+
+
+
+/* timeline */
+
+
+.timeline-box{
+
+margin:20px auto;
+
+max-width:350px;
+
+}
+
+
+
+
+/* buttons */
+
+
+.button{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+padding:15px 25px;
+
+margin:8px;
+
+border-radius:50px;
+
+text-decoration:none;
+
+color:var(--ink);
+
+background:
+
+linear-gradient(
+135deg,
+white,
+#f5e3b5
+);
+
+box-shadow:var(--shadow);
+
+}
+
+
+
+.button img{
+
+width:30px;
+
+}
+
+
+
+
+
+/* music */
+
+
+.music{
+
+position:fixed;
+
+bottom:25px;
+
+left:25px;
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+border:0;
+
+background:white;
+
+box-shadow:var(--shadow);
+
+z-index:10;
+
+}
+
+
+
+/* animation */
+
+
+.reveal{
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:1s;
+
+}
+
+
+.show{
+
+opacity:1;
+
+transform:none;
+
+}
+
+
+
+footer{
+
+padding:70px;
+
+font-size:30px;
+
+color:var(--gold);
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+.photo-frame{
+
+width:250px;
+
+height:360px;
+
+}
+
+
+.hero-title{
+
+font-size:55px;
+
+}
+
+
+}
+
+
+</style>
 
 </head>
+
 
 
 <body>
 
 
-<div class="stars-layer"></div>
+
+<audio id="music" loop>
+
+<source src="assets/music/birthday.mp3">
+
+</audio>
+
+
+<button class="music" onclick="musicControl()">
+
+🎵
+
+</button>
 
 
 
 
-<!-- MUSIC -->
+<section class="reveal">
 
-<audio id="bgMusic" loop>
+<div class="section-inner">
 
+
+<div class="photo-frame">
+
+
+<div class="photo-glow"></div>
+
+
+<div class="photo-inner">
+
+<img src="assets/noora-main.jpg">
+
+</div>
+
+
+<span class="photo-star star-one">✦</span>
+
+<span class="photo-star star-two">✧</span>
+
+<span class="photo-star star-three">✦</span>
+
+
+</div>
+
+
+
+<h1 class="hero-title">
+
+نورا جان
+
+</h1>
+
+
+
+<p class="hero-text">
+
+به افتخار اولین سال زندگی نورا جان،
+
+<br>
+
+با عشق منتظر حضور شما هستیم.
+
+</p>
+
+
+
+<div class="scroll-down">
+
+<div class="scroll-circle">
+
+↓
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+
+<section class="reveal">
+
+<div class="section-inner">
+
+
+<div class="quote-card">
+
+
+<span class="quote-mark">❝</span>
+
+
+<p>
+
+حضور شما،
+
+<br>
+
+قشنگ‌ترین قسمت این جشن است.
+
+</p>
+
+
+<span class="quote-mark">❞</span>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2>
+
+جشن تولد یک سالگی
+
+</h2>
+
+
+<div class="glass event">
+
+
+<div>
+
+<div class="icon">🎂</div>
+
+<p>تولد نورا</p>
+
+</div>
+
+
+<div>
+
+<div class="icon">📅</div>
+
+<p>۹ مهر</p>
+
+</div>
+
+
+<div>
+
+<div class="icon">🕕</div>
+
+<p>۱۸:۰۰</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2>
+
+تا شروع جشن
+
+</h2>
+
+
+<div class="countdown">
+
+
+<div class="glass time">
+
+<strong id="d">۰۰</strong>
+
+روز
+
+</div>
+
+
+<div class="glass time">
+
+<strong id="h">۰۰</strong>
+
+ساعت
+
+</div>
+
+
+<div class="glass time">
+
+<strong id="m">۰۰</strong>
+
+دقیقه
+
+</div>
+
+
+<div class="glass time">
+
+<strong id="s">۰۰</strong>
+
+ثانیه
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2>
+
+برنامه جشن
+
+</h2>
+
+
+<div class="glass timeline-box">
+
+۱۸:۰۰
+
+<br>
+
+پذیرایی و شروع جشن
+
+</div>
+
+
+
+<div class="glass timeline-box">
+
+۲۰:۰۰
+
+<br>
+
+شام و خاطره‌سازی
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2>
+
+تالار دوریکا
+
+</h2>
+
+
+<p>
+
+نشتارود
+
+</p>
+
+
+
+<a class="button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
+
+Google Maps
+
+</a>
+
+
+<a class="button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
+
+نشان
+
+</a>
+
+
+
+<a class="button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
+
+بلد
+
+</a>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2>
+
+منتظر دیدار شما هستیم
+
+</h2>
+
+
+<div class="glass">
+
+
+<button class="button">
+
+✓ بله، می‌آیم
+
+</button>
+
+
+
+<button class="button">
+
+نمی‌توانم بیایم
+
+</button>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<footer>
+
+به امید دیدار شما
+
+<br>
+
+نورا نیک نفس
+
+</footer>
+
+
+
+
+
+
+
+<script>
+
+
+// stars
+
+for(let i=0;i<35;i++){
+
+let s=document.createElement("div");
+
+s.className="star";
+
+s.innerHTML="✦";
+
+s.style.left=Math.random()*100+"%";
+
+s.style.top=Math.random()*100+"%";
+
+s.style.fontSize=(10+Math.random()*15)+"px";
+
+document.body.appendChild(s);
+
+}
+
+
+
+// reveal
+
+let items=document.querySelectorAll(".reveal");
+
+
+let obs=new IntersectionObserver(e=>{
+
+e.forEach(x=>{
+
+if(x.isIntersecting)
+
+x.target.classList.add("show");
+
+});
+
+});
+
+
+items.forEach(x=>obs.observe(x));
+
+
+
+
+// countdown
+
+function fa(n){
+
+return String(n).padStart(2,"0")
+.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+
+}
+
+
+
+let date=new Date("2026-10-01T18:00:00");
+
+
+function count(){
+
+let x=date-new Date();
+
+if(x<0)return;
+
+
+d.innerHTML=fa(Math.floor(x/86400000));
+
+h.innerHTML=fa(Math.floor(x/3600000)%24);
+
+m.innerHTML=fa(Math.floor(x/60000)%60);
+
+s.innerHTML=fa(Math.floor(x/1000)%60);
+
+
+}
+
+
+setInterval(count,1000);
+
+count();
+
+
+
+
+// music
+
+let playing=false;
+
+function musicControl(){
+
+let audio=document.getElementById("music");
+
+
+if(!playing){
+
+audio.play();
+
+playing=true;
+
+}
+
+else{
+
+audio.pause();
+
+playing=false;
+
+}
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
 <source src="assets/music/birthday.mp3" type="audio/mpeg">
 
 </audio>
