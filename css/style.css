@@ -1,119 +1,253 @@
-/* ==================================================
-   NOORA - PRINCESS PEARL INVITATION
-   Design System
-================================================== */
+/* =====================================================
+   NOORA LUXURY PRINCESS INVITATION
+   style.css
+===================================================== */
 
 
-/* ---------- Fonts ---------- */
-
-@import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Vazirmatn:wght@300;400;500;600&display=swap');
-
-
-/* ---------- Root ---------- */
+/* =====================
+   VARIABLES
+===================== */
 
 :root {
 
-    --pearl: #fffdf8;
-    --milk: #fffaf2;
+    --pearl:#fffdf8;
+    --milk:#fff7ef;
 
-    --champagne: #f4dfb0;
-    --gold: #d6ad62;
-    --gold-light: #f8e7b5;
+    --gold:#d7b26d;
+    --gold-light:#f8e8bd;
 
-    --blush: #efc6c8;
-    --pink-soft: #f8dddd;
+    --champagne:#edd5a4;
 
-    --text: #705766;
-    --text-light: #947b86;
+    --pink:#efc8d1;
 
-    --white: #ffffff;
+    --text:#695260;
+    --soft-text:#927986;
+
+    --glass:
+    rgba(255,255,255,.55);
 
 }
 
 
 
-/* ---------- Reset ---------- */
+/* =====================
+   RESET
+===================== */
 
-* {
-    box-sizing: border-box;
+
+*{
+
+    box-sizing:border-box;
+
 }
 
 
-html {
+html{
 
     scroll-behavior:smooth;
 
 }
 
 
-body {
+
+body{
+
 
     margin:0;
 
     background:
 
-    linear-gradient(
-        180deg,
-        var(--pearl),
-        var(--milk)
+    radial-gradient(
+        circle at top,
+        #ffffff,
+        var(--pearl)
     );
+
 
     color:var(--text);
 
-    font-family:"Vazirmatn", sans-serif;
+
+    font-family:
+    "Vazirmatn",
+    sans-serif;
+
 
     text-align:center;
 
-    direction:rtl;
+    overflow-x:hidden;
+
 
 }
 
 
-/* ---------- General ---------- */
 
 
-section {
+
+/* =====================
+   BACKGROUND SPARKLES
+===================== */
+
+
+.sparkles {
+
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background-image:
+
+    radial-gradient(
+        circle,
+        rgba(218,180,100,.5) 1px,
+        transparent 2px
+    );
+
+
+    background-size:
+    90px 90px;
+
+
+    opacity:.25;
+
+
+    animation:
+
+    sparkleMove 12s linear infinite;
+
+
+}
+
+
+
+@keyframes sparkleMove {
+
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+
+    to{
+
+        transform:translateY(90px);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* =====================
+   GENERAL
+===================== */
+
+
+section{
+
+
+    min-height:auto;
+
+    padding:
+
+    90px 20px;
+
 
     position:relative;
 
-    width:100%;
-
-    padding:90px 20px;
 
 }
 
 
 
-.section-inner {
+
+.section-inner{
+
 
     max-width:850px;
 
     margin:auto;
 
+
 }
 
 
-/* ---------- Titles ---------- */
 
 
-.hero-title,
-.personal h2,
-.invitation-name {
+h2,
+.section-title{
 
 
-    font-family:"Parisienne", cursive;
+    font-size:38px;
+
+    font-weight:500;
+
+
+    color:#b88945;
+
+
+}
+
+
+
+p{
+
+
+    font-size:18px;
+
+    line-height:2;
+
+
+}
+
+
+
+
+
+/* =====================
+   NASTALIQ
+===================== */
+
+
+.nastaliq-title{
+
+
+    font-family:
+
+    "Noto Nastaliq Urdu",
+    serif;
+
 
     font-weight:400;
 
-    line-height:1.5;
+
+    font-size:70px;
+
+
+    line-height:2;
+
 
     background:
 
     linear-gradient(
+
         120deg,
-        #b98642,
-        #f8e8b4,
-        #c99a52
+
+        #b88438,
+
+        #f9e7ae,
+
+        #c38d43
+
     );
 
 
@@ -122,55 +256,26 @@ section {
     color:transparent;
 
 
-}
-
-
-/* اسم نورا */
-
-.hero-title {
-
-    font-size:72px;
-
-    margin:25px 0;
-
-    padding-bottom:20px;
-
-}
-
-
-
-.personal h2 {
-
-    font-size:60px;
-
-    margin:25px 0;
 
 }
 
 
 
 
-/* ---------- Body Text ---------- */
-
-
-p {
-
-    font-size:18px;
-
-    line-height:2;
-
-    color:var(--text);
-
-}
 
 
 
-/* ---------- Hero ---------- */
+
+/* =====================
+   HERO / ENVELOPE
+===================== */
 
 
-.hero {
+.hero{
 
-    min-height:100vh;
+
+    height:100vh;
+
 
     display:flex;
 
@@ -178,11 +283,13 @@ p {
 
     justify-content:center;
 
+
 }
 
 
 
-.hero-content {
+.hero-inner{
+
 
     display:flex;
 
@@ -190,184 +297,406 @@ p {
 
     align-items:center;
 
+
 }
 
 
-/* ---------- Envelope ---------- */
+
+.envelope-container{
 
 
-.envelope {
+    perspective:1200px;
 
 
-    width:280px;
+}
 
-    height:190px;
+
+
+
+.envelope{
+
+
+    width:330px;
+
+    height:220px;
+
+
+    position:relative;
+
 
     background:
 
+
     linear-gradient(
-        145deg,
-        #f8e8c8,
-        #fff6e5
+
+    145deg,
+
+    #fff2d7,
+
+    #e9c986
+
     );
 
 
-    border-radius:18px;
+    border-radius:12px;
 
-    position:relative;
 
     box-shadow:
 
 
-    0 25px 60px rgba(190,150,80,.25);
+    0 30px 70px
+
+    rgba(180,130,50,.35);
+
+
+
+    overflow:hidden;
+
+
+    transition:.8s;
+
 
 }
 
 
 
-/* حذف خطوط مورب */
 
-.envelope::before,
-.envelope::after {
+.envelope-flap{
 
-    display:none;
+
+    position:absolute;
+
+
+    top:0;
+
+    left:0;
+
+
+    width:100%;
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+
+    145deg,
+
+    #f8dfad,
+
+    #fff5dd
+
+    );
+
+
+    clip-path:
+
+    polygon(
+
+    0 0,
+
+    100% 0,
+
+    50% 55%
+
+    );
+
+
+    transform-origin:top;
+
+
+    transition:1s;
+
 
 }
 
 
 
 
-/* مهر */
 
-.seal {
+.envelope.open .envelope-flap{
 
 
-    width:90px;
+    transform:
 
-    height:90px;
+    rotateX(180deg);
+
+
+}
+
+
+
+
+
+
+.letter{
+
+
+    position:absolute;
+
+
+    bottom:-100%;
+
+
+    left:20px;
+
+
+    width:290px;
+
+    height:190px;
+
+
+    background:white;
+
+
+    border-radius:8px;
+
+
+    transition:1s;
+
+
+}
+
+
+
+.envelope.open .letter{
+
+
+    bottom:15px;
+
+
+}
+
+
+
+
+
+
+.wax-seal{
+
+
+    position:absolute;
+
+
+    top:50%;
+
+    left:50%;
+
+
+    transform:
+
+    translate(-50%,-50%);
+
+
+    width:95px;
+
+    height:95px;
 
 
     border-radius:50%;
 
 
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-
-    transform:
-    translate(-50%,-50%);
-
-
     display:flex;
-
-    align-items:center;
 
     justify-content:center;
 
+    align-items:center;
 
 
     background:
 
     radial-gradient(
-        circle,
-        #f6dca1,
-        #c89645
+
+    circle,
+
+    #f4d68f,
+
+    #b87b2e
+
     );
 
 
     box-shadow:
 
-    0 8px 25px rgba(180,130,40,.35);
 
+    0 10px 30px
+
+    rgba(150,100,30,.45);
 
 
 }
 
 
 
+.wax-seal span{
 
-.seal span {
 
+    font-family:
 
-    font-family:"Parisienne";
+    "Noto Nastaliq Urdu";
 
-    font-size:65px;
 
     color:white;
 
 
-}
-
-
-
-
-/* ---------- Personal ---------- */
-
-
-.personal {
-
-
-    background:
-
-    rgba(255,255,255,.65);
-
-
-    backdrop-filter:blur(8px);
-
-}
-
-
-
-.personal-label {
-
-
-    color:var(--text-light);
-
-    font-size:16px;
+    font-size:65px;
 
 
 }
 
 
 
-.personal-text {
 
 
-    max-width:550px;
+
+
+
+.intro-name{
+
+
+    margin-top:35px;
+
+
+    font-size:22px;
+
+
+    color:#8b6b76;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================
+   SCROLL
+===================== */
+
+
+.scroll-down{
+
+
+    margin-top:50px;
+
+
+    color:#b68a4c;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+.arrow{
+
+
+    margin-top:15px;
+
+
+    animation:
+
+    arrowMove 1.5s infinite;
+
+
+}
+
+
+
+.arrow i{
+
+
+    display:block;
+
+
+    width:15px;
+
+    height:15px;
+
+
+    border-right:
+
+    2px solid var(--gold);
+
+
+    border-bottom:
+
+    2px solid var(--gold);
+
+
+    transform:
+
+    rotate(45deg);
+
 
     margin:auto;
 
+
 }
 
 
 
-/* ---------- Photo ---------- */
+.arrow i:nth-child(2){
 
 
-.photo-frame {
+    margin-top:-8px;
+
+
+}
+
+
+
+
+
+@keyframes arrowMove{
+
+
+50%{
+
+transform:translateY(10px);
+
+}
+
+}
+
+
+
+
+
+/* =====================
+   PHOTO
+===================== */
+
+
+.photo-frame{
 
 
     position:relative;
 
+
     display:inline-block;
 
-    margin:40px auto;
 
 }
 
 
 
-.photo-frame img {
+.photo-frame img{
 
 
-    width:280px;
+    width:300px;
 
-    height:280px;
+    height:300px;
+
 
     object-fit:cover;
+
 
     border-radius:50%;
 
@@ -377,137 +706,152 @@ p {
     8px solid white;
 
 
-
     box-shadow:
 
 
-    0 15px 50px rgba(220,180,100,.35);
+    0 20px 60px
+
+    rgba(210,170,90,.35);
 
 
 }
 
 
 
-/* glow */
 
 
-.photo-frame::before {
-
-
-    content:"";
+.photo-glow{
 
 
     position:absolute;
 
-    inset:-30px;
+
+    inset:-40px;
 
 
     background:
 
     radial-gradient(
-        circle,
-        rgba(244,210,130,.45),
-        transparent 65%
+
+    circle,
+
+    rgba(248,210,130,.5),
+
+    transparent 65%
+
     );
 
 
-    filter:blur(20px);
+    filter:blur(25px);
+
 
     z-index:-1;
 
-}
-
-
-
-/* ---------- Ornament ---------- */
-
-
-.ornament {
-
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:18px;
-
-    margin:40px 0;
-
 
 }
 
 
-.ornament span {
 
 
-    color:var(--gold);
+.photo-stars span{
 
-    font-size:22px;
+
+    position:absolute;
+
+
+    color:#d8ae60;
+
+
+    animation:
+
+    twinkle 2s infinite;
+
 
 }
 
 
-.ornament i {
+
+.photo-stars span:nth-child(1){
+
+top:0;
+right:20px;
+
+}
 
 
-    width:70px;
+.photo-stars span:nth-child(2){
 
-    height:1px;
+bottom:30px;
+left:0;
+
+}
+
+
+
+.photo-stars span:nth-child(3){
+
+top:50%;
+right:-30px;
+
+}
+
+
+
+
+@keyframes twinkle{
+
+
+50%{
+
+opacity:.3;
+
+transform:scale(1.4);
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* =====================
+   GLASS
+===================== */
+
+
+.glass{
 
 
     background:
 
-    linear-gradient(
-        90deg,
-        transparent,
-        var(--gold),
-        transparent
-    );
+    rgba(255,255,255,.55);
 
 
-}
+    backdrop-filter:
+
+    blur(15px);
 
 
+    border:
 
-/* ---------- Timeline ---------- */
+    1px solid
 
-
-.timeline {
-
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:35px;
-
-
-}
-
-
-
-.timeline-item {
-
-
-    width:280px;
-
-    padding:25px;
-
-
-    background:white;
-
-
-    border-radius:25px;
+    rgba(255,255,255,.8);
 
 
     box-shadow:
 
 
-    0 15px 40px rgba(200,170,100,.15);
+    0 15px 40px
+
+    rgba(190,150,80,.15);
+
+
+    border-radius:30px;
 
 
 }
@@ -515,224 +859,337 @@ p {
 
 
 
-.timeline-time {
 
 
-    font-size:26px;
-
-    color:#c28d43;
-
-
-    font-weight:600;
-
-}
+/* =====================
+   EVENT
+===================== */
 
 
-
-.timeline-title {
-
-
-    font-size:18px;
-
-}
-
-
-
-/* حذف خط عمودی */
-
-.timeline::before {
-
-
-    display:none;
-
-
-}
-
-
-
-
-/* ---------- Countdown ---------- */
-
-
-.countdown {
+.event-card{
 
 
     display:flex;
+
 
     justify-content:center;
 
+
+    gap:20px;
+
+
+    padding:30px;
+
+
+}
+
+
+
+.event-item{
+
+
+    padding:20px;
+
+
+}
+
+
+
+.icon{
+
+
+    font-size:35px;
+
+
+}
+
+
+
+
+
+
+/* =====================
+   COUNTDOWN
+===================== */
+
+
+.countdown{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
     gap:15px;
+
 
     flex-wrap:wrap;
 
+
 }
 
 
 
-.countdown div {
+.countdown .glass{
 
 
-    background:white;
+    width:95px;
 
 
-    min-width:90px;
-
-    padding:20px 10px;
-
-
-    border-radius:20px;
-
-
-    box-shadow:
-
-    0 10px 30px rgba(200,170,100,.18);
+    padding:20px;
 
 
 }
 
 
 
-.countdown span {
+.countdown strong{
 
 
     display:block;
 
+
     font-size:32px;
 
-    color:#c28d43;
+
+    color:#b8833c;
 
 
 }
 
 
 
-.countdown small {
 
 
-    color:var(--text-light);
+
+
+/* =====================
+   TIMELINE
+===================== */
+
+
+.timeline{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    gap:25px;
+
 
 }
 
 
 
-/* ---------- Buttons ---------- */
+.timeline-card{
 
 
-button,
-.primary-btn {
+    width:300px;
 
 
-    border:none;
+    padding:25px;
 
 
-    cursor:pointer;
+}
 
 
-    padding:15px 35px;
+
+.timeline-time{
+
+
+    font-size:28px;
+
+    color:#b8843f;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================
+   BUTTONS
+===================== */
+
+
+.glass-btn{
+
+
+    display:inline-flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:10px;
+
+
+    padding:
+
+    15px 28px;
+
+
+    margin:8px;
 
 
     border-radius:50px;
 
 
+    text-decoration:none;
+
+
+    color:#72535d;
+
 
     background:
 
-
     linear-gradient(
-        135deg,
-        #d8ad62,
-        #f7dfa7
+
+    135deg,
+
+    rgba(255,255,255,.7),
+
+    rgba(244,220,170,.65)
+
     );
 
 
-    color:#60495a;
+    backdrop-filter:
+
+    blur(12px);
 
 
-    font-family:"Vazirmatn";
+    border:
 
+    1px solid
 
-    font-size:17px;
+    rgba(255,255,255,.8);
 
 
     box-shadow:
 
-    0 10px 25px rgba(210,170,80,.3);
+
+    0 12px 35px
+
+    rgba(180,140,60,.2);
+
 
 
 }
 
 
 
-/* ---------- Scroll hint ---------- */
+.glass-btn img{
 
 
-.scroll-hint {
+    width:28px;
 
-
-    margin-top:60px;
-
-
-    color:var(--text-light);
-
-
-}
-
-
-.scroll-arrow {
-
-
-    margin-top:15px;
-
-    animation:down 1.5s infinite;
+    height:28px;
 
 
 }
 
 
 
-@keyframes down {
+
+.main{
 
 
-    50% {
+    cursor:pointer;
 
-        transform:translateY(10px);
-
-    }
+    border:none;
 
 }
 
 
 
-/* ---------- Responsive ---------- */
+
+
+/* =====================
+   FOOTER
+===================== */
+
+
+footer{
+
+
+    padding:80px 20px;
+
+
+    font-family:
+
+    "Noto Nastaliq Urdu";
+
+
+    font-size:30px;
+
+
+}
+
+
+
+
+
+
+
+/* =====================
+   MOBILE
+===================== */
 
 
 @media(max-width:600px){
 
 
-.hero-title {
+.nastaliq-title{
 
-    font-size:55px;
-
-}
-
-
-.personal h2 {
-
-    font-size:45px;
+font-size:52px;
 
 }
 
 
-p {
+h2{
 
-    font-size:16px;
+font-size:30px;
 
 }
 
 
-section {
+.envelope{
 
-    padding:70px 18px;
+width:290px;
+
+height:190px;
+
+}
+
+
+.photo-frame img{
+
+width:240px;
+
+height:240px;
+
+}
+
+
+.event-card{
+
+flex-direction:column;
 
 }
 
