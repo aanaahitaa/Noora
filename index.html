@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوت‌نامه اولین تولد نورا عزیز 💖</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'IranNastaliq';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/iran-nastaliq-font/IranNastaliq.woff') format('woff');
+        }
+
+        :root {
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-dark: #4a3b32;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #fefae0 0%, #f3e5ab 50%, #fceade 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #ffd700, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: sparkleAnim 4s infinite linear;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .envelope-wrapper {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25);
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .guest-name-tag {
+            font-size: 1.3rem;
+            color: #8a6d3b;
+            margin-bottom: 15px;
+        }
+
+        .envelope-icon {
+            font-size: 70px;
+            margin: 20px 0;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .open-btn {
+            background: linear-gradient(45deg, #d4af37, #f3e5ab, #d4af37);
+            background-size: 200% 200%;
+            color: #4a3b32;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .open-btn:hover { transform: scale(1.05); }
+
+        .main-card {
+            display: none;
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 30px;
+            border: 3px double var(--gold-primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 35px 25px;
+            text-align: center;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nastaliq {
+            font-family: 'IranNastaliq', serif;
+            line-height: 2.2;
+        }
+
+        .title-sub { font-size: 1.6rem; color: #7a5c29; }
+        .title-main { font-size: 2.5rem; color: #a37212; margin: 10px 0; }
+        .child-name { font-size: 3.8rem; color: #b8860b; font-weight: bold; margin: 5px 0; }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold-primary), transparent);
+            margin: 25px 0;
+        }
+
+        .countdown-title { font-size: 1rem; color: #666; margin-bottom: 10px; }
+
+        .timer-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .time-unit {
+            background: #fff8e7;
+            border: 1px solid var(--gold-light);
+            border-radius: 12px;
+            padding: 10px;
+            min-width: 65px;
+        }
+
+        .time-unit .num { font-size: 1.5rem; font-weight: bold; color: var(--gold-primary); }
+        .time-unit .label { font-size: 0.75rem; color: #777; }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-google { background-color: #ea4335; }
+        .btn-neshan { background-color: #0088cc; }
+        .btn-balad { background-color: #00a859; }
+
+        .nav-btn img { width: 24px; height: 24px; object-fit: contain; }
+
+        .rsvp-section {
+            background: #fffdf9;
+            border: 1px solid var(--gold-light);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .form-group { margin-bottom: 15px; text-align: right; }
+        .form-group label { display: block; font-size: 0.9rem; margin-bottom: 5px; color: #555; }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gold-primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .footer-info { margin-top: 25px; font-size: 0.9rem; color: #777; line-height: 1.8; }
+    </style>
+</head>
+<body>
+
+    <div class="sparkles"></div>
+
+    <div class="container">
+        <!-- پاکت نامه اولیه -->
+        <div class="envelope-wrapper" id="envelopeScreen">
+            <div class="guest-name-tag">
+                دعوت‌نامه اختصاصی برای:<br>
+                <span id="guestNameDisplay" style="color: #b8860b; font-size: 2rem;" class="nastaliq">مهمان عزیز</span>
+            </div>
+            <div class="envelope-icon">✉️✨</div>
+            <p style="margin-bottom: 25px; color: #666;">شما به جشن تولد نورا عزیزمان دعوت شده‌اید</p>
+            <button class="open-btn" onclick="openInvitation()">باز کردن کارت دعوت 🎀</button>
+        </div>
+
+        <!-- محتوای کارت بعد از باز شدن -->
+        <div class="main-card" id="mainCardScreen">
+            <div class="title-sub nastaliq">معجزه‌ای کوچک در راه است</div>
+            <div class="title-main nastaliq">ما با قلبی سرشار از عشق منتظر اولین تولد</div>
+            <div class="child-name nastaliq">نورا</div>
+            <div class="title-main nastaliq">دوست داشتنی‌مان هستیم.</div>
+
+            <div class="divider"></div>
+
+            <div style="margin: 20px 0; background: #fff8e7; padding: 15px; border-radius: 15px; font-size: 0.95rem;">
+                <p>📅 <strong>زمان:</strong> پنج‌شنبه ۹ مهر ماه ۱۴۰۵</p>
+                <p>⏰ <strong>ساعت:</strong> شیرینی و شام از ساعت ۱۸:۰۰</p>
+                <p>📍 <strong>مکان:</strong> نشتارود، تالار دوریکا</p>
+            </div>
+
+            <!-- شمارش معکوس -->
+            <div class="countdown-title">⏳ شمارش معکوس تا شروع جشن:</div>
+            <div class="timer-box">
+                <div class="time-unit"><div class="num" id="days">0</div><div class="label">روز</div></div>
+                <div class="time-unit"><div class="num" id="hours">0</div><div class="label">ساعت</div></div>
+                <div class="time-unit"><div class="num" id="minutes">0</div><div class="label">دقیقه</div></div>
+                <div class="time-unit"><div class="num" id="seconds">0</div><div class="label">ثانیه</div></div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- مسیریابی -->
+            <div class="location-section">
+                <p style="margin-bottom: 10px; font-weight: bold; color: #666;">🗺️ مسیریابی تالار دوریکا:</p>
+
+                <a href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98" target="_blank" class="nav-btn btn-google">
+                    <img src="g.png" alt="Google Maps" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2991/2991148.png'">
+                    مسیریابی با Google Maps
+                </a>
+
+                <a href="https://nshn.ir/2e_bf-IH5x5Y4D" target="_blank" class="nav-btn btn-neshan">
+                    <img src="n.png" alt="نشان" onerror="this.src='https://cdn-icons-png.flaticon.com/512/854/854878.png'">
+                    مسیریابی با نشان
+                </a>
+
+                <a href="https://balad.ir/p/7ahglm8ucy5Qjp" target="_blank" class="nav-btn btn-balad">
+                    <img src="b.png" alt="بلد" onerror="this.src='https://cdn-icons-png.flaticon.com/512/854/854878.png'">
+                    مسیریابی با بلد
+                </a>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- فرم ثبت پاسخ (RSVP) -->
+            <div class="rsvp-section">
+                <h3 style="color: var(--gold-primary); margin-bottom: 15px;">💌 اعلام حضور (RSVP)</h3>
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label>نام و نام خانوادگی:</label>
+                        <input type="text" id="guestNameInput" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>آیا در جشن شرکت می‌کنید؟</label>
+                        <select id="attendanceInput" class="form-control">
+                            <option value="بله می‌آیم">بله، با کمال میل</option>
+                            <option value="متأسفانه نمی‌توانم بیایم">متأسفانه نمی‌توانم بیایم</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تعداد نفرات (با احتساب خودتان):</label>
+                        <input type="number" id="countInput" class="form-control" min="1" value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>پیام برای نورا جون:</label>
+                        <textarea id="messageInput" class="form-control" rows="3" placeholder="پیام شما..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">ثبت پاسخ</button>
+                </form>
+                <div id="formResponse" style="margin-top: 10px; font-weight: bold; color: green;"></div>
+            </div>
+
+            <!-- اطلاعات میزبان -->
+            <div class="footer-info">
+                <p><strong>میزبانان:</strong> پیمان نیک نفس و مهناز شیرج پور</p>
+                <p><strong>شماره تماس:</strong> ۰۹۱۱۱۹۶۲۰۰۸</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ۱. خواندن اسم مهمان از URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let guestName = urlParams.get('name');
+
+        if (guestName) {
+            guestName = guestName.replace(/_/g, ' ');
+            document.getElementById('guestNameDisplay').innerText = guestName;
+            document.getElementById('guestNameInput').value = guestName;
+        }
+
+        // ۲. انیمیشن باز شدن پاکت
+        function openInvitation() {
+            const env = document.getElementById('envelopeScreen');
+            const card = document.getElementById('mainCardScreen');
+            
+            env.style.transform = 'scale(0.8)';
+            env.style.opacity = '0';
+            
+            setTimeout(() => {
+                env.style.display = 'none';
+                card.style.display = 'block';
+            }, 500);
+        }
+
+        // ۳. تایمر معکوس (۹ مهر ۱۴۰۵)
+        const targetDate = new Date('2026-10-01T18:00:00').getTime();
+
+        setInterval(() => {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                document.getElementById('days').innerText = Math.floor(difference / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('minutes').innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('seconds').innerText = Math.floor((difference % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // ۴. ثبت اطلاعات فرم
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('formResponse').innerText = 'پاسخ شما با موفقیت ثبت شد. با تشکر! 🌸';
+            this.reset();
+        });
+    </script>
+</body>
+</html>
