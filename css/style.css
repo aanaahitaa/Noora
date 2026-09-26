@@ -984,9 +984,11 @@ a {
 
   width:
     min(
-      78vw,
-      330px
+      310px,
+      75vw
     );
+   
+  aspect-ratio: 4 / 5;
 
   margin:
     0 auto;
@@ -998,60 +1000,49 @@ a {
 
   position: absolute;
 
-  inset: 5%;
+  inset: -30px;
 
-  border-radius: 50%;
+  
 
-  background:
-    rgba(
-      224,
-      187,
-      99,
-      .15
-    );
+background:
+        radial-gradient(
+            circle,
+            rgba(214,168,75,.23),
+            transparent 65%
+        );
 
-  filter: blur(35px);
+    filter: blur(20px);
 
 }
 
 
 .photo-frame {
 
-  position: relative;
+    position: relative;
 
-  z-index: 2;
+    width: 100%;
 
-  padding: 8px;
+    height: 100%;
 
-  border:
-    1px solid
-    rgba(
-      245,
-      223,
-      155,
-      .55
-    );
+    padding: 7px;
 
-  border-radius:
-    50%
-    50%
-    44%
-    44%;
+    border-radius: 170px 170px 20px 20px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.1),
-      rgba(255,255,255,.02)
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #8f682e,
+            #f1d48c,
+            #a67938,
+            #f3d98f,
+            #805b2a
+        );
 
-  box-shadow:
-    0 20px 55px
-    rgba(0,0,0,.45),
+    box-shadow:
+        var(--shadow),
+        var(--gold-shadow);
 
-    0 0 35px
-    rgba(217,182,109,.12);
-
+    overflow: hidden;
 }
 
 
