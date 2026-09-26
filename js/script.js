@@ -1,570 +1,420 @@
 /* =========================================================
-   NOORA — CLEAN V2
-   Main JavaScript
+   NOORA INVITATION — MAIN JAVASCRIPT
 ========================================================= */
 
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-
-    /* =====================================================
-       DOM ELEMENTS
-    ===================================================== */
-
-    const envelopeScreen =
-      document.getElementById(
-        "envelopeScreen"
-      );
-
-
-    const envelopeTrigger =
-      document.getElementById(
-        "envelopeTrigger"
-      );
-
-
-    const envelope =
-      document.querySelector(
-        ".envelope"
-      );
-
-
-    const invitation =
-      document.getElementById(
-        "invitation"
-      );
-
-
-    const music =
-      document.getElementById(
-        "backgroundMusic"
-      );
-
-
-    const musicButton =
-      document.getElementById(
-        "musicButton"
-      );
-
-
-    const introName =
-      document.getElementById(
-        "introName"
-      );
-
-
-    const mainGuestName =
-      document.getElementById(
-        "guestName"
-      );
-
+document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
        GUEST PERSONALIZATION
-    ===================================================== */
-
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    const guestId =
-      params.get(
-        "guest"
-      );
-
-
-    /*
-      مهمان‌ها را اینجا تعریف می‌کنیم.
-
-      مثال:
-
-      ?guest=anna
-
-      نتیجه:
-
-      آنا جان
-    */
+    ====================================================== */
 
     const guestMap = {
 
-      anna:
-        "آنا جان",
+        anna:
+            "آنا جان",
 
-      mahsa:
-        "مهسا جان",
+        mahsa:
+            "مهسا جان",
 
-      mahdi:
-        "مهـدی جان",
+        mahdi:
+            "مهدی جان",
 
-      "family-ahmadi":
-        "خانواده احمدی عزیز",
+        "family-ahmadi":
+            "خانواده احمدی عزیز",
 
-      "family-shirajpour":
-        "خانواده شیرج‌پور عزیز"
+        "family-shirajpour":
+            "خانواده شیرج‌پور عزیز"
 
     };
 
 
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const guestId =
+        params.get("guest");
+
+
     const currentGuest =
-      guestMap[guestId]
-      ||
-      "مهمان عزیز";
+        guestMap[guestId] ||
+        "مهمان عزیز";
 
 
-    /*
-      اسم مهمان همین اول صفحه
-      و قبل از باز شدن پاکت
-      قرار می‌گیرد.
-    */
+    const introName =
+        document.getElementById(
+            "introName"
+        );
+
+
+    const guestName =
+        document.getElementById(
+            "guestName"
+        );
+
 
     if (introName) {
 
-      introName.textContent =
-        currentGuest;
+        introName.textContent =
+            currentGuest;
 
     }
 
 
-    /*
-      اسم مهمان در صفحه اصلی
-    */
+    if (guestName) {
 
-    if (mainGuestName) {
-
-      mainGuestName.textContent =
-        currentGuest;
+        guestName.textContent =
+            currentGuest;
 
     }
 
 
 
     /* =====================================================
-       BACKGROUND STARS
-    ===================================================== */
+       OPENING
+    ====================================================== */
 
-    const stars =
-      document.getElementById(
-        "stars"
-      );
-
-
-    if (stars) {
-
-      for (
-        let i = 0;
-        i < 90;
-        i++
-      ) {
-
-        const star =
-          document.createElement(
-            "span"
-          );
-
-
-        star.className =
-          "star";
-
-
-        star.style.left =
-          `${Math.random() * 100}%`;
-
-
-        star.style.top =
-          `${Math.random() * 100}%`;
-
-
-        star.style.animationDelay =
-          `${Math.random() * 3}s`;
-
-
-        star.style.opacity =
-          `${0.15 + Math.random() * .7}`;
-
-
-        stars.appendChild(
-          star
-        );
-
-      }
-
-    }
-
-
-
-    /* =====================================================
-       MAGIC PARTICLES
-    ===================================================== */
-
-
-    function createMagicParticles() {
-
-      for (
-        let i = 0;
-        i < 28;
-        i++
-      ) {
-
-        const particle =
-          document.createElement(
-            "span"
-          );
-
-
-        particle.className =
-          "magic-particle";
-
-
-        particle.textContent =
-          Math.random() > .5
-            ? "✦"
-            : "·";
-
-
-        particle.style.left =
-          `${45 + Math.random() * 10}%`;
-
-
-        particle.style.top =
-          `${40 + Math.random() * 15}%`;
-
-
-        particle.style.setProperty(
-          "--x",
-          `${(Math.random() - .5) * 260}px`
+    const opening =
+        document.getElementById(
+            "opening"
         );
 
 
-        particle.style.setProperty(
-          "--y",
-          `${-80 - Math.random() * 220}px`
+    const envelope =
+        document.getElementById(
+            "envelope"
         );
 
 
-        particle.style.fontSize =
-          `${7 + Math.random() * 12}px`;
-
-
-        particle.style.animationDelay =
-          `${Math.random() * .35}s`;
-
-
-        document.body.appendChild(
-          particle
+    const openButton =
+        document.getElementById(
+            "openButton"
         );
 
 
-        setTimeout(
-          () => {
-            particle.remove();
-          },
-          1900
+    const openingScroll =
+        document.getElementById(
+            "openingScroll"
         );
 
-      }
 
-    }
-
-
-
-    /* =====================================================
-       MUSIC
-    ===================================================== */
+    const invitation =
+        document.getElementById(
+            "invitation"
+        );
 
 
-    function startMusic() {
-
-      if (!music) {
-        return;
-      }
+    const body =
+        document.body;
 
 
-      music.volume =
-        0.45;
+    let opened =
+        false;
 
 
-      music
-        .play()
-        .then(
-          () => {
+    body.classList.add(
+        "locked"
+    );
 
-            musicButton?.classList.add(
-              "playing"
+
+    function openInvitation() {
+
+        if (opened) {
+            return;
+        }
+
+
+        opened = true;
+
+
+        envelope.classList.add(
+            "open"
+        );
+
+
+        openButton.style.opacity =
+            "0";
+
+
+        openButton.style.pointerEvents =
+            "none";
+
+
+        startMusic();
+
+
+        setTimeout(() => {
+
+            openingScroll.classList.add(
+                "show"
             );
 
-          }
-        )
-        .catch(
-          () => {
-
-            /*
-              بعضی مرورگرها
-              پخش موسیقی را محدود می‌کنند.
-            */
-
-          }
-        );
-
-    }
+        }, 1200);
 
 
+        setTimeout(() => {
 
-    function toggleMusic() {
+            opening.classList.add(
+                "closed"
+            );
 
-      if (!music) {
-        return;
-      }
-
-
-      if (music.paused) {
-
-        music
-          .play()
-          .then(
-            () => {
-
-              musicButton?.classList.add(
-                "playing"
-              );
-
-            }
-          )
-          .catch(
-            () => {}
-          );
-
-      }
-
-      else {
-
-        music.pause();
+            body.classList.remove(
+                "locked"
+            );
 
 
-        musicButton?.classList.remove(
-          "playing"
-        );
+            window.scrollTo({
+                top: 0,
+                behavior: "instant"
+            });
 
-      }
+        }, 2300);
 
     }
 
 
-    musicButton?.addEventListener(
-      "click",
-      toggleMusic
+    openButton.addEventListener(
+        "click",
+        openInvitation
+    );
+
+
+    envelope.addEventListener(
+        "click",
+        openInvitation
     );
 
 
 
     /* =====================================================
-       ENVELOPE
-    ===================================================== */
+       MUSIC
+    ====================================================== */
+
+    const music =
+        document.getElementById(
+            "birthdayMusic"
+        );
 
 
-    let opened =
-      false;
+    const musicButton =
+        document.getElementById(
+            "musicButton"
+        );
 
 
-    function openInvitation() {
-
-      if (opened) {
-        return;
-      }
+    let musicPlaying =
+        false;
 
 
-      opened =
-        true;
+    function startMusic() {
+
+        if (!music) {
+            return;
+        }
 
 
-      envelope?.classList.add(
-        "open"
-      );
+        music.volume =
+            0.35;
 
 
-      createMagicParticles();
+        const playPromise =
+            music.play();
 
 
-      /*
-        چون این کلیک توسط کاربر انجام شده،
-        مرورگر اجازه پخش موسیقی را می‌دهد.
-      */
+        if (
+            playPromise !== undefined
+        ) {
 
-      startMusic();
+            playPromise
+                .then(() => {
 
+                    musicPlaying =
+                        true;
 
-      setTimeout(
-        () => {
+                    updateMusicButton();
 
-          envelopeScreen?.classList.add(
-            "opened"
-          );
+                })
+                .catch(() => {
 
+                    musicPlaying =
+                        false;
 
-          document.body.classList.remove(
-            "locked"
-          );
+                });
 
-
-          invitation?.scrollIntoView(
-            {
-              behavior:
-                "smooth",
-
-              block:
-                "start"
-            }
-          );
-
-        },
-        1900
-      );
+        }
 
     }
 
 
-    envelopeTrigger?.addEventListener(
-      "click",
-      openInvitation
+    function updateMusicButton() {
+
+        if (!musicButton) {
+            return;
+        }
+
+
+        musicButton.textContent =
+            musicPlaying
+                ? "♫"
+                : "×";
+
+    }
+
+
+    musicButton.addEventListener(
+        "click",
+        () => {
+
+            if (!music) {
+                return;
+            }
+
+
+            if (musicPlaying) {
+
+                music.pause();
+
+                musicPlaying =
+                    false;
+
+            } else {
+
+                music.play()
+                    .then(() => {
+
+                        musicPlaying =
+                            true;
+
+                        updateMusicButton();
+
+                    })
+                    .catch(() => {});
+
+            }
+
+
+            updateMusicButton();
+
+        }
     );
 
 
 
     /* =====================================================
        COUNTDOWN
-    ===================================================== */
+    ====================================================== */
+
+    const targetDate =
+        new Date(
+            "2026-10-01T18:00:00+03:30"
+        ).getTime();
 
 
-    /*
-      پنج‌شنبه ۹ مهر ۱۴۰۵
-      ساعت ۱۸:۰۰
-      برابر با 1 October 2026
-    */
+    const daysEl =
+        document.getElementById(
+            "days"
+        );
 
-    const eventDate =
-      new Date(
-        "2026-10-01T18:00:00+03:30"
-      );
+
+    const hoursEl =
+        document.getElementById(
+            "hours"
+        );
+
+
+    const minutesEl =
+        document.getElementById(
+            "minutes"
+        );
+
+
+    const secondsEl =
+        document.getElementById(
+            "seconds"
+        );
 
 
     function updateCountdown() {
 
-      const difference =
-        eventDate.getTime()
-        -
-        Date.now();
+        const now =
+            new Date().getTime();
 
 
-      const ids = [
-
-        "days",
-        "hours",
-        "minutes",
-        "seconds"
-
-      ];
+        const distance =
+            targetDate - now;
 
 
-      if (
-        difference <= 0
-      ) {
+        if (distance <= 0) {
 
-        ids.forEach(
-          id => {
-
-            const element =
-              document.getElementById(
-                id
-              );
-
-
-            if (element) {
-
-              element.textContent =
+            daysEl.textContent =
                 "00";
 
-            }
+            hoursEl.textContent =
+                "00";
 
-          }
-        );
+            minutesEl.textContent =
+                "00";
 
+            secondsEl.textContent =
+                "00";
 
-        return;
+            return;
 
-      }
-
-
-      const days =
-        Math.floor(
-          difference /
-          86400000
-        );
+        }
 
 
-      const hours =
-        Math.floor(
-          difference /
-          3600000
-        ) % 24;
+        const days =
+            Math.floor(
+                distance /
+                (1000 * 60 * 60 * 24)
+            );
 
 
-      const minutes =
-        Math.floor(
-          difference /
-          60000
-        ) % 60;
+        const hours =
+            Math.floor(
+                (distance %
+                    (1000 * 60 * 60 * 24)) /
+                (1000 * 60 * 60)
+            );
 
 
-      const seconds =
-        Math.floor(
-          difference /
-          1000
-        ) % 60;
+        const minutes =
+            Math.floor(
+                (distance %
+                    (1000 * 60 * 60)) /
+                (1000 * 60)
+            );
 
 
-      document.getElementById(
-        "days"
-      ).textContent =
-        String(days)
-          .padStart(
-            2,
-            "0"
-          );
+        const seconds =
+            Math.floor(
+                (distance %
+                    (1000 * 60)) /
+                1000
+            );
 
 
-      document.getElementById(
-        "hours"
-      ).textContent =
-        String(hours)
-          .padStart(
-            2,
-            "0"
-          );
+        daysEl.textContent =
+            String(days)
+                .padStart(2, "0");
 
 
-      document.getElementById(
-        "minutes"
-      ).textContent =
-        String(minutes)
-          .padStart(
-            2,
-            "0"
-          );
+        hoursEl.textContent =
+            String(hours)
+                .padStart(2, "0");
 
 
-      document.getElementById(
-        "seconds"
-      ).textContent =
-        String(seconds)
-          .padStart(
-            2,
-            "0"
-          );
+        minutesEl.textContent =
+            String(minutes)
+                .padStart(2, "0");
+
+
+        secondsEl.textContent =
+            String(seconds)
+                .padStart(2, "0");
 
     }
 
@@ -573,340 +423,426 @@ document.addEventListener(
 
 
     setInterval(
-      updateCountdown,
-      1000
+        updateCountdown,
+        1000
     );
 
 
 
     /* =====================================================
        SCROLL REVEAL
-    ===================================================== */
-
+    ====================================================== */
 
     const revealElements =
-      document.querySelectorAll(
-        ".reveal"
-      );
-
-
-    if (
-      "IntersectionObserver"
-      in window
-    ) {
-
-      const observer =
-        new IntersectionObserver(
-          entries => {
-
-            entries.forEach(
-              entry => {
-
-                if (
-                  entry.isIntersecting
-                ) {
-
-                  entry.target.classList.add(
-                    "visible"
-                  );
-
-
-                  observer.unobserve(
-                    entry.target
-                  );
-
-                }
-
-              }
-            );
-
-          },
-          {
-            threshold:
-              0.12
-          }
+        document.querySelectorAll(
+            ".section-inner"
         );
 
 
-      revealElements.forEach(
-        element => {
+    revealElements.forEach(
+        (element) => {
 
-          observer.observe(
-            element
-          );
-
-        }
-      );
-
-    }
-
-    else {
-
-      revealElements.forEach(
-        element => {
-
-          element.classList.add(
-            "visible"
-          );
+            element.classList.add(
+                "reveal"
+            );
 
         }
-      );
+    );
 
-    }
+
+    const observer =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+
+    revealElements.forEach(
+        (element) => {
+
+            observer.observe(
+                element
+            );
+
+        }
+    );
 
 
 
     /* =====================================================
        RSVP
-    ===================================================== */
+    ====================================================== */
 
-
-    const rsvpOptions =
-      document.querySelectorAll(
-        ".rsvp-option"
-      );
+    const rsvpForm =
+        document.getElementById(
+            "rsvpForm"
+        );
 
 
     const rsvpDetails =
-      document.getElementById(
-        "rsvpDetails"
-      );
+        document.getElementById(
+            "rsvpDetails"
+        );
 
 
-    const rsvpThanks =
-      document.getElementById(
-        "rsvpThanks"
-      );
+    const rsvpResult =
+        document.getElementById(
+            "rsvpResult"
+        );
 
 
-    const guestCount =
-      document.getElementById(
-        "guestCount"
-      );
+    const rsvpChoices =
+        document.querySelectorAll(
+            ".rsvp-choice"
+        );
 
 
-    const plusGuests =
-      document.getElementById(
-        "plusGuests"
-      );
+    const guestCountEl =
+        document.getElementById(
+            "guestCount"
+        );
 
 
-    const minusGuests =
-      document.getElementById(
-        "minusGuests"
-      );
+    const minusGuest =
+        document.getElementById(
+            "minusGuest"
+        );
 
 
-    const submitRsvp =
-      document.getElementById(
-        "submitRsvp"
-      );
+    const plusGuest =
+        document.getElementById(
+            "plusGuest"
+        );
 
 
     const guestMessage =
-      document.getElementById(
-        "guestMessage"
-      );
+        document.getElementById(
+            "guestMessage"
+        );
 
 
     let answer =
-      null;
+        null;
 
 
     let numberOfGuests =
-      1;
+        1;
 
 
+    /* Select answer */
 
-    /* ---------- RSVP answer ---------- */
+    rsvpChoices.forEach(
+        (button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    rsvpChoices.forEach(
+                        (item) => {
+
+                            item.classList.remove(
+                                "selected"
+                            );
+
+                        }
+                    );
 
 
-    rsvpOptions.forEach(
-      option => {
+                    button.classList.add(
+                        "selected"
+                    );
 
-        option.addEventListener(
-          "click",
-          () => {
 
-            rsvpOptions.forEach(
-              item => {
+                    answer =
+                        button.dataset.answer;
 
-                item.classList.remove(
-                  "selected"
-                );
 
-              }
+                    if (
+                        answer === "yes"
+                    ) {
+
+                        rsvpDetails.classList.add(
+                            "show"
+                        );
+
+                        rsvpResult.textContent =
+                            "";
+
+                    } else {
+
+                        rsvpDetails.classList.remove(
+                            "show"
+                        );
+
+
+                        rsvpResult.textContent =
+                            "ممنون که به ما اطلاع دادید. جای شما در جشن نورا خالی خواهد بود 🤍";
+
+                    }
+
+                }
             );
 
-
-            option.classList.add(
-              "selected"
-            );
+        }
+    );
 
 
-            answer =
-              option.dataset.answer;
+    /* Guest counter */
+
+    minusGuest.addEventListener(
+        "click",
+        () => {
+
+            if (
+                numberOfGuests > 1
+            ) {
+
+                numberOfGuests--;
+
+                guestCountEl.textContent =
+                    numberOfGuests;
+
+            }
+
+        }
+    );
+
+
+    plusGuest.addEventListener(
+        "click",
+        () => {
+
+            if (
+                numberOfGuests < 10
+            ) {
+
+                numberOfGuests++;
+
+                guestCountEl.textContent =
+                    numberOfGuests;
+
+            }
+
+        }
+    );
+
+
+    /* Submit */
+
+    rsvpForm.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+
+            if (!answer) {
+
+                rsvpResult.textContent =
+                    "لطفاً ابتدا وضعیت حضور خود را انتخاب کنید.";
+
+                return;
+
+            }
 
 
             if (
-              answer === "yes"
+                answer === "no"
             ) {
 
-              rsvpDetails?.classList.add(
-                "active"
-              );
-
-
-              rsvpThanks?.classList.remove(
-                "active"
-              );
+                return;
 
             }
 
-            else {
 
-              rsvpDetails?.classList.remove(
-                "active"
-              );
+            const formData = {
+
+                guestId:
+                    guestId ||
+                    "unknown",
+
+                guestName:
+                    currentGuest,
+
+                answer:
+                    answer,
+
+                guests:
+                    numberOfGuests,
+
+                message:
+                    guestMessage.value.trim(),
+
+                submittedAt:
+                    new Date()
+                        .toISOString()
+
+            };
 
 
-              setTimeout(
-                showThanks,
-                250
-              );
+            /*
+             ==================================================
+             TEMPORARY
+
+             فعلاً داده را در console می‌بینیم.
+             در مرحله بعد همین قسمت را به Google Apps Script
+             وصل می‌کنیم.
+             ==================================================
+            */
+
+            console.log(
+                "NOORA RSVP:",
+                formData
+            );
+
+
+            /* Local backup */
+
+            try {
+
+                const existing =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "noora_rsvp"
+                        ) || "[]"
+                    );
+
+
+                existing.push(
+                    formData
+                );
+
+
+                localStorage.setItem(
+                    "noora_rsvp",
+                    JSON.stringify(
+                        existing
+                    )
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Local storage unavailable.",
+                    error
+                );
 
             }
 
-          }
-        );
 
-      }
-    );
-
-
-
-    /* ---------- Guest counter ---------- */
-
-
-    plusGuests?.addEventListener(
-      "click",
-      () => {
-
-        if (
-          numberOfGuests < 10
-        ) {
-
-          numberOfGuests++;
+            rsvpResult.innerHTML =
+                `
+                <strong>
+                    پاسخ شما ثبت شد 🤍
+                </strong>
+                <br>
+                مشتاق دیدنتان در جشن نورا هستیم.
+                `;
 
 
-          if (guestCount) {
+            rsvpForm
+                .querySelectorAll(
+                    "button"
+                )
+                .forEach(
+                    (button) => {
 
-            guestCount.textContent =
-              numberOfGuests;
+                        if (
+                            button.type ===
+                            "submit"
+                        ) {
 
-          }
+                            button.disabled =
+                                true;
 
-        }
+                            button.style.opacity =
+                                ".6";
 
-      }
-    );
+                        }
 
-
-
-    minusGuests?.addEventListener(
-      "click",
-      () => {
-
-        if (
-          numberOfGuests > 1
-        ) {
-
-          numberOfGuests--;
-
-
-          if (guestCount) {
-
-            guestCount.textContent =
-              numberOfGuests;
-
-          }
+                    }
+                );
 
         }
-
-      }
     );
 
 
 
-    /* ---------- Thank you ---------- */
+    /* =====================================================
+       OPENING PARTICLES
+    ====================================================== */
+
+    function createSparkles() {
+
+        const container =
+            document.querySelector(
+                ".opening"
+            );
 
 
-    function showThanks() {
+        if (!container) {
+            return;
+        }
 
-      rsvpThanks?.classList.add(
-        "active"
-      );
+
+        for (
+            let i = 0;
+            i < 25;
+            i++
+        ) {
+
+            const sparkle =
+                document.createElement(
+                    "span"
+                );
+
+
+            sparkle.className =
+                "generated-sparkle";
+
+
+            sparkle.style.left =
+                `${Math.random() * 100}%`;
+
+
+            sparkle.style.top =
+                `${Math.random() * 100}%`;
+
+
+            sparkle.style.animationDelay =
+                `${Math.random() * 2}s`;
+
+
+            container.appendChild(
+                sparkle
+            );
+
+        }
 
     }
 
 
+    createSparkles();
 
-    /* ---------- Submit ---------- */
-
-
-    submitRsvp?.addEventListener(
-      "click",
-      () => {
-
-
-        const data = {
-
-          guest:
-            guestId
-            ||
-            "unknown",
-
-          guestName:
-            currentGuest,
-
-          answer:
-            answer,
-
-          guests:
-            numberOfGuests,
-
-          message:
-            guestMessage?.value.trim()
-            ||
-            ""
-
-        };
-
-
-        /*
-          فعلاً فقط در Console ذخیره می‌شود.
-
-          مرحله بعد:
-          اتصال همین data
-          به Google Sheets
-        */
-
-        console.log(
-          "RSVP:",
-          data
-        );
-
-
-        rsvpDetails?.classList.remove(
-          "active"
-        );
-
-
-        showThanks();
-
-      }
-    );
-
-
-  }
-);
+});
