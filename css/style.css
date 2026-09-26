@@ -2269,12 +2269,3 @@ p,
 .hero-content {
   overflow: visible !important;
 }
-
-.wax-seal {
-  font-family: "Great Vibes", cursive;
-  font-size: 3.4rem;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0;
-  transform: translateY(-2px);
-}
