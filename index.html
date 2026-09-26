@@ -9,7 +9,7 @@
 <title>جشن تولد نورا نیک نفس</title>
 
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Nastaliq+Urdu&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
 
 
 <style>
@@ -19,13 +19,27 @@
 
 --pearl:#fffaf7;
 --milk:#fffdfb;
+
 --blush:#f3dce0;
+--rose:#dcaeb7;
+
 --gold:#c9a45c;
 --gold-light:#efdcae;
+--gold-bright:#e7c978;
+
+--blue:#e6f0f7;
+
 --ink:#66565a;
+--muted:#9a8588;
+
+--white:#ffffff;
+
 
 --shadow:
-0 20px 60px rgba(185,145,115,.18);
+0 20px 60px rgba(185,145,115,.16);
+
+--soft-shadow:
+0 10px 35px rgba(185,145,115,.12);
 
 }
 
@@ -33,9 +47,9 @@
 
 *{
 
-box-sizing:border-box;
 margin:0;
 padding:0;
+box-sizing:border-box;
 
 }
 
@@ -53,9 +67,29 @@ body{
 
 background:
 
-radial-gradient(circle at top,#fff,#fff7f3);
+radial-gradient(
+circle at 15% 10%,
+rgba(243,220,224,.35),
+transparent 30%
+),
 
-font-family:"Noto Naskh Arabic",serif;
+radial-gradient(
+circle at 85% 25%,
+rgba(230,240,247,.4),
+transparent 30%
+),
+
+linear-gradient(
+180deg,
+#fffdfb,
+#fff7f3
+);
+
+
+font-family:
+"Noto Naskh Arabic",
+serif;
+
 
 color:var(--ink);
 
@@ -67,47 +101,14 @@ overflow-x:hidden;
 
 
 
-/* ستاره های پس زمینه */
-
-.star{
-
-position:fixed;
-
-color:#e8c976;
-
-opacity:.5;
-
-animation: sparkle 3s infinite;
-
-z-index:-1;
-
-}
-
-
-
-@keyframes sparkle{
-
-50%{
-
-opacity:1;
-
-transform:scale(1.5);
-
-}
-
-}
-
-
-
 
 section{
 
-padding:80px 20px;
+padding:75px 20px;
 
-min-height:70vh;
+min-height:60vh;
 
 }
-
 
 
 
@@ -122,142 +123,18 @@ margin:auto;
 
 
 
-/* HERO */
 
+/* ---------- typography ---------- */
 
-.photo-frame{
 
-position:relative;
+.hero-title,
+.section-title,
+footer{
 
-width:300px;
 
-height:430px;
-
-margin:auto;
-
-}
-
-
-
-.photo-glow{
-
-position:absolute;
-
-inset:-40px;
-
-background:
-
-radial-gradient(circle,
-rgba(231,201,120,.6),
-transparent 65%);
-
-filter:blur(25px);
-
-}
-
-
-
-.photo-inner{
-
-width:100%;
-
-height:100%;
-
-overflow:hidden;
-
-border-radius:
-
-50% 50% 45% 45%;
-
-
-border:10px solid white;
-
-box-shadow:var(--shadow);
-
-}
-
-
-
-.photo-inner img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-}
-
-
-
-.photo-frame:after{
-
-content:"";
-
-position:absolute;
-
-inset:-15px;
-
-border-radius:
-
-50% 50% 45% 45%;
-
-border:2px solid var(--gold);
-
-}
-
-
-
-.photo-star{
-
-position:absolute;
-
-font-size:35px;
-
-color:var(--gold);
-
-animation:sparkle 2s infinite;
-
-}
-
-
-
-.star-one{
-
-right:-15px;
-
-top:40px;
-
-}
-
-
-.star-two{
-
-left:-15px;
-
-bottom:100px;
-
-}
-
-
-.star-three{
-
-right:20px;
-
-bottom:20px;
-
-}
-
-
-
-.hero-title{
-
-
-margin-top:40px;
-
-font-size:70px;
-
-font-weight:400;
+font-family:
+"Noto Nastaliq Urdu",
+serif;
 
 
 background:
@@ -265,7 +142,7 @@ background:
 linear-gradient(
 120deg,
 #b88942,
-#ffe5a2,
+#f7df9d,
 #b88942
 );
 
@@ -274,13 +151,35 @@ linear-gradient(
 
 color:transparent;
 
+
 }
 
 
 
-.hero-text{
 
-font-size:22px;
+.hero-title{
+
+font-size:72px;
+
+margin-top:35px;
+
+}
+
+
+
+.section-title{
+
+font-size:42px;
+
+margin-bottom:35px;
+
+}
+
+
+
+p{
+
+font-size:20px;
 
 line-height:2;
 
@@ -290,48 +189,193 @@ line-height:2;
 
 
 
-/* scroll */
 
 
-.scroll-down{
+/* ---------- photo ---------- */
 
-margin-top:50px;
 
-color:var(--gold);
+.photo-frame{
+
+
+position:relative;
+
+
+width:clamp(220px,58vw,330px);
+
+
+aspect-ratio:1;
+
+
+display:grid;
+
+
+place-items:center;
+
+
+margin:auto;
+
 
 }
 
 
 
-.scroll-circle{
 
-margin:15px auto;
+.photo-glow{
 
-width:50px;
 
-height:50px;
+position:absolute;
+
+
+inset:-35px;
+
+
+background:
+
+radial-gradient(
+circle,
+rgba(231,201,120,.45),
+transparent 65%
+);
+
+
+filter:blur(25px);
+
+
+}
+
+
+
+
+.photo-inner{
+
+
+width:88%;
+
+
+height:88%;
+
+
+overflow:hidden;
+
 
 border-radius:50%;
 
-border:1px solid var(--gold);
 
-display:flex;
+border:
 
-align-items:center;
+8px solid white;
 
-justify-content:center;
 
-animation:down 2s infinite;
+box-shadow:
+
+var(--shadow);
+
 
 }
 
 
 
-@keyframes down{
+
+.photo-inner img{
+
+
+width:100%;
+
+height:100%;
+
+
+object-fit:cover;
+
+
+}
+
+
+
+
+.photo-frame:before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:0;
+
+
+border-radius:50%;
+
+
+border:
+
+2px solid rgba(201,164,92,.8);
+
+
+}
+
+
+
+
+
+.photo-star{
+
+
+position:absolute;
+
+
+color:var(--gold);
+
+
+font-size:32px;
+
+
+animation:
+
+twinkle 2.5s infinite;
+
+
+}
+
+
+
+.star-one{
+
+top:10%;
+
+right:8%;
+
+}
+
+
+.star-two{
+
+bottom:15%;
+
+left:5%;
+
+}
+
+
+.star-three{
+
+top:45%;
+
+right:-5%;
+
+}
+
+
+
+
+@keyframes twinkle{
+
 
 50%{
 
-transform:translateY(12px);
+opacity:.35;
+
+transform:scale(1.35);
 
 }
 
@@ -341,28 +385,62 @@ transform:translateY(12px);
 
 
 
-/* quote */
+
+/* ---------- glass ---------- */
+
+
+.glass-card{
+
+
+background:
+
+rgba(255,255,255,.55);
+
+
+backdrop-filter:
+
+blur(18px);
+
+
+border:
+
+1px solid rgba(255,255,255,.8);
+
+
+border-radius:30px;
+
+
+box-shadow:
+
+var(--soft-shadow);
+
+
+padding:30px;
+
+
+}
+
+
+
+
+
+
+
+/* ---------- quote ---------- */
 
 
 .quote-card{
 
-background:
 
-rgba(255,255,255,.65);
+padding:45px;
 
-backdrop-filter:blur(15px);
-
-border-radius:35px;
-
-padding:40px;
-
-box-shadow:var(--shadow);
 
 }
 
 
 
 .quote-mark{
+
 
 font-size:60px;
 
@@ -374,7 +452,7 @@ color:var(--gold);
 
 .quote-card p{
 
-font-size:25px;
+font-size:26px;
 
 }
 
@@ -382,57 +460,13 @@ font-size:25px;
 
 
 
-/* glass */
 
 
-.glass{
-
-background:
-
-rgba(255,255,255,.6);
-
-backdrop-filter:blur(20px);
-
-border-radius:30px;
-
-box-shadow:var(--shadow);
-
-padding:30px;
-
-}
-
-
-
-
-
-.event{
-
-display:flex;
-
-justify-content:center;
-
-gap:35px;
-
-flex-wrap:wrap;
-
-}
-
-
-
-.icon{
-
-font-size:40px;
-
-}
-
-
-
-
-
-/* countdown */
+/* ---------- countdown ---------- */
 
 
 .countdown{
+
 
 display:flex;
 
@@ -442,90 +476,141 @@ gap:15px;
 
 flex-wrap:wrap;
 
+
 }
 
 
 
-.time{
+.time-box{
+
 
 width:110px;
 
-padding:25px;
 
 }
 
 
 
-.time strong{
+.time-box strong{
+
 
 display:block;
 
-font-family:Vazirmatn;
 
-font-size:40px;
+font-family:
+
+"Vazirmatn";
+
+
+font-size:38px;
+
 
 color:var(--gold);
 
+
 }
 
 
 
 
 
-/* timeline */
 
 
-.timeline-box{
+/* ---------- timeline ---------- */
 
-margin:20px auto;
+
+.timeline-card{
+
 
 max-width:350px;
 
+
+margin:20px auto;
+
+
 }
 
 
 
 
-/* buttons */
 
 
-.button{
 
-display:inline-flex;
+/* ---------- buttons ---------- */
 
-align-items:center;
+
+.buttons{
+
+
+display:flex;
 
 justify-content:center;
 
+flex-wrap:wrap;
+
+
+}
+
+
+
+.glass-button{
+
+
+display:inline-flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
 gap:10px;
 
-padding:15px 25px;
+
+padding:14px 25px;
+
 
 margin:8px;
 
+
 border-radius:50px;
 
-text-decoration:none;
-
-color:var(--ink);
 
 background:
 
 linear-gradient(
 135deg,
-white,
-#f5e3b5
+rgba(255,255,255,.9),
+rgba(239,220,174,.5)
 );
 
-box-shadow:var(--shadow);
+
+box-shadow:
+
+var(--soft-shadow);
+
+
+border:
+
+1px solid white;
+
+
+text-decoration:none;
+
+
+color:var(--ink);
+
 
 }
 
 
 
-.button img{
+.glass-button img{
 
-width:30px;
+
+width:28px;
+
 
 }
 
@@ -533,98 +618,171 @@ width:30px;
 
 
 
-/* music */
 
 
-.music{
+/* ---------- scroll ---------- */
 
-position:fixed;
 
-bottom:25px;
+.scroll-down{
 
-left:25px;
 
-width:55px;
+margin-top:45px;
 
-height:55px;
+
+color:var(--gold);
+
+
+}
+
+
+
+.scroll-circle{
+
+
+width:48px;
+
+
+height:48px;
+
 
 border-radius:50%;
 
-border:0;
 
-background:white;
+border:
 
-box-shadow:var(--shadow);
+1px solid var(--gold);
 
-z-index:10;
+
+margin:auto;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+animation:
+
+bounce 2s infinite;
+
 
 }
 
 
 
-/* animation */
+@keyframes bounce{
+
+
+50%{
+
+transform:translateY(10px);
+
+}
+
+}
+
+
+
+
+
+
+
+/* ---------- music ---------- */
+
+
+.music-btn{
+
+
+position:fixed;
+
+
+left:25px;
+
+
+bottom:25px;
+
+
+width:55px;
+
+
+height:55px;
+
+
+border-radius:50%;
+
+
+border:none;
+
+
+background:white;
+
+
+box-shadow:var(--shadow);
+
+
+z-index:10;
+
+
+}
+
+
+
+
+
+
+/* ---------- reveal ---------- */
 
 
 .reveal{
 
+
 opacity:0;
+
 
 transform:translateY(40px);
 
+
 transition:1s;
+
 
 }
 
 
-.show{
+
+.reveal.show{
+
 
 opacity:1;
 
+
 transform:none;
 
+
 }
+
 
 
 
 footer{
 
-padding:70px;
 
-font-size:30px;
-
-color:var(--gold);
-
-}
+padding:70px 20px;
 
 
-
-
-@media(max-width:600px){
-
-
-.photo-frame{
-
-width:250px;
-
-height:360px;
-
-}
-
-
-.hero-title{
-
-font-size:55px;
-
-}
+font-size:35px;
 
 
 }
+
 
 
 </style>
 
 </head>
-
 
 
 <body>
@@ -638,11 +796,14 @@ font-size:55px;
 </audio>
 
 
-<button class="music" onclick="musicControl()">
+<button class="music-btn" onclick="toggleMusic()">
 
 🎵
 
 </button>
+
+
+
 
 
 
@@ -660,7 +821,7 @@ font-size:55px;
 
 <div class="photo-inner">
 
-<img src="assets/noora-main.jpg">
+<img src="assets/noora-main.jpg" alt="نورا نیک نفس">
 
 </div>
 
@@ -684,15 +845,16 @@ font-size:55px;
 
 
 
-<p class="hero-text">
+<p>
 
-به افتخار اولین سال زندگی نورا جان،
+به افتخار اولین سال زندگی نورا جان
 
 <br>
 
 با عشق منتظر حضور شما هستیم.
 
 </p>
+
 
 
 
@@ -702,44 +864,8 @@ font-size:55px;
 
 ↓
 
-</div>
 
 </div>
-
-
-</div>
-
-</section>
-
-
-
-
-
-
-<section class="reveal">
-
-<div class="section-inner">
-
-
-<div class="quote-card">
-
-
-<span class="quote-mark">❝</span>
-
-
-<p>
-
-حضور شما،
-
-<br>
-
-قشنگ‌ترین قسمت این جشن است.
-
-</p>
-
-
-<span class="quote-mark">❞</span>
-
 
 </div>
 
@@ -756,523 +882,7 @@ font-size:55px;
 <section class="reveal">
 
 
-<h2>
-
-جشن تولد یک سالگی
-
-</h2>
-
-
-<div class="glass event">
-
-
-<div>
-
-<div class="icon">🎂</div>
-
-<p>تولد نورا</p>
-
-</div>
-
-
-<div>
-
-<div class="icon">📅</div>
-
-<p>۹ مهر</p>
-
-</div>
-
-
-<div>
-
-<div class="icon">🕕</div>
-
-<p>۱۸:۰۰</p>
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2>
-
-تا شروع جشن
-
-</h2>
-
-
-<div class="countdown">
-
-
-<div class="glass time">
-
-<strong id="d">۰۰</strong>
-
-روز
-
-</div>
-
-
-<div class="glass time">
-
-<strong id="h">۰۰</strong>
-
-ساعت
-
-</div>
-
-
-<div class="glass time">
-
-<strong id="m">۰۰</strong>
-
-دقیقه
-
-</div>
-
-
-<div class="glass time">
-
-<strong id="s">۰۰</strong>
-
-ثانیه
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2>
-
-برنامه جشن
-
-</h2>
-
-
-<div class="glass timeline-box">
-
-۱۸:۰۰
-
-<br>
-
-پذیرایی و شروع جشن
-
-</div>
-
-
-
-<div class="glass timeline-box">
-
-۲۰:۰۰
-
-<br>
-
-شام و خاطره‌سازی
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2>
-
-تالار دوریکا
-
-</h2>
-
-
-<p>
-
-نشتارود
-
-</p>
-
-
-
-<a class="button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
-
-Google Maps
-
-</a>
-
-
-<a class="button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
-
-نشان
-
-</a>
-
-
-
-<a class="button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
-
-بلد
-
-</a>
-
-
-
-</section>
-
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2>
-
-منتظر دیدار شما هستیم
-
-</h2>
-
-
-<div class="glass">
-
-
-<button class="button">
-
-✓ بله، می‌آیم
-
-</button>
-
-
-
-<button class="button">
-
-نمی‌توانم بیایم
-
-</button>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<footer>
-
-به امید دیدار شما
-
-<br>
-
-نورا نیک نفس
-
-</footer>
-
-
-
-
-
-
-
-<script>
-
-
-// stars
-
-for(let i=0;i<35;i++){
-
-let s=document.createElement("div");
-
-s.className="star";
-
-s.innerHTML="✦";
-
-s.style.left=Math.random()*100+"%";
-
-s.style.top=Math.random()*100+"%";
-
-s.style.fontSize=(10+Math.random()*15)+"px";
-
-document.body.appendChild(s);
-
-}
-
-
-
-// reveal
-
-let items=document.querySelectorAll(".reveal");
-
-
-let obs=new IntersectionObserver(e=>{
-
-e.forEach(x=>{
-
-if(x.isIntersecting)
-
-x.target.classList.add("show");
-
-});
-
-});
-
-
-items.forEach(x=>obs.observe(x));
-
-
-
-
-// countdown
-
-function fa(n){
-
-return String(n).padStart(2,"0")
-.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
-
-}
-
-
-
-let date=new Date("2026-10-01T18:00:00");
-
-
-function count(){
-
-let x=date-new Date();
-
-if(x<0)return;
-
-
-d.innerHTML=fa(Math.floor(x/86400000));
-
-h.innerHTML=fa(Math.floor(x/3600000)%24);
-
-m.innerHTML=fa(Math.floor(x/60000)%60);
-
-s.innerHTML=fa(Math.floor(x/1000)%60);
-
-
-}
-
-
-setInterval(count,1000);
-
-count();
-
-
-
-
-// music
-
-let playing=false;
-
-function musicControl(){
-
-let audio=document.getElementById("music");
-
-
-if(!playing){
-
-audio.play();
-
-playing=true;
-
-}
-
-else{
-
-audio.pause();
-
-playing=false;
-
-}
-
-}
-
-
-
-</script>
-
-
-</body>
-
-</html>
-<source src="assets/music/birthday.mp3" type="audio/mpeg">
-
-</audio>
-
-
-<button id="musicToggle" class="music-button">
-
-🎵
-
-</button>
-
-
-
-
-
-
-
-<!-- ==========================
-     HERO
-========================== -->
-
-
-<section class="hero section reveal">
-
-
-<div class="section-inner">
-
-
-
-<div class="photo-frame">
-
-
-<div class="photo-glow"></div>
-
-
-
-<div class="photo-inner">
-
-
-<img src="assets/noora-main.jpg" alt="نورا نیک نفس">
-
-
-</div>
-
-
-
-
-<span class="photo-star star-one">
-✦
-</span>
-
-
-<span class="photo-star star-two">
-✧
-</span>
-
-
-
-<span class="photo-star star-three">
-✦
-</span>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-<h1 class="hero-title">
-
-نورا جان
-
-</h1>
-
-
-
-
-<p class="hero-text">
-
-به افتخار اولین سال زندگی نورا جان،
-
-<br>
-
-با عشق منتظر حضور شما هستیم.
-
-</p>
-
-
-
-
-<div class="scroll-down modern">
-
-
-<span>
-
-ادامه دعوتنامه
-
-</span>
-
-
-<div class="scroll-circle">
-
-↓
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     MESSAGE
-========================== -->
-
-
-<section class="message-section section reveal">
-
-
-<div class="section-inner">
-
-
-<div class="quote-card">
+<div class="glass-card quote-card">
 
 
 <span class="quote-mark">
@@ -1282,7 +892,6 @@ playing=false;
 </span>
 
 
-
 <p>
 
 حضور شما،
@@ -1294,33 +903,11 @@ playing=false;
 </p>
 
 
-
-
-<span class="quote-mark quote-bottom">
+<span class="quote-mark">
 
 ❞
 
 </span>
-
-
-
-</div>
-
-
-
-
-<div class="scroll-down modern">
-
-
-<div class="scroll-circle">
-
-↓
-
-</div>
-
-
-</div>
-
 
 
 </div>
@@ -1333,18 +920,7 @@ playing=false;
 
 
 
-
-
-
-<!-- ==========================
-     EVENT INFO
-========================== -->
-
-
-<section class="event-section section reveal">
-
-
-<div class="section-inner">
+<section class="reveal">
 
 
 <h2 class="section-title">
@@ -1354,90 +930,18 @@ playing=false;
 </h2>
 
 
-
-<div class="glass-card event-card">
-
+<div class="glass-card">
 
 
-<div class="event-item">
+🎂 جشن تولد نورا
 
-<div class="event-icon">
+<br><br>
 
-🎂
+📅 پنج‌شنبه ۹ مهر
 
-</div>
+<br><br>
 
-
-<p>
-
-جشن تولد نورا
-
-</p>
-
-</div>
-
-
-
-
-
-<div class="event-item">
-
-<div class="event-icon">
-
-📅
-
-</div>
-
-
-<p>
-
-پنج‌شنبه ۹ مهر
-
-</p>
-
-</div>
-
-
-
-
-
-<div class="event-item">
-
-<div class="event-icon">
-
-🕕
-
-
-</div>
-
-
-<p>
-
-ساعت ۱۸
-
-</p>
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-<div class="scroll-down modern">
-
-<div class="scroll-circle">
-
-↓
-
-</div>
-
-</div>
-
+🕕 ساعت ۱۸
 
 
 </div>
@@ -1452,16 +956,7 @@ playing=false;
 
 
 
-
-<!-- ==========================
-     COUNTDOWN
-========================== -->
-
-
-<section class="countdown-section section reveal">
-
-
-<div class="section-inner">
+<section class="reveal">
 
 
 <h2 class="section-title">
@@ -1472,109 +967,41 @@ playing=false;
 
 
 
-
 <div class="countdown">
 
 
+<div class="glass-card time-box">
 
-<div class="time-box glass-card">
-
-<strong id="days">
-
-۰۰
-
-</strong>
-
-<span>
+<strong id="day">۰۰</strong>
 
 روز
 
-</span>
-
-
 </div>
 
 
+<div class="glass-card time-box">
 
-
-
-<div class="time-box glass-card">
-
-
-<strong id="hours">
-
-۰۰
-
-</strong>
-
-<span>
+<strong id="hour">۰۰</strong>
 
 ساعت
 
-</span>
-
-
 </div>
 
 
+<div class="glass-card time-box">
 
-
-
-<div class="time-box glass-card">
-
-
-<strong id="minutes">
-
-۰۰
-
-</strong>
-
-<span>
+<strong id="minute">۰۰</strong>
 
 دقیقه
 
-</span>
-
-
 </div>
 
 
+<div class="glass-card time-box">
 
-
-
-<div class="time-box glass-card">
-
-
-<strong id="seconds">
-
-۰۰
-
-</strong>
-
-<span>
+<strong id="second">۰۰</strong>
 
 ثانیه
-
-</span>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="scroll-down modern">
-
-<div class="scroll-circle">
-
-↓
-
-</div>
 
 </div>
 
@@ -1590,18 +1017,7 @@ playing=false;
 
 
 
-
-
-
-<!-- ==========================
-     TIMELINE
-========================== -->
-
-
-<section class="timeline-section section reveal">
-
-
-<div class="section-inner">
+<section class="reveal">
 
 
 <h2 class="section-title">
@@ -1611,76 +1027,27 @@ playing=false;
 </h2>
 
 
-
-
-<div class="timeline">
-
-
-
-<div class="timeline-card glass-card">
-
-
-<div class="timeline-time">
+<div class="glass-card timeline-card">
 
 ۱۸:۰۰
 
-</div>
-
-
-<p>
+<br>
 
 پذیرایی و شروع جشن
 
-</p>
-
-
 </div>
 
 
-
-
-
-<div class="timeline-card glass-card">
-
-
-<div class="timeline-time">
+<div class="glass-card timeline-card">
 
 ۲۰:۰۰
 
-</div>
+<br>
 
-
-<p>
-
-شام و خاطره‌سازی
-
-</p>
-
+شام
 
 </div>
 
-
-
-</div>
-
-
-
-
-
-
-<div class="scroll-down modern">
-
-<div class="scroll-circle">
-
-↓
-
-</div>
-
-</div>
-
-
-
-</div>
 
 
 </section>
@@ -1690,18 +1057,7 @@ playing=false;
 
 
 
-
-
-
-<!-- ==========================
-     LOCATION
-========================== -->
-
-
-<section class="location-section section reveal">
-
-
-<div class="section-inner">
+<section class="reveal">
 
 
 <h2 class="section-title">
@@ -1719,71 +1075,28 @@ playing=false;
 
 
 
-
-<div class="location-buttons">
-
-
-<a class="glass-button"
-href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
+<div class="buttons">
 
 
-<img src="assets/icons/g.png">
-
+<a class="glass-button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
 
 Google Maps
 
-
 </a>
 
 
-
-
-<a class="glass-button"
-href="https://nshn.ir/2e_bf-IH5x5Y4D">
-
-
-<img src="assets/icons/n.png">
-
+<a class="glass-button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
 
 نشان
 
-
 </a>
 
 
-
-
-<a class="glass-button"
-href="https://balad.ir/p/7ahglm8ucy5Qjp">
-
-
-<img src="assets/icons/b.png">
-
+<a class="glass-button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
 
 بلد
 
-
 </a>
-
-
-
-</div>
-
-
-
-
-
-<div class="scroll-down modern">
-
-<div class="scroll-circle">
-
-↓
-
-</div>
-
-</div>
-
-
 
 
 </div>
@@ -1796,29 +1109,17 @@ href="https://balad.ir/p/7ahglm8ucy5Qjp">
 
 
 
-
-
-
-<!-- ==========================
-     RSVP
-========================== -->
-
-
-<section class="rsvp-section section reveal">
-
-
-<div class="section-inner">
+<section class="reveal">
 
 
 <h2 class="section-title">
 
-منتظر دیدار شما هستیم
+تایید حضور
 
 </h2>
 
 
-
-<div class="rsvp-box glass-card">
+<div class="glass-card">
 
 
 <button class="glass-button">
@@ -1828,18 +1129,11 @@ href="https://balad.ir/p/7ahglm8ucy5Qjp">
 </button>
 
 
-
-
 <button class="glass-button">
 
 متأسفانه نمی‌توانم بیایم
 
 </button>
-
-
-
-</div>
-
 
 
 </div>
@@ -1853,19 +1147,13 @@ href="https://balad.ir/p/7ahglm8ucy5Qjp">
 
 
 
-
 <footer>
-
-
-<p>
 
 به امید دیدار شما
 
 <br>
 
 پیمان و مهناز
-</p>
-
 
 </footer>
 
@@ -1874,7 +1162,117 @@ href="https://balad.ir/p/7ahglm8ucy5Qjp">
 
 
 
-<script src="js/script.js"></script>
+<script>
+
+
+// reveal
+
+const observer=
+new IntersectionObserver(entries=>{
+
+entries.forEach(e=>{
+
+if(e.isIntersecting)
+
+e.target.classList.add("show");
+
+});
+
+});
+
+
+document.querySelectorAll(".reveal")
+.forEach(x=>observer.observe(x));
+
+
+
+
+// countdown
+
+const target=
+new Date("2026-10-01T18:00:00");
+
+
+
+function fa(n){
+
+return String(n)
+.padStart(2,"0")
+.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+
+}
+
+
+
+function update(){
+
+
+let diff=target-new Date();
+
+
+if(diff<0)return;
+
+
+day.innerHTML=
+fa(Math.floor(diff/86400000));
+
+
+hour.innerHTML=
+fa(Math.floor(diff/3600000)%24);
+
+
+minute.innerHTML=
+fa(Math.floor(diff/60000)%60);
+
+
+second.innerHTML=
+fa(Math.floor(diff/1000)%60);
+
+
+}
+
+
+setInterval(update,1000);
+
+update();
+
+
+
+
+// music
+
+let playing=false;
+
+
+function toggleMusic(){
+
+
+let m=document.getElementById("music");
+
+
+if(!playing){
+
+m.play();
+
+playing=true;
+
+}
+
+else{
+
+m.pause();
+
+playing=false;
+
+}
+
+
+}
+
+
+
+
+</script>
 
 
 </body>
