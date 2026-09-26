@@ -2249,3 +2249,16 @@ p,
   line-height: 2;
   font-weight: 600;
 }
+
+
+/* Fix Persian/Nastaliq title clipping */
+.hero-title {
+  line-height: 2.2 !important;
+  padding-bottom: 0.25em;
+  overflow: visible !important;
+}
+
+.hero-title,
+.hero-title * {
+  overflow: visible !important;
+}
