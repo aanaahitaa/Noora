@@ -198,6 +198,26 @@ a {
 }
 
 
+/* Guest name on envelope intro */
+.intro-name {
+  position: relative;
+  z-index: 50 !important;
+
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  margin-top: 18px;
+  color: #f4d98b !important;
+
+  font-family: "Vazirmatn", sans-serif;
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  font-weight: 500;
+  line-height: 2;
+
+  text-align: center;
+}
+
 .intro-glow {
 
     position: absolute;
