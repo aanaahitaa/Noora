@@ -1,6 +1,8 @@
 /* =========================================================
    NOORA — PRINCESS LUXURY INVITATION
 ========================================================= */
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+
 
 :root {
 
@@ -2261,4 +2263,19 @@ p,
 .hero-title,
 .hero-title * {
   overflow: visible !important;
+}
+
+.hero-title-wrapper,
+.hero-title-container,
+.hero-content {
+  overflow: visible !important;
+}
+
+.wax-seal {
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-size: 2.8rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: 0;
 }
