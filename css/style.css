@@ -1045,19 +1045,36 @@ background:
     overflow: hidden;
 }
 
+.photo-frame::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 5px;
+
+    border:
+        1px solid rgba(255,255,255,.55);
+
+    border-radius: inherit;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
 
 .photo-frame img {
 
-  display: block;
+    width: 100%;
 
-  width: 100%;
+    height: 100%;
 
-  aspect-ratio: 1;
+    object-fit: cover;
 
-  object-fit: cover;
+    display: block;
 
-  border-radius: inherit;
-
+    border-radius:
+        160px 160px 15px 15px;
 }
 
 
