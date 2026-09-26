@@ -1,460 +1,384 @@
-/* =========================================================
-   NOORA — INTERACTIONS
-========================================================= */
+/* =====================================================
+   NOORA INVITATION
+===================================================== */
 
 
-/* =========================================================
-   DOM
-========================================================= */
-
-const envelopeScreen =
-    document.getElementById("envelopeScreen");
-
-const envelopeTrigger =
-    document.getElementById("envelopeTrigger");
-
-const envelope =
-    document.querySelector(".envelope");
-
-const invitation =
-    document.getElementById("invitation");
-
-const music =
-    document.getElementById("backgroundMusic");
-
-const musicButton =
-    document.getElementById("musicButton");
-
-const introName =
-    document.getElementById("introName");
-
-const guestName =
-    document.getElementById("guestName");
-
-
-/* =========================================================
-   GUEST SYSTEM
-========================================================= */
-
-const params =
-    new URLSearchParams(window.location.search);
-
-const guest =
-    params.get("guest");
-
-
-/*
-    Later we can move this into a JSON file
-    or Google Sheet.
-
-    For now:
-*/
+/* =====================================================
+   GUESTS
+===================================================== */
 
 const guests = {
 
-    "anna":
-        "آنا جان",
+  anna: "آنا جان",
 
-    "mahsa":
-        "مهسا جان",
+  mahsa: "مهسا جان",
 
-    "mahdi":
-        "مهـدی جان",
+  mahdi: "مهدی جان",
 
-    "family-ahmadi":
-        "خانواده احمدی عزیز",
+  "family-ahmadi":
+    "خانواده احمدی عزیز",
 
-    "family-shirajpour":
-        "خانواده شیرج‌پور عزیز"
+  "family-shirajpour":
+    "خانواده شیرج‌پور عزیز"
 
 };
 
 
-/* Decode URL guest name */
+/* =====================================================
+   GET GUEST FROM URL
+===================================================== */
 
-let currentGuest =
-    guests[guest] || "مهمان عزیز";
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
 
-/* Show guest name */
+const guestId =
+  params.get("guest");
 
-guestName.textContent =
+
+const currentGuest =
+  guests[guestId] ||
+  "مهمان عزیز";
+
+
+/* =====================================================
+   SET GUEST NAME
+===================================================== */
+
+const introName =
+  document.getElementById(
+    "introName"
+  );
+
+
+const guestName =
+  document.getElementById(
+    "guestName"
+  );
+
+
+if (introName) {
+
+  introName.textContent =
     currentGuest;
 
-introName.textContent =
-    currentGuest;
-
-
-/* =========================================================
-   STAR FIELD
-========================================================= */
-
-const stars =
-    document.getElementById("stars");
-
-function createStars() {
-
-    const amount =
-        window.innerWidth < 600
-            ? 45
-            : 80;
-
-    for (let i = 0; i < amount; i++) {
-
-        const star =
-            document.createElement("span");
-
-        star.className = "star";
-
-        star.style.left =
-            Math.random() * 100 + "%";
-
-        star.style.top =
-            Math.random() * 100 + "%";
-
-        const size =
-            Math.random() * 2 + 1;
-
-        star.style.width =
-            size + "px";
-
-        star.style.height =
-            size + "px";
-
-        star.style.animationDelay =
-            Math.random() * 4 + "s";
-
-        star.style.animationDuration =
-            2 + Math.random() * 4 + "s";
-
-        stars.appendChild(star);
-    }
-}
-
-createStars();
-
-
-/* =========================================================
-   MAGIC PARTICLES
-========================================================= */
-
-function createMagicParticles() {
-
-    const symbols = [
-        "✦",
-        "✧",
-        "✥",
-        "•"
-    ];
-
-    for (let i = 0; i < 38; i++) {
-
-        const particle =
-            document.createElement("div");
-
-        particle.className =
-            "magic-particle";
-
-        particle.textContent =
-            symbols[
-                Math.floor(
-                    Math.random() *
-                    symbols.length
-                )
-            ];
-
-        const centerX =
-            window.innerWidth / 2;
-
-        const centerY =
-            window.innerHeight / 2;
-
-        particle.style.left =
-            centerX + "px";
-
-        particle.style.top =
-            centerY + "px";
-
-        const angle =
-            Math.random() *
-            Math.PI *
-            2;
-
-        const distance =
-            70 +
-            Math.random() * 220;
-
-        particle.style.setProperty(
-            "--x",
-            Math.cos(angle) *
-            distance +
-            "px"
-        );
-
-        particle.style.setProperty(
-            "--y",
-            Math.sin(angle) *
-            distance +
-            "px"
-        );
-
-        particle.style.fontSize =
-            7 +
-            Math.random() *
-            12 +
-            "px";
-
-        particle.style.animationDelay =
-            Math.random() * .35 +
-            "s";
-
-        document.body.appendChild(
-            particle
-        );
-
-        setTimeout(() => {
-
-            particle.remove();
-
-        }, 1900);
-    }
 }
 
 
-/* =========================================================
-   ENVELOPE OPEN
-========================================================= */
+if (guestName) {
 
-let opened =
-    false;
+  guestName.textContent =
+    currentGuest;
 
-
-envelopeTrigger.addEventListener(
-    "click",
-    openInvitation
-);
+}
 
 
-function openInvitation() {
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-    if (opened) return;
-
-    opened = true;
-
-    envelope.classList.add("open");
-
-    introName.classList.add("show");
-
-    createMagicParticles();
-
-    /*
-        Try to start music after
-        direct user interaction.
-    */
-
-    setTimeout(() => {
-
-        startMusic();
-
-    }, 700);
+const intro =
+  document.getElementById(
+    "intro"
+  );
 
 
-    /*
-        Let letter animation breathe
-        before revealing the site.
-    */
+const invitation =
+  document.getElementById(
+    "invitation"
+  );
 
-    setTimeout(() => {
 
-        envelopeScreen.classList.add(
-            "opened"
+const envelopeButton =
+  document.getElementById(
+    "envelopeButton"
+  );
+
+
+const envelope =
+  document.querySelector(
+    ".envelope"
+  );
+
+
+/* =====================================================
+   OPEN INVITATION
+===================================================== */
+
+let invitationOpened = false;
+
+
+envelopeButton.addEventListener(
+  "click",
+  () => {
+
+    if (invitationOpened) {
+      return;
+    }
+
+
+    invitationOpened = true;
+
+
+    envelope.classList.add(
+      "open"
+    );
+
+
+    playMusic();
+
+
+    setTimeout(
+      () => {
+
+        intro.classList.add(
+          "is-hidden"
         );
+
 
         invitation.classList.add(
-            "visible"
+          "is-visible"
         );
 
-        musicButton.classList.add(
-            "visible"
+
+        document.body.classList.add(
+          "invitation-open"
         );
 
-        document.body.classList.remove(
-            "locked"
+
+        setTimeout(
+          () => {
+
+            intro.style.display =
+              "none";
+
+          },
+          1200
         );
 
-    }, 1900);
-}
+      },
+      1400
+    );
 
-
-/* =========================================================
-   INITIAL LOCK
-========================================================= */
-
-document.body.classList.add(
-    "locked"
+  }
 );
 
 
-/* =========================================================
+/* =====================================================
    MUSIC
-========================================================= */
+===================================================== */
 
-let musicPlaying =
-    false;
+const music =
+  document.getElementById(
+    "birthdayMusic"
+  );
 
 
-async function startMusic() {
+const musicButton =
+  document.getElementById(
+    "musicButton"
+  );
 
-    /*
-        If the audio file doesn't exist,
-        don't break the site.
-    */
 
-    try {
+let musicPlaying = false;
 
-        await music.play();
 
-        musicPlaying = true;
+function playMusic() {
 
-        musicButton.classList.add(
-            "playing"
-        );
+  if (!music) {
+    return;
+  }
 
-    } catch (error) {
 
-        console.log(
-            "Music is not available yet."
-        );
+  music
+    .play()
+    .then(() => {
 
-    }
+      musicPlaying = true;
+
+      musicButton.classList.add(
+        "is-playing"
+      );
+
+    })
+    .catch(() => {
+
+      musicPlaying = false;
+
+    });
+
 }
 
 
 musicButton.addEventListener(
-    "click",
-    toggleMusic
-);
+  "click",
+  () => {
 
+    if (!music) {
+      return;
+    }
 
-function toggleMusic() {
 
     if (musicPlaying) {
 
-        music.pause();
+      music.pause();
 
-        musicPlaying = false;
+      musicPlaying = false;
 
-        musicButton.classList.remove(
-            "playing"
-        );
+      musicButton.classList.remove(
+        "is-playing"
+      );
 
-    } else {
-
-        startMusic();
     }
-}
+
+    else {
+
+      music
+        .play()
+        .then(() => {
+
+          musicPlaying = true;
+
+          musicButton.classList.add(
+            "is-playing"
+          );
+
+        });
+
+    }
+
+  }
+);
 
 
-/* =========================================================
+/* =====================================================
    COUNTDOWN
-========================================================= */
-
-
-/*
-    پنج‌شنبه ۹ مهر ۱۴۰۵
-    = October 1, 2026
-    18:00 Iran time (+03:30)
-
-    Later you can change ONLY this line.
-*/
+===================================================== */
 
 const eventDate =
-    new Date(
-        "2026-10-01T18:00:00+03:30"
+  new Date(
+    "2026-10-01T18:00:00+03:30"
+  );
+
+
+const daysElement =
+  document.getElementById(
+    "days"
+  );
+
+
+const hoursElement =
+  document.getElementById(
+    "hours"
+  );
+
+
+const minutesElement =
+  document.getElementById(
+    "minutes"
+  );
+
+
+const secondsElement =
+  document.getElementById(
+    "seconds"
+  );
+
+
+function toPersianNumber(value) {
+
+  return String(value)
+    .replace(
+      /\d/g,
+      digit =>
+        "۰۱۲۳۴۵۶۷۸۹"[digit]
     );
+
+}
 
 
 function updateCountdown() {
 
-    const now =
-        new Date();
-
-    const difference =
-        eventDate - now;
+  const now =
+    new Date();
 
 
-    if (difference <= 0) {
-
-        document.getElementById(
-            "days"
-        ).textContent = "00";
-
-        document.getElementById(
-            "hours"
-        ).textContent = "00";
-
-        document.getElementById(
-            "minutes"
-        ).textContent = "00";
-
-        document.getElementById(
-            "seconds"
-        ).textContent = "00";
-
-        return;
-    }
+  const difference =
+    eventDate - now;
 
 
-    const days =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
+  if (difference <= 0) {
+
+    daysElement.textContent =
+      "۰";
+
+    hoursElement.textContent =
+      "۰۰";
+
+    minutesElement.textContent =
+      "۰۰";
+
+    secondsElement.textContent =
+      "۰۰";
+
+    return;
+
+  }
 
 
-    const hours =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60)
-        ) % 24;
+  const days =
+    Math.floor(
+      difference /
+      (1000 * 60 * 60 * 24)
+    );
 
 
-    const minutes =
-        Math.floor(
-            difference /
-            (1000 * 60)
-        ) % 60;
+  const hours =
+    Math.floor(
+      (difference /
+        (1000 * 60 * 60)) %
+      24
+    );
 
 
-    const seconds =
-        Math.floor(
-            difference /
-            1000
-        ) % 60;
+  const minutes =
+    Math.floor(
+      (difference /
+        (1000 * 60)) %
+      60
+    );
 
 
-    document.getElementById(
-        "days"
-    ).textContent =
-        String(days).padStart(2, "0");
+  const seconds =
+    Math.floor(
+      (difference / 1000) %
+      60
+    );
 
 
-    document.getElementById(
-        "hours"
-    ).textContent =
-        String(hours).padStart(2, "0");
+  daysElement.textContent =
+    toPersianNumber(days);
 
 
-    document.getElementById(
-        "minutes"
-    ).textContent =
-        String(minutes).padStart(2, "0");
+  hoursElement.textContent =
+    toPersianNumber(
+      String(hours).padStart(2, "0")
+    );
 
 
-    document.getElementById(
-        "seconds"
-    ).textContent =
-        String(seconds).padStart(2, "0");
+  minutesElement.textContent =
+    toPersianNumber(
+      String(minutes).padStart(2, "0")
+    );
+
+
+  secondsElement.textContent =
+    toPersianNumber(
+      String(seconds).padStart(2, "0")
+    );
+
 }
 
 
@@ -462,281 +386,200 @@ updateCountdown();
 
 
 setInterval(
-    updateCountdown,
-    1000
+  updateCountdown,
+  1000
 );
 
 
-/* =========================================================
+/* =====================================================
    SCROLL REVEAL
-========================================================= */
+===================================================== */
 
 const revealElements =
-    document.querySelectorAll(
-        ".reveal"
-    );
+  document.querySelectorAll(
+    ".reveal"
+  );
 
 
-const observer =
-    new IntersectionObserver(
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
 
-        (entries) => {
+      entries.forEach(
+        entry => {
 
-            entries.forEach(
-                (entry) => {
+          if (
+            entry.isIntersecting
+          ) {
 
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                    }
-
-                }
+            entry.target.classList.add(
+              "visible"
             );
 
-        },
+            revealObserver.unobserve(
+              entry.target
+            );
 
-        {
-            threshold: .15
+          }
+
         }
+      );
 
-    );
+    },
+    {
+      threshold: .12
+    }
+  );
 
 
 revealElements.forEach(
-    (element) => {
+  element => {
 
-        observer.observe(
-            element
-        );
+    revealObserver.observe(
+      element
+    );
 
-    }
+  }
 );
 
 
-/* =========================================================
+/* =====================================================
    RSVP
-========================================================= */
+===================================================== */
 
-const rsvpOptions =
-    document.querySelectorAll(
-        ".rsvp-option"
-    );
+const rsvpButtons =
+  document.querySelectorAll(
+    ".rsvp-btn"
+  );
 
-const rsvpDetails =
-    document.getElementById(
-        "rsvpDetails"
-    );
 
-const rsvpThanks =
-    document.getElementById(
-        "rsvpThanks"
-    );
+const rsvpForm =
+  document.getElementById(
+    "rsvpForm"
+  );
+
 
 const guestCount =
-    document.getElementById(
-        "guestCount"
-    );
+  document.getElementById(
+    "guestCount"
+  );
 
-const plusGuests =
-    document.getElementById(
-        "plusGuests"
-    );
 
-const minusGuests =
-    document.getElementById(
-        "minusGuests"
-    );
+const guestMessage =
+  document.getElementById(
+    "guestMessage"
+  );
+
 
 const submitRsvp =
-    document.getElementById(
-        "submitRsvp"
-    );
+  document.getElementById(
+    "submitRsvp"
+  );
 
 
-let answer =
-    null;
+const rsvpResult =
+  document.getElementById(
+    "rsvpResult"
+  );
 
 
-let numberOfGuests =
-    1;
+let rsvpAnswer = null;
 
 
-/* RSVP selection */
+rsvpButtons.forEach(
+  button => {
 
-rsvpOptions.forEach(
-    (option) => {
+    button.addEventListener(
+      "click",
+      () => {
 
-        option.addEventListener(
-            "click",
-            () => {
-
-                rsvpOptions.forEach(
-                    (item) => {
-
-                        item.classList.remove(
-                            "selected"
-                        );
-
-                    }
-                );
-
-                option.classList.add(
-                    "selected"
-                );
-
-                answer =
-                    option.dataset.answer;
+        rsvpAnswer =
+          button.dataset.answer;
 
 
-                if (
-                    answer === "yes"
-                ) {
+        rsvpForm.hidden =
+          false;
 
-                    rsvpDetails.classList.add(
-                        "active"
-                    );
-
-                } else {
-
-                    rsvpDetails.classList.remove(
-                        "active"
-                    );
-
-                    /*
-                        In V1 this only shows
-                        confirmation.
-
-                        Later:
-                        send to Google Sheet.
-                    */
-
-                    setTimeout(
-                        showThanks,
-                        250
-                    );
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================================
-   GUEST COUNTER
-========================================================= */
-
-plusGuests.addEventListener(
-    "click",
-    () => {
 
         if (
-            numberOfGuests < 10
+          rsvpAnswer === "no"
         ) {
 
-            numberOfGuests++;
-
-            updateGuestCount();
+          guestCount.value =
+            "1";
 
         }
 
-    }
-);
 
-
-minusGuests.addEventListener(
-    "click",
-    () => {
-
-        if (
-            numberOfGuests > 1
-        ) {
-
-            numberOfGuests--;
-
-            updateGuestCount();
-
-        }
-
-    }
-);
-
-
-function updateGuestCount() {
-
-    guestCount.textContent =
-        numberOfGuests;
-}
-
-
-/* =========================================================
-   SUBMIT RSVP
-========================================================= */
-
-submitRsvp.addEventListener(
-    "click",
-    () => {
-
-        /*
-            V1:
-            No database yet.
-
-            Later this exact function
-            will send:
-
-            guest
-            answer
-            numberOfGuests
-            message
-
-            to Google Sheets.
-        */
-
-        console.log({
-            guest: currentGuest,
-            answer: answer,
-            guests: numberOfGuests,
-            message:
-                document.getElementById(
-                    "guestMessage"
-                ).value
+        rsvpForm.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
         });
 
+      }
+    );
 
-        showThanks();
-
-    }
+  }
 );
 
 
-/* =========================================================
-   THANK YOU
-========================================================= */
+/* =====================================================
+   RSVP SUBMIT
+===================================================== */
 
-function showThanks() {
+submitRsvp.addEventListener(
+  "click",
+  () => {
 
-    rsvpDetails.classList.remove(
-        "active"
+    if (!rsvpAnswer) {
+      return;
+    }
+
+
+    const response = {
+
+      guestId:
+        guestId || "unknown",
+
+      guestName:
+        currentGuest,
+
+      answer:
+        rsvpAnswer,
+
+      count:
+        guestCount.value,
+
+      message:
+        guestMessage.value.trim(),
+
+      submittedAt:
+        new Date().toISOString()
+
+    };
+
+
+    /*
+      فعلاً برای تست در مرورگر ذخیره می‌کنیم.
+
+      در مرحله بعد همین response
+      را به Google Sheets وصل می‌کنیم.
+    */
+
+    localStorage.setItem(
+      "noora-rsvp",
+      JSON.stringify(response)
     );
 
-    rsvpOptions.forEach(
-        (option) => {
 
-            option.style.display =
-                "none";
+    rsvpResult.textContent =
+      rsvpAnswer === "yes"
+        ? "پاسخ شما ثبت شد؛ منتظر دیدارتان هستیم ✨"
+        : "ممنون که خبرمان کردید 🤍";
 
-        }
-    );
 
-    rsvpThanks.classList.add(
-        "active"
-    );
+    submitRsvp.disabled =
+      true;
 
-    createMagicParticles();
-}
+  }
+);
