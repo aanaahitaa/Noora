@@ -7,12 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>جشن تولد نورا</title>
+
+<title>جشن تولد نورا نیک نفس</title>
 
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400&family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -26,49 +27,42 @@
 <body>
 
 
-<!-- Sparkles Layer -->
+<!-- =========================
+     FLOATING STARS
+========================= -->
 
-<div class="sparkles"></div>
-
-
-
-
-<!-- ==========================
-     ENVELOPE INTRO
-=========================== -->
-
-<section class="hero reveal">
-
-
-<div class="hero-inner">
+<div class="stars-layer"></div>
 
 
 
-<div class="envelope-container">
 
 
-<div class="envelope"
-id="envelope">
+<!-- =========================
+     INTRO ENVELOPE
+========================= -->
 
 
-<div class="envelope-flap"></div>
+<section class="intro">
 
 
+<div class="guest-name" id="guestName">
 
-<div class="letter">
-
-
-<div class="letter-content">
-
-
-<span>
-
-با عشق
-
-</span>
-
+برای مهمان عزیز ✨
 
 </div>
+
+
+
+
+<div class="envelope-scene">
+
+
+
+<div class="envelope" id="envelope">
+
+
+
+<div class="paper">
 
 
 </div>
@@ -76,8 +70,24 @@ id="envelope">
 
 
 
-<div class="wax-seal"
-id="seal">
+<div class="envelope-back">
+
+
+</div>
+
+
+
+
+<div class="envelope-flap">
+
+
+</div>
+
+
+
+
+
+<div class="wax" id="wax">
 
 
 <span>
@@ -91,48 +101,38 @@ N
 
 
 
-</div>
-
-
 
 </div>
 
-
-
-
-
-<div class="intro-name"
-id="introName">
-
-
-مهمان عزیز
 
 
 </div>
 
 
 
-<div class="scroll-down">
+
+
+<div class="open-text">
+
+برای باز کردن دعوتنامه لمس کنید
+
+</div>
+
+
+
+<div class="scroll-indicator">
+
 
 <span>
-برای دیدن دعوتنامه
+
+↓
+
+
 </span>
 
 
-<div class="arrow">
-
-<i></i>
-<i></i>
-
-
 </div>
 
-</div>
-
-
-
-
-</div>
 
 
 </section>
@@ -144,104 +144,46 @@ id="introName">
 
 
 
-<!-- ==========================
-     PERSONAL GREETING
-=========================== -->
+
+<!-- =========================
+     MAIN CARD
+========================= -->
 
 
-<section class="personal reveal">
-
-
-<div class="section-inner">
-
-
-<h1 class="nastaliq-title">
-
-نورا جان
-
-</h1>
-
-
-
-<p>
-
-
-به افتخار اولین سال زندگی نورا جان،
-
-<br>
-
-با عشق منتظر حضور شما هستیم.
-
-
-</p>
-
-
-
-
-<div class="ornament">
-
-<span>✦</span>
-
-<i></i>
-
-<span>✦</span>
-
-</div>
-
-
-
-
-<div class="scroll-down small">
-
-<div class="arrow">
-
-<i></i>
-<i></i>
-
-
-</div>
-
-</div>
-
-
-
-</div>
-
-
-</section>
+<main id="invitation">
 
 
 
 
 
 
+<!-- HERO PHOTO -->
 
-
-<!-- ==========================
-     PHOTO
-=========================== -->
-
-
-<section class="photo-section reveal">
-
-
-<div class="section-inner">
-
+<section class="hero-photo reveal">
 
 
 <div class="photo-frame">
 
 
-<div class="photo-glow"></div>
+
+<div class="gold-ring"></div>
 
 
-<div class="photo-stars">
+
+<div class="photo-sparkles">
+
 
 <span>✦</span>
+
 <span>✧</span>
+
 <span>✦</span>
+
+<span>✧</span>
+
 
 </div>
+
 
 
 
@@ -256,21 +198,31 @@ alt="Noora">
 
 
 
-<div class="scroll-down small">
+<h1 class="title">
 
+نورا جان
 
-<div class="arrow">
-
-<i></i>
-<i></i>
-
-</div>
-
-
-</div>
+</h1>
 
 
 
+
+<p class="intro-text">
+
+به افتخار اولین سال زندگی نورا جان،
+
+<br>
+
+با عشق منتظر حضور شما هستیم.
+
+</p>
+
+
+
+
+<div class="scroll-indicator">
+
+<span>↓</span>
 
 </div>
 
@@ -284,46 +236,27 @@ alt="Noora">
 
 
 
-<!-- ==========================
-     EVENT INFO
-=========================== -->
+
+<!-- DATE -->
+
+<section class="event-info reveal">
 
 
-<section class="event reveal">
+<div class="glass-card">
 
 
-<div class="section-inner">
+<div class="info-item">
 
-
-
-<h2 class="section-title">
-
-جشن تولد یک سالگی
-
-</h2>
-
-
-
-
-<div class="event-card glass">
-
-
-
-<div class="event-item">
-
-
-<span class="icon">
+<div class="info-icon">
 
 🎂
 
-</span>
+</div>
 
 
 <p>
 
-پنج‌شنبه
-<br>
-۹ مهر
+جشن تولد یک سالگی
 
 </p>
 
@@ -334,15 +267,35 @@ alt="Noora">
 
 
 
-<div class="event-item">
+<div class="info-item">
+
+<div class="info-icon">
+
+📅
+
+</div>
 
 
-<span class="icon">
+<p>
+
+پنج‌شنبه ۹ مهر
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="info-item">
+
+<div class="info-icon">
 
 🕕
 
 
-</span>
+</div>
 
 
 <p>
@@ -355,51 +308,17 @@ alt="Noora">
 </div>
 
 
-
-
-
-<div class="event-item">
-
-
-<span class="icon">
-
-📍
-
-</span>
-
-
-<p>
-
-تالار دوریکا
-<br>
-نشتارود
-
-</p>
-
-
-</div>
-
-
-
 </div>
 
 
 
 
-<div class="scroll-down small">
+<div class="scroll-indicator">
 
-<div class="arrow">
-
-<i></i>
-<i></i>
+<span>↓</span>
 
 </div>
 
-</div>
-
-
-
-</div>
 
 
 </section>
@@ -411,19 +330,13 @@ alt="Noora">
 
 
 
-<!-- ==========================
-     COUNTDOWN
-=========================== -->
 
+<!-- COUNTDOWN -->
 
 <section class="countdown-section reveal">
 
 
-<div class="section-inner">
-
-
-
-<h2 class="section-title">
+<h2>
 
 تا شروع جشن
 
@@ -431,12 +344,10 @@ alt="Noora">
 
 
 
-
-<div class="countdown"
-id="countdown">
+<div class="countdown">
 
 
-<div class="glass">
+<div class="time-box glass-card">
 
 <strong id="days">
 
@@ -455,13 +366,15 @@ id="countdown">
 
 
 
-<div class="glass">
+<div class="time-box glass-card">
+
 
 <strong id="hours">
 
 00
 
 </strong>
+
 
 <span>
 
@@ -475,13 +388,15 @@ id="countdown">
 
 
 
-<div class="glass">
+<div class="time-box glass-card">
+
 
 <strong id="minutes">
 
 00
 
 </strong>
+
 
 <span>
 
@@ -495,13 +410,15 @@ id="countdown">
 
 
 
-<div class="glass">
+<div class="time-box glass-card">
+
 
 <strong id="seconds">
 
 00
 
 </strong>
+
 
 <span>
 
@@ -520,20 +437,12 @@ id="countdown">
 
 
 
-<div class="scroll-down small">
+<div class="scroll-indicator">
 
-<div class="arrow">
-
-<i></i>
-<i></i>
+<span>↓</span>
 
 </div>
 
-</div>
-
-
-
-</div>
 
 
 </section>
@@ -546,19 +455,13 @@ id="countdown">
 
 
 
-<!-- ==========================
-     TIMELINE
-=========================== -->
+<!-- TIMELINE -->
 
 
 <section class="timeline-section reveal">
 
 
-<div class="section-inner">
-
-
-
-<h2 class="section-title">
+<h2>
 
 برنامه جشن
 
@@ -570,21 +473,21 @@ id="countdown">
 
 
 
-<div class="timeline-card glass">
+<div class="timeline-card glass-card">
 
 
-<div class="timeline-time">
+<div class="time">
 
 ۱۸:۰۰
 
 </div>
 
 
-<div>
+<p>
 
 پذیرایی و آغاز جشن
 
-</div>
+</p>
 
 
 </div>
@@ -593,47 +496,40 @@ id="countdown">
 
 
 
-<div class="timeline-card glass">
+<div class="timeline-card glass-card">
 
 
-<div class="timeline-time">
+<div class="time">
 
 ۲۰:۰۰
 
 </div>
 
 
-<div>
+<p>
 
 شام و خاطره‌سازی
 
-</div>
+</p>
 
 
 </div>
 
 
 
-</div>
-
-
-
-
-
-<div class="scroll-down small">
-
-<div class="arrow">
-
-<i></i>
-<i></i>
-
-</div>
 
 </div>
 
 
 
+
+
+<div class="scroll-indicator">
+
+<span>↓</span>
+
 </div>
+
 
 
 </section>
@@ -646,18 +542,13 @@ id="countdown">
 
 
 
-<!-- ==========================
-     LOCATION
-=========================== -->
+<!-- LOCATION -->
 
 
-<section class="location reveal">
+<section class="location-section reveal">
 
 
-<div class="section-inner">
-
-
-<h2 class="section-title">
+<h2>
 
 مسیر جشن
 
@@ -666,12 +557,12 @@ id="countdown">
 
 
 
-<div class="map-buttons">
+<div class="location-buttons">
 
 
 
 <a href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98"
-class="glass-btn">
+class="glass-button">
 
 
 <img src="assets/icons/g.png">
@@ -684,9 +575,8 @@ Google Maps
 
 
 
-
 <a href="https://nshn.ir/2e_bf-IH5x5Y4D"
-class="glass-btn">
+class="glass-button">
 
 
 <img src="assets/icons/n.png">
@@ -699,9 +589,8 @@ class="glass-btn">
 
 
 
-
 <a href="https://balad.ir/p/7ahglm8ucy5Qjp"
-class="glass-btn">
+class="glass-button">
 
 
 <img src="assets/icons/b.png">
@@ -713,11 +602,19 @@ class="glass-btn">
 
 
 
-</div>
-
-
 
 </div>
+
+
+
+
+
+<div class="scroll-indicator">
+
+<span>↓</span>
+
+</div>
+
 
 
 </section>
@@ -730,28 +627,21 @@ class="glass-btn">
 
 
 
-<!-- ==========================
-     RSVP
-=========================== -->
+<!-- RSVP -->
 
 
 <section class="rsvp reveal">
 
 
-<div class="section-inner">
+<h2>
 
-
-
-<h2 class="nastaliq-title">
-
-منتظر دیدار شما هستیم
+حضور شما باعث شادی ماست
 
 </h2>
 
 
 
-
-<button class="glass-btn main">
+<button class="glass-button main-button">
 
 تایید حضور
 
@@ -759,9 +649,6 @@ class="glass-btn">
 
 
 
-</div>
-
-
 </section>
 
 
@@ -770,11 +657,6 @@ class="glass-btn">
 
 
 
-
-
-<!-- ==========================
-     FOOTER
-=========================== -->
 
 
 <footer>
@@ -787,17 +669,15 @@ class="glass-btn">
 <br>
 
 
-<strong>
-
-نورا نیک نفس
-
-</strong>
-
+پیمان و مهناز
 
 </p>
 
 
+
 </footer>
+
+
 
 
 
@@ -807,5 +687,6 @@ class="glass-btn">
 
 
 </body>
+
 
 </html>
