@@ -1,848 +1,2093 @@
 /* =========================================================
-   NOORA INVITATION — MAIN JAVASCRIPT
+   NOORA — PRINCESS LUXURY INVITATION
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+:root {
+
+    --bg: #0e0915;
+    --bg-2: #160d20;
+
+    --gold: #d9b66d;
+    --gold-light: #f5df9b;
+    --gold-dark: #9a7135;
+
+    --cream: #fff8e9;
+    --text: #f8efdc;
+    --muted: #c6b9a6;
+
+    --glass: rgba(255, 248, 226, .055);
+    --glass-border: rgba(235, 205, 139, .20);
+
+    --serif: "Vazirmatn", sans-serif;
+    --nastaliq: "Noto Nastaliq Urdu", serif;
+
+    --shadow:
+        0 30px 80px rgba(0,0,0,.45);
+
+    --gold-shadow:
+        0 0 30px rgba(218, 182, 105, .25);
+}
 
 
-    /* =====================================================
-       GUEST PERSONALIZATION
-    ====================================================== */
-
-    const guestMap = {
-
-        anna:
-            "آنا جان",
-
-        mahsa:
-            "مهسا جان",
-
-        mahdi:
-            "مهدی جان",
-
-        "family-ahmadi":
-            "خانواده احمدی عزیز",
-
-        "family-shirajpour":
-            "خانواده شیرج‌پور عزیز"
-
-    };
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 
-    const params =
-        new URLSearchParams(
-            window.location.search
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(133, 83, 143, .18),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 20% 40%,
+            rgba(191, 143, 67, .07),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #0b0710 0%,
+            #120a18 45%,
+            #0a070e 100%
         );
 
+    color: var(--text);
 
-    const guestId =
-        params.get("guest");
+    font-family: var(--serif);
 
-
-    const currentGuest =
-        guestMap[guestId] ||
-        "مهمان عزیز";
+    overflow-x: hidden;
+}
 
 
-    const introName =
-        document.getElementById(
-            "introName"
-        );
+body.locked {
+    overflow: hidden;
+}
 
 
-    const guestName =
-        document.getElementById(
-            "guestName"
-        );
+button,
+a,
+input,
+textarea {
+    font-family: inherit;
+}
 
 
-    if (introName) {
+button {
+    border: 0;
+}
 
-        introName.textContent =
-            currentGuest;
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.stars {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    overflow: hidden;
+}
+
+
+.star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    background: #fff1bc;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px #f4d886;
+
+    animation:
+        twinkle 3s infinite ease-in-out;
+}
+
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: .15;
+        transform: scale(.7);
     }
 
+    50% {
+        opacity: .9;
+        transform: scale(1.4);
+    }
+}
 
-    if (guestName) {
 
-        guestName.textContent =
-            currentGuest;
+/* =========================================================
+   ENVELOPE INTRO
+========================================================= */
 
+.envelope-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(112, 67, 112, .25),
+            transparent 38%
+        ),
+
+        linear-gradient(
+            145deg,
+            #09060d,
+            #1a0d20,
+            #08060c
+        );
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+
+.envelope-screen.opened {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+.intro-glow {
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(232, 194, 105, .16),
+            transparent 65%
+        );
+
+    filter: blur(20px);
+
+    animation: introGlow 4s ease-in-out infinite;
+}
+
+
+@keyframes introGlow {
+
+    0%,
+    100% {
+        transform: scale(.9);
+        opacity: .6;
     }
 
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
 
 
-    /* =====================================================
-       OPENING
-    ====================================================== */
+/* =========================================================
+   ENVELOPE
+========================================================= */
 
-    const opening =
-        document.getElementById(
-            "opening"
+.envelope-wrapper {
+
+    position: relative;
+
+    width: min(330px, 82vw);
+
+    aspect-ratio: 1.45;
+
+    cursor: pointer;
+
+    perspective: 1000px;
+
+    z-index: 3;
+}
+
+
+.envelope-shadow {
+
+    position: absolute;
+
+    bottom: -25px;
+
+    left: 10%;
+
+    width: 80%;
+
+    height: 35px;
+
+    background: rgba(0,0,0,.65);
+
+    filter: blur(18px);
+
+    border-radius: 50%;
+}
+
+
+.envelope {
+
+    position: absolute;
+
+    inset: 0;
+
+    transform-style: preserve-3d;
+
+    filter:
+        drop-shadow(
+            0 25px 35px rgba(0,0,0,.5)
+        );
+}
+
+
+.envelope-body {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #b98a42,
+            #e8ca83 35%,
+            #9d7136 70%,
+            #d9ae5c
         );
 
-
-    const envelope =
-        document.getElementById(
-            "envelope"
-        );
-
-
-    const openButton =
-        document.getElementById(
-            "openButton"
-        );
-
-
-    const openingScroll =
-        document.getElementById(
-            "openingScroll"
-        );
-
-
-    const invitation =
-        document.getElementById(
-            "invitation"
-        );
-
-
-    const body =
-        document.body;
-
-
-    let opened =
-        false;
-
-
-    body.classList.add(
-        "locked"
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 100%,
+        0 100%
     );
 
+    border-radius: 5px 5px 12px 12px;
 
-    function openInvitation() {
-
-        if (opened) {
-            return;
-        }
-
-
-        opened = true;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.35),
+        inset 0 -20px 30px rgba(89,49,14,.22);
+}
 
 
-        envelope.classList.add(
-            "open"
+.envelope-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 1px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e4c17a,
+            #b8873e
         );
 
-
-        openButton.style.opacity =
-            "0";
-
-
-        openButton.style.pointerEvents =
-            "none";
-
-
-        startMusic();
+    clip-path: polygon(
+        0 0,
+        50% 55%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+}
 
 
-        setTimeout(() => {
+.envelope-flap {
 
-            openingScroll.classList.add(
-                "show"
-            );
+    position: absolute;
 
-        }, 1200);
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 65%;
+
+    z-index: 6;
+
+    transform-origin: top center;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f1d68e,
+            #c3984d
+        );
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    transition:
+        transform 1.2s cubic-bezier(.22,.61,.36,1);
+
+    backface-visibility: hidden;
+}
 
 
-        setTimeout(() => {
+.envelope.open .envelope-flap {
 
-            opening.classList.add(
-                "closed"
-            );
+    transform:
+        rotateX(180deg);
 
-            body.classList.remove(
-                "locked"
-            );
+    z-index: 2;
+}
 
 
-            window.scrollTo({
-                top: 0,
-                behavior: "instant"
-            });
+/* =========================================================
+   LETTER
+========================================================= */
 
-        }, 2300);
+.letter {
 
+    position: absolute;
+
+    left: 7%;
+
+    bottom: 5%;
+
+    width: 86%;
+
+    height: 78%;
+
+    z-index: 1;
+
+    border-radius: 5px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fffaf0,
+            #eadfc9
+        );
+
+    color: #5d4022;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.3);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        transform 1.5s cubic-bezier(.2,.8,.2,1),
+        z-index 0s linear .7s;
+}
+
+
+.envelope.open .letter {
+
+    transform:
+        translateY(-115%)
+        scale(1.03);
+
+    z-index: 10;
+}
+
+
+.letter-content {
+    text-align: center;
+}
+
+
+.letter-small {
+
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 7px;
+}
+
+
+.letter h2 {
+
+    font-family: var(--nastaliq);
+
+    font-size: 24px;
+
+    font-weight: 500;
+
+    line-height: 2;
+
+}
+
+
+.letter-name {
+
+    font-family: var(--nastaliq);
+
+    font-size: 25px;
+
+    color: #9a7135;
+}
+
+
+/* =========================================================
+   WAX SEAL
+========================================================= */
+
+.wax-seal {
+
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+
+    top: 58%;
+
+    width: 65px;
+    height: 65px;
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #f5db98;
+
+    font-family: serif;
+
+    font-size: 24px;
+
+    background:
+
+        radial-gradient(
+            circle at 30% 25%,
+            #8c3451,
+            #54182e 60%,
+            #310d1c
+        );
+
+    border:
+        2px solid rgba(246,210,137,.65);
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.45),
+        inset 0 2px 3px rgba(255,255,255,.25);
+
+    transition:
+        opacity .4s ease,
+        transform .5s ease;
+}
+
+
+.envelope.open .wax-seal {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.5);
+}
+
+
+.envelope-shine {
+
+    position: absolute;
+
+    inset: -30%;
+
+    z-index: 20;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 42%,
+            rgba(255,255,255,.28) 50%,
+            transparent 58%
+        );
+
+    transform:
+        translateX(-100%);
+
+    animation:
+        envelopeShine 3.5s infinite;
+}
+
+
+@keyframes envelopeShine {
+
+    0% {
+        transform: translateX(-100%);
     }
 
-
-    openButton.addEventListener(
-        "click",
-        openInvitation
-    );
-
-
-    envelope.addEventListener(
-        "click",
-        openInvitation
-    );
+    35%,
+    100% {
+        transform: translateX(100%);
+    }
+}
 
 
+.open-message {
 
-    /* =====================================================
-       MUSIC
-    ====================================================== */
+    position: relative;
 
-    const music =
-        document.getElementById(
-            "birthdayMusic"
-        );
+    margin-top: 70px;
 
+    z-index: 4;
 
-    const musicButton =
-        document.getElementById(
-            "musicButton"
-        );
+    color: var(--gold-light);
 
+    font-size: 12px;
 
-    let musicPlaying =
-        false;
+    letter-spacing: .3px;
+
+    animation:
+        breathe 2.5s infinite;
+}
 
 
-    function startMusic() {
+.sparkle {
 
-        if (!music) {
-            return;
-        }
+    margin: 0 8px;
 
-
-        music.volume =
-            0.35;
+    color: #f6d98a;
+}
 
 
-        const playPromise =
-            music.play();
+@keyframes breathe {
 
-
-        if (
-            playPromise !== undefined
-        ) {
-
-            playPromise
-                .then(() => {
-
-                    musicPlaying =
-                        true;
-
-                    updateMusicButton();
-
-                })
-                .catch(() => {
-
-                    musicPlaying =
-                        false;
-
-                });
-
-        }
-
+    0%,
+    100% {
+        opacity: .45;
     }
 
-
-    function updateMusicButton() {
-
-        if (!musicButton) {
-            return;
-        }
+    50% {
+        opacity: 1;
+    }
+}
 
 
-        musicButton.textContent =
-            musicPlaying
-                ? "♫"
-                : "×";
+.intro-name {
 
+    position: absolute;
+
+    bottom: 12%;
+
+    font-family: var(--nastaliq);
+
+    color: var(--gold-light);
+
+    font-size: 20px;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    transition: .8s ease;
+}
+
+
+.intro-name.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SPARKLES
+========================================================= */
+
+.magic-particle {
+
+    position: fixed;
+
+    z-index: 2000;
+
+    pointer-events: none;
+
+    color: #f7d98c;
+
+    font-size: 14px;
+
+    animation:
+        magicParticle 1.5s ease-out forwards;
+}
+
+
+@keyframes magicParticle {
+
+    0% {
+        opacity: 0;
+        transform: scale(.2) translate(0,0);
     }
 
-
-    musicButton.addEventListener(
-        "click",
-        () => {
-
-            if (!music) {
-                return;
-            }
-
-
-            if (musicPlaying) {
-
-                music.pause();
-
-                musicPlaying =
-                    false;
-
-            } else {
-
-                music.play()
-                    .then(() => {
-
-                        musicPlaying =
-                            true;
-
-                        updateMusicButton();
-
-                    })
-                    .catch(() => {});
-
-            }
-
-
-            updateMusicButton();
-
-        }
-    );
-
-
-
-    /* =====================================================
-       COUNTDOWN
-    ====================================================== */
-
-    const targetDate =
-        new Date(
-            "2026-10-01T18:00:00+03:30"
-        ).getTime();
-
-
-    const daysEl =
-        document.getElementById(
-            "days"
-        );
-
-
-    const hoursEl =
-        document.getElementById(
-            "hours"
-        );
-
-
-    const minutesEl =
-        document.getElementById(
-            "minutes"
-        );
-
-
-    const secondsEl =
-        document.getElementById(
-            "seconds"
-        );
-
-
-    function updateCountdown() {
-
-        const now =
-            new Date().getTime();
-
-
-        const distance =
-            targetDate - now;
-
-
-        if (distance <= 0) {
-
-            daysEl.textContent =
-                "00";
-
-            hoursEl.textContent =
-                "00";
-
-            minutesEl.textContent =
-                "00";
-
-            secondsEl.textContent =
-                "00";
-
-            return;
-
-        }
-
-
-        const days =
-            Math.floor(
-                distance /
-                (1000 * 60 * 60 * 24)
-            );
-
-
-        const hours =
-            Math.floor(
-                (distance %
-                    (1000 * 60 * 60 * 24)) /
-                (1000 * 60 * 60)
-            );
-
-
-        const minutes =
-            Math.floor(
-                (distance %
-                    (1000 * 60 * 60)) /
-                (1000 * 60)
-            );
-
-
-        const seconds =
-            Math.floor(
-                (distance %
-                    (1000 * 60)) /
-                1000
-            );
-
-
-        daysEl.textContent =
-            String(days)
-                .padStart(2, "0");
-
-
-        hoursEl.textContent =
-            String(hours)
-                .padStart(2, "0");
-
-
-        minutesEl.textContent =
-            String(minutes)
-                .padStart(2, "0");
-
-
-        secondsEl.textContent =
-            String(seconds)
-                .padStart(2, "0");
-
+    20% {
+        opacity: 1;
     }
 
-
-    updateCountdown();
-
-
-    setInterval(
-        updateCountdown,
-        1000
-    );
-
-
-
-    /* =====================================================
-       SCROLL REVEAL
-    ====================================================== */
-
-    const revealElements =
-        document.querySelectorAll(
-            ".section-inner"
-        );
-
-
-    revealElements.forEach(
-        (element) => {
-
-            element.classList.add(
-                "reveal"
+    100% {
+        opacity: 0;
+        transform:
+            scale(1.4)
+            translate(
+                var(--x),
+                var(--y)
             );
+    }
+}
 
-        }
-    );
+
+/* =========================================================
+   INVITATION
+========================================================= */
+
+.invitation {
+
+    position: relative;
+
+    z-index: 2;
+
+    opacity: 0;
+
+    transition:
+        opacity 1.2s ease;
+}
 
 
-    const observer =
-        new IntersectionObserver(
-            (entries) => {
+.invitation.visible {
+    opacity: 1;
+}
 
-                entries.forEach(
-                    (entry) => {
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+.section {
 
-                            entry.target.classList.add(
-                                "visible"
-                            );
+    position: relative;
 
-                        }
+    min-height: 100vh;
 
-                    }
-                );
+    display: flex;
 
-            },
-            {
-                threshold: 0.12
-            }
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 90px 24px;
+}
+
+
+.section-inner {
+
+    width: min(600px, 100%);
+
+    margin: auto;
+
+    text-align: center;
+}
+
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(45px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.22,.61,.36,1);
+}
+
+
+.reveal.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+.eyebrow {
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    letter-spacing: 2.5px;
+
+    margin-bottom: 18px;
+}
+
+
+.nastaliq-title {
+
+    font-family: var(--nastaliq);
+
+    font-weight: 500;
+
+    font-size: clamp(30px, 8vw, 50px);
+
+    line-height: 2;
+
+    color: var(--cream);
+}
+
+
+.gold-small {
+
+    color: var(--gold);
+
+    font-size: 20px;
+}
+
+
+.gold-divider {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+
+.gold-divider span {
+
+    width: 65px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold)
+        );
+}
+
+
+.gold-divider span:last-child {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold),
+            transparent
+        );
+}
+
+
+.gold-divider i {
+
+    color: var(--gold);
+
+    font-style: normal;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 100svh;
+
+    padding-top: 70px;
+
+    overflow: hidden;
+}
+
+
+.hero-content {
+    width: 100%;
+}
+
+
+.hero h1 {
+
+    font-family: var(--nastaliq);
+
+    font-size: clamp(50px, 15vw, 90px);
+
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    background:
+        linear-gradient(
+            120deg,
+            #c79542,
+            #fff0b2,
+            #c6923d
         );
 
+    -webkit-background-clip: text;
 
-    revealElements.forEach(
-        (element) => {
+    background-clip: text;
 
-            observer.observe(
-                element
-            );
+    color: transparent;
 
-        }
-    );
+    filter:
+        drop-shadow(
+            0 0 25px rgba(224,187,99,.15)
+        );
+}
 
 
+.hero-text {
 
-    /* =====================================================
-       RSVP
-    ====================================================== */
+    margin: 10px auto 45px;
 
-    const rsvpForm =
-        document.getElementById(
-            "rsvpForm"
+    color: var(--muted);
+
+    line-height: 2.3;
+
+    font-size: 14px;
+}
+
+
+.ornament {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    color: var(--gold);
+
+    margin: 10px 0;
+}
+
+
+.ornament i {
+
+    width: 55px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.hero-photo {
+
+    position: relative;
+
+    width: min(310px, 75vw);
+
+    aspect-ratio: 4 / 5;
+
+    margin: auto;
+}
+
+
+.photo-glow {
+
+    position: absolute;
+
+    inset: -30px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(214,168,75,.23),
+            transparent 65%
         );
 
+    filter: blur(20px);
+}
 
-    const rsvpDetails =
-        document.getElementById(
-            "rsvpDetails"
+
+.photo-frame {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 100%;
+
+    padding: 7px;
+
+    border-radius: 170px 170px 20px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8f682e,
+            #f1d48c,
+            #a67938,
+            #f3d98f,
+            #805b2a
         );
 
+    box-shadow:
+        var(--shadow),
+        var(--gold-shadow);
 
-    const rsvpResult =
-        document.getElementById(
-            "rsvpResult"
-        );
+    overflow: hidden;
+}
 
 
-    const rsvpChoices =
-        document.querySelectorAll(
-            ".rsvp-choice"
-        );
+.photo-frame::before {
 
+    content: "";
 
-    const guestCountEl =
-        document.getElementById(
-            "guestCount"
-        );
+    position: absolute;
 
+    inset: 5px;
 
-    const minusGuest =
-        document.getElementById(
-            "minusGuest"
-        );
+    border:
+        1px solid rgba(255,255,255,.55);
 
+    border-radius: inherit;
 
-    const plusGuest =
-        document.getElementById(
-            "plusGuest"
-        );
+    pointer-events: none;
 
+    z-index: 2;
+}
 
-    const guestMessage =
-        document.getElementById(
-            "guestMessage"
-        );
 
+.photo-frame img {
 
-    let answer =
-        null;
+    width: 100%;
 
+    height: 100%;
 
-    let numberOfGuests =
-        1;
+    object-fit: cover;
 
+    display: block;
 
-    /* Select answer */
+    border-radius:
+        160px 160px 15px 15px;
+}
 
-    rsvpChoices.forEach(
-        (button) => {
 
-            button.addEventListener(
-                "click",
-                () => {
+.photo-sparkle {
 
-                    rsvpChoices.forEach(
-                        (item) => {
+    position: absolute;
 
-                            item.classList.remove(
-                                "selected"
-                            );
+    color: var(--gold-light);
 
-                        }
-                    );
+    text-shadow:
+        0 0 15px rgba(255,215,125,.8);
 
+    animation:
+        sparkleFloat 3s ease-in-out infinite;
+}
 
-                    button.classList.add(
-                        "selected"
-                    );
 
+.sparkle-a {
+    right: -8px;
+    top: 25%;
+}
 
-                    answer =
-                        button.dataset.answer;
 
+.sparkle-b {
+    left: -10px;
+    top: 42%;
+    animation-delay: .8s;
+}
 
-                    if (
-                        answer === "yes"
-                    ) {
 
-                        rsvpDetails.classList.add(
-                            "show"
-                        );
+.sparkle-c {
+    right: 15%;
+    bottom: -5px;
+    animation-delay: 1.4s;
+}
 
-                        rsvpResult.textContent =
-                            "";
 
-                    } else {
+@keyframes sparkleFloat {
 
-                        rsvpDetails.classList.remove(
-                            "show"
-                        );
-
-
-                        rsvpResult.textContent =
-                            "ممنون که به ما اطلاع دادید. جای شما در جشن نورا خالی خواهد بود 🤍";
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* Guest counter */
-
-    minusGuest.addEventListener(
-        "click",
-        () => {
-
-            if (
-                numberOfGuests > 1
-            ) {
-
-                numberOfGuests--;
-
-                guestCountEl.textContent =
-                    numberOfGuests;
-
-            }
-
-        }
-    );
-
-
-    plusGuest.addEventListener(
-        "click",
-        () => {
-
-            if (
-                numberOfGuests < 10
-            ) {
-
-                numberOfGuests++;
-
-                guestCountEl.textContent =
-                    numberOfGuests;
-
-            }
-
-        }
-    );
-
-
-    /* Submit */
-
-    rsvpForm.addEventListener(
-        "submit",
-        (event) => {
-
-            event.preventDefault();
-
-
-            if (!answer) {
-
-                rsvpResult.textContent =
-                    "لطفاً ابتدا وضعیت حضور خود را انتخاب کنید.";
-
-                return;
-
-            }
-
-
-            if (
-                answer === "no"
-            ) {
-
-                return;
-
-            }
-
-
-            const formData = {
-
-                guestId:
-                    guestId ||
-                    "unknown",
-
-                guestName:
-                    currentGuest,
-
-                answer:
-                    answer,
-
-                guests:
-                    numberOfGuests,
-
-                message:
-                    guestMessage.value.trim(),
-
-                submittedAt:
-                    new Date()
-                        .toISOString()
-
-            };
-
-
-            /*
-             ==================================================
-             TEMPORARY
-
-             فعلاً داده را در console می‌بینیم.
-             در مرحله بعد همین قسمت را به Google Apps Script
-             وصل می‌کنیم.
-             ==================================================
-            */
-
-            console.log(
-                "NOORA RSVP:",
-                formData
-            );
-
-
-            /* Local backup */
-
-            try {
-
-                const existing =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "noora_rsvp"
-                        ) || "[]"
-                    );
-
-
-                existing.push(
-                    formData
-                );
-
-
-                localStorage.setItem(
-                    "noora_rsvp",
-                    JSON.stringify(
-                        existing
-                    )
-                );
-
-            } catch (error) {
-
-                console.warn(
-                    "Local storage unavailable.",
-                    error
-                );
-
-            }
-
-
-            rsvpResult.innerHTML =
-                `
-                <strong>
-                    پاسخ شما ثبت شد 🤍
-                </strong>
-                <br>
-                مشتاق دیدنتان در جشن نورا هستیم.
-                `;
-
-
-            rsvpForm
-                .querySelectorAll(
-                    "button"
-                )
-                .forEach(
-                    (button) => {
-
-                        if (
-                            button.type ===
-                            "submit"
-                        ) {
-
-                            button.disabled =
-                                true;
-
-                            button.style.opacity =
-                                ".6";
-
-                        }
-
-                    }
-                );
-
-        }
-    );
-
-
-
-    /* =====================================================
-       OPENING PARTICLES
-    ====================================================== */
-
-    function createSparkles() {
-
-        const container =
-            document.querySelector(
-                ".opening"
-            );
-
-
-        if (!container) {
-            return;
-        }
-
-
-        for (
-            let i = 0;
-            i < 25;
-            i++
-        ) {
-
-            const sparkle =
-                document.createElement(
-                    "span"
-                );
-
-
-            sparkle.className =
-                "generated-sparkle";
-
-
-            sparkle.style.left =
-                `${Math.random() * 100}%`;
-
-
-            sparkle.style.top =
-                `${Math.random() * 100}%`;
-
-
-            sparkle.style.animationDelay =
-                `${Math.random() * 2}s`;
-
-
-            container.appendChild(
-                sparkle
-            );
-
-        }
-
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: .5;
     }
 
+    50% {
+        transform: translateY(-12px) rotate(25deg);
+        opacity: 1;
+    }
+}
 
-    createSparkles();
 
-});
+.scroll-hint {
+
+    margin-top: 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: rgba(255,255,255,.4);
+
+    font-size: 10px;
+}
+
+
+.scroll-line {
+
+    width: 1px;
+
+    height: 40px;
+
+    background:
+        linear-gradient(
+            var(--gold),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   PERSONAL
+========================================================= */
+
+.personal {
+
+    min-height: 80vh;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(139,92,118,.12),
+            transparent 65%
+        );
+}
+
+
+.personal-label {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin: 15px 0 5px;
+}
+
+
+.personal h2 {
+
+    font-family: var(--nastaliq);
+
+    color: var(--gold-light);
+
+    font-size: 36px;
+
+    font-weight: 500;
+
+    line-height: 2;
+}
+
+
+.personal-text {
+
+    color: var(--muted);
+
+    line-height: 2.6;
+
+    margin-top: 25px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.date-big {
+
+    font-size: clamp(70px, 20vw, 120px);
+
+    line-height: 1;
+
+    font-weight: 300;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a87b36,
+            #fff0ad,
+            #b7833b
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.date-year {
+
+    color: var(--gold);
+
+    letter-spacing: 8px;
+
+    margin-top: 10px;
+}
+
+
+.time-box {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    margin-top: 25px;
+
+    color: var(--cream);
+}
+
+
+.time-box div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.time-box strong {
+
+    font-size: 17px;
+
+    font-weight: 500;
+}
+
+
+.time-box span {
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+.time-separator {
+
+    width: 1px;
+
+    height: 40px;
+
+    background:
+        linear-gradient(
+            transparent,
+            var(--gold),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin-top: 35px;
+}
+
+
+.count-box {
+
+    padding: 20px 5px;
+
+    border:
+        1px solid var(--glass-border);
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.025)
+        );
+
+    backdrop-filter: blur(15px);
+}
+
+
+.count-box strong {
+
+    display: block;
+
+    color: var(--gold-light);
+
+    font-size: 25px;
+
+    font-weight: 400;
+}
+
+
+.count-box span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 7px;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message-section {
+
+    min-height: 75vh;
+}
+
+
+.quote-mark {
+
+    color: var(--gold);
+
+    font-family: serif;
+
+    font-size: 65px;
+
+    line-height: .5;
+
+    opacity: .5;
+}
+
+
+.nastaliq-message {
+
+    font-family: var(--nastaliq);
+
+    color: var(--cream);
+
+    font-size: clamp(22px, 6vw, 35px);
+
+    line-height: 2.5;
+}
+
+
+.signature {
+
+    margin-top: 30px;
+
+    color: var(--muted);
+
+    line-height: 2;
+
+    font-size: 11px;
+}
+
+
+.signature strong {
+
+    color: var(--gold-light);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location-card {
+
+    margin-top: 30px;
+
+    padding: 30px 20px;
+
+    border:
+        1px solid var(--glass-border);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.02)
+        );
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.25);
+}
+
+
+.location-icon {
+
+    color: var(--gold);
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+
+.location-card h3 {
+
+    font-family: var(--nastaliq);
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+    line-height: 2;
+}
+
+
+.location-card > p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+.map-buttons {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 25px;
+}
+
+
+.map-button {
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 10px 5px;
+
+    border:
+        1px solid rgba(230,205,146,.16);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    color: var(--cream);
+
+    font-size: 9px;
+
+    transition:
+        .3s ease;
+}
+
+
+.map-button:hover {
+
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(230,205,146,.5);
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+.map-button img {
+
+    width: 22px;
+
+    height: 22px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   PROGRAM
+========================================================= */
+
+.timeline {
+
+    position: relative;
+
+    margin-top: 45px;
+
+    text-align: right;
+}
+
+
+.timeline::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    right: 7px;
+
+    width: 1px;
+
+    background:
+        linear-gradient(
+            var(--gold),
+            transparent
+        );
+}
+
+
+.timeline-item {
+
+    position: relative;
+
+    padding:
+        0 35px 45px 0;
+}
+
+
+.timeline-dot {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 4px;
+
+    width: 15px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid var(--gold);
+
+    background: var(--bg);
+
+    box-shadow:
+        0 0 15px rgba(218,182,105,.3);
+}
+
+
+.timeline-content span {
+
+    color: var(--gold);
+
+    font-size: 12px;
+}
+
+
+.timeline-content h3 {
+
+    font-family: var(--nastaliq);
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    line-height: 2;
+}
+
+
+.timeline-content p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   RSVP
+========================================================= */
+
+.rsvp-section {
+
+    min-height: 100vh;
+
+    padding-bottom: 60px;
+}
+
+
+.rsvp-card {
+
+    margin-top: 35px;
+
+    padding: 25px 18px;
+
+    border:
+        1px solid var(--glass-border);
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.02)
+        );
+
+    backdrop-filter: blur(20px);
+
+    text-align: right;
+}
+
+
+.rsvp-option {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border:
+        1px solid rgba(230,205,146,.12);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color: var(--cream);
+
+    cursor: pointer;
+
+    transition: .3s ease;
+
+    text-align: right;
+}
+
+
+.rsvp-option:hover,
+.rsvp-option.selected {
+
+    border-color:
+        rgba(231,201,132,.55);
+
+    background:
+        rgba(222,183,96,.08);
+}
+
+
+.option-icon {
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid var(--gold);
+
+    border-radius: 50%;
+
+    color: var(--gold-light);
+
+    flex-shrink: 0;
+}
+
+
+.rsvp-details {
+
+    display: none;
+
+    padding-top: 20px;
+}
+
+
+.rsvp-details.active {
+
+    display: block;
+
+    animation:
+        fadeUp .5s ease;
+}
+
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.rsvp-details label {
+
+    display: block;
+
+    color: var(--cream);
+
+    font-size: 12px;
+
+    margin:
+        18px 0 12px;
+}
+
+
+.rsvp-details label small {
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+.guest-counter {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin: 15px 0 30px;
+}
+
+
+.guest-counter button {
+
+    width: 38px;
+    height: 38px;
+
+    border:
+        1px solid var(--gold);
+
+    border-radius: 50%;
+
+    background:
+        transparent;
+
+    color: var(--gold-light);
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+.guest-counter strong {
+
+    min-width: 30px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    color: var(--gold-light);
+
+    font-weight: 400;
+}
+
+
+textarea {
+
+    width: 100%;
+
+    resize: vertical;
+
+    border:
+        1px solid rgba(230,205,146,.15);
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    background:
+        rgba(0,0,0,.18);
+
+    color: var(--cream);
+
+    outline: none;
+
+    font-size: 12px;
+}
+
+
+textarea:focus {
+
+    border-color:
+        rgba(230,205,146,.5);
+}
+
+
+.submit-rsvp {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #a97c39,
+            #e5c579,
+            #9c7134
+        );
+
+    color: #25170a;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(211,171,82,.15);
+}
+
+
+.rsvp-thanks {
+
+    display: none;
+
+    text-align: center;
+
+    padding: 30px 10px;
+}
+
+
+.rsvp-thanks.active {
+
+    display: block;
+
+    animation:
+        fadeUp .6s ease;
+}
+
+
+.thanks-icon {
+
+    color: var(--gold-light);
+
+    font-size: 40px;
+
+    margin-bottom: 10px;
+}
+
+
+.rsvp-thanks h3 {
+
+    font-family: var(--nastaliq);
+
+    font-size: 28px;
+
+    line-height: 2;
+}
+
+
+.rsvp-thanks p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-button {
+
+    position: fixed;
+
+    z-index: 900;
+
+    left: 18px;
+
+    bottom: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid rgba(234,202,132,.4);
+
+    border-radius: 50%;
+
+    background:
+        rgba(20,12,27,.75);
+
+    backdrop-filter: blur(10px);
+
+    color: var(--gold-light);
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s ease;
+}
+
+
+.music-button.visible {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.music-button.playing {
+
+    box-shadow:
+        0 0 20px rgba(229,192,102,.25);
+}
+
+
+.music-button span {
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    position: relative;
+
+    text-align: center;
+
+    padding: 80px 20px 50px;
+
+    color: var(--muted);
+}
+
+
+.footer-stars {
+
+    color: var(--gold);
+
+    margin-bottom: 25px;
+}
+
+
+.footer p {
+
+    font-size: 11px;
+
+    margin-bottom: 10px;
+}
+
+
+.footer strong {
+
+    display: block;
+
+    font-family: var(--nastaliq);
+
+    color: var(--gold-light);
+
+    font-size: 30px;
+
+    line-height: 2;
+}
+
+
+.footer small {
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: .5;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 700px) {
+
+    .section {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .hero-photo {
+        width: 350px;
+    }
+
+    .rsvp-card {
+        padding: 35px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: .01ms !important;
+    }
+
+}
