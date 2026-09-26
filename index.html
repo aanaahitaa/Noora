@@ -1,239 +1,137 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#100b19">
+    <meta name="description" content="دعوتنامه دیجیتال جشن یک‌سالگی نورا">
 
-    <meta name="theme-color" content="#faf7f1">
+    <title>جشن یک‌سالگی نورا جان</title>
 
-    <meta name="description"
-          content="دعوت‌نامه اولین تولد نورا نیک نفس">
-
-    <title>نورا جان | اولین تولد</title>
-
-    <!-- Fonts -->
+    <!-- Persian / Nastaliq -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- =========================================================
-         OPENING SCREEN
-    ========================================================== -->
-
-    <section class="opening" id="opening">
-
-        <!-- Ambient background -->
-        <div class="opening-bg"></div>
-
-        <!-- Soft light -->
-        <div class="opening-glow"></div>
-
-        <!-- Decorative floating elements -->
-        <div class="floating-particles" aria-hidden="true">
-
-            <span class="particle p1"></span>
-            <span class="particle p2"></span>
-            <span class="particle p3"></span>
-            <span class="particle p4"></span>
-            <span class="particle p5"></span>
-            <span class="particle p6"></span>
-            <span class="particle p7"></span>
-            <span class="particle p8"></span>
-
-        </div>
-
-        <!-- Floral decorations -->
-        <div class="flower flower-left" aria-hidden="true">
-            ✿
-        </div>
-
-        <div class="flower flower-right" aria-hidden="true">
-            ✿
-        </div>
-
-        <!-- Pearls -->
-        <div class="pearl pearl-1"></div>
-        <div class="pearl pearl-2"></div>
-        <div class="pearl pearl-3"></div>
-        <div class="pearl pearl-4"></div>
-
-        <!-- Guest dedication -->
-        <div class="dedication" id="dedication">
-
-            <span class="dedication-label">
-                تقدیم به
-            </span>
-
-            <div class="dedication-name" id="introName">
-                مهمان عزیز
-            </div>
-
-        </div>
+    <!-- =========================================
+         BACKGROUND PARTICLES
+    ========================================== -->
+    <div class="stars" id="stars"></div>
 
 
-        <!-- =====================================================
-             ENVELOPE
-        ====================================================== -->
+    <!-- =========================================
+         ENVELOPE INTRO
+    ========================================== -->
+    <section class="envelope-screen" id="envelopeScreen">
 
-        <div class="envelope-scene" id="envelopeScene">
+        <div class="intro-glow"></div>
 
-            <div class="envelope-wrapper">
+        <div class="envelope-wrapper" id="envelopeTrigger">
 
-                <div class="envelope" id="envelope">
+            <div class="envelope-shadow"></div>
 
-                    <!-- Letter -->
-                    <div class="letter">
+            <div class="envelope">
 
-                        <div class="letter-inner">
-
-                            <div class="letter-shine"></div>
-
-                            <span class="letter-small">
-                                با عشق
-                            </span>
-
-                            <span class="letter-name">
-                                نورا جان
-                            </span>
-
-                        </div>
-
+                <!-- Letter inside -->
+                <div class="letter">
+                    <div class="letter-content">
+                        <span class="letter-small">دعوتید به</span>
+                        <h2>جشن یک‌سالگی</h2>
+                        <span class="letter-name">نورا جان</span>
                     </div>
-
-
-                    <!-- Envelope body -->
-                    <div class="envelope-body">
-
-                        <div class="envelope-paper-shine"></div>
-
-                    </div>
-
-
-                    <!-- Envelope flap -->
-                    <div class="envelope-flap"></div>
-
-
-                    <!-- Wax seal -->
-                    <div class="wax-seal">
-
-                        <div class="wax-inner">
-
-                            <span class="wax-monogram">
-                                N
-                            </span>
-
-                        </div>
-
-                    </div>
-
                 </div>
 
+                <!-- Envelope body -->
+                <div class="envelope-body"></div>
+
+                <!-- Envelope flap -->
+                <div class="envelope-flap"></div>
+
+                <!-- Wax seal -->
+                <div class="wax-seal">
+                    <span>N</span>
+                </div>
+
+                <!-- Shine -->
+                <div class="envelope-shine"></div>
+
             </div>
 
         </div>
 
-
-        <!-- Opening instruction -->
-        <button class="open-button"
-                id="openButton"
-                type="button">
-
-            <span class="open-button-icon">
-                ✦
-            </span>
-
-            برای گشودن دعوت‌نامه لمس کنید
-
-            <span class="open-button-icon">
-                ✦
-            </span>
-
-        </button>
-
-
-        <!-- Scroll hint appears after opening -->
-        <div class="opening-scroll" id="openingScroll">
-
-            <span>ادامه‌ی دعوت</span>
-
-            <div class="scroll-arrow">
-                ↓
-            </div>
-
+        <div class="open-message">
+            <span class="sparkle">✦</span>
+            برای باز کردن دعوتنامه لمس کنید
+            <span class="sparkle">✦</span>
         </div>
+
+        <div class="intro-name" id="introName"></div>
 
     </section>
 
 
-    <!-- =========================================================
+    <!-- =========================================
          MAIN INVITATION
-    ========================================================== -->
-
+    ========================================== -->
     <main class="invitation" id="invitation">
 
+        <!-- HERO -->
+        <section class="hero section">
 
-        <!-- =====================================================
-             HERO
-        ====================================================== -->
+            <div class="hero-decoration hero-decoration-1"></div>
+            <div class="hero-decoration hero-decoration-2"></div>
 
-        <section class="section hero-section">
+            <div class="hero-content reveal">
 
-            <div class="section-inner">
-
-                <div class="hero-eyebrow">
+                <p class="eyebrow">
                     به افتخار اولین سال زندگی
-                </div>
+                </p>
 
-                <h1 class="hero-title">
+                <h1>
                     نورا جان
                 </h1>
 
-                <div class="hero-ornament">
-                    <span></span>
-                    <b>✦</b>
-                    <span></span>
+                <div class="ornament">
+                    <span>✦</span>
+                    <i></i>
+                    <span>✦</span>
                 </div>
 
-                <p class="hero-description">
-                    یک سال از آمدنت گذشت؛
+                <p class="hero-text">
+                    یک سال از آمدنت گذشت
                     <br>
-                    یک سال پر از عشق، خنده و زیبایی.
+                    و دنیا برای ما زیباتر شد...
                 </p>
-
 
                 <div class="hero-photo">
 
+                    <div class="photo-glow"></div>
+
                     <div class="photo-frame">
 
-                        <div class="photo-glow"></div>
-
-                        <img src="assets/noora-main.jpg"
-                             alt="نورا نیک نفس">
+                        <img
+                            src="assets/noora-main.jpg"
+                            alt="نورا"
+                        >
 
                     </div>
+
+                    <div class="photo-sparkle sparkle-a">✦</div>
+                    <div class="photo-sparkle sparkle-b">✧</div>
+                    <div class="photo-sparkle sparkle-c">✦</div>
 
                 </div>
 
-
                 <div class="scroll-hint">
-
-                    <span>برای دیدن ادامه دعوت‌نامه</span>
-
-                    <div class="scroll-chevron">
-                        ↓
-                    </div>
-
+                    <span>برای ادامه اسکرول کنید</span>
+                    <div class="scroll-line"></div>
                 </div>
 
             </div>
@@ -241,96 +139,73 @@
         </section>
 
 
+        <!-- PERSONAL GREETING -->
+        <section class="personal section">
 
-        <!-- =====================================================
-             PERSONAL GREETING
-        ====================================================== -->
+            <div class="section-inner reveal">
 
-        <section class="section personal-section">
+                <span class="gold-small">✦</span>
 
-            <div class="section-inner">
+                <p class="personal-label">
+                    این دعوتنامه برای
+                </p>
 
-                <div class="section-kicker">
-                    با افتخار
-                </div>
-
-                <h2 class="section-title">
-                    منتظر دیدار شما هستیم
+                <h2 id="guestName">
+                    مهمان عزیز
                 </h2>
 
-                <div class="personal-card">
-
-                    <div class="personal-flower">
-                        ✿
-                    </div>
-
-                    <p>
-                        <span id="guestName">
-                            مهمان عزیز
-                        </span>
-                        <br>
-                        حضورتان در اولین جشن تولد نورا
-                        برای ما ارزشمند و دوست‌داشتنی است.
-                    </p>
-
-                </div>
-
-                <div class="scroll-hint">
-                    <span>ادامه</span>
-                    <div class="scroll-chevron">↓</div>
-                </div>
+                <p class="personal-text">
+                    با افتخار از شما دعوت می‌کنیم
+                    <br>
+                    تا در جشن اولین سال تولد
+                    <br>
+                    نورا جان، در کنار ما باشید.
+                </p>
 
             </div>
 
         </section>
 
 
+        <!-- DATE -->
+        <section class="date-section section">
 
-        <!-- =====================================================
-             DATE
-        ====================================================== -->
+            <div class="section-inner reveal">
 
-        <section class="section date-section">
+                <p class="eyebrow">زمان جشن</p>
 
-            <div class="section-inner">
-
-                <div class="section-kicker">
-                    قرار ما
-                </div>
-
-                <h2 class="section-title">
-                    اولین جشن تولد نورا
+                <h2 class="nastaliq-title">
+                    پنج‌شنبه
                 </h2>
 
-                <div class="date-card">
-
-                    <div class="date-weekday">
-                        پنج‌شنبه
-                    </div>
-
-                    <div class="date-main">
-                        ۹ مهر
-                    </div>
-
-                    <div class="date-year">
-                        ۱۴۰۵
-                    </div>
-
-                    <div class="date-divider"></div>
-
-                    <div class="date-time">
-                        ساعت ۱۸:۰۰
-                    </div>
-
-                    <div class="date-until">
-                        تا ساعت ۲۳:۰۰
-                    </div>
-
+                <div class="date-big">
+                    ۹ مهر
                 </div>
 
-                <div class="scroll-hint">
-                    <span>ادامه</span>
-                    <div class="scroll-chevron">↓</div>
+                <div class="date-year">
+                    ۱۴۰۵
+                </div>
+
+                <div class="gold-divider">
+                    <span></span>
+                    <i>✦</i>
+                    <span></span>
+                </div>
+
+                <div class="time-box">
+
+                    <div>
+                        <strong>۱۸:۰۰</strong>
+                        <span>شروع مراسم</span>
+                    </div>
+
+                    <div class="time-separator"></div>
+
+                    <div>
+                        <strong>پنج‌شنبه</strong>
+                        <span>۹ مهر</span>
+                    </div>
+
                 </div>
 
             </div>
@@ -338,70 +213,41 @@
         </section>
 
 
+        <!-- COUNTDOWN -->
+        <section class="countdown-section section">
 
-        <!-- =====================================================
-             COUNTDOWN
-        ====================================================== -->
+            <div class="section-inner reveal">
 
-        <section class="section countdown-section">
+                <p class="eyebrow">
+                    تا دیدار شما
+                </p>
 
-            <div class="section-inner">
-
-                <div class="section-kicker">
-                    تا دیدار
-                </div>
-
-                <h2 class="section-title">
+                <h2 class="nastaliq-title">
                     لحظه‌شماری می‌کنیم
                 </h2>
 
-                <div class="countdown" id="countdown">
+                <div class="countdown">
 
                     <div class="count-box">
-
                         <strong id="days">00</strong>
-
-                        <span>
-                            روز
-                        </span>
-
+                        <span>روز</span>
                     </div>
 
                     <div class="count-box">
-
                         <strong id="hours">00</strong>
-
-                        <span>
-                            ساعت
-                        </span>
-
+                        <span>ساعت</span>
                     </div>
 
                     <div class="count-box">
-
                         <strong id="minutes">00</strong>
-
-                        <span>
-                            دقیقه
-                        </span>
-
+                        <span>دقیقه</span>
                     </div>
 
                     <div class="count-box">
-
                         <strong id="seconds">00</strong>
-
-                        <span>
-                            ثانیه
-                        </span>
-
+                        <span>ثانیه</span>
                     </div>
 
-                </div>
-
-                <div class="scroll-hint">
-                    <span>ادامه</span>
-                    <div class="scroll-chevron">↓</div>
                 </div>
 
             </div>
@@ -409,54 +255,25 @@
         </section>
 
 
+        <!-- MESSAGE -->
+        <section class="message-section section">
 
-        <!-- =====================================================
-             MESSAGE
-        ====================================================== -->
+            <div class="section-inner reveal">
 
-        <section class="section message-section">
+                <div class="quote-mark">“</div>
 
-            <div class="section-inner">
+                <p class="nastaliq-message">
+                    یک سالگی تو
+                    <br>
+                    شروع قصه‌های قشنگ‌تری‌ست
+                    <br>
+                    که با لبخندت نوشته می‌شوند...
+                </p>
 
-                <div class="message-card">
-
-                    <div class="message-decoration top">
-                        ✦
-                    </div>
-
-                    <p class="message-text">
-
-                        یک سالگی تو،
-                        <br>
-                        برای ما فقط یک تولد نیست؛
-                        <br>
-                        جشن یک سال دوست داشتنِ
-                        <br>
-                        بی‌نهایت است.
-
-                    </p>
-
-                    <div class="message-decoration bottom">
-                        ✦
-                    </div>
-
-                    <div class="signature">
-
-                        <span>
-                            با عشق
-                        </span>
-
-                        <strong>
-                            پیمان و مهناز
-                        </strong>
-
-                    </div>
-
-                </div>
-
-                <div class="scroll-hint">
-                    <span>ادامه</span>
-                    <div class="scroll-chevron">↓</div>
+                <div class="signature">
+                    با عشق
+                    <br>
+                    <strong>پیمان و مهناز</strong>
                 </div>
 
             </div>
@@ -464,21 +281,17 @@
         </section>
 
 
+        <!-- LOCATION -->
+        <section class="location-section section">
 
-        <!-- =====================================================
-             LOCATION
-        ====================================================== -->
+            <div class="section-inner reveal">
 
-        <section class="section location-section">
+                <p class="eyebrow">
+                    منتظر دیدارتان هستیم
+                </p>
 
-            <div class="section-inner">
-
-                <div class="section-kicker">
-                    منتظر شما هستیم
-                </div>
-
-                <h2 class="section-title">
-                    نشانی جشن
+                <h2 class="nastaliq-title">
+                    محل جشن
                 </h2>
 
                 <div class="location-card">
@@ -497,57 +310,35 @@
 
                     <div class="map-buttons">
 
-                        <a href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="map-button">
-
-                            <img src="assets/icons/g.png"
-                                 alt="Google Maps">
-
-                            <span>
-                                Google Maps
-                            </span>
-
+                        <a
+                            href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98"
+                            target="_blank"
+                            class="map-button"
+                        >
+                            <img src="assets/icons/g.png" alt="Google Maps">
+                            <span>Google Maps</span>
                         </a>
 
-
-                        <a href="https://nshn.ir/2e_bf-IH5x5Y4D"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="map-button">
-
-                            <img src="assets/icons/n.png"
-                                 alt="نشان">
-
-                            <span>
-                                نشان
-                            </span>
-
+                        <a
+                            href="https://nshn.ir/2e_bf-IH5x5Y4D"
+                            target="_blank"
+                            class="map-button"
+                        >
+                            <img src="assets/icons/n.png" alt="نشان">
+                            <span>نشان</span>
                         </a>
 
-
-                        <a href="https://balad.ir/p/7ahglm8ucy5Qjp"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="map-button">
-
-                            <img src="assets/icons/b.png"
-                                 alt="بلد">
-
-                            <span>
-                                بلد
-                            </span>
-
+                        <a
+                            href="https://balad.ir/p/7ahglm8ucy5Qjp"
+                            target="_blank"
+                            class="map-button"
+                        >
+                            <img src="assets/icons/b.png" alt="بلد">
+                            <span>بلد</span>
                         </a>
 
                     </div>
 
-                </div>
-
-                <div class="scroll-hint">
-                    <span>ادامه</span>
-                    <div class="scroll-chevron">↓</div>
                 </div>
 
             </div>
@@ -555,23 +346,18 @@
         </section>
 
 
+        <!-- EVENT PROGRAM -->
+        <section class="program-section section">
 
-        <!-- =====================================================
-             PROGRAM
-        ====================================================== -->
+            <div class="section-inner reveal">
 
-        <section class="section program-section">
+                <p class="eyebrow">
+                    برنامه جشن
+                </p>
 
-            <div class="section-inner">
-
-                <div class="section-kicker">
-                    برنامه‌ی جشن
-                </div>
-
-                <h2 class="section-title">
-                    با هم چه خواهیم کرد؟
+                <h2 class="nastaliq-title">
+                    یک عصر شیرین
                 </h2>
-
 
                 <div class="timeline">
 
@@ -579,12 +365,18 @@
 
                         <div class="timeline-dot"></div>
 
-                        <div class="timeline-time">
-                            ۱۸:۰۰
-                        </div>
-
                         <div class="timeline-content">
-                            پذیرایی و شیرینی
+
+                            <span>۱۸:۰۰</span>
+
+                            <h3>
+                                پذیرایی و شیرینی
+                            </h3>
+
+                            <p>
+                                آغاز دیدار و دورهمی
+                            </p>
+
                         </div>
 
                     </div>
@@ -594,12 +386,18 @@
 
                         <div class="timeline-dot"></div>
 
-                        <div class="timeline-time">
-                            ۱۹:۰۰
-                        </div>
-
                         <div class="timeline-content">
-                            شروع جشن تولد نورا
+
+                            <span>...</span>
+
+                            <h3>
+                                جشن تولد نورا
+                            </h3>
+
+                            <p>
+                                یک سالگی کوچولوی دوست‌داشتنی ما
+                            </p>
+
                         </div>
 
                     </div>
@@ -609,37 +407,22 @@
 
                         <div class="timeline-dot"></div>
 
-                        <div class="timeline-time">
-                            ۲۰:۳۰
-                        </div>
-
                         <div class="timeline-content">
-                            کیک و فوت کردن شمع
+
+                            <span>...</span>
+
+                            <h3>
+                                شام
+                            </h3>
+
+                            <p>
+                                ادامه‌ی یک شب دوست‌داشتنی
+                            </p>
+
                         </div>
 
                     </div>
 
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-dot"></div>
-
-                        <div class="timeline-time">
-                            ۲۱:۰۰
-                        </div>
-
-                        <div class="timeline-content">
-                            شام
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="scroll-hint">
-                    <span>ادامه</span>
-                    <div class="scroll-chevron">↓</div>
                 </div>
 
             </div>
@@ -647,165 +430,155 @@
         </section>
 
 
+        <!-- RSVP -->
+        <section class="rsvp-section section" id="rsvp">
 
-        <!-- =====================================================
-             RSVP
-        ====================================================== -->
+            <div class="section-inner reveal">
 
-        <section class="section rsvp-section" id="rsvp">
-
-            <div class="section-inner">
-
-                <div class="section-kicker">
-                    حضور شما
-                </div>
-
-                <h2 class="section-title">
-                    منتظر پاسخ شما هستیم
-                </h2>
-
-                <p class="section-description">
-                    لطفاً تا حد امکان حضور خود را به ما اطلاع دهید.
+                <p class="eyebrow">
+                    حضور شما برای ما ارزشمند است
                 </p>
 
+                <h2 class="nastaliq-title">
+                    آیا در جشن همراه ما هستید؟
+                </h2>
 
-                <form class="rsvp-card" id="rsvpForm">
+                <div class="rsvp-card">
 
                     <div class="rsvp-question">
-                        آیا در جشن تولد نورا همراه ما هستید؟
-                    </div>
-
-
-                    <div class="rsvp-options">
-
-                        <button type="button"
-                                class="rsvp-choice"
-                                data-answer="yes">
-
-                            حتماً می‌آیم
+                        <button
+                            class="rsvp-option"
+                            data-answer="yes"
+                        >
+                            <span class="option-icon">✓</span>
+                            <span>
+                                بله، با کمال میل می‌آیم
+                            </span>
                         </button>
 
-                        <button type="button"
-                                class="rsvp-choice"
-                                data-answer="no">
-
-                            متأسفانه نمی‌توانم بیایم
+                        <button
+                            class="rsvp-option"
+                            data-answer="no"
+                        >
+                            <span class="option-icon">×</span>
+                            <span>
+                                متأسفانه نمی‌توانم بیایم
+                            </span>
                         </button>
-
                     </div>
 
 
                     <div class="rsvp-details" id="rsvpDetails">
 
-                        <label for="guestCount">
-                            چند نفر همراه شما خواهند بود؟
+                        <label>
+                            چند نفر تشریف می‌آورید؟
                         </label>
 
                         <div class="guest-counter">
 
-                            <button type="button"
-                                    id="minusGuest"
-                                    aria-label="کم کردن">
-                                −
-                            </button>
+                            <button id="minusGuests">−</button>
 
-                            <span id="guestCount">
-                                1
-                            </span>
+                            <strong id="guestCount">1</strong>
 
-                            <button type="button"
-                                    id="plusGuest"
-                                    aria-label="اضافه کردن">
-                                +
-                            </button>
+                            <button id="plusGuests">+</button>
 
                         </div>
 
-
-                        <label for="guestMessage">
-                            اگر نکته‌ای هست برای ما بنویسید
+                        <label>
+                            پیامی برای نورا جان
+                            <small>(اختیاری)</small>
                         </label>
 
-                        <textarea id="guestMessage"
-                                  rows="4"
-                                  placeholder="پیامتان را اینجا بنویسید..."></textarea>
+                        <textarea
+                            id="guestMessage"
+                            placeholder="مثلاً: تولدت مبارک نورای عزیز..."
+                            rows="4"
+                        ></textarea>
 
-
-                        <button type="submit"
-                                class="rsvp-submit">
-
+                        <button
+                            class="submit-rsvp"
+                            id="submitRsvp"
+                        >
                             ثبت پاسخ
-
                         </button>
 
                     </div>
 
 
-                    <div class="rsvp-result"
-                         id="rsvpResult">
+                    <div
+                        class="rsvp-thanks"
+                        id="rsvpThanks"
+                    >
+                        <div class="thanks-icon">✦</div>
 
+                        <h3>
+                            ممنون از پاسخ شما
+                        </h3>
+
+                        <p>
+                            بی‌صبرانه منتظر دیدارتان هستیم.
+                        </p>
                     </div>
 
-                </form>
+                </div>
 
             </div>
 
         </section>
 
 
-
-        <!-- =====================================================
-             FOOTER
-        ====================================================== -->
-
+        <!-- FOOTER -->
         <footer class="footer">
 
-            <div class="footer-ornament">
-                ✦
+            <div class="footer-stars">
+                ✦ &nbsp; ✧ &nbsp; ✦
             </div>
 
-            <div class="footer-main">
+            <p>
                 به امید دیدار شما
-            </div>
+            </p>
 
-            <div class="footer-name">
-                نورا نیک نفس
-            </div>
+            <strong>
+                نورا جان
+            </strong>
 
-            <div class="footer-meta">
+            <small>
                 اولین تولد • ۱۴۰۵
-            </div>
+            </small>
 
         </footer>
 
     </main>
 
 
-
-    <!-- =========================================================
+    <!-- =========================================
          MUSIC
-    ========================================================== -->
+    ========================================== -->
 
-    <audio id="birthdayMusic"
-           src="assets/music/birthday.mp3"
-           preload="auto"
-           loop>
+    <audio
+        id="backgroundMusic"
+        loop
+        preload="auto"
+    >
+        <source src="assets/music/birthday.mp3" type="audio/mpeg">
     </audio>
 
 
-    <button class="music-button"
-            id="musicButton"
-            type="button"
-            aria-label="موسیقی">
-
-        ♫
-
+    <!-- MUSIC BUTTON -->
+    <button
+        class="music-button"
+        id="musicButton"
+        aria-label="موسیقی"
+    >
+        <span>♫</span>
     </button>
 
 
-    <!-- JS -->
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
     <script src="js/script.js"></script>
 
 </body>
-
 </html>
