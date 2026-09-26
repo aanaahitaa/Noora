@@ -1,43 +1,41 @@
-/* =====================================================
-   NOORA PRINCESS INVITATION
-   STYLE.CSS
-===================================================== */
+/* =========================================
+   NOORA LUXURY BABY INVITATION
+========================================= */
 
 
-/* =========================
-   VARIABLES
-========================= */
+:root{
 
-:root {
+    --pearl:#fffaf7;
+    --milk:#fffdfb;
 
-    --pearl:#fffdf8;
-    --milk:#fff7ef;
+    --blush:#f3dce0;
+    --rose:#dcaeb7;
 
-    --gold:#d7ae62;
-    --gold-light:#f8e9bd;
-    --gold-dark:#b98539;
+    --gold:#c9a45c;
+    --gold-light:#efdcae;
+    --gold-bright:#f7dfa0;
 
-    --pink:#f1cbd4;
+    --blue:#e6f0f7;
 
-    --text:#725664;
-    --soft:#9c808b;
+    --ink:#66565a;
+    --muted:#9a8588;
 
-    --glass:
-    rgba(255,255,255,.45);
+    --white:#ffffff;
+
+    --shadow:
+    0 20px 60px rgba(185,145,115,.16);
+
+    --soft-shadow:
+    0 10px 35px rgba(185,145,115,.12);
 
 }
 
 
 
-
-
-/* =========================
-   RESET
-========================= */
-
-
 *{
 
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 
 }
@@ -54,39 +52,26 @@ html{
 
 body{
 
-
-    margin:0;
-
-
     background:
-
 
     radial-gradient(
         circle at top,
-        #ffffff 0%,
+        #ffffff,
         var(--pearl) 45%,
-        #fff3ef 100%
+        #fff2f4
     );
 
-
-
-    color:var(--text);
-
+    color:var(--ink);
 
     font-family:
-
-    "Vazirmatn",
-    sans-serif;
-
-
+    "Noto Naskh Arabic",
+    serif;
 
     text-align:center;
 
     overflow-x:hidden;
 
 }
-
-
 
 
 
@@ -97,37 +82,26 @@ body{
 
 .stars-layer{
 
-
     position:fixed;
-
 
     inset:0;
 
-
     pointer-events:none;
 
-
     z-index:-1;
-
 
 }
 
 
 
-
 .star{
-
 
     position:absolute;
 
-
-    color:#e2bb70;
-
+    color:#e7c978;
 
     animation:
-
     sparkle 3s infinite ease-in-out;
-
 
 }
 
@@ -136,22 +110,22 @@ body{
 @keyframes sparkle{
 
 
-    0%,100%{
+0%,100%{
 
-        opacity:.2;
+    opacity:.25;
 
-        transform:scale(.8);
+    transform:scale(.8);
 
-    }
+}
 
 
-    50%{
+50%{
 
-        opacity:1;
+    opacity:1;
 
-        transform:scale(1.4);
+    transform:scale(1.5);
 
-    }
+}
 
 
 }
@@ -160,21 +134,28 @@ body{
 
 
 
+
+
 /* =========================
-   SECTIONS
+   GENERAL
 ========================= */
 
 
-section{
+.section{
+
+    min-height:70vh;
+
+    padding:80px 20px;
+
+}
 
 
-    padding:
 
-    90px 20px;
+.section-inner{
 
+    max-width:900px;
 
-    position:relative;
-
+    margin:auto;
 
 }
 
@@ -183,18 +164,17 @@ section{
 h1,
 h2{
 
-
-    color:var(--gold-dark);
-
+    color:#b88a43;
 
 }
 
 
 
-h2{
+.section-title{
 
+    font-size:32px;
 
-    font-size:34px;
+    margin-bottom:35px;
 
     font-weight:500;
 
@@ -202,18 +182,13 @@ h2{
 
 
 
-
 p{
 
-
-    font-size:18px;
+    font-size:20px;
 
     line-height:2;
 
-
 }
-
-
 
 
 
@@ -222,359 +197,217 @@ p{
 
 
 /* =========================
-   INTRO
+   HERO PHOTO
 ========================= */
 
 
-.intro{
-
-
-    height:100vh;
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-
-}
-
-
-
-
-.guest-name{
-
-
-    font-size:22px;
-
-
-    color:#8e6d79;
-
-
-    margin-bottom:45px;
-
-
-}
-
-
-
-
-
-.envelope-scene{
-
-
-    perspective:1200px;
-
-
-}
-
-
-
-
-
-
-.envelope{
-
-
-    width:340px;
-
-    height:230px;
-
+.photo-frame{
 
     position:relative;
 
+    width:
+    clamp(230px,65vw,340px);
 
-    cursor:pointer;
+    aspect-ratio:.78;
 
+    margin:auto;
 
-    transform-style:preserve-3d;
+    display:grid;
 
-
-    transition:1s;
-
-
+    place-items:center;
 
 }
 
 
 
-
-
-.envelope-back{
-
+.photo-glow{
 
     position:absolute;
 
-
-    inset:0;
-
+    inset:-35px;
 
     background:
 
-
-    linear-gradient(
-
-    145deg,
-
-    #fff0c9,
-
-    #d7ae62
-
+    radial-gradient(
+        circle,
+        rgba(231,201,120,.55),
+        transparent 65%
     );
 
+    filter:blur(25px);
 
-    border-radius:12px;
+}
+
+
+
+.photo-inner{
+
+    width:100%;
+
+    height:100%;
+
+    overflow:hidden;
+
+
+    border-radius:
+
+    50% 50% 45% 45%;
+
+
+    border:
+
+    9px solid white;
 
 
     box-shadow:
 
-
-    0 30px 80px
-
-    rgba(180,130,50,.35);
-
-
+    var(--shadow);
 
 }
 
 
 
-
-
-.paper{
-
-
-    position:absolute;
-
-
-    width:290px;
-
-    height:200px;
-
-
-    background:white;
-
-
-    left:25px;
-
-
-    bottom:0;
-
-
-    border-radius:8px;
-
-
-    transform:
-
-    translateY(80px);
-
-
-    opacity:0;
-
-
-    transition:1s;
-
-
-}
-
-
-
-
-
-.envelope-flap{
-
-
-    position:absolute;
-
-
-    top:0;
-
-
-    left:0;
+.photo-inner img{
 
 
     width:100%;
 
-
     height:100%;
 
+    object-fit:cover;
 
-    background:
-
-
-    linear-gradient(
-
-    145deg,
-
-    #f7dfaa,
-
-    #fff6df
-
-    );
+}
 
 
 
-    clip-path:
-
-    polygon(
-
-    0 0,
-
-    100% 0,
-
-    50% 55%
-
-    );
+.photo-frame:after{
 
 
-    transform-origin:top;
+    content:"";
+
+    position:absolute;
+
+    inset:-12px;
+
+    border-radius:
+
+    50% 50% 45% 45%;
 
 
-    transition:1s;
+    border:
 
-
-    z-index:3;
-
+    2px solid var(--gold);
 
 
 }
 
 
 
-
-.envelope.open 
-.envelope-flap{
-
-
-    transform:
-
-    rotateX(180deg);
-
-
-
-}
-
-
-
-
-
-.envelope.open 
-.paper{
-
-
-    transform:
-
-    translateY(-80px);
-
-
-    opacity:1;
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   WAX SEAL
-========================= */
-
-
-
-.wax{
-
-
-    width:100px;
-
-
-    height:100px;
+.photo-star{
 
 
     position:absolute;
 
+    color:var(--gold);
 
-    left:50%;
+    font-size:32px;
 
-    top:50%;
+    animation:
 
+    twinkle 2s infinite;
 
-
-    transform:
-
-    translate(-50%,-50%);
-
-
-
-    border-radius:50%;
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    align-items:center;
+}
 
 
 
-    background:
+.star-one{
+
+    top:5%;
+
+    right:-10px;
+
+}
 
 
-    radial-gradient(
+.star-two{
 
-    circle at 35% 30%,
+    bottom:25%;
 
-    #ffe9a8,
+    left:-15px;
 
-    #c18b35
-
-    );
+}
 
 
+.star-three{
 
-    box-shadow:
+    bottom:5%;
 
+    right:10px;
 
-    0 15px 35px
-
-    rgba(170,120,40,.45);
+}
 
 
 
-    z-index:5;
+@keyframes twinkle{
+
+
+50%{
+
+opacity:.3;
+
+transform:scale(1.4);
+
+}
 
 
 }
 
 
 
-.wax span{
 
 
-    font-family:
-
-    "Noto Nastaliq Urdu";
+.hero-title{
 
 
-    color:white;
+    margin-top:35px;
 
 
     font-size:65px;
 
 
+    font-weight:400;
+
+
+    background:
+
+    linear-gradient(
+        120deg,
+        #b88a43,
+        #f6df9e,
+        #b88a43
+    );
+
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+
 }
+
+
+
+
+
+
+.hero-text{
+
+    margin-top:20px;
+
+    color:var(--ink);
+
+}
+
 
 
 
@@ -588,40 +421,51 @@ p{
 ========================= */
 
 
-.scroll-indicator{
+.scroll-down{
 
-
-    margin-top:50px;
-
+    margin-top:45px;
 
     color:var(--gold);
+
+}
+
+
+
+.scroll-circle{
+
+    width:48px;
+
+    height:48px;
+
+    margin:15px auto;
+
+    border-radius:50%;
+
+    border:
+
+    1px solid var(--gold);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
 
     animation:
 
-    float 2s infinite;
-
-
-}
-
-
-
-.scroll-indicator span{
-
-
-    font-size:32px;
-
+    bounce 2s infinite;
 
 }
 
 
 
-@keyframes float{
+@keyframes bounce{
 
 
 50%{
 
-transform:translateY(12px);
+transform:translateY(10px);
 
 }
 
@@ -637,221 +481,53 @@ transform:translateY(12px);
 
 
 /* =========================
-   PHOTO FRAME
+   QUOTE
 ========================= */
 
 
-
-.photo-frame{
-
-
-    width:330px;
-
-
-    height:470px;
-
-
-    position:relative;
-
-
-    margin:auto;
-
-
-
-}
-
-
-
-
-.photo-frame img{
-
-
-    width:100%;
-
-
-    height:100%;
-
-
-    object-fit:cover;
-
-
-
-    border-radius:
-
-    50% 50% 45% 45%;
-
-
-
-    border:
-
-    8px solid white;
-
-
-
-    box-shadow:
-
-
-    0 30px 70px
-
-    rgba(190,150,70,.35);
-
-
-}
-
-
-
-
-
-.gold-ring{
-
-
-    position:absolute;
-
-
-    inset:-18px;
-
-
-    border-radius:
-
-    50% 50% 45% 45%;
-
-
-
-    border:
-
-    3px solid var(--gold);
-
-
-
-    animation:
-
-    rotateGlow 8s linear infinite;
-
-
-
-}
-
-
-
-@keyframes rotateGlow{
-
-
-to{
-
-transform:rotate(360deg);
-
-}
-
-
-}
-
-
-
-
-
-
-
-.photo-sparkles span{
-
-
-    position:absolute;
-
-
-    color:#e1b45c;
-
-
-    font-size:28px;
-
-
-    animation:
-
-    sparkle 2s infinite;
-
-
-}
-
-
-
-.photo-sparkles span:nth-child(1){
-
-top:20px;
-
-right:-20px;
-
-}
-
-
-
-.photo-sparkles span:nth-child(2){
-
-bottom:80px;
-
-left:-30px;
-
-}
-
-
-
-.photo-sparkles span:nth-child(3){
-
-top:50%;
-
-right:-45px;
-
-}
-
-
-
-.photo-sparkles span:nth-child(4){
-
-bottom:20px;
-
-right:20px;
-
-}
-
-
-
-
-
-
-
-
-.title{
-
-
-    font-family:
-
-    "Noto Nastaliq Urdu";
-
-
-    font-size:70px;
-
-
-    font-weight:400;
-
+.quote-card{
 
 
     background:
 
-    linear-gradient(
-
-    120deg,
-
-    #b98437,
-
-    #ffe9ad,
-
-    #c08b40
-
-    );
+    rgba(255,255,255,.55);
 
 
-    -webkit-background-clip:text;
+    backdrop-filter:
+
+    blur(18px);
 
 
-    color:transparent;
 
+    border-radius:35px;
+
+
+    padding:40px 25px;
+
+
+    box-shadow:
+
+    var(--shadow);
+
+
+}
+
+
+
+.quote-mark{
+
+
+    font-size:60px;
+
+    color:var(--gold);
+
+}
+
+
+
+.quote-card p{
+
+    font-size:25px;
 
 }
 
@@ -863,8 +539,9 @@ right:20px;
 
 
 
+
 /* =========================
-   GLASS CARDS
+   GLASS
 ========================= */
 
 
@@ -873,47 +550,27 @@ right:20px;
 
     background:
 
-    rgba(255,255,255,.5);
+    rgba(255,255,255,.55);
 
 
     backdrop-filter:
 
-    blur(20px);
+    blur(18px);
 
 
 
     border:
 
-    1px solid
-
-    rgba(255,255,255,.8);
-
+    1px solid rgba(255,255,255,.8);
 
 
     box-shadow:
 
-
-    0 20px 50px
-
-    rgba(190,150,80,.15);
-
+    var(--soft-shadow);
 
 
     border-radius:30px;
 
-
-}
-
-
-
-
-
-
-.info-card{
-
-
-    display:flex;
-
 }
 
 
@@ -922,13 +579,11 @@ right:20px;
 
 
 
-.event-info .glass-card{
+
+/* EVENT */
 
 
-    max-width:700px;
-
-
-    margin:auto;
+.event-card{
 
 
     padding:35px;
@@ -943,43 +598,6 @@ right:20px;
     gap:40px;
 
 
-}
-
-
-
-.info-icon{
-
-
-    font-size:38px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   COUNTDOWN
-========================= */
-
-
-.countdown{
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    gap:15px;
-
-
     flex-wrap:wrap;
 
 
@@ -987,14 +605,52 @@ right:20px;
 
 
 
+.event-icon{
+
+
+    font-size:40px;
+
+}
+
+
+
+.event-item p{
+
+    font-size:18px;
+
+}
+
+
+
+
+
+
+
+
+
+/* COUNTDOWN */
+
+
+.countdown{
+
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
 .time-box{
 
-
-    width:100px;
-
+    width:110px;
 
     padding:25px 10px;
-
 
 }
 
@@ -1006,11 +662,21 @@ right:20px;
     display:block;
 
 
-    font-size:35px;
+    font-family:
+    "Vazirmatn";
 
 
-    color:var(--gold-dark);
+    font-size:40px;
 
+    color:var(--gold);
+
+}
+
+
+
+.time-box span{
+
+    font-size:18px;
 
 }
 
@@ -1021,9 +687,8 @@ right:20px;
 
 
 
-/* =========================
-   TIMELINE
-========================= */
+
+/* TIMELINE */
 
 
 .timeline{
@@ -1031,15 +696,11 @@ right:20px;
 
     display:flex;
 
-
     flex-direction:column;
-
 
     align-items:center;
 
-
     gap:25px;
-
 
 }
 
@@ -1050,7 +711,6 @@ right:20px;
 
     width:320px;
 
-
     padding:25px;
 
 
@@ -1058,14 +718,12 @@ right:20px;
 
 
 
-.time{
+.timeline-time{
 
 
-    color:var(--gold-dark);
+    color:var(--gold);
 
-
-    font-size:30px;
-
+    font-size:35px;
 
 }
 
@@ -1076,9 +734,20 @@ right:20px;
 
 
 
-/* =========================
-   BUTTONS
-========================= */
+
+/* BUTTON */
+
+
+.location-buttons{
+
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+}
 
 
 
@@ -1090,53 +759,27 @@ right:20px;
 
     align-items:center;
 
-
     justify-content:center;
 
 
-    gap:12px;
+    gap:10px;
 
 
     padding:
 
-    15px 30px;
-
+    15px 25px;
 
 
     border-radius:50px;
 
 
-
     margin:8px;
-
 
 
     text-decoration:none;
 
 
-    color:#755460;
-
-
-
-    background:
-
-
-    linear-gradient(
-
-    135deg,
-
-    rgba(255,255,255,.8),
-
-    rgba(240,210,150,.55)
-
-    );
-
-
-
-    backdrop-filter:
-
-    blur(15px);
-
+    color:var(--ink);
 
 
     border:
@@ -1144,14 +787,21 @@ right:20px;
     1px solid white;
 
 
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.9),
+        rgba(239,220,174,.5)
+    );
+
 
     box-shadow:
 
+    var(--soft-shadow);
 
-    0 15px 35px
 
-    rgba(190,150,80,.25);
-
+    cursor:pointer;
 
 }
 
@@ -1159,23 +809,92 @@ right:20px;
 
 .glass-button img{
 
+    width:28px;
 
-    width:30px;
+}
 
-    height:30px;
+
+
+
+
+
+
+
+
+/* RSVP */
+
+
+.rsvp-box{
+
+
+    padding:30px;
 
 
 }
 
 
 
-.main-button{
+
+
+
+
+
+
+/* MUSIC */
+
+
+.music-button{
+
+
+    position:fixed;
+
+
+    bottom:25px;
+
+    left:25px;
+
+
+    width:55px;
+
+    height:55px;
+
+
+    border-radius:50%;
 
 
     border:none;
 
 
-    cursor:pointer;
+    background:white;
+
+
+    box-shadow:var(--shadow);
+
+
+    z-index:10;
+
+}
+
+
+
+
+
+
+
+
+/* FOOTER */
+
+
+footer{
+
+
+    padding:70px 20px;
+
+
+    font-size:28px;
+
+
+    color:var(--gold);
 
 
 }
@@ -1187,9 +906,7 @@ right:20px;
 
 
 
-/* =========================
-   REVEAL
-========================= */
+/* REVEAL */
 
 
 .reveal{
@@ -1198,31 +915,22 @@ right:20px;
     opacity:0;
 
 
-    transform:
-
-    translateY(40px);
+    transform:translateY(40px);
 
 
-
-    transition:
-
-    1s;
-
+    transition:1s ease;
 
 }
 
 
 
-.reveal.show{
+.reveal.visible{
 
 
     opacity:1;
 
 
-    transform:
-
-    translateY(0);
-
+    transform:none;
 
 }
 
@@ -1230,78 +938,21 @@ right:20px;
 
 
 
-
-
-footer{
-
-
-    padding:80px 20px;
-
-
-    font-family:
-
-    "Noto Nastaliq Urdu";
-
-
-    font-size:32px;
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   MOBILE
-========================= */
 
 
 @media(max-width:600px){
 
 
-.photo-frame{
-
-
-    width:260px;
-
-
-    height:380px;
-
-
-}
-
-
-
-.title{
-
+.hero-title{
 
     font-size:52px;
 
-
 }
 
 
-.event-info .glass-card{
-
+.event-card{
 
     flex-direction:column;
-
-
-}
-
-
-
-.envelope{
-
-
-    width:290px;
-
-
-    height:200px;
-
 
 }
 
