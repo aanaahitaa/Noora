@@ -1,177 +1,100 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>جشن تولد نورا نیک نفس</title>
+<title>نورا نیک‌نفس | اولین جشن تولد</title>
 
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Nastaliq+Urdu&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&family=Gulzar&display=swap" rel="stylesheet">
 
 
 <style>
 
-
-:root{
-
---pearl:#fffaf7;
---milk:#fffdfb;
-
---blush:#f3dce0;
---rose:#dcaeb7;
-
---gold:#c9a45c;
---gold-light:#efdcae;
---gold-bright:#e7c978;
-
---blue:#e6f0f7;
-
---ink:#66565a;
---muted:#9a8588;
-
---white:#ffffff;
-
-
---shadow:
-0 20px 60px rgba(185,145,115,.16);
-
---soft-shadow:
-0 10px 35px rgba(185,145,115,.12);
-
-}
-
-
-
 *{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
+    box-sizing:border-box;
 }
-
-
 
 html{
-
-scroll-behavior:smooth;
-
+    scroll-behavior:smooth;
 }
-
 
 
 body{
 
-background:
+    margin:0;
+    font-family:Vazirmatn,sans-serif;
 
-radial-gradient(
-circle at 15% 10%,
-rgba(243,220,224,.35),
-transparent 30%
-),
+    background:
+    radial-gradient(circle at top,#fff2df,#e8d3b0 40%,#20151b);
 
-radial-gradient(
-circle at 85% 25%,
-rgba(230,240,247,.4),
-transparent 30%
-),
-
-linear-gradient(
-180deg,
-#fffdfb,
-#fff7f3
-);
-
-
-font-family:
-"Noto Naskh Arabic",
-serif;
-
-
-color:var(--ink);
-
-text-align:center;
-
-overflow-x:hidden;
+    color:white;
 
 }
-
-
 
 
 section{
 
-padding:75px 20px;
+    min-height:100vh;
 
-min-height:60vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-}
+    padding:40px 20px;
 
-
-
-.section-inner{
-
-max-width:850px;
-
-margin:auto;
+    position:relative;
 
 }
 
 
-
-
-
-/* ---------- typography ---------- */
-
-
-.hero-title,
-.section-title,
-footer{
-
-
-font-family:
-"Noto Nastaliq Urdu",
-serif;
-
+.glass{
 
 background:
+rgba(255,255,255,.15);
 
-linear-gradient(
-120deg,
-#b88942,
-#f7df9d,
-#b88942
-);
+backdrop-filter:blur(18px);
+
+border:
+1px solid rgba(255,255,255,.3);
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.25);
+
+border-radius:35px;
+
+padding:35px;
+
+width:min(430px,95%);
+
+text-align:center;
+
+}
 
 
--webkit-background-clip:text;
+h1,h2{
 
-color:transparent;
+font-family:Gulzar,serif;
 
+font-weight:400;
 
 }
 
 
 
+h1{
 
-.hero-title{
+font-size:48px;
 
-font-size:72px;
-
-margin-top:35px;
+margin:10px;
 
 }
 
 
+h2{
 
-.section-title{
-
-font-size:42px;
-
-margin-bottom:35px;
+font-size:32px;
 
 }
 
@@ -179,602 +102,164 @@ margin-bottom:35px;
 
 p{
 
-font-size:20px;
-
 line-height:2;
 
 }
 
 
 
+.cover img{
 
+width:230px;
 
-
-
-/* ---------- photo ---------- */
-
-
-.photo-frame{
-
-
-position:relative;
-
-
-width:clamp(220px,58vw,330px);
-
-
-aspect-ratio:1;
-
-
-display:grid;
-
-
-place-items:center;
-
-
-margin:auto;
-
-
-}
-
-
-
-
-.photo-glow{
-
-
-position:absolute;
-
-
-inset:-35px;
-
-
-background:
-
-radial-gradient(
-circle,
-rgba(231,201,120,.45),
-transparent 65%
-);
-
-
-filter:blur(25px);
-
-
-}
-
-
-
-
-.photo-inner{
-
-
-width:88%;
-
-
-height:88%;
-
-
-overflow:hidden;
-
-
-border-radius:50%;
-
-
-border:
-
-8px solid white;
-
-
-box-shadow:
-
-var(--shadow);
-
-
-}
-
-
-
-
-.photo-inner img{
-
-
-width:100%;
-
-height:100%;
-
+height:230px;
 
 object-fit:cover;
 
-
-}
-
-
-
-
-.photo-frame:before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-inset:0;
-
-
 border-radius:50%;
 
+border:5px solid rgba(255,255,255,.5);
 
-border:
-
-2px solid rgba(201,164,92,.8);
-
+box-shadow:0 0 50px #ffd77a;
 
 }
 
 
-
-
-
-.photo-star{
-
-
-position:absolute;
-
-
-color:var(--gold);
-
-
-font-size:32px;
-
-
-animation:
-
-twinkle 2.5s infinite;
-
-
-}
-
-
-
-.star-one{
-
-top:10%;
-
-right:8%;
-
-}
-
-
-.star-two{
-
-bottom:15%;
-
-left:5%;
-
-}
-
-
-.star-three{
-
-top:45%;
-
-right:-5%;
-
-}
-
-
-
-
-@keyframes twinkle{
-
-
-50%{
-
-opacity:.35;
-
-transform:scale(1.35);
-
-}
-
-}
-
-
-
-
-
-
-/* ---------- glass ---------- */
-
-
-.glass-card{
-
-
-background:
-
-rgba(255,255,255,.55);
-
-
-backdrop-filter:
-
-blur(18px);
-
-
-border:
-
-1px solid rgba(255,255,255,.8);
-
-
-border-radius:30px;
-
-
-box-shadow:
-
-var(--soft-shadow);
-
-
-padding:30px;
-
-
-}
-
-
-
-
-
-
-
-/* ---------- quote ---------- */
-
-
-.quote-card{
-
-
-padding:45px;
-
-
-}
-
-
-
-.quote-mark{
-
-
-font-size:60px;
-
-color:var(--gold);
-
-}
-
-
-
-.quote-card p{
-
-font-size:26px;
-
-}
-
-
-
-
-
-
-
-/* ---------- countdown ---------- */
-
-
-.countdown{
-
-
-display:flex;
-
-justify-content:center;
-
-gap:15px;
-
-flex-wrap:wrap;
-
-
-}
-
-
-
-.time-box{
-
-
-width:110px;
-
-
-}
-
-
-
-.time-box strong{
-
-
-display:block;
-
-
-font-family:
-
-"Vazirmatn";
-
-
-font-size:38px;
-
-
-color:var(--gold);
-
-
-}
-
-
-
-
-
-
-
-/* ---------- timeline ---------- */
-
-
-.timeline-card{
-
-
-max-width:350px;
-
-
-margin:20px auto;
-
-
-}
-
-
-
-
-
-
-
-/* ---------- buttons ---------- */
-
-
-.buttons{
-
-
-display:flex;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-
-}
-
-
-
-.glass-button{
-
-
-display:inline-flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-gap:10px;
-
-
-padding:14px 25px;
-
-
-margin:8px;
-
-
-border-radius:50px;
-
-
-background:
-
-linear-gradient(
-135deg,
-rgba(255,255,255,.9),
-rgba(239,220,174,.5)
-);
-
-
-box-shadow:
-
-var(--soft-shadow);
-
-
-border:
-
-1px solid white;
-
-
-text-decoration:none;
-
-
-color:var(--ink);
-
-
-}
-
-
-
-.glass-button img{
-
-
-width:28px;
-
-
-}
-
-
-
-
-
-
-
-/* ---------- scroll ---------- */
-
-
-.scroll-down{
-
-
-margin-top:45px;
-
-
-color:var(--gold);
-
-
-}
-
-
-
-.scroll-circle{
-
-
-width:48px;
-
-
-height:48px;
-
-
-border-radius:50%;
-
-
-border:
-
-1px solid var(--gold);
-
-
-margin:auto;
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-animation:
-
-bounce 2s infinite;
-
-
-}
-
-
-
-@keyframes bounce{
-
-
-50%{
-
-transform:translateY(10px);
-
-}
-
-}
-
-
-
-
-
-
-
-/* ---------- music ---------- */
-
-
-.music-btn{
-
-
-position:fixed;
-
-
-left:25px;
-
-
-bottom:25px;
-
-
-width:55px;
-
-
-height:55px;
-
-
-border-radius:50%;
-
+button{
 
 border:none;
 
+padding:14px 28px;
 
-background:white;
+border-radius:50px;
 
+cursor:pointer;
 
-box-shadow:var(--shadow);
+background:
+linear-gradient(135deg,#fff0b0,#d4a44c);
 
+color:#4b2b13;
 
-z-index:10;
+font-size:16px;
 
+margin-top:20px;
 
 }
 
 
 
+.scroll{
+
+position:absolute;
+
+bottom:25px;
+
+animation:down 1.5s infinite;
+
+font-size:30px;
+
+}
 
 
+@keyframes down{
 
-/* ---------- reveal ---------- */
+50%{
+transform:translateY(10px);
+}
+
+}
 
 
 .reveal{
 
-
 opacity:0;
-
 
 transform:translateY(40px);
 
-
 transition:1s;
-
 
 }
 
 
-
-.reveal.show{
-
+.reveal.active{
 
 opacity:1;
 
-
 transform:none;
-
 
 }
 
 
 
+.count{
 
-footer{
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+}
 
 
-padding:70px 20px;
+.time{
+
+background:rgba(255,255,255,.2);
+
+padding:15px;
+
+border-radius:20px;
+
+}
 
 
-font-size:35px;
 
+.maps{
+
+display:flex;
+
+gap:10px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+
+.maps img{
+
+width:45px;
+
+height:45px;
+
+}
+
+
+
+a{
+
+text-decoration:none;
+
+color:white;
+
+}
+
+
+
+input,textarea{
+
+width:100%;
+
+margin:8px 0;
+
+padding:12px;
+
+border-radius:15px;
+
+border:none;
+
+background:white;
 
 }
 
@@ -791,86 +276,45 @@ font-size:35px;
 
 <audio id="music" loop>
 
-<source src="assets/music/birthday.mp3">
+<source src="assets/birthday.mp3">
 
 </audio>
 
 
-<button class="music-btn" onclick="toggleMusic()">
 
-🎵
-
-</button>
+<section class="cover">
 
 
+<div class="glass reveal">
 
 
+<img src="assets/noora.png">
 
 
-
-<section class="reveal">
-
-<div class="section-inner">
-
-
-<div class="photo-frame">
-
-
-<div class="photo-glow"></div>
-
-
-<div class="photo-inner">
-
-<img src="assets/noora-main.jpg" alt="نورا نیک نفس">
-
-</div>
-
-
-<span class="photo-star star-one">✦</span>
-
-<span class="photo-star star-two">✧</span>
-
-<span class="photo-star star-three">✦</span>
-
-
-</div>
-
-
-
-<h1 class="hero-title">
-
+<h1>
 نورا جان
-
 </h1>
 
 
-
 <p>
-
-به افتخار اولین سال زندگی نورا جان
-
-<br>
-
-با عشق منتظر حضور شما هستیم.
-
+اولین جشن تولد من
 </p>
 
 
+<button onclick="openCard()">
 
+باز کردن دعوتنامه ✨
 
-<div class="scroll-down">
-
-<div class="scroll-circle">
-
-↓
-
-
-</div>
-
-</div>
+</button>
 
 
 </div>
+
+
+<div class="scroll">
+⌄
+</div>
+
 
 </section>
 
@@ -878,40 +322,28 @@ font-size:35px;
 
 
 
+<section>
 
-<section class="reveal">
-
-
-<div class="glass-card quote-card">
+<div class="glass reveal">
 
 
-<span class="quote-mark">
-
-❝
-
-</span>
+<h2>
+به افتخار یک سالگی نورا
+</h2>
 
 
 <p>
-
-حضور شما،
-
-<br>
-
-قشنگ‌ترین قسمت این جشن است.
-
+پیمان نیک‌نفس و مهناز شیرج‌پور
+با افتخار شما را دعوت می‌کنند
 </p>
 
 
-<span class="quote-mark">
-
-❞
-
-</span>
-
-
 </div>
 
+
+<div class="scroll">
+⌄
+</div>
 
 </section>
 
@@ -919,89 +351,45 @@ font-size:35px;
 
 
 
+<section>
 
-<section class="reveal">
+<div class="glass reveal">
 
 
-<h2 class="section-title">
-
-جشن تولد یک سالگی
-
+<h2>
+جشن تولد نورا
 </h2>
 
 
-<div class="glass-card">
+<p>
+پنج‌شنبه ۹ مهر<br>
+ساعت ۱۸:۰۰
+</p>
 
 
-🎂 جشن تولد نورا
-
-<br><br>
-
-📅 پنج‌شنبه ۹ مهر
-
-<br><br>
-
-🕕 ساعت ۱۸
+<div class="count">
 
 
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2 class="section-title">
-
-تا شروع جشن
-
-</h2>
-
-
-
-<div class="countdown">
-
-
-<div class="glass-card time-box">
-
-<strong id="day">۰۰</strong>
-
+<div class="time">
+<span id="d">0</span>
+<br>
 روز
-
 </div>
 
 
-<div class="glass-card time-box">
-
-<strong id="hour">۰۰</strong>
-
+<div class="time">
+<span id="h">0</span>
+<br>
 ساعت
-
 </div>
 
 
-<div class="glass-card time-box">
-
-<strong id="minute">۰۰</strong>
-
+<div class="time">
+<span id="m">0</span>
+<br>
 دقیقه
-
 </div>
 
-
-<div class="glass-card time-box">
-
-<strong id="second">۰۰</strong>
-
-ثانیه
 
 </div>
 
@@ -1009,6 +397,10 @@ font-size:35px;
 
 </div>
 
+
+<div class="scroll">
+⌄
+</div>
 
 </section>
 
@@ -1017,88 +409,56 @@ font-size:35px;
 
 
 
-<section class="reveal">
+<section>
 
 
-<h2 class="section-title">
-
-برنامه جشن
-
-</h2>
+<div class="glass reveal">
 
 
-<div class="glass-card timeline-card">
-
-۱۸:۰۰
-
-<br>
-
-پذیرایی و شروع جشن
-
-</div>
-
-
-<div class="glass-card timeline-card">
-
-۲۰:۰۰
-
-<br>
-
-شام
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2 class="section-title">
-
+<h2>
 تالار دوریکا
-
 </h2>
 
 
 <p>
-
 نشتارود
-
 </p>
 
 
 
-<div class="buttons">
+<div class="maps">
 
 
-<a class="glass-button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
+<a href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
 
-Google Maps
-
-</a>
-
-
-<a class="glass-button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
-
-نشان
+<img src="assets/g.png">
 
 </a>
 
 
-<a class="glass-button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
+<a href="https://nshn.ir/2e_bf-IH5x5Y4D">
 
-بلد
+<img src="assets/n.png">
 
 </a>
 
 
+<a href="https://balad.ir/p/7ahglm8ucy5Qjp">
+
+<img src="assets/b.png">
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="scroll">
+⌄
 </div>
 
 
@@ -1109,54 +469,51 @@ Google Maps
 
 
 
-<section class="reveal">
+
+<section>
 
 
-<h2 class="section-title">
+<div class="glass reveal">
 
-تایید حضور
 
+<h2>
+اعلام حضور
 </h2>
 
 
-<div class="glass-card">
+<input placeholder="نام شما">
 
 
-<button class="glass-button">
+<select style="width:100%;padding:12px;border-radius:15px">
 
-✓ بله، می‌آیم
+<option>
+با افتخار می‌آیم
+</option>
 
-</button>
-
-
-<button class="glass-button">
-
+<option>
 متأسفانه نمی‌توانم بیایم
+</option>
 
+</select>
+
+
+
+<input placeholder="تعداد نفرات">
+
+
+<textarea placeholder="پیام شما"></textarea>
+
+
+<button>
+ثبت پاسخ
 </button>
+
 
 
 </div>
 
 
 </section>
-
-
-
-
-
-
-
-<footer>
-
-به امید دیدار شما
-
-<br>
-
-پیمان و مهناز
-
-</footer>
-
 
 
 
@@ -1165,110 +522,71 @@ Google Maps
 <script>
 
 
-// reveal
+function openCard(){
+
+document
+.getElementById("music")
+.play();
+
+
+}
+
+
+
+let target =
+new Date("2026-10-01T18:00:00")
+.getTime();
+
+
+
+setInterval(()=>{
+
+
+let now=new Date().getTime();
+
+let diff=target-now;
+
+
+document.getElementById("d").innerHTML=
+Math.floor(diff/(1000*60*60*24));
+
+
+document.getElementById("h").innerHTML=
+Math.floor(diff/(1000*60*60)%24);
+
+
+document.getElementById("m").innerHTML=
+Math.floor(diff/(1000*60)%60);
+
+
+
+},1000);
+
+
+
+
 
 const observer=
 new IntersectionObserver(entries=>{
 
+
 entries.forEach(e=>{
+
 
 if(e.isIntersecting)
 
-e.target.classList.add("show");
+e.target.classList.add("active");
+
+
+})
+
 
 });
 
-});
 
 
 document.querySelectorAll(".reveal")
-.forEach(x=>observer.observe(x));
-
-
-
-
-// countdown
-
-const target=
-new Date("2026-10-01T18:00:00");
-
-
-
-function fa(n){
-
-return String(n)
-.padStart(2,"0")
-.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
-
-}
-
-
-
-function update(){
-
-
-let diff=target-new Date();
-
-
-if(diff<0)return;
-
-
-day.innerHTML=
-fa(Math.floor(diff/86400000));
-
-
-hour.innerHTML=
-fa(Math.floor(diff/3600000)%24);
-
-
-minute.innerHTML=
-fa(Math.floor(diff/60000)%60);
-
-
-second.innerHTML=
-fa(Math.floor(diff/1000)%60);
-
-
-}
-
-
-setInterval(update,1000);
-
-update();
-
-
-
-
-// music
-
-let playing=false;
-
-
-function toggleMusic(){
-
-
-let m=document.getElementById("music");
-
-
-if(!playing){
-
-m.play();
-
-playing=true;
-
-}
-
-else{
-
-m.pause();
-
-playing=false;
-
-}
-
-
-}
-
+.forEach(el=>observer.observe(el));
 
 
 
@@ -1276,5 +594,4 @@ playing=false;
 
 
 </body>
-
 </html>
