@@ -2257,3 +2257,35 @@ p,
   overflow: visible !important;
 }
 
+
+
+/* =========================
+   INTRO GUEST NAME
+   ========================= */
+
+.intro-recipient {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.intro-recipient-label {
+  display: block;
+  font-family: "Vazirmatn", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  color: rgba(231, 194, 112, 0.75);
+  margin-bottom: 4px;
+}
+
+.intro-name {
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
+  line-height: 2;
+  color: #f4d58b;
+  text-align: center;
+  text-shadow:
+    0 0 12px rgba(231, 194, 112, 0.25);
+}
