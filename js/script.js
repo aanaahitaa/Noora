@@ -1,5 +1,5 @@
 /* =====================================================
-   NOORA INVITATION
+   NOORA PRINCESS INVITATION
    script.js
 ===================================================== */
 
@@ -7,18 +7,20 @@
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
+function(){
 
 
 
-/* =========================
+/* =================================
    PERSONAL GUEST NAME
-========================= */
+================================= */
 
 
-const params = new URLSearchParams(
+const params =
+new URLSearchParams(
 window.location.search
 );
+
 
 
 const guest =
@@ -26,21 +28,20 @@ params.get("guest");
 
 
 
-const introName =
+const guestName =
 document.getElementById(
-"introName"
+"guestName"
 );
 
 
 
 if(
 guest &&
-introName
+guestName
 ){
 
-introName.innerHTML =
-`تقدیم با عشق به <strong>${guest}</strong>`;
-
+guestName.innerHTML =
+`برای ${guest} عزیز ✨`;
 
 }
 
@@ -50,9 +51,10 @@ introName.innerHTML =
 
 
 
-/* =========================
+
+/* =================================
    ENVELOPE OPEN
-========================= */
+================================= */
 
 
 const envelope =
@@ -62,19 +64,12 @@ document.getElementById(
 
 
 
-const seal =
-document.getElementById(
-"seal"
-);
-
-
-
 if(envelope){
 
 
 envelope.addEventListener(
 "click",
-()=>{
+function(){
 
 
 envelope.classList.toggle(
@@ -83,23 +78,6 @@ envelope.classList.toggle(
 
 
 
-if(seal){
-
-seal.style.transform =
-"translate(-50%,-50%) scale(.9)";
-
-setTimeout(()=>{
-
-seal.style.transform =
-"translate(-50%,-50%) scale(1)";
-
-
-},500);
-
-
-}
-
-
 }
 
 );
@@ -115,22 +93,22 @@ seal.style.transform =
 
 
 
-/* =========================
-   RANDOM SPARKLES
-========================= */
+/* =================================
+   CREATE SPARKLES
+================================= */
 
 
-const sparkleContainer =
+const starsLayer =
 document.querySelector(
-".sparkles"
+".stars-layer"
 );
 
 
 
-function createSparkles(){
+function createStars(){
 
 
-if(!sparkleContainer)
+if(!starsLayer)
 return;
 
 
@@ -144,17 +122,17 @@ i++
 
 const star =
 document.createElement(
-"span"
+"div"
 );
+
+
+
+star.className =
+"star";
 
 
 star.innerHTML =
 "✦";
-
-
-
-star.style.position =
-"absolute";
 
 
 
@@ -175,22 +153,14 @@ Math.random()*15+8
 
 
 
-star.style.color =
-"#d8b56a";
+star.style.animationDelay =
+(
+Math.random()*3
+)+"s";
 
 
 
-star.style.opacity =
-Math.random();
-
-
-
-star.style.animation =
-`floatingStar ${Math.random()*4+3}s infinite ease-in-out`;
-
-
-
-sparkleContainer.appendChild(
+starsLayer.appendChild(
 star
 );
 
@@ -198,12 +168,11 @@ star
 }
 
 
-
 }
 
 
 
-createSparkles();
+createStars();
 
 
 
@@ -213,26 +182,26 @@ createSparkles();
 
 
 
-
-/* =========================
+/* =================================
    SCROLL REVEAL
-========================= */
+================================= */
 
 
-const sections =
+
+const revealItems =
 document.querySelectorAll(
 ".reveal"
 );
 
 
 
-const observer =
+const revealObserver =
 new IntersectionObserver(
-(entries)=>{
+function(entries){
 
 
 entries.forEach(
-(entry)=>{
+entry=>{
 
 
 if(
@@ -241,7 +210,7 @@ entry.isIntersecting
 
 
 entry.target.classList.add(
-"visible"
+"show"
 );
 
 
@@ -255,27 +224,26 @@ entry.target.classList.add(
 
 },
 {
+
 threshold:.15
+
 }
+
 );
 
 
 
-sections.forEach(
-(section)=>{
+revealItems.forEach(
+item=>{
 
 
-section.classList.add(
-"hidden"
-);
-
-
-observer.observe(
-section
+revealObserver.observe(
+item
 );
 
 
 }
+
 );
 
 
@@ -286,29 +254,28 @@ section
 
 
 
-/* =========================
+/* =================================
    COUNTDOWN
-========================= */
+================================= */
 
 
 /*
 
-تاریخ جشن:
-پنج شنبه 9 مهر
+زمان فعلی جشن:
+پنجشنبه ۹ مهر ساعت ۱۸
 
-فعلا نمونه:
-
-سال را بعداً تغییر می‌دهیم
+بعداً فقط این تاریخ را عوض می‌کنیم.
 
 */
 
 
 
 
-const targetDate =
+const eventDate =
 new Date(
 "2026-10-01T18:00:00"
 );
+
 
 
 
@@ -323,13 +290,14 @@ new Date();
 
 
 const distance =
-targetDate - now;
+eventDate - now;
 
 
 
-
-if(distance <=0)
+if(distance < 0)
 return;
+
+
 
 
 
@@ -372,34 +340,41 @@ Math.floor(
 
 
 
-const ids = {
+
+const values={
 
 
 days,
+
 hours,
+
 minutes,
+
 seconds
+
 
 };
 
 
 
-Object.keys(ids)
+
+
+Object.keys(values)
 .forEach(
-(id)=>{
+function(key){
 
 
-const el =
+const element =
 document.getElementById(
-id
+key
 );
 
 
 
-if(el){
+if(element){
 
-el.innerText =
-String(ids[id])
+element.innerText =
+String(values[key])
 .padStart(
 2,
 "0"
@@ -409,10 +384,13 @@ String(ids[id])
 
 
 
-});
+}
+
+);
 
 
 }
+
 
 
 
@@ -428,82 +406,6 @@ updateCountdown,
 
 
 
-
-
-
-
-
-/* =========================
-   ADD CSS ANIMATION
-========================= */
-
-
-const style =
-document.createElement(
-"style"
-);
-
-
-style.innerHTML = `
-
-
-.hidden{
-
-opacity:0;
-
-transform:
-translateY(40px);
-
-transition:
-1s ease;
-
-}
-
-
-.visible{
-
-opacity:1;
-
-transform:
-translateY(0);
-
-}
-
-
-
-
-@keyframes floatingStar{
-
-
-0%,100%{
-
-transform:
-translateY(0)
-rotate(0deg);
-
-}
-
-
-50%{
-
-transform:
-translateY(-20px)
-rotate(180deg);
-
-}
-
-
-}
-
-
-
-`;
-
-
-
-document.head.appendChild(
-style
-);
 
 
 
