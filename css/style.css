@@ -2091,3 +2091,161 @@ textarea:focus {
     }
 
 }
+
+/* =========================
+   FINAL TYPOGRAPHY & ALIGNMENT
+   ========================= */
+
+/* همه‌چیز وسط‌چین */
+body,
+section,
+.hero,
+.hero-content,
+.intro-content,
+.invitation-content,
+.message-section,
+.location-section,
+.program-section,
+.rsvp-section,
+.footer {
+  text-align: center;
+}
+
+/* حذف فاصله‌ی اضافی بین حروف */
+h1,
+h2,
+h3,
+p,
+.section-title,
+.hero-title,
+.guest-name,
+.date,
+.message,
+.intro-text {
+  letter-spacing: normal;
+}
+
+/* عنوان‌های اصلی */
+.section-title {
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+  line-height: 2;
+}
+
+/* عنوان اصلی نورا */
+.hero-title {
+  font-size: clamp(2.4rem, 9vw, 4rem);
+  line-height: 1.8;
+}
+
+/* اسم مهمان */
+.guest-name {
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  line-height: 2;
+}
+
+/* تاریخ */
+.date {
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
+  line-height: 2;
+}
+
+/* متن‌های توضیحی */
+.message,
+.intro-text {
+  font-size: clamp(1.05rem, 3.8vw, 1.3rem);
+  line-height: 2.3;
+}
+
+/* =========================
+   COUNTDOWN
+   ========================= */
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: clamp(10px, 3vw, 24px);
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-number {
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.countdown-label {
+  font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+  line-height: 1.8;
+}
+
+/* =========================
+   HOST NAMES
+   ========================= */
+
+.hosts,
+.host-names {
+  text-align: center;
+}
+
+.host-name {
+  font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+  line-height: 2;
+  font-weight: 600;
+}
+
+/* اگر اسم‌ها مستقیماً داخل این بخش هستند */
+.hosts p,
+.hosts span {
+  font-size: clamp(1.2rem, 4.2vw, 1.7rem);
+  line-height: 2.2;
+}
+
+/* =========================
+   PROGRAM / TIMELINE
+   ========================= */
+
+.program,
+.timeline,
+.program-section,
+.timeline-container {
+  text-align: center;
+}
+
+.timeline {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.timeline-item {
+  text-align: center;
+}
+
+.timeline-time,
+.timeline-title,
+.timeline-description {
+  text-align: center;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+  text-align: center;
+}
+
+.footer-message {
+  font-size: clamp(1.25rem, 4.5vw, 1.8rem);
+  line-height: 2.2;
+}
+
+.footer-name {
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
+  line-height: 2;
+  font-weight: 600;
+}
