@@ -2236,3 +2236,8 @@ p,
 .hero-content {
   overflow: visible !important;
 }
+
+
+.hero-title + .ornament {
+  margin-top: 25px !important;
+}
