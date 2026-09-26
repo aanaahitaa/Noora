@@ -490,53 +490,20 @@ a {
 ========================================================= */
 
 .wax-seal {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
 
-    position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    z-index: 10;
+  font-family: "Great Vibes", cursive;
+  font-size: 3.4rem;
+  font-weight: 400;
+  line-height: 1;
 
-    left: 50%;
-
-    top: 58%;
-
-    width: 65px;
-    height: 65px;
-
-    transform:
-        translate(-50%, -50%);
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    color: #f5db98;
-
-    font-family: serif;
-
-    font-size: 24px;
-
-    background:
-
-        radial-gradient(
-            circle at 30% 25%,
-            #8c3451,
-            #54182e 60%,
-            #310d1c
-        );
-
-    border:
-        2px solid rgba(246,210,137,.65);
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.45),
-        inset 0 2px 3px rgba(255,255,255,.25);
-
-    transition:
-        opacity .4s ease,
-        transform .5s ease;
+  transform: rotate(-8deg);
 }
 
 
