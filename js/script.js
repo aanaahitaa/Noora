@@ -36,54 +36,32 @@ const guestName =
    GUEST SYSTEM
 ========================================================= */
 
-const params =
-    new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
+const guestId = params.get("guest");
 
-const guest =
-    params.get("guest");
-
-
-/*
-    Later we can move this into a JSON file
-    or Google Sheet.
-
-    For now:
-*/
-
-const guests = {
-
-    "anna":
-        "آنا جان",
-
-    "mahsa":
-        "مهسا جان",
-
-    "mahdi":
-        "مهـدی جان",
-
-    "family-ahmadi":
-        "خانواده احمدی عزیز",
-
-    "family-shirajpour":
-        "خانواده شیرج‌پور عزیز"
-
+const guestMap = {
+  anna: "آنا جان",
+  mahsa: "مهسا جان",
+  mahdi: "مهـدی جان",
+  "family-ahmadi": "خانواده احمدی عزیز",
+  "family-shirajpour": "خانواده شیرج‌پور عزیز"
 };
 
+const guestName = guestMap[guestId] || "مهمان عزیز";
 
-/* Decode URL guest name */
+// نمایش اسم در همان صفحه اول
+const introName = document.getElementById("introName");
 
-let currentGuest =
-    guests[guest] || "مهمان عزیز";
+if (introName) {
+  introName.textContent = guestName;
+}
 
+// نمایش اسم در صفحه اصلی
+const mainGuestName = document.getElementById("guestName");
 
-/* Show guest name */
-
-guestName.textContent =
-    currentGuest;
-
-introName.textContent =
-    currentGuest;
-
+if (mainGuestName) {
+  mainGuestName.textContent = guestName;
+}
 
 /* =========================================================
    STAR FIELD
