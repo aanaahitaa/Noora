@@ -36,6 +36,22 @@ function getOrCreateSheet_(name, headers) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     sheet.setFrozenRows(1);
     sheet.autoResizeColumns(1, headers.length);
+  } else if (sheet.getMaxColumns() < headers.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), headers.length - sheet.getMaxColumns());
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    sheet.setFrozenRows(1);
+  } else {
+    var headerValues = sheet.getRange(1, 1, 1, headers.length).getValues()[0];
+    var headerChanged = false;
+    for (var h = 0; h < headers.length; h++) {
+      if (!String(headerValues[h] || "").trim()) {
+        headerValues[h] = headers[h];
+        headerChanged = true;
+      }
+    }
+    if (headerChanged) {
+      sheet.getRange(1, 1, 1, headers.length).setValues([headerValues]);
+    }
   }
 
   return sheet;
