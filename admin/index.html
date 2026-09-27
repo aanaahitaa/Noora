@@ -56,9 +56,9 @@ button:disabled{opacity:.55;cursor:wait}
 <input name="action" value="create_guest"><input name="guestId" id="saveGuestId"><input name="name" id="saveName"><input name="maxGuests" value="1"><input name="invitationUrl" id="saveUrl">
 </form>
 
-<script src="../js/config.js"></script>
+<script src="../js/config.js?v=20260927-2"></script>
 <script>
-const GS_ENDPOINT=window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL;
+const GS_ENDPOINT=(window.NOORA_CONFIG&&window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL)||"https://script.google.com/macros/s/AKfycbwbAFhiYbNwpqxczEQzeQNbGm1yIYGveTBUvQ-Cu3zfKFKPdS8wcaNI4CdarzSmwolbuA/exec";
 const base=new URL("../",location.href).href;
 const nameEl=document.getElementById("guestName"),result=document.getElementById("result"),linkEl=document.getElementById("link"),statusEl=document.getElementById("status"),createBtn=document.getElementById("create"),saveForm=document.getElementById("saveForm");
 
