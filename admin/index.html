@@ -15,8 +15,30 @@ body:before{top:12vh;left:5vw}body:after{right:5vw;top:60vh;animation-delay:-2s}
 .header{text-align:center;margin-bottom:30px;padding:0 12px}.header .star{color:var(--gold);font-family:Arial;font-size:22px}.header h1{margin:10px 0 8px;font-size:58px;line-height:1.55;background:linear-gradient(100deg,var(--gold-deep),var(--gold-light),var(--gold-deep));-webkit-background-clip:text;color:transparent;overflow:visible}.header p{margin:0;font-size:27px;color:#8b719b;line-height:1.8}
 .card,.list-card{background:#ffffffb8;backdrop-filter:blur(18px);border:1px solid #ffffff;border-radius:30px;padding:32px 24px;box-shadow:0 20px 60px #b49bd52b}
 .field{margin-bottom:20px}.field label{display:block;font-size:28px;margin-bottom:8px;color:var(--text)}
-input{width:100%;padding:20px 28px 16px;border-radius:18px;border:1px solid #b69ae855;background:#ffffffc9;color:var(--text);font:inherit;font-size:27px;line-height:1.9;outline:none;direction:rtl;text-align:right;overflow:visible}input::placeholder{color:#8b719b;opacity:.72;line-height:1.9;padding-inline-start:8px}
-input:focus{border-color:#b69ae8;box-shadow:0 0 0 4px #b9a7e81c}
+input{
+  width:100%;
+  padding:24px 32px 20px;
+  border-radius:18px;
+  border:1px solid #b69ae855;
+  background:#ffffffc9;
+  color:var(--text);
+  font:inherit;
+  font-size:27px;
+  line-height:2.4;
+  outline:none;
+  direction:rtl;
+  text-align:right;
+  overflow:visible;
+  min-height:78px;
+}
+
+input::placeholder{
+  color:#8b719b;
+  opacity:.72;
+  line-height:2.4;
+  padding-inline-start:0;
+}
+  input:focus{border-color:#b69ae8;box-shadow:0 0 0 4px #b9a7e81c}
 button{width:100%;border:0;border-radius:22px;padding:16px 20px;font:inherit;font-size:30px;color:white;cursor:pointer;background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 12px 30px #b9a7e84d}
 button:disabled{opacity:.55;cursor:wait}
 .status{display:none;margin:18px 0 0;padding:13px 15px;border-radius:16px;background:#fff4f7;text-align:center;font-size:22px;line-height:1.8}.status.show{display:block}.status.error{color:#a05a5a}
