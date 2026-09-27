@@ -60,5 +60,6 @@ async function enterInvitation(){
 
 musicEnter.addEventListener("click",enterInvitation);
 document.querySelector(".envelope-scene").addEventListener("click",enterInvitation);
+musicGate.addEventListener("click",enterInvitation);
 
 function toggleMusic(){if(playing){music.pause();playing=false;}else playMusic();}
