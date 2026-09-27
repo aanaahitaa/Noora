@@ -263,3 +263,24 @@ footer{font-size:58px;line-height:2}
   }
   .rsvp-submit{font-size:34px!important}
 }
+
+
+/* Requested final intro polish */
+.music-gate-card{width:min(86vw,520px);margin-inline:auto}
+.envelope-scene{width:100%;max-width:520px;margin-inline:auto}
+.invitation-card{left:4%;right:4%;bottom:4%;width:92%;height:92%;border:3px solid var(--gold);border-radius:14px;background:transparent;box-shadow:none;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.invitation-card img{width:100%;height:100%;object-fit:contain;border-radius:11px}
+.music-enter{width:100%;max-width:520px;margin-inline:auto;box-shadow:none!important}
+.music-enter:hover{box-shadow:none!important}
+.music-greeting .greeting-text{font-size:44px}
+.footer-names{color:var(--gold-deep)}
+.section-scroll{font-size:27px}
+@media(max-width:600px){
+  .music-gate-card{width:min(88vw,420px)}
+  .envelope-scene{width:100%;max-width:420px}
+  .invitation-card{left:4%;right:4%;bottom:4%;width:92%;height:92%;border-radius:12px}
+  .invitation-card img{border-radius:9px}
+  .music-enter{width:100%;max-width:420px}
+  .music-greeting .greeting-text{font-size:40px}
+  .section-scroll{font-size:25px}
+}
