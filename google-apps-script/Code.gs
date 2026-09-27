@@ -88,9 +88,36 @@ function doGet(e) {
     qs.split("&").forEach(function(part) {
       var bits = part.split("=");
       var key = decodeURIComponent(bits[0] || "");
-      if (!key || p[key] !== undefined) return;
+      if (!key) return;
 
       var value = bits.slice(1).join("=");
+      try {
+        value = decodeURIComponent(value.replace(/\+/g, " "));
+      } catch (ignore) {}
+
+      // queryString را منبع اصلی پارامترها قرار می‌دهیم.
+      p[key] = value;
+    });
+  }
+
+  // بعضی محیط‌ها ممکن است action را به‌صورت
+  // "reset_all&callback=testCallback" تحویل دهند.
+  // در این حالت آن را دوباره به پارامترهای جداگانه تبدیل می‌کنیم.
+  if (String(p.action || "").indexOf("&") !== -1) {
+    var actionParts = String(p.action).split("&");
+    var cleanAction = actionParts.shift();
+
+    if (cleanAction) {
+      p.action = cleanAction;
+    }
+
+    actionParts.forEach(function(part) {
+      var bits = part.split("=");
+      var key = decodeURIComponent(bits[0] || "");
+      var value = bits.slice(1).join("=");
+
+      if (!key) return;
+
       try {
         value = decodeURIComponent(value.replace(/\+/g, " "));
       } catch (ignore) {}
