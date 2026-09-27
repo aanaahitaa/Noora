@@ -29,7 +29,7 @@ button:disabled{opacity:.55;cursor:wait}
 .empty,.loading{text-align:center;font-size:23px;color:#9b849f;padding:20px 8px;line-height:1.8}
 .list-actions{display:grid;gap:10px;margin-top:22px}.list-actions button{font-size:24px;padding:13px 16px}.refresh-list{background:linear-gradient(135deg,#b9a7e8,#9f8bd0)}.reset-list{background:linear-gradient(135deg,#d99a9a,#b86f6f)}
 .list-actions{display:grid;gap:10px;margin-top:22px}.list-actions button{font-size:24px;padding:13px 16px}.refresh-list{background:linear-gradient(135deg,#b9a7e8,#9f8bd0)}.reset-list{background:linear-gradient(135deg,#d99a9a,#b86f6f)}
-.note{text-align:center;font-size:21px;color:#9b849f;margin:26px 12px 0;line-height:2.1;padding:0 8px}
+.note{text-align:center;font-size:21px;color:#9b849f;margin:26px 12px 0;line-height:2.1;padding:0 8px}.note a{color:var(--gold-deep);text-decoration:none}.note a:hover{text-decoration:underline}
 @media(max-width:600px){.wrap{width:min(92%,680px);padding:46px 0 80px}.header{padding:0 16px}.header h1{font-size:48px;line-height:1.7;margin-top:10px}.header p{font-size:24px;line-height:1.9}.card,.list-card{padding:26px 18px;border-radius:26px}.field label{font-size:26px}input{font-size:25px}.guest-main{align-items:flex-start}.guest-name{font-size:25px}.guest-status{font-size:18px}.list-head h2{font-size:32px}.list-head p{font-size:20px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{padding:15px 7px}.stat strong{font-size:42px}.stat span{font-size:23px}.note{font-size:20px}}
 </style>
 </head>
@@ -50,7 +50,7 @@ button:disabled{opacity:.55;cursor:wait}
 <div class="guest-list" id="guestList"><div class="loading">در حال دریافت فهرست مهمان‌ها…</div></div><div class="list-actions"><button type="button" class="refresh-list" id="refreshList">↻ تازه‌سازی لیست مهمان‌ها</button><button type="button" class="reset-list" id="resetList">پاک کردن کامل لیست مهمان‌ها</button></div><div class="list-actions"><button type="button" class="refresh-list" id="refreshList">↻ تازه‌سازی لیست مهمان‌ها</button><button type="button" class="reset-list" id="resetList">پاک کردن کامل لیست مهمان‌ها</button></div>
 </section>
 
-<div class="note">لینک هر مهمان فقط با یک کد کوتاه و یکتا ساخته می‌شود؛ نام و پاسخ مهمان در Google Sheets با همان کد نگهداری می‌شود.</div>
+<div class="note">ساخته شده با عشق توسط <a href="https://t.me/ThisIsAnahita" target="_blank" rel="noopener noreferrer">زن‌دایی آنا ♡</a></div>
 </main>
 
 <iframe name="guestSaveFrame" id="guestSaveFrame" hidden></iframe>
