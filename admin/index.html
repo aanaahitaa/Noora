@@ -51,6 +51,11 @@ button:disabled{opacity:.55;cursor:wait}
 </section>
 
 <section class="list-card">
+<div class="list-head"><h2>♡ لینک‌های ساخته‌شده ♡</h2><p>برای هر مهمان فقط یک لینک دائمی ساخته می‌شود.</p></div>
+<div class="guest-list" id="linkList"><div class="loading">در حال دریافت لینک‌ها…</div></div>
+</section>
+
+<section class="list-card">
 <div class="list-head"><h2>مهمان‌های ثبت‌شده</h2><p>فهرست مهمان‌هایی که تا الان برایشان لینک ساخته شده</p></div>
 <div class="stats"><div class="stat"><strong id="totalGuests">۰</strong><span>کل مهمان‌ها</span></div><div class="stat"><strong id="totalPeople">۰</strong><span>کل نفرات</span></div><div class="stat"><strong id="answeredGuests">۰</strong><span>پاسخ داده‌اند</span></div><div class="stat"><strong id="attendingGuests">۰</strong><span>می‌آیند</span></div></div>
 <div class="guest-list" id="guestList"><div class="loading">در حال دریافت فهرست مهمان‌ها…</div></div><div class="list-actions"><button type="button" class="reset-list" id="resetList">پاک کردن کامل لیست مهمان‌ها</button></div>
@@ -98,19 +103,41 @@ function loadGuests(){
 }
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
 
-createBtn.onclick=()=>{
+async function findExistingGuest(name){
+ return new Promise((resolve,reject)=>{
+  const callback="nooraFind_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  window[callback]=(data)=>{delete window[callback];const old=document.getElementById(callback);if(old)old.remove();if(data&&data.ok)resolve(data.guest||null);else if(data&&data.error==="guest_not_found")resolve(null);else reject(new Error("find_failed"))};
+  const script=document.createElement("script");script.id=callback;script.src=GS_ENDPOINT+"?action=find_guest&name="+encodeURIComponent(name)+"&callback="+callback+"&t="+Date.now();script.onerror=()=>{delete window[callback];script.remove();reject(new Error("network"))};document.body.appendChild(script);
+ });
+}
+function renderLinkList(guests){
+ const list=document.getElementById("linkList");
+ if(!guests||!guests.length){list.innerHTML='<div class="empty">هنوز لینکی ساخته نشده است.</div>';return}
+ list.innerHTML=guests.map(g=>'<div class="guest-row"><div class="guest-main"><div class="guest-name">'+escapeHtml(g.name)+'</div><button type="button" class="copy link-copy" data-url="'+escapeHtml(g.url||g.invitationUrl)+'" style="width:auto;padding:8px 16px;font-size:20px">📋 کپی لینک</button></div><div class="guest-link">'+escapeHtml(g.url||g.invitationUrl)+'</div></div>').join("");
+ list.querySelectorAll(".link-copy").forEach(btn=>btn.onclick=async()=>{await navigator.clipboard.writeText(btn.dataset.url);btn.textContent="✓ کپی شد";setTimeout(()=>btn.textContent="📋 کپی لینک",1600)});
+}
+function loadLinks(){
+ const list=document.getElementById("linkList"),callback="nooraLinks_"+Date.now();
+ window[callback]=(data)=>{try{if(!data||!data.ok)throw new Error("load_failed");renderLinkList(data.links||[])}catch(e){list.innerHTML='<div class="empty">دریافت لینک‌ها انجام نشد.</div>'}delete window[callback];const old=document.getElementById(callback);if(old)old.remove()};
+ const script=document.createElement("script");script.id=callback;script.src=GS_ENDPOINT+"?action=list_links&callback="+callback+"&t="+Date.now();script.onerror=()=>{list.innerHTML='<div class="empty">ارتباط با Google Sheets برقرار نشد.</div>';delete window[callback];script.remove()};document.body.appendChild(script);
+}
+createBtn.onclick=async()=>{
  const name=nameEl.value.trim();
  if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";showStatus("لطفاً نام مهمان را وارد کنید.",true);return}
  if(!GS_ENDPOINT||GS_ENDPOINT.includes("PASTE_")){showStatus("آدرس Google Apps Script هنوز در تنظیمات وارد نشده است.",true);return}
- const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");
- const url=base+"?g="+id;
- document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;
- createBtn.disabled=true;showStatus("در حال ذخیره مهمان در Google Sheets…");saveForm.submit();
- linkEl.textContent=url;result.classList.add("show");
- setTimeout(()=>{createBtn.disabled=false;showStatus("مهمان در شیت ذخیره شد؛ لینک دائمی آماده است.");loadGuests()},1200);
+ createBtn.disabled=true;showStatus("در حال بررسی مهمان‌های قبلی…");
+ try{
+  const existing=await findExistingGuest(name);
+  if(existing){const existingUrl=existing.url||existing.invitationUrl||"";linkEl.textContent=existingUrl;result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}
+  const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");
+  const url=base+"?g="+id;
+  document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;
+  saveForm.submit();linkEl.textContent=url;result.classList.add("show");showStatus("در حال ذخیره مهمان در Google Sheets…");
+  setTimeout(()=>{createBtn.disabled=false;showStatus("مهمان در شیت ذخیره شد؛ لینک دائمی آماده است.");loadGuests();loadLinks()},1200);
+ }catch(e){createBtn.disabled=false;showStatus("بررسی مهمان قبلی انجام نشد؛ دوباره تلاش کنید.",true)}
 };
 document.getElementById("copy").onclick=async()=>{await navigator.clipboard.writeText(linkEl.textContent);document.getElementById("copy").textContent="✓ لینک کپی شد";setTimeout(()=>document.getElementById("copy").textContent="کپی لینک",1800)};
-document.getElementById("refreshList").onclick=()=>{showStatus("در حال تازه‌سازی فهرست مهمان‌ها…");loadGuests()};
+document.getElementById("refreshList")?.addEventListener("click",()=>{showStatus("در حال تازه‌سازی فهرست مهمان‌ها…");loadGuests();loadLinks()});
 document.getElementById("resetList").onclick=()=>{
  if(!confirm("مطمئنی می‌خوای کل لیست مهمان‌ها پاک بشه؟"))return;
  if(!confirm("این کار نام مهمان‌ها و پاسخ‌های ثبت‌شده را برای همیشه پاک می‌کند. واقعاً مطمئنی؟"))return;
@@ -123,5 +150,6 @@ document.getElementById("resetList").onclick=()=>{
  setTimeout(()=>{showStatus("لیست مهمان‌ها و پاسخ‌ها پاک شد.");result.classList.remove("show");nameEl.value="";loadGuests()},1200);
 };
 loadGuests();
+loadLinks();
 </script>
 </body></html>
