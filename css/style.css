@@ -547,3 +547,44 @@ body::before,body::after{
 
 /* Prevent the generic greeting from flashing before the personalized guest name loads */
 body.guest-loading .music-greeting{visibility:hidden}
+
+
+/* Final requested typography, RTL countdown, and gold RSVP palette */
+.event-item{font-size:42px!important}
+.countdown{direction:rtl!important;flex-direction:row!important}
+.countdown .time-box{direction:rtl}
+.rsvp-submit{font-size:48px!important}
+.attendance-option.is-selected{
+  color:#fff!important;
+  background:linear-gradient(135deg,#e7c36f 0%,#d6ad58 50%,#b98b3b 100%)!important;
+  border-color:#b98b3b!important;
+  box-shadow:0 12px 30px rgba(190,148,65,.24)!important;
+}
+.guest-count-btn{
+  color:var(--gold-deep)!important;
+  background:#fff!important;
+  border-color:#d9c18a!important;
+}
+.guest-count-btn:hover{
+  color:var(--gold-deep)!important;
+  background:#fffaf0!important;
+  border-color:#c8a65a!important;
+}
+.guest-count-btn.is-selected{
+  color:#6f521d!important;
+  background:linear-gradient(135deg,#f7e6b0 0%,#eed493 48%,#dfbd67 100%)!important;
+  border-color:#b98b3b!important;
+  box-shadow:0 8px 22px rgba(190,148,65,.24)!important;
+}
+.music-enter{
+  color:#fff!important;
+  background:linear-gradient(135deg,#e7c36f 0%,#d6ad58 50%,#b98b3b 100%)!important;
+  border-color:#b98b3b!important;
+}
+.rsvp-submit span{color:#fff4cf!important}
+@media(max-width:600px){
+  .event-item{font-size:30px!important}
+  .rsvp-submit{font-size:44px!important}
+  .countdown{direction:rtl!important;flex-direction:row!important}
+  .countdown .time-box{direction:rtl}
+}
