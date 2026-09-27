@@ -445,3 +445,11 @@ body::before,body::after{z-index:0!important}
 /* Small hearts around footer names */
 .footer-heart{font-family:Arial,sans-serif;font-size:.38em;vertical-align:middle;margin-inline:10px;color:var(--gold-deep)}
 @media(max-width:600px){.footer-heart{font-size:.36em;margin-inline:7px}}
+
+
+/* RSVP count: RTL order with selected state */
+.guest-count{direction:rtl!important}
+.guest-count-btn{color:#123f3d!important;background:rgba(255,255,255,.78)!important;border-color:#8bb5af!important}
+.guest-count-btn:hover{background:#f8ffff!important;border-color:#5f928a!important}
+.guest-count-btn.is-selected{color:#103c4a!important;background:#a9cedb!important;border-color:#47798c!important}
+.rsvp-submit span{color:#d6ad58!important}
