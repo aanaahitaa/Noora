@@ -8,567 +8,34 @@
 
 <title>کارت دعوت جشن تولد نورا جان</title>
 
-
-
-
-<style>
-
-:root{
-
---pearl:#fffaf7;
---milk:#fffdfb;
-
---blush:#f3dce0;
---pink:#f7cfd9;
-
---rose:#dcaeb7;
-
---blue:#e6f0f7;
---blue-soft:#dcecf8;
-
---gold:#c9a45c;
---gold-light:#efdcae;
---gold-bright:#f5dc91;
-
---ink:#66565a;
---muted:#9a8588;
-
---white:#ffffff;
-
---shadow:
-0 25px 70px rgba(185,145,115,.18);
-
---soft-shadow:
-0 10px 35px rgba(185,145,115,.12);
-
-}
-
-
-*{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
-}
-
-
-
-html{
-
-scroll-behavior:smooth;
-
-}
-
-
-
-body{
-
-background:
-
-radial-gradient(circle at 10% 10%,
-rgba(247,207,217,.35),
-transparent 28%),
-
-radial-gradient(circle at 90% 20%,
-rgba(220,236,248,.45),
-transparent 30%),
-
-linear-gradient(
-180deg,
-#fffdfb,
-#fff7f3
-);
-
-
-
-@font-face {
-
-    font-family: "Nastaliq";
-
-    src: url("assets/fonts/Iran Nastaliq 1.0.ttf")
-    format("truetype");
-
-    font-weight: normal;
-
-    font-style: normal;
-
-}
-
-
-
-/* =========================
-   TYPOGRAPHY
-   ========================= */
-
-
-.hero-small-title,
-.hero-title,
-.section-title,
-footer {
-
-    font-family: "Nastaliq",
-    "Scheherazade New",
-    serif;
-
-}
-
-
-
-
-
-/* =========================
-   PHOTO FRAME UPDATE
-   ========================= */
-
-
-.photo-frame {
-
-
-    position:relative;
-
-    width:clamp(290px,72vw,400px);
-
-    aspect-ratio:.85;
-
-    margin:55px auto;
-
-    display:grid;
-
-    place-items:center;
-
-
-}
-
-
-
-/* animated pearl aura */
-
-
-.photo-glow {
-
-
-    position:absolute;
-
-
-    width:125%;
-
-
-    height:125%;
-
-
-    border-radius:50%;
-
-
-    z-index:-2;
-
-
-
-    background:
-
-
-    radial-gradient(
-
-        circle,
-
-        rgba(239,220,174,.85)
-        0%,
-
-        rgba(247,207,217,.55)
-        28%,
-
-        rgba(230,240,247,.45)
-        48%,
-
-        transparent 72%
-
-    );
-
-
-
-    filter:blur(35px);
-
-
-
-    animation:
-
-    pearlPulse 5s ease-in-out infinite;
-
-
-
-}
-
-
-
-/* second moving glow layer */
-
-
-.photo-glow::after {
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    inset:15%;
-
-
-    border-radius:50%;
-
-
-    background:
-
-
-    conic-gradient(
-
-        from 0deg,
-
-        transparent,
-
-        rgba(255,255,255,.9),
-
-        rgba(239,220,174,.7),
-
-        transparent
-
-    );
-
-
-    animation:
-
-    rotateGlow 8s linear infinite;
-
-
-
-}
-
-
-
-
-
-@keyframes pearlPulse {
-
-
-    0%,
-    100% {
-
-        transform:scale(.95);
-
-        opacity:.65;
-
-    }
-
-
-    50% {
-
-        transform:scale(1.08);
-
-        opacity:1;
-
-    }
-
-}
-
-
-
-@keyframes rotateGlow {
-
-
-    from {
-
-        transform:rotate(0deg);
-
-    }
-
-
-    to {
-
-        transform:rotate(360deg);
-
-    }
-
-}
-
-
-
-
-
-
-/* IMAGE SIZE */
-
-
-.photo-inner {
-
-
-    width:80%;
-
-
-    height:80%;
-
-
-    overflow:hidden;
-
-
-    border-radius:50%;
-
-
-
-    border:
-
-
-    12px solid rgba(255,255,255,.95);
-
-
-
-    box-shadow:
-
-
-    0 0 0 3px rgba(239,220,174,.8),
-
-
-    0 25px 80px rgba(185,145,115,.35);
-
-
-
-    position:relative;
-
-
-
-}
-
-
-
-
-
-.photo-inner::before {
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    inset:0;
-
-
-    border-radius:50%;
-
-
-    border:
-
-
-    2px solid rgba(255,255,255,.8);
-
-
-
-    pointer-events:none;
-
-
-}
-
-
-
-
-
-
-
-.photo-inner img {
-
-
-    width:100%;
-
-
-    height:100%;
-
-
-    object-fit:cover;
-
-
-}
-
-
-
-
-
-/* OUTER GOLD RING */
-
-
-.photo-frame::before {
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    width:86%;
-
-
-    height:86%;
-
-
-    border-radius:50%;
-
-
-    border:
-
-
-    2px solid rgba(239,220,174,.95);
-
-
-
-    animation:
-
-    ringGlow 3s infinite;
-
-
-
-}
-
-
-
-
-
-@keyframes ringGlow {
-
-
-    0%,
-    100% {
-
-        opacity:.55;
-
-    }
-
-
-    50% {
-
-        opacity:1;
-
-    }
-
-
-}
-
-
-
-
-
-
-/* TITLE SIZE FIX */
-
-
-.hero-title {
-
-
-    font-family:"NooraNastaliq",
-    "Scheherazade New",
-    serif;
-
-
-
-    font-size:90px;
-
-
-    line-height:1.6;
-
-
-    margin-top:10px;
-
-
-}
-
-
-
-
-
-.hero-small-title {
-
-
-    font-size:34px;
-
-
-    margin-bottom:-5px;
-
-
-}
-
-
-
-
-
-
-/* STAR UPDATE */
-
-
-.photo-star {
-
-
-    filter:
-
-    drop-shadow(0 0 10px rgba(239,220,174,.8));
-
-
-    animation:
-
-    starFloat 3s ease-in-out infinite;
-
-
-}
-
-
-
-@keyframes starFloat {
-
-
-    50% {
-
-
-        transform:
-
-        translateY(-10px)
-
-        scale(1.25);
-
-
-        opacity:.7;
-
-    }
-
-
-}
-
-
-</style>
+<link rel="stylesheet" href="css/style.css">
 
 </head>
-
 
 
 <body>
 
 
+<!-- Music -->
 
-<audio id="music" loop>
+<audio id="music" loop preload="auto">
 
-<source src="assets/music/birthday.mp3">
+    <source src="assets/music/birthday.mp3" type="audio/mpeg">
 
 </audio>
 
 
 <button class="music-btn" onclick="toggleMusic()">
-
-🎵
-
+    🎵
 </button>
 
 
 
+<!-- HERO -->
+
 
 <section class="hero reveal">
+
 
 <div class="section-inner">
 
@@ -578,6 +45,7 @@ footer {
 به افتخار اولین سال زندگی
 
 </div>
+
 
 
 <h1 class="hero-title">
@@ -594,19 +62,25 @@ footer {
 <div class="photo-glow"></div>
 
 
+
 <div class="photo-inner">
 
-<img src="assets/noora-main.jpg">
+<img src="assets/noora-main.jpg" alt="Noora">
 
 </div>
+
 
 
 <span class="photo-star star-one">✦</span>
+
 <span class="photo-star star-two">✧</span>
+
 <span class="photo-star star-three">✦</span>
 
 
+
 </div>
+
 
 
 
@@ -615,21 +89,25 @@ footer {
 <div class="scroll-arrow">
 
 <i></i>
-
 <i></i>
 
 </div>
 
-
 </div>
 
 
+
 </div>
+
 
 </section>
 
 
 
+
+
+
+<!-- INTRO -->
 
 
 <section class="reveal">
@@ -650,15 +128,21 @@ footer {
 
 با افتخار از شما دعوت می‌کنیم
 
+
 <br>
+
 
 تا در جشن اولین سال تولد
 
+
 <br>
+
 
 نورا جان
 
+
 <br>
+
 
 در کنار ما باشید.
 
@@ -670,13 +154,15 @@ footer {
 </div>
 
 
-
 </section>
 
 
 
 
 
+
+
+<!-- DATE -->
 
 
 <section class="reveal">
@@ -689,21 +175,28 @@ footer {
 </h2>
 
 
+
 <div class="glass-card">
 
 
- پنج‌شنبه ۹ مهر
+پنج‌شنبه ۹ مهر
+
 
 <br><br>
 
- ساعت ۱۸
+
+ساعت ۱۸
+
 
 <br><br>
 
- تالار دوریکا
+
+تالار دوریکا
+
 
 
 </div>
+
 
 
 </section>
@@ -712,6 +205,10 @@ footer {
 
 
 
+
+
+
+<!-- COUNTDOWN -->
 
 
 <section class="reveal">
@@ -724,39 +221,71 @@ footer {
 </h2>
 
 
+
 <div class="countdown">
+
 
 
 <div class="glass-card time-box">
 
-<strong id="day">۰۰</strong>
+<strong id="day">
+
+۰۰
+
+</strong>
+
 روز
 
 </div>
 
 
+
+
+
 <div class="glass-card time-box">
 
-<strong id="hour">۰۰</strong>
+<strong id="hour">
+
+۰۰
+
+</strong>
+
 ساعت
 
 </div>
 
 
+
+
+
 <div class="glass-card time-box">
 
-<strong id="minute">۰۰</strong>
+<strong id="minute">
+
+۰۰
+
+</strong>
+
 دقیقه
 
 </div>
 
 
+
+
+
 <div class="glass-card time-box">
 
-<strong id="second">۰۰</strong>
+<strong id="second">
+
+۰۰
+
+</strong>
+
 ثانیه
 
 </div>
+
 
 
 </div>
@@ -767,6 +296,11 @@ footer {
 
 
 
+
+
+
+
+<!-- RSVP -->
 
 
 <section class="reveal">
@@ -780,35 +314,69 @@ footer {
 
 
 
+
 <div class="glass-card rsvp-form">
 
 
-<input placeholder="نام مهمان">
+
+<input type="text" placeholder="نام مهمان">
+
 
 
 <select>
 
-<option>تعداد نفرات همراه</option>
 
-<option>۱ نفر</option>
+<option>
 
-<option>۲ نفر</option>
+تعداد نفرات همراه
 
-<option>۳ نفر</option>
+</option>
 
-<option>۴ نفر</option>
+
+<option>
+
+۱ نفر
+
+</option>
+
+
+<option>
+
+۲ نفر
+
+</option>
+
+
+<option>
+
+۳ نفر
+
+</option>
+
+
+<option>
+
+۴ نفر
+
+</option>
+
 
 </select>
+
+
 
 
 <textarea placeholder="پیام شما"></textarea>
 
 
+
 <button class="glass-button">
 
- ثبت
+ثبت
 
 </button>
+
+
 
 
 </div>
@@ -819,6 +387,12 @@ footer {
 
 
 
+
+
+
+
+
+<!-- MAP -->
 
 
 <section class="reveal">
@@ -831,30 +405,44 @@ footer {
 </h2>
 
 
+
 <div class="buttons">
 
 
-<a class="glass-button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
+<a class="glass-button"
+href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98"
+target="_blank">
 
 مشاهده در گوگل مپس
 
 </a>
 
 
-<a class="glass-button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
+
+
+<a class="glass-button"
+href="https://nshn.ir/2e_bf-IH5x5Y4D"
+target="_blank">
 
 مشاهده در نشان
+
 </a>
 
 
-<a class="glass-button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
+
+
+<a class="glass-button"
+href="https://balad.ir/p/7ahglm8ucy5Qjp"
+target="_blank">
 
 مشاهده در بلد
 
 </a>
 
 
+
 </div>
+
 
 
 </section>
@@ -863,13 +451,19 @@ footer {
 
 
 
+
 <footer>
+
 
 به امید دیدار شما
 
+
 <br>
 
+
 مهناز و پیمان
+
+
 
 </footer>
 
@@ -877,103 +471,10 @@ footer {
 
 
 
-<script>
-
-
-const observer =
-new IntersectionObserver(entries=>{
-
-entries.forEach(e=>{
-
-if(e.isIntersecting)
-
-e.target.classList.add("show");
-
-});
-
-});
-
-
-document.querySelectorAll(".reveal")
-.forEach(x=>observer.observe(x));
-
-
-
-
-const target =
-new Date("2026-10-01T18:00:00");
-
-
-function fa(n){
-
-return String(n)
-.padStart(2,"0")
-.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
-
-}
-
-
-function update(){
-
-
-let d=target-new Date();
-
-
-if(d<0)return;
-
-
-day.innerHTML=fa(Math.floor(d/86400000));
-
-hour.innerHTML=fa(Math.floor(d/3600000)%24);
-
-minute.innerHTML=fa(Math.floor(d/60000)%60);
-
-second.innerHTML=fa(Math.floor(d/1000)%60);
-
-
-}
-
-
-setInterval(update,1000);
-
-update();
-
-
-
-let playing=false;
-
-
-function toggleMusic(){
-
-
-let m=document.getElementById("music");
-
-
-if(!playing){
-
-m.play();
-
-playing=true;
-
-
-}else{
-
-
-m.pause();
-
-playing=false;
-
-
-}
-
-
-}
-
-
-
-</script>
+<script src="js/script.js"></script>
 
 
 </body>
+
 
 </html>
