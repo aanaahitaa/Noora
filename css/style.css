@@ -309,3 +309,31 @@ body::before{content:"✦  ·  ✧";top:14vh;left:4vw;font-size:18px;letter-spac
 body::after{content:"✧  ·  ✦";right:5vw;top:54vh;font-size:16px;letter-spacing:15px;animation:ambientSparkle 6s ease-in-out -2s infinite}
 @keyframes ambientSparkle{0%,100%{opacity:.22;transform:translateY(0) scale(.9)}50%{opacity:.7;transform:translateY(-10px) scale(1.08)}}
 @media(max-width:600px){.invitation-card{width:100%!important;border-radius:12px}.invitation-card img{width:100%!important;max-width:none!important;height:auto!important;max-height:none!important;border-radius:10.5px}.music-btn{width:46px;height:46px;bottom:16px;left:16px}.music-note{font-size:22px}}
+
+
+/* Targeted restoration: hero scroll, spacing, headings, sparkle and countdown direction */
+.hero{overflow:visible!important}
+section{padding-top:38px;padding-bottom:38px}
+.hero{padding-top:14px;padding-bottom:18px}
+.hero .section-inner{min-height:calc(100svh - 32px)}
+.hero-small-title{direction:rtl;text-align:center;white-space:nowrap}
+.hero-title{direction:rtl;text-align:center}
+.section-title{direction:rtl;text-align:center}
+.section-title,.hero-title{
+  background-image:linear-gradient(105deg,var(--gold-deep) 0%,var(--gold-light) 28%,#fff1b9 43%,var(--gold) 58%,var(--gold-deep) 100%);
+  background-size:220% auto;
+  animation:goldShine 5s linear infinite;
+}
+body::before,body::after{z-index:1}
+.scroll-hint{z-index:6;flex:0 0 auto}
+.countdown{direction:ltr!important;flex-direction:row!important}
+.countdown .time-box{direction:ltr}
+
+@media(max-width:600px){
+  section{padding-top:28px;padding-bottom:28px}
+  .hero{padding-top:8px;padding-bottom:12px}
+  .hero .section-inner{min-height:calc(100svh - 20px)}
+  .hero-small-title{white-space:normal}
+  .scroll-hint{margin-top:4px}
+  .countdown{direction:ltr!important;flex-direction:row!important;gap:4px}
+}
