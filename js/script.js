@@ -14,10 +14,17 @@ function updateCountdown(){const distance=targetDate-new Date();if(distance<=0)r
 setInterval(updateCountdown,1000);updateCountdown();
 
 // =========================
-// RSVP
+// RSVP + GUEST LINK
 // =========================
+const RSVP_ENDPOINT="PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE";
 let attendance="yes";
 let guestCount=1;
+
+const params=new URLSearchParams(window.location.search);
+const guestName=(params.get("guest")||params.get("name")||"").trim();
+const guestId=(params.get("id")||params.get("g")||"").trim();
+const maxGuests=Math.max(1,Math.min(5,Number(params.get("max")||1)));
+
 const attendanceOptions=document.querySelectorAll(".attendance-option");
 const guestCountButtons=document.querySelectorAll(".guest-count-btn");
 const guestCountWrap=document.getElementById("guestCountWrap");
@@ -26,9 +33,92 @@ const rsvpSubmit=document.getElementById("rsvpSubmit");
 const rsvpFeedback=document.getElementById("rsvpFeedback");
 const rsvpButtonHTML='<span>✦</span> ثبت حضور <span>✦</span>';
 const declinedButtonHTML='<span>✦</span> ثبت پاسخ <span>✦</span>';
-attendanceOptions.forEach(button=>{button.addEventListener("click",()=>{attendance=button.dataset.attendance;attendanceOptions.forEach(item=>item.classList.toggle("is-selected",item===button));rsvpForm.classList.toggle("is-declined",attendance==="no");rsvpSubmit.innerHTML=attendance==="yes"?rsvpButtonHTML:declinedButtonHTML;});});
-guestCountButtons.forEach(button=>{button.addEventListener("click",()=>{guestCount=Number(button.dataset.count);guestCountButtons.forEach(item=>item.classList.toggle("is-selected",item===button));});});
-rsvpSubmit.addEventListener("click",()=>{const name=document.getElementById("guestName").value.trim();if(!name){rsvpFeedback.textContent="لطفاً نام مهمان را وارد کنید 🌸";document.getElementById("guestName").focus();return;}const message=document.getElementById("guestMessage").value.trim();if(attendance==="yes")rsvpFeedback.textContent=`ممنون ${name} جان؛ حضور شما برای ${persianNumber(guestCount)} نفر ثبت شد ❤️`;else rsvpFeedback.textContent=`ممنون ${name} جان؛ پاسخ شما ثبت شد 🌷`;console.log({name,attendance,guestCount,message});});
+
+guestCountButtons.forEach(button=>{
+  const count=Number(button.dataset.count);
+  button.hidden=count>maxGuests;
+  button.addEventListener("click",()=>{
+    guestCount=count;
+    guestCountButtons.forEach(item=>item.classList.toggle("is-selected",item===button));
+  });
+});
+
+attendanceOptions.forEach(button=>{
+  button.addEventListener("click",()=>{
+    attendance=button.dataset.attendance;
+    attendanceOptions.forEach(item=>item.classList.toggle("is-selected",item===button));
+    rsvpForm.classList.toggle("is-declined",attendance==="no");
+    rsvpSubmit.innerHTML=attendance==="yes"?rsvpButtonHTML:declinedButtonHTML;
+  });
+});
+
+function submitToGoogleSheet(payload){
+  if(RSVP_ENDPOINT.includes("PASTE_")) return false;
+
+  let iframe=document.getElementById("rsvpSubmitFrame");
+  if(!iframe){
+    iframe=document.createElement("iframe");
+    iframe.name="rsvpSubmitFrame";
+    iframe.id="rsvpSubmitFrame";
+    iframe.hidden=true;
+    document.body.appendChild(iframe);
+  }
+
+  let form=document.getElementById("rsvpSubmitForm");
+  if(!form){
+    form=document.createElement("form");
+    form.id="rsvpSubmitForm";
+    form.method="POST";
+    form.target="rsvpSubmitFrame";
+    form.style.display="none";
+    document.body.appendChild(form);
+  }
+
+  form.action=RSVP_ENDPOINT;
+  form.innerHTML="";
+  Object.entries(payload).forEach(([key,value])=>{
+    const input=document.createElement("input");
+    input.type="hidden";
+    input.name=key;
+    input.value=value==null?"":value;
+    form.appendChild(input);
+  });
+  form.submit();
+  return true;
+}
+
+rsvpSubmit.addEventListener("click",()=>{
+  if(!guestId){
+    rsvpFeedback.textContent="این لینک مهمان معتبر نیست. لطفاً از لینک اختصاصی دعوت‌نامه وارد شوید.";
+    return;
+  }
+
+  if(!guestName){
+    rsvpFeedback.textContent="نام مهمان این لینک مشخص نشده است.";
+    return;
+  }
+
+  const message=document.getElementById("guestMessage").value.trim();
+  const payload={
+    action:"rsvp",
+    guestId:guestId,
+    attendance:attendance,
+    guestCount:attendance==="yes"?guestCount:0,
+    message:message,
+    userAgent:navigator.userAgent
+  };
+
+  if(!submitToGoogleSheet(payload)){
+    rsvpFeedback.textContent="اتصال Google Sheets هنوز فعال نشده است.";
+    return;
+  }
+
+  if(attendance==="yes"){
+    rsvpFeedback.textContent=`ممنون ${guestName} جان؛ حضور شما برای ${persianNumber(guestCount)} نفر ثبت شد ❤️`;
+  }else{
+    rsvpFeedback.textContent=`ممنون ${guestName} جان؛ پاسخ شما ثبت شد 🌷`;
+  }
+});
 
 // =========================
 // PERSONALIZED ENVELOPE + MUSIC
@@ -41,10 +131,8 @@ const envelopeScene=document.getElementById("envelopeScene");
 let playing=false;
 music.volume=0.35;
 
-const params=new URLSearchParams(window.location.search);
-const guestName=(params.get("guest")||params.get("name")||"").trim();
-const guestId=(params.get("id")||params.get("g")||guestName||"unknown").trim();
-const greetingText=musicGreeting.querySelector(".greeting-text"); greetingText.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
+const greetingText=musicGreeting.querySelector(".greeting-text");
+greetingText.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
 
 function playMusic(){return music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});}
 
