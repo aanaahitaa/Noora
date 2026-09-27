@@ -1,97 +1,36 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+/* =========================
+   FONT SETUP (local font)
+   ========================= */
 
-<head>
+/* بعداً فایل فونت را داخل assets/fonts قرار بده */
+@font-face {
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    font-family: "NooraNastaliq";
 
-<title>جشن تولد نورا نیک نفس</title>
+    src: url("assets/fonts/NooraNastaliq.ttf")
+    format("truetype");
 
+    font-weight: normal;
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Scheherazade+New:wght@400;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-
-<style>
-
-:root{
-
---pearl:#fffaf7;
---milk:#fffdfb;
-
---blush:#f3dce0;
---pink:#f7cfd9;
-
---rose:#dcaeb7;
-
---blue:#e6f0f7;
---blue-soft:#dcecf8;
-
---gold:#c9a45c;
---gold-light:#efdcae;
---gold-bright:#f5dc91;
-
---ink:#66565a;
---muted:#9a8588;
-
---white:#ffffff;
-
---shadow:
-0 25px 70px rgba(185,145,115,.18);
-
---soft-shadow:
-0 10px 35px rgba(185,145,115,.12);
-
-}
-
-
-*{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
+    font-style: normal;
 
 }
 
 
 
-html{
-
-scroll-behavior:smooth;
-
-}
+/* =========================
+   TYPOGRAPHY
+   ========================= */
 
 
+.hero-small-title,
+.hero-title,
+.section-title,
+footer {
 
-body{
-
-background:
-
-radial-gradient(circle at 10% 10%,
-rgba(247,207,217,.35),
-transparent 28%),
-
-radial-gradient(circle at 90% 20%,
-rgba(220,236,248,.45),
-transparent 30%),
-
-linear-gradient(
-180deg,
-#fffdfb,
-#fff7f3
-);
-
-
-font-family:
-"Vazirmatn",
-sans-serif;
-
-
-color:var(--ink);
-
-text-align:center;
-
-overflow-x:hidden;
+    font-family: "NooraNastaliq",
+    "Scheherazade New",
+    serif;
 
 }
 
@@ -99,85 +38,129 @@ overflow-x:hidden;
 
 
 
-section{
-
-padding:75px 20px;
-
-min-height:60vh;
-
-}
+/* =========================
+   PHOTO FRAME UPDATE
+   ========================= */
 
 
-
-.section-inner{
-
-max-width:850px;
-
-margin:auto;
-
-}
+.photo-frame {
 
 
+    position:relative;
 
+    width:clamp(290px,72vw,400px);
 
+    aspect-ratio:.85;
 
-/* TITLES */
+    margin:55px auto;
 
+    display:grid;
 
-.hero-small-title{
-
-
-font-family:
-"Scheherazade New",
-serif;
-
-
-font-size:32px;
-
-
-color:var(--gold);
-
-
-margin-bottom:0;
+    place-items:center;
 
 
 }
 
 
 
-.hero-title{
+/* animated pearl aura */
 
 
-font-family:
-"Scheherazade New",
-serif;
+.photo-glow {
 
 
-font-size:95px;
+    position:absolute;
 
 
-font-weight:700;
+    width:125%;
 
 
-line-height:1.2;
+    height:125%;
 
 
-margin-top:0;
+    border-radius:50%;
 
 
-background:
-
-linear-gradient(
-120deg,
-#b88942,
-#f8dfa0,
-#b88942
-);
+    z-index:-2;
 
 
--webkit-background-clip:text;
 
-color:transparent;
+    background:
+
+
+    radial-gradient(
+
+        circle,
+
+        rgba(239,220,174,.85)
+        0%,
+
+        rgba(247,207,217,.55)
+        28%,
+
+        rgba(230,240,247,.45)
+        48%,
+
+        transparent 72%
+
+    );
+
+
+
+    filter:blur(35px);
+
+
+
+    animation:
+
+    pearlPulse 5s ease-in-out infinite;
+
+
+
+}
+
+
+
+/* second moving glow layer */
+
+
+.photo-glow::after {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:15%;
+
+
+    border-radius:50%;
+
+
+    background:
+
+
+    conic-gradient(
+
+        from 0deg,
+
+        transparent,
+
+        rgba(255,255,255,.9),
+
+        rgba(239,220,174,.7),
+
+        transparent
+
+    );
+
+
+    animation:
+
+    rotateGlow 8s linear infinite;
+
 
 
 }
@@ -186,433 +169,46 @@ color:transparent;
 
 
 
-.section-title{
+@keyframes pearlPulse {
 
 
-font-family:
-"Scheherazade New",
-serif;
+    0%,
+    100% {
+
+        transform:scale(.95);
+
+        opacity:.65;
+
+    }
 
 
-font-size:50px;
+    50% {
 
+        transform:scale(1.08);
 
-color:var(--gold);
+        opacity:1;
 
-
-}
-
-
-
-
-
-/* HERO */
-
-
-.hero{
-
-
-min-height:100vh;
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
+    }
 
 }
 
 
 
+@keyframes rotateGlow {
 
-/* PHOTO */
 
+    from {
 
-.photo-frame{
+        transform:rotate(0deg);
 
+    }
 
-position:relative;
 
+    to {
 
-width:clamp(280px,70vw,380px);
+        transform:rotate(360deg);
 
-
-aspect-ratio:.85;
-
-
-margin:45px auto;
-
-
-display:grid;
-
-
-place-items:center;
-
-
-}
-
-
-
-.photo-glow{
-
-
-position:absolute;
-
-
-inset:-60px;
-
-
-z-index:-1;
-
-
-background:
-
-
-radial-gradient(
-circle,
-rgba(243,220,225,.8),
-rgba(230,240,247,.45),
-transparent 70%
-);
-
-
-filter:blur(35px);
-
-
-}
-
-
-
-.photo-inner{
-
-
-width:95%;
-
-
-height:95%;
-
-
-overflow:hidden;
-
-
-border-radius:50%;
-
-
-border:
-
-10px solid rgba(255,255,255,.95);
-
-
-box-shadow:
-
-0 30px 80px rgba(185,145,115,.25);
-
-
-}
-
-
-
-.photo-inner img{
-
-
-width:100%;
-
-
-height:100%;
-
-
-object-fit:cover;
-
-
-}
-
-
-
-
-
-.photo-frame:before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-inset:-8px;
-
-
-border-radius:50%;
-
-
-border:
-
-2px solid rgba(239,220,174,.9);
-
-
-}
-
-
-
-
-
-.photo-star{
-
-
-position:absolute;
-
-
-font-size:32px;
-
-
-color:var(--gold);
-
-
-animation:twinkle 2.5s infinite;
-
-
-}
-
-
-.star-one{
-
-top:5%;
-
-right:2%;
-
-}
-
-
-.star-two{
-
-bottom:15%;
-
-left:0;
-
-color:var(--rose);
-
-}
-
-
-.star-three{
-
-top:45%;
-
-right:-8%;
-
-}
-
-
-
-@keyframes twinkle{
-
-
-50%{
-
-opacity:.35;
-
-transform:scale(1.35);
-
-}
-
-}
-
-
-
-
-
-/* QUOTE CARD */
-
-
-.quote-card{
-
-
-width:min(90%,520px);
-
-
-margin:auto;
-
-
-padding:55px 30px;
-
-
-border-radius:35px;
-
-
-background:
-
-linear-gradient(
-145deg,
-rgba(255,255,255,.85),
-rgba(243,220,225,.35)
-);
-
-
-border:
-
-1px solid rgba(201,164,92,.25);
-
-
-box-shadow:var(--shadow);
-
-
-}
-
-
-
-.quote-mark{
-
-
-font-size:55px;
-
-
-color:var(--gold);
-
-
-}
-
-
-
-.quote-text{
-
-
-font-family:
-"Noto Naskh Arabic",
-serif;
-
-
-font-size:25px;
-
-
-line-height:2.2;
-
-
-}
-
-
-
-
-
-/* SCROLL */
-
-
-.scroll-hint{
-
-
-margin-top:55px;
-
-
-display:flex;
-
-
-flex-direction:column;
-
-
-align-items:center;
-
-
-gap:8px;
-
-
-color:var(--muted);
-
-
-font-size:.85rem;
-
-
-}
-
-
-
-.scroll-arrow{
-
-
-width:32px;
-
-
-height:50px;
-
-
-border:
-
-2px solid var(--gold-light);
-
-
-border-radius:20px;
-
-
-display:flex;
-
-
-justify-content:center;
-
-
-padding-top:8px;
-
-
-}
-
-
-
-.scroll-arrow i{
-
-
-display:block;
-
-
-width:8px;
-
-
-height:8px;
-
-
-border-right:
-
-2px solid var(--gold);
-
-
-border-bottom:
-
-2px solid var(--gold);
-
-
-transform:
-
-rotate(45deg);
-
-
-animation:
-
-scrollMove 1.8s infinite;
-
-
-}
-
-
-.scroll-arrow i:nth-child(2){
-
-animation-delay:.3s;
-
-}
-
-
-
-@keyframes scrollMove{
-
-
-50%{
-
-transform:
-translateY(10px)
-rotate(45deg);
-
-opacity:.2;
-
-}
+    }
 
 }
 
@@ -621,41 +217,44 @@ opacity:.2;
 
 
 
-/* GLASS CARD */
+/* IMAGE SIZE */
 
 
-.glass-card{
+.photo-inner {
 
 
-background:
-
-rgba(255,255,255,.55);
+    width:80%;
 
 
-backdrop-filter:
-
-blur(25px);
+    height:80%;
 
 
--webkit-backdrop-filter:
-
-blur(25px);
+    overflow:hidden;
 
 
-border:
-
-1px solid rgba(255,255,255,.8);
+    border-radius:50%;
 
 
-box-shadow:
 
-var(--soft-shadow);
-
-
-border-radius:35px;
+    border:
 
 
-padding:35px;
+    12px solid rgba(255,255,255,.95);
+
+
+
+    box-shadow:
+
+
+    0 0 0 3px rgba(239,220,174,.8),
+
+
+    0 25px 80px rgba(185,145,115,.35);
+
+
+
+    position:relative;
+
 
 
 }
@@ -664,52 +263,29 @@ padding:35px;
 
 
 
-/* COUNTDOWN */
+.photo-inner::before {
 
 
-.countdown{
+    content:"";
 
 
-display:flex;
+    position:absolute;
 
 
-justify-content:center;
+    inset:0;
 
 
-gap:15px;
+    border-radius:50%;
 
 
-flex-wrap:wrap;
+    border:
 
 
-}
-
-
-
-.time-box{
-
-
-width:110px;
-
-
-}
+    2px solid rgba(255,255,255,.8);
 
 
 
-.time-box strong{
-
-
-font-family:
-"Vazirmatn";
-
-
-font-size:40px;
-
-
-color:var(--gold);
-
-
-display:block;
+    pointer-events:none;
 
 
 }
@@ -718,16 +294,58 @@ display:block;
 
 
 
-/* TIMELINE */
 
 
-.timeline-card{
+.photo-inner img {
 
 
-max-width:380px;
+    width:100%;
 
 
-margin:20px auto;
+    height:100%;
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+
+/* OUTER GOLD RING */
+
+
+.photo-frame::before {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:86%;
+
+
+    height:86%;
+
+
+    border-radius:50%;
+
+
+    border:
+
+
+    2px solid rgba(239,220,174,.95);
+
+
+
+    animation:
+
+    ringGlow 3s infinite;
+
 
 
 }
@@ -736,156 +354,50 @@ margin:20px auto;
 
 
 
-/* IOS GLASS BUTTON */
+@keyframes ringGlow {
 
 
-.buttons{
+    0%,
+    100% {
+
+        opacity:.55;
+
+    }
 
 
-display:flex;
+    50% {
 
+        opacity:1;
 
-justify-content:center;
-
-
-flex-wrap:wrap;
-
-
-}
-
-
-
-.glass-button{
-
-
-position:relative;
-
-
-overflow:hidden;
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-gap:10px;
-
-
-min-width:160px;
-
-
-padding:16px 30px;
-
-
-margin:10px;
-
-
-border-radius:30px;
-
-
-border:
-
-1px solid rgba(255,255,255,.8);
-
-
-background:
-
-linear-gradient(
-135deg,
-rgba(255,255,255,.75),
-rgba(255,255,255,.25)
-);
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-box-shadow:
-
-0 15px 35px rgba(180,150,130,.15),
-inset 0 1px 2px white;
-
-
-color:var(--ink);
-
-
-text-decoration:none;
-
-
-font-family:
-
-"Vazirmatn";
-
-
-transition:.3s;
+    }
 
 
 }
 
 
 
-.glass-button:before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-top:0;
-
-
-left:-100%;
-
-
-width:70%;
-
-
-height:100%;
-
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.8),
-transparent
-);
-
-
-transform:skewX(-25deg);
-
-
-transition:.8s;
-
-
-}
 
 
 
-.glass-button:hover:before{
+/* TITLE SIZE FIX */
 
 
-left:130%;
+.hero-title {
 
 
-}
+    font-family:"NooraNastaliq",
+    "Scheherazade New",
+    serif;
 
 
 
-.glass-button:hover{
+    font-size:90px;
 
 
-transform:translateY(-4px);
+    line-height:1.6;
+
+
+    margin-top:10px;
 
 
 }
@@ -894,55 +406,13 @@ transform:translateY(-4px);
 
 
 
-/* RSVP */
+.hero-small-title {
 
 
-.rsvp-form{
+    font-size:34px;
 
 
-display:flex;
-
-
-flex-direction:column;
-
-
-gap:18px;
-
-
-}
-
-
-
-input,
-select,
-textarea{
-
-
-width:100%;
-
-
-padding:15px;
-
-
-border-radius:20px;
-
-
-border:
-
-1px solid rgba(201,164,92,.2);
-
-
-background:
-
-rgba(255,255,255,.65);
-
-
-font-family:
-
-"Vazirmatn";
-
-
-text-align:right;
+    margin-bottom:-5px;
 
 
 }
@@ -951,538 +421,43 @@ text-align:right;
 
 
 
-/* MUSIC */
+
+/* STAR UPDATE */
 
 
-.music-btn{
+.photo-star {
 
 
-position:fixed;
+    filter:
+
+    drop-shadow(0 0 10px rgba(239,220,174,.8));
 
 
-bottom:25px;
+    animation:
 
-
-left:25px;
-
-
-width:60px;
-
-
-height:60px;
-
-
-border-radius:50%;
-
-
-border:none;
-
-
-background:
-
-rgba(255,255,255,.7);
-
-
-backdrop-filter:blur(20px);
-
-
-box-shadow:var(--shadow);
-
-
-z-index:20;
+    starFloat 3s ease-in-out infinite;
 
 
 }
 
 
 
+@keyframes starFloat {
 
 
-/* REVEAL */
+    50% {
 
 
-.reveal{
+        transform:
+
+        translateY(-10px)
+
+        scale(1.25);
 
 
-opacity:0;
+        opacity:.7;
 
-
-transform:translateY(40px);
-
-
-transition:1s;
-
-
-}
-
-
-
-.reveal.show{
-
-
-opacity:1;
-
-
-transform:none;
+    }
 
 
 }
-
-
-
-
-footer{
-
-
-padding:70px;
-
-
-font-family:
-"Scheherazade New";
-
-
-font-size:40px;
-
-
-color:var(--gold);
-
-
-}
-
-
-</style>
-
-</head>
-
-
-
-<body>
-
-
-
-<audio id="music" loop>
-
-<source src="assets/music/birthday.mp3">
-
-</audio>
-
-
-<button class="music-btn" onclick="toggleMusic()">
-
-🎵
-
-</button>
-
-
-
-
-<section class="hero reveal">
-
-<div class="section-inner">
-
-
-<div class="hero-small-title">
-
-به افتخار اولین سال زندگی
-
-</div>
-
-
-<h1 class="hero-title">
-
-نورا جان
-
-</h1>
-
-
-
-<div class="photo-frame">
-
-
-<div class="photo-glow"></div>
-
-
-<div class="photo-inner">
-
-<img src="assets/noora-main.jpg">
-
-</div>
-
-
-<span class="photo-star star-one">✦</span>
-<span class="photo-star star-two">✧</span>
-<span class="photo-star star-three">✦</span>
-
-
-</div>
-
-
-
-<div class="scroll-hint">
-
-<div class="scroll-arrow">
-
-<i></i>
-
-<i></i>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-
-
-<section class="reveal">
-
-
-<div class="quote-card">
-
-
-<span class="quote-mark">
-
-✦
-
-</span>
-
-
-<p class="quote-text">
-
-
-با افتخار از شما دعوت می‌کنیم
-
-<br>
-
-تا در جشن اولین سال تولد
-
-<br>
-
-نورا جان
-
-<br>
-
-در کنار ما باشید.
-
-
-</p>
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2 class="section-title">
-
-جشن تولد یک سالگی
-
-</h2>
-
-
-<div class="glass-card">
-
-
-📅 پنج‌شنبه ۹ مهر
-
-<br><br>
-
-🕕 ساعت ۱۸
-
-<br><br>
-
-🎂 تالار دوریکا
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2 class="section-title">
-
-تا شروع جشن
-
-</h2>
-
-
-<div class="countdown">
-
-
-<div class="glass-card time-box">
-
-<strong id="day">۰۰</strong>
-روز
-
-</div>
-
-
-<div class="glass-card time-box">
-
-<strong id="hour">۰۰</strong>
-ساعت
-
-</div>
-
-
-<div class="glass-card time-box">
-
-<strong id="minute">۰۰</strong>
-دقیقه
-
-</div>
-
-
-<div class="glass-card time-box">
-
-<strong id="second">۰۰</strong>
-ثانیه
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2 class="section-title">
-
-تایید حضور
-
-</h2>
-
-
-
-<div class="glass-card rsvp-form">
-
-
-<input placeholder="نام مهمان">
-
-
-<select>
-
-<option>تعداد نفرات همراه</option>
-
-<option>۱ نفر</option>
-
-<option>۲ نفر</option>
-
-<option>۳ نفر</option>
-
-<option>۴ نفر</option>
-
-</select>
-
-
-<textarea placeholder="پیام شما"></textarea>
-
-
-<button class="glass-button">
-
-✓ ثبت حضور
-
-</button>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2 class="section-title">
-
-مسیریابی
-
-</h2>
-
-
-<div class="buttons">
-
-
-<a class="glass-button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
-
-Google Maps
-
-</a>
-
-
-<a class="glass-button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
-
-نشان
-
-</a>
-
-
-<a class="glass-button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
-
-بلد
-
-</a>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<footer>
-
-به امید دیدار شما
-
-<br>
-
-نورا نیک نفس
-
-</footer>
-
-
-
-
-
-<script>
-
-
-const observer =
-new IntersectionObserver(entries=>{
-
-entries.forEach(e=>{
-
-if(e.isIntersecting)
-
-e.target.classList.add("show");
-
-});
-
-});
-
-
-document.querySelectorAll(".reveal")
-.forEach(x=>observer.observe(x));
-
-
-
-
-const target =
-new Date("2026-10-01T18:00:00");
-
-
-function fa(n){
-
-return String(n)
-.padStart(2,"0")
-.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
-
-}
-
-
-function update(){
-
-
-let d=target-new Date();
-
-
-if(d<0)return;
-
-
-day.innerHTML=fa(Math.floor(d/86400000));
-
-hour.innerHTML=fa(Math.floor(d/3600000)%24);
-
-minute.innerHTML=fa(Math.floor(d/60000)%60);
-
-second.innerHTML=fa(Math.floor(d/1000)%60);
-
-
-}
-
-
-setInterval(update,1000);
-
-update();
-
-
-
-let playing=false;
-
-
-function toggleMusic(){
-
-
-let m=document.getElementById("music");
-
-
-if(!playing){
-
-m.play();
-
-playing=true;
-
-
-}else{
-
-
-m.pause();
-
-playing=false;
-
-
-}
-
-
-}
-
-
-
-</script>
-
-
-</body>
-
-</html>
