@@ -459,3 +459,9 @@ body::before,body::after{z-index:0!important}
 .guest-count-btn{background:linear-gradient(135deg,#d8f0e9 0%,#d8eaf5 28%,#e5e0f5 52%,#f2ddec 76%,#f6e8d5 100%)!important;border-color:#8eb7b0!important}
 .guest-count-btn:hover{background:linear-gradient(135deg,#c8e8df 0%,#c9e0ef 30%,#ded7ef 55%,#edd4e3 78%,#f2dfc9 100%)!important;border-color:#5f928a!important}
 .guest-count-btn.is-selected{background:linear-gradient(135deg,#a8d8cc 0%,#acd4e6 42%,#c8d8ec 70%,#d8d0e8 100%)!important;border-color:#4f8f89!important}
+
+
+/* RSVP popup */
+.rsvp-toast{right:50%!important;top:50%!important;bottom:auto!important;transform:translate(50%,-42%) scale(.94)!important;width:min(88%,560px)!important;padding:20px 24px!important;border-radius:28px!important;background:rgba(255,255,255,.94)!important;color:#5b4c6f!important;border:1px solid rgba(214,173,88,.35)!important;box-shadow:0 20px 60px rgba(110,80,140,.22)!important;backdrop-filter:blur(16px)!important;opacity:0!important}
+.rsvp-toast.show{opacity:1!important;transform:translate(50%,-50%) scale(1)!important}
+@media(max-width:600px){.rsvp-toast{width:min(88%,420px)!important;padding:16px 18px!important;font-size:19px!important}}
