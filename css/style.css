@@ -35,3 +35,60 @@
 @media(max-width:600px){
   .photo-inner{border-width:10px}
 }
+
+/* Final visual polish */
+html,body{max-width:100%;overflow-x:hidden}
+section{min-height:auto;padding:62px 20px}
+.hero{min-height:100svh;padding:18px 20px 24px}
+.hero .section-inner{min-height:calc(100svh - 42px)}
+.hero-small-title{margin-bottom:12px}
+.hero-title{margin-bottom:10px}
+.section-title{
+  -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  background-image:linear-gradient(255deg,var(--gold-deep) 0%,var(--gold-light) 24%,#fff4c7 40%,var(--gold) 58%,var(--gold-deep) 82%);
+  background-size:240% auto;
+  text-shadow:0 0 16px rgba(214,173,88,.16);
+  -webkit-text-stroke:.2px rgba(167,122,46,.35);
+  animation:goldShineRTL 5s linear infinite;
+}
+.hero-title{
+  -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  background-image:linear-gradient(255deg,var(--gold-deep) 0%,var(--gold-light) 24%,#fff4c7 40%,var(--gold) 58%,var(--gold-deep) 82%);
+  background-size:240% auto;
+  animation:goldShineRTL 5s linear infinite;
+}
+@keyframes goldShineRTL{0%{background-position:220% center}100%{background-position:-20% center}}
+.photo-frame{aspect-ratio:1;width:clamp(270px,52vh,400px);margin:22px auto 0}
+.photo-inner{width:100%;height:100%;border-width:10px}
+.photo-inner img{object-fit:cover}
+.section-scroll{height:42px;display:flex;align-items:center;justify-content:center;color:var(--gold-deep);font-family:Arial,sans-serif;font-size:24px;opacity:.7;animation:sectionScroll 1.7s ease-in-out infinite}
+@keyframes sectionScroll{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(7px);opacity:1}}
+.glass-button{font-size:29px;padding:18px 35px}
+.attendance-option{font-size:26px}
+.guest-count-btn{font-size:42px}
+.rsvp-submit{font-size:30px!important}
+.music-enter{font-size:27px}
+.music-enter span{display:none}
+.music-greeting{display:flex;align-items:center;justify-content:center;gap:14px}
+.music-greeting span{font-family:Arial,sans-serif;font-size:24px;color:var(--gold)}
+.envelope-scene.is-opening .invitation-card{transform:translateY(0) scale(1);bottom:7%;animation:invitationFadeIn 1.1s ease forwards}
+@keyframes invitationFadeIn{0%{opacity:.25;filter:blur(8px);transform:scale(.96)}100%{opacity:1;filter:blur(0);transform:scale(1)}}
+@media(max-width:600px){
+  section{padding:46px 14px}
+  .hero{padding:12px 12px 18px}
+  .hero .section-inner{min-height:calc(100svh - 30px)}
+  .hero-small-title{font-size:30px;margin-bottom:16px;line-height:1.7}
+  .hero-title{font-size:72px;margin-bottom:8px}
+  .photo-frame{width:clamp(235px,52vh,330px);margin-top:20px}
+  .section-title{font-size:43px;max-width:calc(100vw - 28px);padding-inline:8px;line-height:1.65;margin-bottom:22px}
+  .glass-button{font-size:27px;padding:17px 18px}
+  .attendance-option{font-size:24px}
+  .guest-count-btn{font-size:38px}
+  .rsvp-submit{font-size:28px!important}
+  .music-enter{font-size:24px;padding:13px 20px}
+  .section-scroll{height:32px;font-size:22px}
+}
