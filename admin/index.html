@@ -48,7 +48,7 @@ button:disabled{opacity:.55;cursor:wait}
 <div class="guest-list" id="guestList"><div class="loading">در حال دریافت فهرست مهمان‌ها…</div></div>
 </section>
 
-<div class="note">لینک هر مهمان با یک شناسه ثابت در Google Sheets ذخیره می‌شود و پاسخ او نیز با همان شناسه ثبت خواهد شد.</div>
+<div class="note">لینک هر مهمان فقط با یک کد کوتاه و یکتا ساخته می‌شود؛ نام و پاسخ مهمان در Google Sheets با همان کد نگهداری می‌شود.</div>
 </main>
 
 <iframe name="guestSaveFrame" id="guestSaveFrame" hidden></iframe>
@@ -92,8 +92,8 @@ createBtn.onclick=()=>{
  const name=nameEl.value.trim();
  if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";showStatus("لطفاً نام مهمان را وارد کنید.",true);return}
  if(!GS_ENDPOINT||GS_ENDPOINT.includes("PASTE_")){showStatus("آدرس Google Apps Script هنوز در تنظیمات وارد نشده است.",true);return}
- const id="G"+crypto.randomUUID().replace(/-/g,"").slice(0,10).toUpperCase();
- const url=base+"?id="+encodeURIComponent(id)+"&guest="+encodeURIComponent(name)+"&max=1";
+ const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");
+ const url=base+"?g="+id;
  document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;
  createBtn.disabled=true;showStatus("در حال ذخیره مهمان در Google Sheets…");saveForm.submit();
  linkEl.textContent=url;result.classList.add("show");
