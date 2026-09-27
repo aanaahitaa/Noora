@@ -74,6 +74,7 @@ button:disabled{opacity:.55;cursor:wait}
 const GS_ENDPOINT=(window.NOORA_CONFIG&&window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL)||"https://script.google.com/macros/s/AKfycbwbAFhiYbNwpqxczEQzeQNbGm1yIYGveTBUvQ-Cu3zfKFKPdS8wcaNI4CdarzSmwolbuA/exec";
 const base=new URL("../",location.href).href;
 const buildGuestUrl=(id,name)=>base+"?g="+encodeURIComponent(id)+"&name="+encodeURIComponent(name);
+const personalizeGuestUrl=(url,name)=>{if(!url||!name)return url||"";try{const u=new URL(url);u.searchParams.set("name",name);return u.href}catch(e){return url}};
 const nameEl=document.getElementById("guestName"),result=document.getElementById("result"),linkEl=document.getElementById("link"),statusEl=document.getElementById("status"),createBtn=document.getElementById("create"),saveForm=document.getElementById("saveForm");
 
 function faNum(n){return String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d])}
@@ -114,7 +115,7 @@ async function findExistingGuest(name){
 function renderLinkList(guests){
  const list=document.getElementById("linkList");
  if(!guests||!guests.length){list.innerHTML='<div class="empty">هنوز لینکی ساخته نشده است.</div>';return}
- list.innerHTML=guests.map(g=>'<div class="guest-row"><div class="guest-main"><div class="guest-name">'+escapeHtml(g.name)+'</div><button type="button" class="copy link-copy" data-url="'+escapeHtml(g.url||g.invitationUrl)+'" style="width:auto;padding:8px 16px;font-size:20px">📋 کپی لینک</button></div><div class="guest-link">'+escapeHtml(g.url||g.invitationUrl)+'</div></div>').join("");
+ list.innerHTML=guests.map(g=>'<div class="guest-row"><div class="guest-main"><div class="guest-name">'+escapeHtml(g.name)+'</div><button type="button" class="copy link-copy" data-url="'+escapeHtml(personalizeGuestUrl(g.url||g.invitationUrl,g.name))+'" style="width:auto;padding:8px 16px;font-size:20px">📋 کپی لینک</button></div><div class="guest-link">'+escapeHtml(g.url||g.invitationUrl)+'</div></div>').join("");
  list.querySelectorAll(".link-copy").forEach(btn=>btn.onclick=async()=>{await navigator.clipboard.writeText(btn.dataset.url);btn.textContent="✓ کپی شد";setTimeout(()=>btn.textContent="📋 کپی لینک",1600)});
 }
 function loadLinks(){
@@ -129,7 +130,7 @@ createBtn.onclick=async()=>{
  createBtn.disabled=true;showStatus("در حال بررسی مهمان‌های قبلی…");
  try{
   const existing=await findExistingGuest(name);
-  if(existing){const existingUrl=existing.url||existing.invitationUrl||"";linkEl.textContent=existingUrl;result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}
+  if(existing){const existingUrl=personalizeGuestUrl(existing.url||existing.invitationUrl||"",existing.name||name);linkEl.textContent=existingUrl;result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}
   const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");
   const url=buildGuestUrl(id,name);
   document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;
