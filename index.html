@@ -8,7 +8,11 @@
 
 <title>جشن تولد نورا نیک نفس</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Nastaliq+Arabic&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Nastaliq+Arabic:wght@400;700&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
 
 
 <style>
@@ -18,75 +22,88 @@
 --pearl:#fffaf7;
 --milk:#fffdfb;
 
---blush:#f3dce0;
---rose:#dcaeb7;
+--pink:#f4d7df;
+--pink-soft:#fdecef;
+
+--blue:#e5f1f8;
+--blue-soft:#f2f8fc;
 
 --gold:#c9a45c;
 --gold-light:#efdcae;
---gold-bright:#e7c978;
+--gold-shine:#f7dfa0;
 
---blue:#e6f0f7;
-
---ink:#66565a;
+--text:#66565a;
 
 --shadow:
-0 25px 70px rgba(185,145,115,.18);
-
---soft-shadow:
-0 10px 35px rgba(185,145,115,.12);
+0 25px 80px rgba(190,150,120,.18);
 
 }
 
 
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
+
 }
 
 
 html{
+
 scroll-behavior:smooth;
+
 }
+
 
 
 body{
 
+
 background:
 
 radial-gradient(
-circle at top,
-rgba(255,255,255,1),
-rgba(255,250,247,.95)
+circle at 20% 10%,
+rgba(244,215,223,.35),
+transparent 30%
+),
+
+radial-gradient(
+circle at 80% 30%,
+rgba(229,241,248,.45),
+transparent 35%
 ),
 
 linear-gradient(
 180deg,
 #fffdfb,
-#fff6f3
+#fff7f4
 );
 
-color:var(--ink);
 
 font-family:
 "Noto Naskh Arabic",
 serif;
 
+
+color:var(--text);
+
 text-align:center;
 
-overflow-x:hidden;
-
 }
+
+
 
 
 
 section{
 
-min-height:70vh;
+min-height:60vh;
 
 padding:80px 20px;
 
 }
+
 
 
 
@@ -102,6 +119,7 @@ margin:auto;
 
 
 /* HERO */
+
 
 .hero{
 
@@ -119,181 +137,40 @@ justify-content:center;
 
 .hero-small-title{
 
-font-size:22px;
+
+font-family:
+"Noto Nastaliq Arabic",
+serif;
+
+
+font-size:28px;
 
 color:var(--gold);
 
-margin-bottom:45px;
+line-height:2;
+
+margin-bottom:0;
+
 
 }
-
-
-
-.photo-frame{
-
-position:relative;
-
-width:clamp(250px,65vw,350px);
-
-aspect-ratio:.85;
-
-display:grid;
-
-place-items:center;
-
-margin:auto;
-
-}
-
-
-
-.photo-glow{
-
-position:absolute;
-
-inset:-45px;
-
-
-background:
-
-radial-gradient(
-circle,
-rgba(239,220,174,.65),
-transparent 65%
-);
-
-
-filter:blur(35px);
-
-}
-
-
-
-.photo-inner{
-
-width:90%;
-
-height:90%;
-
-overflow:hidden;
-
-border-radius:50%;
-
-border:
-
-8px solid white;
-
-box-shadow:var(--shadow);
-
-}
-
-
-
-.photo-inner img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-}
-
-
-
-.photo-frame:before{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-border-radius:50%;
-
-border:
-
-2px solid var(--gold-light);
-
-}
-
-
-
-.photo-star{
-
-position:absolute;
-
-color:var(--gold);
-
-font-size:32px;
-
-animation:twinkle 2.5s infinite;
-
-}
-
-
-
-.star-one{
-
-top:10%;
-
-right:5%;
-
-}
-
-
-
-.star-two{
-
-bottom:15%;
-
-left:3%;
-
-color:#dcaeb7;
-
-}
-
-
-
-.star-three{
-
-right:-5%;
-
-top:45%;
-
-}
-
-
-
-@keyframes twinkle{
-
-50%{
-
-opacity:.35;
-
-transform:scale(1.4);
-
-}
-
-}
-
 
 
 
 .hero-title{
 
-font-family:
 
+font-family:
 "Noto Nastaliq Arabic",
 serif;
 
-font-size:85px;
 
-font-weight:400;
+font-size:90px;
+
 
 line-height:1.8;
 
-margin-top:35px;
+
+margin-top:0;
 
 
 background:
@@ -301,15 +178,250 @@ background:
 linear-gradient(
 120deg,
 #b88942,
-#f5dfa0,
+#f8df9c,
 #b88942
 );
+
 
 -webkit-background-clip:text;
 
 color:transparent;
 
+
 }
+
+
+
+
+/* PHOTO */
+
+
+.photo-frame{
+
+
+position:relative;
+
+
+width:clamp(280px,70vw,390px);
+
+
+aspect-ratio:.85;
+
+
+margin:25px auto;
+
+
+display:grid;
+
+place-items:center;
+
+
+}
+
+
+
+.photo-glow{
+
+
+position:absolute;
+
+
+inset:-70px;
+
+
+background:
+
+
+radial-gradient(
+
+circle,
+
+rgba(239,220,174,.7),
+
+rgba(244,215,223,.25),
+
+transparent 70%
+
+);
+
+
+filter:blur(35px);
+
+
+animation:
+
+glow 5s infinite alternate;
+
+
+}
+
+
+
+@keyframes glow{
+
+
+from{
+
+transform:scale(.9);
+
+opacity:.7;
+
+}
+
+
+to{
+
+transform:scale(1.1);
+
+opacity:1;
+
+}
+
+}
+
+
+
+
+
+.photo-inner{
+
+
+width:94%;
+
+
+height:94%;
+
+
+border-radius:50%;
+
+
+overflow:hidden;
+
+
+border:
+
+10px solid rgba(255,255,255,.95);
+
+
+box-shadow:
+
+0 30px 90px rgba(185,145,115,.25);
+
+
+z-index:2;
+
+
+}
+
+
+
+.photo-inner img{
+
+
+width:100%;
+
+height:100%;
+
+
+object-fit:cover;
+
+
+}
+
+
+
+
+.photo-frame:before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:0;
+
+
+border-radius:50%;
+
+
+border:
+
+3px solid var(--gold-light);
+
+
+z-index:3;
+
+
+}
+
+
+
+
+.photo-star{
+
+
+position:absolute;
+
+z-index:4;
+
+font-size:35px;
+
+color:var(--gold);
+
+animation:star 2.5s infinite;
+
+
+}
+
+
+
+.star-one{
+
+top:5%;
+
+right:5%;
+
+}
+
+
+.star-two{
+
+bottom:12%;
+
+left:5%;
+
+color:#df9fb1;
+
+}
+
+
+.star-three{
+
+right:-8%;
+
+top:45%;
+
+}
+
+
+
+
+@keyframes star{
+
+
+50%{
+
+opacity:.4;
+
+transform:scale(1.3);
+
+}
+
+}
+
+
 
 
 
@@ -318,9 +430,249 @@ color:transparent;
 
 font-size:22px;
 
+margin-top:20px;
+
+}
+
+
+
+
+/* GLASS */
+
+
+.glass{
+
+
+background:
+
+rgba(255,255,255,.65);
+
+
+backdrop-filter:
+
+blur(20px);
+
+
+border:
+
+1px solid rgba(255,255,255,.9);
+
+
+box-shadow:
+
+var(--shadow);
+
+
+border-radius:35px;
+
+
+padding:35px;
+
+
+}
+
+
+
+
+
+/* TITLES */
+
+
+.section-title{
+
+
+font-family:
+
+"Noto Nastaliq Arabic",
+serif;
+
+
+font-size:48px;
+
+
+color:var(--gold);
+
+
+}
+
+
+
+
+
+/* QUOTE */
+
+
+.quote{
+
+font-size:27px;
+
 line-height:2;
 
 }
+
+
+
+
+
+/* COUNTDOWN */
+
+
+.countdown{
+
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+
+}
+
+
+
+.time-box{
+
+
+width:115px;
+
+
+}
+
+
+
+.time-box strong{
+
+
+display:block;
+
+
+font-family:
+
+"Vazirmatn";
+
+
+font-size:40px;
+
+
+color:var(--gold);
+
+
+}
+
+
+
+
+
+/* TIMELINE */
+
+
+.timeline{
+
+
+max-width:350px;
+
+margin:20px auto;
+
+font-size:22px;
+
+
+}
+
+
+
+
+
+/* BUTTON */
+
+
+.button{
+
+
+display:inline-flex;
+
+
+margin:8px;
+
+
+padding:15px 30px;
+
+
+border-radius:50px;
+
+
+background:
+
+linear-gradient(
+135deg,
+white,
+#f4dfb0
+);
+
+
+color:var(--text);
+
+
+text-decoration:none;
+
+
+border:1px solid white;
+
+
+}
+
+
+
+
+
+/* RSVP */
+
+
+.rsvp-form{
+
+
+display:flex;
+
+
+flex-direction:column;
+
+
+gap:18px;
+
+
+}
+
+
+
+input,
+textarea,
+select{
+
+
+padding:15px;
+
+
+border-radius:20px;
+
+
+border:
+
+1px solid #ead9cf;
+
+
+font-family:inherit;
+
+
+font-size:17px;
+
+
+text-align:center;
+
+
+}
+
 
 
 
@@ -330,7 +682,9 @@ line-height:2;
 
 .scroll-down{
 
-margin-top:50px;
+
+margin-top:40px;
+
 
 }
 
@@ -338,35 +692,36 @@ margin-top:50px;
 
 .scroll-circle{
 
+
 width:50px;
 
 height:50px;
 
+
 border-radius:50%;
 
-border:
 
-1px solid var(--gold);
+border:1px solid var(--gold);
+
 
 display:flex;
 
+align-items:center;
+
 justify-content:center;
 
-align-items:center;
 
 margin:auto;
 
-color:var(--gold);
 
-animation:
+animation:bounce 2s infinite;
 
-bounce 2s infinite;
 
 }
 
 
-
 @keyframes bounce{
+
 
 50%{
 
@@ -379,257 +734,8 @@ transform:translateY(10px);
 
 
 
-
-/* GLASS */
-
-
-.glass{
-
-background:
-
-rgba(255,255,255,.55);
-
-backdrop-filter:
-
-blur(18px);
-
-border:
-
-1px solid rgba(255,255,255,.8);
-
-box-shadow:var(--soft-shadow);
-
-border-radius:35px;
-
-padding:35px;
-
-}
-
-
-
-/* QUOTE */
-
-
-.quote-mark{
-
-font-size:60px;
-
-color:var(--gold);
-
-}
-
-
-
-.quote-text{
-
-font-size:26px;
-
-line-height:2;
-
-}
-
-
-
-
-/* TITLES */
-
-
-.section-title{
-
-font-family:
-
-"Noto Nastaliq Arabic",
-serif;
-
-font-size:45px;
-
-font-weight:400;
-
-margin-bottom:35px;
-
-background:
-
-linear-gradient(
-120deg,
-#b88942,
-#f5dfa0,
-#b88942
-);
-
--webkit-background-clip:text;
-
-color:transparent;
-
-}
-
-
-
-
-/* EVENT */
-
-
-.event-grid{
-
-display:flex;
-
-justify-content:center;
-
-gap:35px;
-
-flex-wrap:wrap;
-
-}
-
-
-
-.event-item{
-
-font-size:22px;
-
-}
-
-
-
-.event-icon{
-
-font-size:40px;
-
-}
-
-
-
-/* COUNTDOWN */
-
-
-.countdown{
-
-display:flex;
-
-justify-content:center;
-
-gap:15px;
-
-flex-wrap:wrap;
-
-}
-
-
-
-.time-box{
-
-width:110px;
-
-}
-
-
-
-.time-box strong{
-
-display:block;
-
-font-family:
-
-"Vazirmatn";
-
-font-size:40px;
-
-color:var(--gold);
-
-}
-
-
-
-
-
-/* TIMELINE */
-
-
-.timeline-card{
-
-max-width:350px;
-
-margin:20px auto;
-
-font-size:22px;
-
-}
-
-
-
-
-
-/* BUTTONS */
-
-
-.buttons{
-
-display:flex;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-}
-
-
-
-.button{
-
-display:inline-flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:10px;
-
-padding:15px 30px;
-
-margin:8px;
-
-border-radius:50px;
-
-text-decoration:none;
-
-color:var(--ink);
-
-background:
-
-linear-gradient(
-135deg,
-white,
-#f3dfb0
-);
-
-box-shadow:var(--soft-shadow);
-
-border:
-
-1px solid white;
-
-}
-
-
-
-
-/* RSVP */
-
-
-.rsvp button{
-
-cursor:pointer;
-
-border:none;
-
-}
-
-
-
-
-/* MUSIC */
-
-
 .music{
+
 
 position:fixed;
 
@@ -637,17 +743,23 @@ bottom:25px;
 
 left:25px;
 
+
 width:55px;
 
 height:55px;
 
+
 border-radius:50%;
+
 
 border:none;
 
+
 background:white;
 
+
 box-shadow:var(--shadow);
+
 
 z-index:10;
 
@@ -656,31 +768,31 @@ z-index:10;
 
 
 
-/* FOOTER */
-
 
 footer{
 
-padding:70px 20px;
 
 font-family:
 
 "Noto Nastaliq Arabic";
 
-font-size:35px;
+
+font-size:38px;
+
 
 color:var(--gold);
+
+
+padding:70px;
+
 
 }
 
 
 
 
-
-/* REVEAL */
-
-
 .reveal{
+
 
 opacity:0;
 
@@ -688,33 +800,23 @@ transform:translateY(40px);
 
 transition:1s;
 
+
 }
 
 
 
 .reveal.show{
 
+
 opacity:1;
 
 transform:none;
 
-}
-
-
-
-
-@media(max-width:600px){
-
-.hero-title{
-
-font-size:65px;
 
 }
 
-}
 
 </style>
-
 
 </head>
 
@@ -722,20 +824,18 @@ font-size:65px;
 <body>
 
 
-
-<audio id="music" loop>
+<audio id="music" autoplay loop muted>
 
 <source src="assets/music/birthday.mp3">
 
 </audio>
 
 
-<button class="music" onclick="musicToggle()">
+<button class="music" onclick="toggleMusic()">
 
 🎵
 
 </button>
-
 
 
 
@@ -749,6 +849,10 @@ font-size:65px;
 
 به افتخار اولین سال زندگی
 
+<br>
+
+نورا جان
+
 </p>
 
 
@@ -761,7 +865,7 @@ font-size:65px;
 
 <div class="photo-inner">
 
-<img src="assets/noora-main.jpg" alt="نورا نیک نفس">
+<img src="assets/noora-main.jpg">
 
 </div>
 
@@ -814,21 +918,14 @@ font-size:65px;
 
 
 
-
 <section class="reveal">
 
 
-<div class="glass">
-
-
-<span class="quote-mark">
+<div class="glass quote">
 
 ❝
 
-</span>
-
-
-<p class="quote-text">
+<br>
 
 حضور شما،
 
@@ -836,22 +933,14 @@ font-size:65px;
 
 قشنگ‌ترین قسمت این جشن است.
 
-</p>
-
-
-<span class="quote-mark">
+<br>
 
 ❞
-
-</span>
-
 
 </div>
 
 
 </section>
-
-
 
 
 
@@ -868,34 +957,18 @@ font-size:65px;
 </h2>
 
 
-<div class="glass event-grid">
+<div class="glass">
 
 
-<div class="event-item">
+🎂 تولد نورا
 
-<div class="event-icon">🎂</div>
+<br><br>
 
-تولد نورا
+📅 پنج‌شنبه ۹ مهر
 
-</div>
+<br><br>
 
-
-<div class="event-item">
-
-<div class="event-icon">📅</div>
-
-۹ مهر
-
-</div>
-
-
-<div class="event-item">
-
-<div class="event-icon">🕕</div>
-
-۱۸:۰۰
-
-</div>
+🕕 ساعت ۱۸
 
 
 </div>
@@ -908,14 +981,12 @@ font-size:65px;
 
 
 
-
-
 <section class="reveal">
 
 
 <h2 class="section-title">
 
-تا شروع جشن
+شمارش معکوس
 
 </h2>
 
@@ -969,8 +1040,6 @@ font-size:65px;
 
 
 
-
-
 <section class="reveal">
 
 
@@ -981,18 +1050,18 @@ font-size:65px;
 </h2>
 
 
-<div class="glass timeline-card">
+<div class="glass timeline">
 
 ۱۸:۰۰
 
 <br>
 
-پذیرایی و شروع جشن
+پذیرایی
 
 </div>
 
 
-<div class="glass timeline-card">
+<div class="glass timeline">
 
 ۲۰:۰۰
 
@@ -1010,26 +1079,14 @@ font-size:65px;
 
 
 
-
-
 <section class="reveal">
 
 
 <h2 class="section-title">
 
-تالار دوریکا
+مسیریابی
 
 </h2>
-
-
-<p>
-
-نشتارود
-
-</p>
-
-
-<div class="buttons">
 
 
 <a class="button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
@@ -1053,9 +1110,6 @@ Google Maps
 </a>
 
 
-</div>
-
-
 </section>
 
 
@@ -1064,8 +1118,7 @@ Google Maps
 
 
 
-
-<section class="reveal rsvp">
+<section class="reveal">
 
 
 <h2 class="section-title">
@@ -1075,21 +1128,77 @@ Google Maps
 </h2>
 
 
+
 <div class="glass">
 
 
-<button class="button">
-
-✓ بله، می‌آیم
-
-</button>
+<form class="rsvp-form">
 
 
-<button class="button">
+<input placeholder="نام شما">
+
+
+<select>
+
+<option>
+
+تعداد نفرات همراه
+
+</option>
+
+
+<option>۱ نفر</option>
+
+<option>۲ نفر</option>
+
+<option>۳ نفر</option>
+
+<option>۴ نفر</option>
+
+
+</select>
+
+
+
+<select>
+
+<option>
+
+وضعیت حضور
+
+</option>
+
+
+<option>
+
+با افتخار می‌آیم
+
+</option>
+
+
+<option>
 
 متأسفانه نمی‌توانم بیایم
 
+</option>
+
+
+</select>
+
+
+
+<textarea placeholder="پیام شما"></textarea>
+
+
+
+<button class="button">
+
+ثبت پاسخ
+
 </button>
+
+
+</form>
 
 
 </div>
@@ -1117,21 +1226,16 @@ Google Maps
 
 
 
-
 <script>
 
 
-const observer=
-
-new IntersectionObserver(entries=>{
-
+const observer=new IntersectionObserver(entries=>{
 
 entries.forEach(e=>{
 
 if(e.isIntersecting)
 
 e.target.classList.add("show");
-
 
 });
 
@@ -1146,9 +1250,31 @@ document.querySelectorAll(".reveal")
 
 
 
-const target=
+let musicPlaying=false;
 
-new Date("2026-10-01T18:00:00");
+
+function toggleMusic(){
+
+
+let audio=document.getElementById("music");
+
+
+audio.muted=false;
+
+
+audio.play();
+
+
+musicPlaying=true;
+
+
+}
+
+
+
+
+
+const target=new Date("2026-10-01T18:00:00");
 
 
 
@@ -1162,70 +1288,48 @@ return String(n)
 
 
 
-function countdown(){
+function update(){
 
 
-let diff=target-new Date();
+let d=target-new Date();
 
 
-if(diff<0)return;
+if(d<0)return;
 
 
+day.innerHTML=fa(Math.floor(d/86400000));
 
-day.innerHTML=
-fa(Math.floor(diff/86400000));
+hour.innerHTML=fa(Math.floor(d/3600000)%24);
 
+minute.innerHTML=fa(Math.floor(d/60000)%60);
 
-hour.innerHTML=
-fa(Math.floor(diff/3600000)%24);
-
-
-minute.innerHTML=
-fa(Math.floor(diff/60000)%60);
-
-
-second.innerHTML=
-fa(Math.floor(diff/1000)%60);
+second.innerHTML=fa(Math.floor(d/1000)%60);
 
 
 }
 
 
 
-setInterval(countdown,1000);
+setInterval(update,1000);
 
-countdown();
-
-
+update();
 
 
 
-let playing=false;
 
+window.addEventListener("load",()=>{
 
-function musicToggle(){
 
 let audio=document.getElementById("music");
 
 
-if(!playing){
-
-audio.play();
-
-playing=true;
-
-}
-
-else{
-
-audio.pause();
-
-playing=false;
-
-}
+audio.muted=true;
 
 
-}
+audio.play().catch(()=>{});
+
+
+});
 
 
 </script>
