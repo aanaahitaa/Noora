@@ -555,14 +555,27 @@ function saveRsvp_(p) {
   );
 
   if (!guest) {
-    return json_({
-      ok: false,
-      error: "guest_not_found"
-    });
+    var recoveredName = String(p.guestName || "").trim() || "مهمان ناشناس";
+    var recoveredUrl = String(p.invitationUrl || "").trim();
+
+    guests.appendRow([
+      new Date(),
+      guestId,
+      recoveredName,
+      7,
+      recoveredUrl,
+      "بدون پاسخ",
+      "",
+      "",
+      "تقدیم به " + recoveredName + " عزیز",
+      "دعوت‌نامه جشن یک‌سالگی نورا جان"
+    ]);
+
+    guest = findGuest_(guests, guestId);
   }
 
   var invitedName =
-    String(guest.values[2] || "");
+    String(guest.values[2] || String(p.guestName || "").trim() || "مهمان ناشناس");
 
   var count =
     attendance === "می‌آید"
