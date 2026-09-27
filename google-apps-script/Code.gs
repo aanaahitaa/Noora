@@ -40,6 +40,7 @@ function doGet(e) {
   var p = e && e.parameter ? e.parameter : {};
   try {
     if (p.action === "list_guests") return listGuests_(p.callback);
+    if (p.action === "get_guest") return getGuest_(p.callback, p.guestId);
     return json_({ok:true, service:"Noora guest service"});
   } catch (err) {
     return jsonp_({ok:false,error:String(err.message || err)}, p.callback);
@@ -79,6 +80,20 @@ function createGuest_(p) {
   } finally {
     lock.releaseLock();
   }
+}
+
+function getGuest_(callback, guestId) {
+  var sheet = getOrCreateSheet_(GUESTS_SHEET, GUEST_HEADERS);
+  var guest = findGuest_(sheet, String(guestId || "").trim());
+  if (!guest) return jsonp_({ok:false,error:"guest_not_found"}, callback);
+  return jsonp_({
+    ok:true,
+    guest:{
+      guestId:String(guest.values[1] || ""),
+      name:String(guest.values[2] || ""),
+      maxGuests:Number(guest.values[3] || 1)
+    }
+  }, callback);
 }
 
 function listGuests_(callback) {
