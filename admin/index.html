@@ -92,7 +92,81 @@ const GS_ENDPOINT=(window.NOORA_CONFIG&&window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_U
 const PREVIEW_BASE_URL=(window.NOORA_CONFIG&&window.NOORA_CONFIG.GUEST_PREVIEW_BASE_URL)||"";const buildGuestUrl=id=>(PREVIEW_BASE_URL||base)+"?g="+encodeURIComponent(id);function faNum(n){return String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d])}function showStatus(message,error=false){statusEl.textContent=message;statusEl.className="status show"+(error?" error":"")}function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
 function renderGuestList(data){const list=document.getElementById("guestList");document.getElementById("totalGuests").textContent=faNum(data.count||0);const guests=data.guests||[];document.getElementById("answeredGuests").textContent=faNum(guests.filter(g=>g.attendance&&g.attendance!=="بدون پاسخ").length);document.getElementById("attendingGuests").textContent=faNum(guests.filter(g=>g.attendance==="می‌آید").length);if(!guests.length){list.innerHTML='<div class="empty">هنوز مهمانی ثبت نشده است.</div>';return}list.innerHTML=guests.map((g,i)=>{const cls=g.attendance==="می‌آید"?"yes":g.attendance==="نمی‌آید"?"no":"";const msg=String(g.message||"");return '<div class="guest-row"><div class="guest-main"><div class="guest-name">'+escapeHtml(g.name)+'</div><button type="button" class="copy link-copy" data-url="'+escapeHtml(g.invitationUrl||"")+'">📋 کپی لینک</button><div class="guest-status '+cls+'">'+escapeHtml(g.attendance||"بدون پاسخ")+'</div></div><div class="guest-meta">تعداد نفرات ثبت‌شده: '+(g.guestCount==null?"—":faNum(g.guestCount))+'</div>'+(msg?'<button type="button" class="message-btn" data-msg="'+escapeHtml(msg)+'">نمایش پیام</button><div class="message-box">'+escapeHtml(msg)+'</div>':'<div class="guest-meta">پیامی ثبت نشده است.</div>')+'</div></div>'}).join("");list.querySelectorAll(".message-btn").forEach(btn=>btn.onclick=()=>{const box=btn.nextElementSibling;const open=box.classList.toggle("show");btn.textContent=open?"بستن پیام":"نمایش پیام"});list.querySelectorAll(".link-copy").forEach(btn=>btn.onclick=async()=>{await navigator.clipboard.writeText(btn.dataset.url);btn.textContent="✓ کپی شد";setTimeout(()=>btn.textContent="📋 کپی لینک",1600)})}
 function renderLinkList(links){const list=document.getElementById("linkList");if(!links.length){list.innerHTML='<div class="empty">هنوز لینکی ساخته نشده است.</div>';return}list.innerHTML=links.map(g=>'<div class="guest-row"><div class="guest-main"><div class="guest-name">'+escapeHtml(g.name)+'</div><button type="button" class="copy link-copy" data-url="'+escapeHtml(g.url||g.invitationUrl||"")+'" style="width:auto;padding:8px 16px;font-size:20px">📋 کپی لینک</button></div><div class="guest-link">'+escapeHtml(g.url||g.invitationUrl||"")+'</div></div>').join("");list.querySelectorAll(".link-copy").forEach(btn=>btn.onclick=async()=>{await navigator.clipboard.writeText(btn.dataset.url);btn.textContent="✓ کپی شد";setTimeout(()=>btn.textContent="📋 کپی لینک",1600)})}
-function jsonpRequest(action,params={},timeoutMs=7000){return new Promise((resolve,reject)=>{const callback="nooraApi_"+action+"_"+Date.now()+"_"+Math.random().toString(36).slice(2);let settled=false;let timer;const cleanup=()=>{clearTimeout(timer);delete window[callback];const old=document.getElementById(callback);if(old)old.remove()};const finish=(fn,value)=>{if(settled)return;settled=true;cleanup();fn(value)};window[callback]=data=>{if(data&&data.ok)finish(resolve,data);else finish(reject,new Error((data&&data.error)||"api_error"))};const script=document.createElement("script");script.id=callback;script.async=true;const query=new URLSearchParams({action,callback,...params,t:String(Date.now())});script.src=GS_ENDPOINT+"?"+query.toString();script.onerror=()=>finish(reject,new Error("network"));document.body.appendChild(script);timer=setTimeout(()=>finish(reject,new Error("timeout")),timeoutMs)})}
+function jsonpRequest(action,params={},timeoutMs=10000){
+  return new Promise((resolve,reject)=>{
+    const callback="nooraApi_"+action+"_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+    let settled=false;
+    let timer=null;
+
+    const cleanup=()=>{
+      if(timer)clearTimeout(timer);
+      try{delete window[callback]}catch(e){}
+      const old=document.getElementById(callback);
+      if(old)old.remove();
+    };
+
+    const finish=(ok,value)=>{
+      if(settled)return;
+      settled=true;
+      cleanup();
+      ok?resolve(value):reject(value);
+    };
+
+    window[callback]=data=>{
+      if(data&&data.ok){
+        finish(true,data);
+      }else{
+        finish(false,new Error((data&&data.error)||"api_error"));
+      }
+    };
+
+    const query=new URLSearchParams();
+    query.set("action",action);
+    query.set("callback",callback);
+    Object.keys(params||{}).forEach(key=>{
+      if(params[key]!==undefined&&params[key]!==null)
+        query.set(key,String(params[key]));
+    });
+    query.set("t",String(Date.now()));
+
+    const script=document.createElement("script");
+    script.id=callback;
+    script.async=true;
+    script.src=GS_ENDPOINT+"?"+query.toString();
+
+    script.onload=()=>{
+      setTimeout(()=>{
+        if(!settled)finish(false,new Error("callback_not_received"));
+      },250);
+    };
+
+    script.onerror=()=>{
+      finish(false,new Error("script_load_error"));
+    };
+
+    document.body.appendChild(script);
+
+    timer=setTimeout(()=>{
+      finish(false,new Error("request_timeout"));
+    },timeoutMs);
+  });
+}
+
+function loadGuests(){
+  const list=document.getElementById("guestList");
+  list.innerHTML='<div class="loading">در حال دریافت فهرست مهمان‌ها…</div>';
+
+  jsonpRequest("list_guests")
+    .then(data=>{
+      renderGuestList(data);
+    })
+    .catch(error=>{
+      console.error("Noora list_guests error:",error);
+      const reason=error&&error.message?error.message:"unknown_error";
+      list.innerHTML='<div class="empty">دریافت فهرست مهمان‌ها انجام نشد.<br><small style="direction:ltr;display:inline-block;margin-top:6px;opacity:.7">'+escapeHtml(reason)+'</small></div>';
+    });
+}
+
 function loadGuests(){const list=document.getElementById("guestList");jsonpRequest("list_guests").then(data=>renderGuestList(data)).catch(()=>{list.innerHTML='<div class="empty">ارتباط با Google Sheets برقرار نشد. لطفاً دوباره تلاش کنید.</div>'})}
 function loadLinks(){const list=document.getElementById("linkList"),callback="nooraLinks_"+Date.now();window[callback]=(data)=>{try{if(!data||!data.ok)throw new Error("load_failed");renderLinkList(data.links||[])}catch(e){list.innerHTML='<div class="empty">دریافت لینک‌ها انجام نشد.</div>'}delete window[callback];const old=document.getElementById(callback);if(old)old.remove()};const script=document.createElement("script");script.id=callback;script.src=GS_ENDPOINT+"?action=list_links&callback="+callback+"&t="+Date.now();script.onerror=()=>{list.innerHTML='<div class="empty">ارتباط با Google Sheets برقرار نشد.</div>';delete window[callback];script.remove()};document.body.appendChild(script)}
 function findExistingGuest(name){return jsonpRequest("find_guest",{name}).then(data=>data.guest||null).catch(e=>{if(e&&e.message==="guest_not_found")return null;throw e})}
