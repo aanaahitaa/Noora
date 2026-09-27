@@ -1,14 +1,760 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>جشن تولد نورا نیک نفس</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Nastaliq+Arabic&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<style>
+
+:root{
+
+--pearl:#fffaf7;
+--milk:#fffdfb;
+
+--blush:#f3dce0;
+--rose:#dcaeb7;
+
+--gold:#c9a45c;
+--gold-light:#efdcae;
+--gold-bright:#e7c978;
+
+--blue:#e6f0f7;
+
+--ink:#66565a;
+
+--shadow:
+0 25px 70px rgba(185,145,115,.18);
+
+--soft-shadow:
+0 10px 35px rgba(185,145,115,.12);
+
+}
+
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+
+html{
+scroll-behavior:smooth;
+}
+
+
+body{
+
+background:
+
+radial-gradient(
+circle at top,
+rgba(255,255,255,1),
+rgba(255,250,247,.95)
+),
+
+linear-gradient(
+180deg,
+#fffdfb,
+#fff6f3
+);
+
+color:var(--ink);
+
+font-family:
+"Noto Naskh Arabic",
+serif;
+
+text-align:center;
+
+overflow-x:hidden;
+
+}
+
+
+
+section{
+
+min-height:70vh;
+
+padding:80px 20px;
+
+}
+
+
+
+.section-inner{
+
+max-width:850px;
+
+margin:auto;
+
+}
+
+
+
+
+/* HERO */
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+.hero-small-title{
+
+font-size:22px;
+
+color:var(--gold);
+
+margin-bottom:45px;
+
+}
+
+
+
+.photo-frame{
+
+position:relative;
+
+width:clamp(250px,65vw,350px);
+
+aspect-ratio:.85;
+
+display:grid;
+
+place-items:center;
+
+margin:auto;
+
+}
+
+
+
+.photo-glow{
+
+position:absolute;
+
+inset:-45px;
+
+
+background:
+
+radial-gradient(
+circle,
+rgba(239,220,174,.65),
+transparent 65%
+);
+
+
+filter:blur(35px);
+
+}
+
+
+
+.photo-inner{
+
+width:90%;
+
+height:90%;
+
+overflow:hidden;
+
+border-radius:50%;
+
+border:
+
+8px solid white;
+
+box-shadow:var(--shadow);
+
+}
+
+
+
+.photo-inner img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+
+
+.photo-frame:before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+border-radius:50%;
+
+border:
+
+2px solid var(--gold-light);
+
+}
+
+
+
+.photo-star{
+
+position:absolute;
+
+color:var(--gold);
+
+font-size:32px;
+
+animation:twinkle 2.5s infinite;
+
+}
+
+
+
+.star-one{
+
+top:10%;
+
+right:5%;
+
+}
+
+
+
+.star-two{
+
+bottom:15%;
+
+left:3%;
+
+color:#dcaeb7;
+
+}
+
+
+
+.star-three{
+
+right:-5%;
+
+top:45%;
+
+}
+
+
+
+@keyframes twinkle{
+
+50%{
+
+opacity:.35;
+
+transform:scale(1.4);
+
+}
+
+}
+
+
+
+
+.hero-title{
+
+font-family:
+
+"Noto Nastaliq Arabic",
+serif;
+
+font-size:85px;
+
+font-weight:400;
+
+line-height:1.8;
+
+margin-top:35px;
+
+
+background:
+
+linear-gradient(
+120deg,
+#b88942,
+#f5dfa0,
+#b88942
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+
+
+
+.hero-text{
+
+font-size:22px;
+
+line-height:2;
+
+}
+
+
+
+
+/* SCROLL */
+
+
+.scroll-down{
+
+margin-top:50px;
+
+}
+
+
+
+.scroll-circle{
+
+width:50px;
+
+height:50px;
+
+border-radius:50%;
+
+border:
+
+1px solid var(--gold);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+margin:auto;
+
+color:var(--gold);
+
+animation:
+
+bounce 2s infinite;
+
+}
+
+
+
+@keyframes bounce{
+
+50%{
+
+transform:translateY(10px);
+
+}
+
+}
+
+
+
+
+
+/* GLASS */
+
+
+.glass{
+
+background:
+
+rgba(255,255,255,.55);
+
+backdrop-filter:
+
+blur(18px);
+
+border:
+
+1px solid rgba(255,255,255,.8);
+
+box-shadow:var(--soft-shadow);
+
+border-radius:35px;
+
+padding:35px;
+
+}
+
+
+
+/* QUOTE */
+
+
+.quote-mark{
+
+font-size:60px;
+
+color:var(--gold);
+
+}
+
+
+
+.quote-text{
+
+font-size:26px;
+
+line-height:2;
+
+}
+
+
+
+
+/* TITLES */
+
+
+.section-title{
+
+font-family:
+
+"Noto Nastaliq Arabic",
+serif;
+
+font-size:45px;
+
+font-weight:400;
+
+margin-bottom:35px;
+
+background:
+
+linear-gradient(
+120deg,
+#b88942,
+#f5dfa0,
+#b88942
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+
+
+
+/* EVENT */
+
+
+.event-grid{
+
+display:flex;
+
+justify-content:center;
+
+gap:35px;
+
+flex-wrap:wrap;
+
+}
+
+
+
+.event-item{
+
+font-size:22px;
+
+}
+
+
+
+.event-icon{
+
+font-size:40px;
+
+}
+
+
+
+/* COUNTDOWN */
+
+
+.countdown{
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+
+
+.time-box{
+
+width:110px;
+
+}
+
+
+
+.time-box strong{
+
+display:block;
+
+font-family:
+
+"Vazirmatn";
+
+font-size:40px;
+
+color:var(--gold);
+
+}
+
+
+
+
+
+/* TIMELINE */
+
+
+.timeline-card{
+
+max-width:350px;
+
+margin:20px auto;
+
+font-size:22px;
+
+}
+
+
+
+
+
+/* BUTTONS */
+
+
+.buttons{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+
+
+.button{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+padding:15px 30px;
+
+margin:8px;
+
+border-radius:50px;
+
+text-decoration:none;
+
+color:var(--ink);
+
+background:
+
+linear-gradient(
+135deg,
+white,
+#f3dfb0
+);
+
+box-shadow:var(--soft-shadow);
+
+border:
+
+1px solid white;
+
+}
+
+
+
+
+/* RSVP */
+
+
+.rsvp button{
+
+cursor:pointer;
+
+border:none;
+
+}
+
+
+
+
+/* MUSIC */
+
+
+.music{
+
+position:fixed;
+
+bottom:25px;
+
+left:25px;
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+border:none;
+
+background:white;
+
+box-shadow:var(--shadow);
+
+z-index:10;
+
+}
+
+
+
+
+/* FOOTER */
+
+
+footer{
+
+padding:70px 20px;
+
+font-family:
+
+"Noto Nastaliq Arabic";
+
+font-size:35px;
+
+color:var(--gold);
+
+}
+
+
+
+
+
+/* REVEAL */
+
+
+.reveal{
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:1s;
+
+}
+
+
+
+.reveal.show{
+
+opacity:1;
+
+transform:none;
+
+}
+
+
+
+
+@media(max-width:600px){
+
+.hero-title{
+
+font-size:65px;
+
+}
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<audio id="music" loop>
+
+<source src="assets/music/birthday.mp3">
+
+</audio>
+
+
+<button class="music" onclick="musicToggle()">
+
+🎵
+
+</button>
+
+
+
+
 <section class="hero reveal">
 
-<div class="hero-inner">
+
+<div class="section-inner">
 
 
 <p class="hero-small-title">
+
 به افتخار اولین سال زندگی
+
 </p>
 
 
+
 <div class="photo-frame">
+
 
 <div class="photo-glow"></div>
 
@@ -21,7 +767,9 @@
 
 
 <span class="photo-star star-one">✦</span>
+
 <span class="photo-star star-two">✧</span>
+
 <span class="photo-star star-three">✦</span>
 
 
@@ -30,20 +778,459 @@
 
 
 <h1 class="hero-title">
+
 نورا جان
+
 </h1>
+
+
+
+<p class="hero-text">
+
+با عشق منتظر حضور شما هستیم
+
+</p>
 
 
 
 <div class="scroll-down">
 
 <div class="scroll-circle">
+
 ↓
+
 </div>
 
 </div>
+
 
 
 </div>
 
 </section>
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<div class="glass">
+
+
+<span class="quote-mark">
+
+❝
+
+</span>
+
+
+<p class="quote-text">
+
+حضور شما،
+
+<br>
+
+قشنگ‌ترین قسمت این جشن است.
+
+</p>
+
+
+<span class="quote-mark">
+
+❞
+
+</span>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+جشن تولد یک سالگی
+
+</h2>
+
+
+<div class="glass event-grid">
+
+
+<div class="event-item">
+
+<div class="event-icon">🎂</div>
+
+تولد نورا
+
+</div>
+
+
+<div class="event-item">
+
+<div class="event-icon">📅</div>
+
+۹ مهر
+
+</div>
+
+
+<div class="event-item">
+
+<div class="event-icon">🕕</div>
+
+۱۸:۰۰
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+تا شروع جشن
+
+</h2>
+
+
+<div class="countdown">
+
+
+<div class="glass time-box">
+
+<strong id="day">۰۰</strong>
+
+روز
+
+</div>
+
+
+<div class="glass time-box">
+
+<strong id="hour">۰۰</strong>
+
+ساعت
+
+</div>
+
+
+<div class="glass time-box">
+
+<strong id="minute">۰۰</strong>
+
+دقیقه
+
+</div>
+
+
+<div class="glass time-box">
+
+<strong id="second">۰۰</strong>
+
+ثانیه
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+برنامه جشن
+
+</h2>
+
+
+<div class="glass timeline-card">
+
+۱۸:۰۰
+
+<br>
+
+پذیرایی و شروع جشن
+
+</div>
+
+
+<div class="glass timeline-card">
+
+۲۰:۰۰
+
+<br>
+
+شام
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+تالار دوریکا
+
+</h2>
+
+
+<p>
+
+نشتارود
+
+</p>
+
+
+<div class="buttons">
+
+
+<a class="button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
+
+Google Maps
+
+</a>
+
+
+<a class="button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
+
+نشان
+
+</a>
+
+
+<a class="button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
+
+بلد
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="reveal rsvp">
+
+
+<h2 class="section-title">
+
+تایید حضور
+
+</h2>
+
+
+<div class="glass">
+
+
+<button class="button">
+
+✓ بله، می‌آیم
+
+</button>
+
+
+<button class="button">
+
+متأسفانه نمی‌توانم بیایم
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<footer>
+
+به امید دیدار شما
+
+<br>
+
+نورا نیک نفس
+
+</footer>
+
+
+
+
+
+
+
+<script>
+
+
+const observer=
+
+new IntersectionObserver(entries=>{
+
+
+entries.forEach(e=>{
+
+if(e.isIntersecting)
+
+e.target.classList.add("show");
+
+
+});
+
+
+});
+
+
+document.querySelectorAll(".reveal")
+.forEach(e=>observer.observe(e));
+
+
+
+
+
+const target=
+
+new Date("2026-10-01T18:00:00");
+
+
+
+function fa(n){
+
+return String(n)
+.padStart(2,"0")
+.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+
+}
+
+
+
+function countdown(){
+
+
+let diff=target-new Date();
+
+
+if(diff<0)return;
+
+
+
+day.innerHTML=
+fa(Math.floor(diff/86400000));
+
+
+hour.innerHTML=
+fa(Math.floor(diff/3600000)%24);
+
+
+minute.innerHTML=
+fa(Math.floor(diff/60000)%60);
+
+
+second.innerHTML=
+fa(Math.floor(diff/1000)%60);
+
+
+}
+
+
+
+setInterval(countdown,1000);
+
+countdown();
+
+
+
+
+
+let playing=false;
+
+
+function musicToggle(){
+
+let audio=document.getElementById("music");
+
+
+if(!playing){
+
+audio.play();
+
+playing=true;
+
+}
+
+else{
+
+audio.pause();
+
+playing=false;
+
+}
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
