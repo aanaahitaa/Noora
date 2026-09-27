@@ -440,3 +440,8 @@ body::before,body::after{z-index:0!important}
 .scroll-arrow{width:30px;height:44px}
 .scroll-arrow i{width:11px;height:11px;border-width:2.5px}
 @media(max-width:600px){.scroll-arrow{width:28px;height:42px}.scroll-arrow i{width:10px;height:10px}}
+
+
+/* Small hearts around footer names */
+.footer-heart{font-family:Arial,sans-serif;font-size:.38em;vertical-align:middle;margin-inline:10px;color:var(--gold-deep)}
+@media(max-width:600px){.footer-heart{font-size:.36em;margin-inline:7px}}
