@@ -7,7 +7,7 @@ document.querySelectorAll(".reveal").forEach(section=>observer.observe(section))
 // =========================
 // COUNTDOWN
 // =========================
-const targetDate=new Date("2026-10-01T18:00:00");
+const targetDate=new Date("2026-10-08T19:00:00");
 const dayEl=document.getElementById("day"),hourEl=document.getElementById("hour"),minuteEl=document.getElementById("minute"),secondEl=document.getElementById("second");
 function persianNumber(num){return String(num).padStart(2,"0").replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);}
 function updateCountdown(){const distance=targetDate-new Date();if(distance<=0)return;dayEl.textContent=persianNumber(Math.floor(distance/86400000));hourEl.textContent=persianNumber(Math.floor(distance/3600000)%24);minuteEl.textContent=persianNumber(Math.floor(distance/60000)%60);secondEl.textContent=persianNumber(Math.floor(distance/1000)%60);}
