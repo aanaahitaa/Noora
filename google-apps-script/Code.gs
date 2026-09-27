@@ -40,6 +40,8 @@ function doGet(e) {
   var p = e && e.parameter ? e.parameter : {};
   try {
     if (p.action === "list_guests") return listGuests_(p.callback);
+    if (p.action === "list_links") return listLinks_(p.callback);
+    if (p.action === "find_guest") return findGuestByName_(p.callback, p.name);
     if (p.action === "get_guest") return getGuest_(p.callback, p.guestId);
     return json_({ok:true, service:"Noora guest service"});
   } catch (err) {
@@ -71,7 +73,12 @@ function createGuest_(p) {
     var sheet = getOrCreateSheet_(GUESTS_SHEET, GUEST_HEADERS);
     var lastRow = sheet.getLastRow();
     if (lastRow > 1) {
-      var ids = sheet.getRange(2,2,lastRow-1,1).getValues().flat().map(String);
+      var rows = sheet.getRange(2,1,lastRow-1,GUEST_HEADERS.length).getValues();
+      var normalizedName = normalizeName_(name);
+      for (var i=0;i<rows.length;i++) {
+        if (normalizeName_(String(rows[i][2] || "")) === normalizedName) return json_({ok:true,duplicate:true,guestId:String(rows[i][1]||""),name:String(rows[i][2]||""),maxGuests:Number(rows[i][3]||1),invitationUrl:String(rows[i][4]||"")});
+      }
+      var ids = rows.map(function(row){return String(row[1]||"");});
       if (ids.indexOf(guestId) !== -1) return json_({ok:false,error:"duplicate_guest_id"});
     }
 
@@ -116,6 +123,40 @@ function listGuests_(callback) {
   }
   guests.reverse();
   return jsonp_({ok:true,count:guests.length,guests:guests},callback);
+}
+
+function normalizeName_(name) {
+  return String(name || "").trim().replace(/\s+/g, " ");
+}
+
+function findGuestByName_(callback, name) {
+  var sheet = getOrCreateSheet_(GUESTS_SHEET, GUEST_HEADERS);
+  var wanted = normalizeName_(name);
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 2 || !wanted) return jsonp_({ok:false,error:"guest_not_found"}, callback);
+  var values = sheet.getRange(2,1,lastRow-1,GUEST_HEADERS.length).getValues();
+  for (var i=0;i<values.length;i++) {
+    if (normalizeName_(String(values[i][2] || "")) === wanted) {
+      return jsonp_({ok:true,guest:{guestId:String(values[i][1]||""),name:String(values[i][2]||""),maxGuests:Number(values[i][3]||1),url:String(values[i][4]||""),invitationUrl:String(values[i][4]||"")}}, callback);
+    }
+  }
+  return jsonp_({ok:false,error:"guest_not_found"}, callback);
+}
+
+function listLinks_(callback) {
+  var sheet = getOrCreateSheet_(GUESTS_SHEET, GUEST_HEADERS);
+  var lastRow = sheet.getLastRow();
+  var links = [];
+  if (lastRow > 1) {
+    var values = sheet.getRange(2,1,lastRow-1,GUEST_HEADERS.length).getValues();
+    values.forEach(function(row) {
+      var name = String(row[2] || "").trim();
+      var url = String(row[4] || "").trim();
+      if (name && url) links.push({name:name,id:String(row[1]||""),url:url,invitationUrl:url});
+    });
+  }
+  links.reverse();
+  return jsonp_({ok:true,count:links.length,links:links}, callback);
 }
 
 function findGuest_(sheet, guestId) {
