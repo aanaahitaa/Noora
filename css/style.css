@@ -621,3 +621,69 @@ body.guest-loading .music-greeting{visibility:hidden}
     100%{transform:translateY(105px);opacity:0}
   }
 }
+
+
+/* Safari / iOS Nastaliq shaping + correct slow opening split */
+@supports (-webkit-touch-callout:none){
+  body,button,input,textarea,select,
+  .hero-title,.section-title,.hero-small-title,.event-item,
+  .quote-text,.rsvp-question,.guest-count-title,.attendance-option,
+  .glass-button,.music-greeting .greeting-text,.music-enter,footer{
+    font-family:"NooraNastaliq",serif!important;
+    font-feature-settings:"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+    -webkit-font-feature-settings:"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+    font-kerning:normal!important;
+    font-variant-ligatures:common-ligatures contextual!important;
+    text-rendering:optimizeLegibility!important;
+    font-synthesis:none!important;
+  }
+}
+.music-note{
+  font-family:Arial,sans-serif!important;
+  font-size:21px!important;
+  font-weight:700;
+  line-height:1;
+}
+.music-gate.is-leaving{
+  animation:introGateFade 1.9s ease forwards!important;
+}
+.music-gate.is-leaving .music-gate-card{
+  animation:none!important;
+  transform:none!important;
+}
+.music-gate.is-leaving .envelope-scene{
+  animation:introPhotoRise 1.9s cubic-bezier(.2,.75,.2,1) forwards!important;
+}
+.music-gate.is-leaving .music-greeting,
+.music-gate.is-leaving .music-instruction,
+.music-gate.is-leaving .music-enter{
+  animation:introTextDrop 1.9s cubic-bezier(.2,.75,.2,1) forwards!important;
+  transform:none;
+}
+@keyframes introGateFade{
+  0%,70%{opacity:1;visibility:visible}
+  100%{opacity:0;visibility:hidden}
+}
+@keyframes introPhotoRise{
+  0%{transform:translateY(0) scale(1);opacity:1}
+  72%{transform:translateY(-20px) scale(1.01);opacity:1}
+  100%{transform:translateY(-150px) scale(1.025);opacity:0}
+}
+@keyframes introTextDrop{
+  0%{transform:translateY(0);opacity:1}
+  72%{transform:translateY(20px);opacity:1}
+  100%{transform:translateY(150px);opacity:0}
+}
+@media(max-width:600px){
+  @keyframes introPhotoRise{
+    0%{transform:translateY(0) scale(1);opacity:1}
+    72%{transform:translateY(-14px) scale(1.01);opacity:1}
+    100%{transform:translateY(-105px) scale(1.02);opacity:0}
+  }
+  @keyframes introTextDrop{
+    0%{transform:translateY(0);opacity:1}
+    72%{transform:translateY(14px);opacity:1}
+    100%{transform:translateY(105px);opacity:0}
+  }
+  .music-note{font-size:18px!important}
+}
