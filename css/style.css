@@ -526,3 +526,13 @@ body::before,body::after{
   color:rgba(214,173,88,.58)!important;
   text-shadow:0 0 10px rgba(255,217,235,.75),0 0 18px rgba(234,220,255,.65),0 0 28px rgba(191,232,255,.55)!important;
 }
+
+
+/* RSVP submit emphasis */
+.rsvp-submit{
+  font-size:43px!important;
+  min-height:78px;
+}
+@media(max-width:600px){
+  .rsvp-submit{font-size:40px!important;min-height:72px}
+}
