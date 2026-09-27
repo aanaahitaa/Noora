@@ -44,7 +44,7 @@ music.volume=0.35;
 const params=new URLSearchParams(window.location.search);
 const guestName=(params.get("guest")||params.get("name")||"").trim();
 const guestId=(params.get("id")||params.get("g")||guestName||"unknown").trim();
-musicGreeting.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
+musicGreeting.innerHTML=guestName ? `<span>✦</span> ${guestName} عزیز <span>✦</span>` : `<span>✦</span> مهمان عزیز <span>✦</span>`;
 
 function playMusic(){return music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});}
 
