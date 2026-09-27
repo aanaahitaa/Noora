@@ -337,3 +337,58 @@ body::before,body::after{z-index:1}
   .scroll-hint{margin-top:4px}
   .countdown{direction:ltr!important;flex-direction:row!important;gap:4px}
 }
+
+
+/* RSVP controls: single row on every viewport + pastel teal/blue */
+.guest-count{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  width:100%;
+  direction:ltr!important;
+}
+.guest-count-btn{
+  flex:1 1 0!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:58px;
+  height:58px!important;
+  aspect-ratio:1;
+  padding:0!important;
+  font-size:30px!important;
+  color:#174c49!important;
+  background:#c4e3dd!important;
+  border:1.5px solid #75aaa2!important;
+}
+.guest-count-btn:hover{
+  border-color:#4f8880!important;
+  background:#b4d9d2!important;
+}
+.guest-count-btn.is-selected{
+  color:#123f4a!important;
+  background:#a9cfe0!important;
+  border-color:#4d8398!important;
+  box-shadow:0 8px 22px rgba(79,136,160,.24);
+  transform:scale(1.04);
+}
+.rsvp-submit{
+  font-size:36px!important;
+  color:#174c49!important;
+  background:linear-gradient(135deg,#b8ddd6,#a9cfe0)!important;
+  border:1.5px solid #78a9a6!important;
+  box-shadow:0 10px 28px rgba(91,145,150,.2);
+}
+.rsvp-submit span{color:#3f6f72!important}
+@media(max-width:600px){
+  .guest-count{gap:4px}
+  .guest-count-btn{
+    max-width:none;
+    height:auto!important;
+    aspect-ratio:1;
+    font-size:25px!important;
+  }
+  .rsvp-submit{font-size:34px!important}
+}
