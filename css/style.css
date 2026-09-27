@@ -434,3 +434,9 @@ body::before,body::after{z-index:0!important}
   border-color:#568982!important;
 }
 
+
+
+/* Slightly larger scroll arrow */
+.scroll-arrow{width:30px;height:44px}
+.scroll-arrow i{width:11px;height:11px;border-width:2.5px}
+@media(max-width:600px){.scroll-arrow{width:28px;height:42px}.scroll-arrow i{width:10px;height:10px}}
