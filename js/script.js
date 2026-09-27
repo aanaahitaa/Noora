@@ -21,7 +21,7 @@ let attendance="yes";
 let guestCount=1;
 
 const params=new URLSearchParams(window.location.search);
-const guestName=(params.get("guest")||params.get("name")||"").trim();
+let guestName=(params.get("guest")||params.get("name")||"").trim();
 const guestId=(params.get("id")||params.get("g")||"").trim();
 const maxGuests=Math.max(1,Math.min(5,Number(params.get("max")||1)));
 
@@ -133,6 +133,25 @@ music.volume=0.35;
 
 const greetingText=musicGreeting.querySelector(".greeting-text");
 greetingText.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
+
+function loadGuestName(){
+  if(guestName || !guestId || !RSVP_ENDPOINT || RSVP_ENDPOINT.includes("PASTE_")) return;
+  const callback="nooraGuest_"+Date.now();
+  window[callback]=(data)=>{
+    if(data && data.ok && data.guest){
+      guestName=String(data.guest.name||"").trim();
+      greetingText.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
+    }
+    delete window[callback];
+    const old=document.getElementById(callback);if(old)old.remove();
+  };
+  const s=document.createElement("script");
+  s.id=callback;
+  s.src=RSVP_ENDPOINT+"?action=get_guest&guestId="+encodeURIComponent(guestId)+"&callback="+callback+"&t="+Date.now();
+  s.onerror=()=>{delete window[callback];s.remove()};
+  document.body.appendChild(s);
+}
+loadGuestName();
 
 function playMusic(){return music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});}
 
