@@ -82,8 +82,8 @@ const nameEl=document.getElementById("guestName"),ogTitleEl=document.getElementB
 let ogTitleAuto=true,ogDescriptionAuto=true;
 function fillPreviewDefaults(){
   const n=nameEl.value.trim();
-  if(n&&ogTitleAuto)ogTitleEl.value=n+" عزیز، بیا اولین شمع تولد نورا رو با ما روشن کن";
-  if(n&&ogDescriptionAuto)ogDescriptionEl.value="با دل خوش از "+n+" عزیز دعوت می‌کنیم تا در جشن اولین سال تولد نورا جان کنار ما باشید.";
+  if(n&&ogTitleAuto)ogTitleEl.value=n+" عزیز، بیا اولین شمع تولد نورا جان رو با ما روشن کن";
+  if(n&&ogDescriptionAuto)ogDescriptionEl.value="نورا جان یک ساله می‌شه و ما دلمون می‌خواد این لحظه‌ی شاد رو با شما قسمت کنیم.";
 }
 nameEl.addEventListener("input",fillPreviewDefaults);
 ogTitleEl.addEventListener("input",()=>{ogTitleAuto=false});
