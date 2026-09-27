@@ -24,11 +24,11 @@ button:disabled{opacity:.55;cursor:wait}
 .result-title{text-align:center;font-size:30px;color:var(--gold-deep);margin-bottom:10px}.linkbox{direction:ltr;word-break:break-all;text-align:left;background:#fff;border-radius:14px;padding:12px;font-family:Arial,sans-serif;font-size:14px;color:#6b5a73;border:1px solid #eee}
 .copy{margin-top:12px;background:linear-gradient(135deg,#d6ad58,#b98b3b);font-size:24px}
 .list-card{margin-top:28px}.list-head{text-align:center;margin-bottom:20px}.list-head h2{font-size:36px;color:var(--gold-deep);margin:0 0 5px;line-height:1.5}.list-head p{font-size:22px;color:#8b719b;margin:0;line-height:1.8}
-.stats{display:flex;gap:12px;margin-bottom:18px}.stat{flex:1;text-align:center;border-radius:18px;padding:13px 8px;background:#fff9f2cc;border:1px solid #d6ad5838}.stat strong{display:block;font-size:34px;color:var(--gold-deep);line-height:1.2}.stat span{font-size:20px}
-.guest-list{display:grid;gap:12px}.guest-row{padding:15px 16px;border-radius:18px;background:#fff;border:1px solid #eadff1;box-shadow:0 8px 20px #b49bd514}.guest-main{display:flex;justify-content:space-between;gap:12px;align-items:center}.guest-name{font-size:28px;color:var(--text);line-height:1.5}.guest-status{font-size:20px;padding:4px 10px;border-radius:999px;background:#f5effa;white-space:nowrap}.guest-status.yes{background:#e9f7ed;color:#4c8a5a}.guest-status.no{background:#fff0f0;color:#a66b6b}.guest-meta{margin-top:5px;font-size:19px;color:#9b849f;line-height:1.8}.guest-link{display:inline-block;margin-top:4px;font-family:Arial,sans-serif;font-size:11px;direction:ltr;word-break:break-all;color:#9b849f}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}.stat{min-width:0;text-align:center;border-radius:20px;padding:17px 8px;background:#fff9f2cc;border:1px solid #d6ad5838}.stat strong{display:block;font-size:48px;color:var(--gold-deep);line-height:1.15;font-weight:700}.stat span{display:block;font-size:25px;line-height:1.5;color:var(--text)}
+.guest-list{display:grid;gap:12px}.guest-row{padding:15px 16px;border-radius:18px;background:#fff;border:1px solid #eadff1;box-shadow:0 8px 20px #b49bd514}.guest-main{display:flex;justify-content:space-between;gap:12px;align-items:center}.guest-name{font-size:28px;color:var(--text);line-height:1.5}.guest-status{font-size:20px;padding:4px 10px;border-radius:999px;background:#f5effa;white-space:nowrap}.guest-status.yes{background:#e9f7ed;color:#4c8a5a}.guest-status.no{background:#fff0f0;color:#a66b6b}.guest-meta{margin-top:7px;font-size:24px;color:#8b719b;line-height:1.9}.guest-link{display:inline-block;margin-top:5px;font-family:Arial,sans-serif;font-size:13px;direction:ltr;word-break:break-all;color:#9b849f}
 .empty,.loading{text-align:center;font-size:23px;color:#9b849f;padding:20px 8px;line-height:1.8}
 .note{text-align:center;font-size:21px;color:#9b849f;margin:26px 12px 0;line-height:2.1;padding:0 8px}
-@media(max-width:600px){.wrap{width:min(92%,680px);padding:46px 0 80px}.header{padding:0 16px}.header h1{font-size:48px;line-height:1.7;margin-top:10px}.header p{font-size:24px;line-height:1.9}.card,.list-card{padding:26px 18px;border-radius:26px}.field label{font-size:26px}input{font-size:25px}.guest-main{align-items:flex-start}.guest-name{font-size:25px}.guest-status{font-size:18px}.list-head h2{font-size:32px}.list-head p{font-size:20px}.stats{gap:8px}.stat strong{font-size:30px}.stat span{font-size:18px}.note{font-size:20px}}
+@media(max-width:600px){.wrap{width:min(92%,680px);padding:46px 0 80px}.header{padding:0 16px}.header h1{font-size:48px;line-height:1.7;margin-top:10px}.header p{font-size:24px;line-height:1.9}.card,.list-card{padding:26px 18px;border-radius:26px}.field label{font-size:26px}input{font-size:25px}.guest-main{align-items:flex-start}.guest-name{font-size:25px}.guest-status{font-size:18px}.list-head h2{font-size:32px}.list-head p{font-size:20px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{padding:15px 7px}.stat strong{font-size:42px}.stat span{font-size:23px}.note{font-size:20px}}
 </style>
 </head>
 <body>
@@ -44,7 +44,7 @@ button:disabled{opacity:.55;cursor:wait}
 
 <section class="list-card">
 <div class="list-head"><h2>مهمان‌های ثبت‌شده</h2><p>فهرست مهمان‌هایی که تا الان برایشان لینک ساخته شده</p></div>
-<div class="stats"><div class="stat"><strong id="totalGuests">۰</strong><span>کل مهمان‌ها</span></div><div class="stat"><strong id="answeredGuests">۰</strong><span>پاسخ داده‌اند</span></div><div class="stat"><strong id="attendingGuests">۰</strong><span>می‌آیند</span></div></div>
+<div class="stats"><div class="stat"><strong id="totalGuests">۰</strong><span>کل مهمان‌ها</span></div><div class="stat"><strong id="totalPeople">۰</strong><span>کل نفرات</span></div><div class="stat"><strong id="answeredGuests">۰</strong><span>پاسخ داده‌اند</span></div><div class="stat"><strong id="attendingGuests">۰</strong><span>می‌آیند</span></div></div>
 <div class="guest-list" id="guestList"><div class="loading">در حال دریافت فهرست مهمان‌ها…</div></div>
 </section>
 
@@ -72,13 +72,15 @@ function loadGuests(){
    try{
     if(!data||!data.ok)throw new Error("load_failed");
     document.getElementById("totalGuests").textContent=faNum(data.count||0);
+    const totalPeople=(data.guests||[]).reduce((sum,g)=>sum+(g.guestCount==null||Number(g.guestCount)<1?1:Number(g.guestCount)),0);
+    document.getElementById("totalPeople").textContent=faNum(totalPeople);
     document.getElementById("answeredGuests").textContent=faNum((data.guests||[]).filter(g=>g.attendance&&g.attendance!=="بدون پاسخ").length);
     document.getElementById("attendingGuests").textContent=faNum((data.guests||[]).filter(g=>g.attendance==="می‌آید").length);
     if(!data.guests||!data.guests.length){list.innerHTML='<div class="empty">هنوز مهمانی ثبت نشده است.</div>';return}
     list.innerHTML=data.guests.map(g=>{
       const cls=g.attendance==="می‌آید"?"yes":g.attendance==="نمی‌آید"?"no":"";
       const status=g.attendance||"بدون پاسخ";
-      return '<div class="guest-row"><div class="guest-main"><div class="guest-name">'+escapeHtml(g.name)+'</div><div class="guest-status '+cls+'">'+escapeHtml(status)+'</div></div><div class="guest-meta">تعداد ثبت‌شده: '+(g.guestCount==null?"—":faNum(g.guestCount))+'</div><div class="guest-link">'+escapeHtml(g.invitationUrl)+'</div></div>';
+      return '<div class="guest-row"><div class="guest-main"><div class="guest-name">'+escapeHtml(g.name)+'</div><div class="guest-status '+cls+'">'+escapeHtml(status)+'</div></div><div class="guest-meta">تعداد مهمان‌ها: '+(g.guestCount==null?"۱":faNum(g.guestCount))+'</div><div class="guest-link">'+escapeHtml(g.invitationUrl)+'</div></div>';
     }).join("");
    }catch(e){list.innerHTML='<div class="empty">دریافت فهرست مهمان‌ها انجام نشد.</div>'}
    delete window[callback];
