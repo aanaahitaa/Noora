@@ -49,10 +49,11 @@ const greetingText=musicGreeting.querySelector(".greeting-text"); greetingText.t
 function playMusic(){return music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});}
 
 async function enterInvitation(){
-  if(musicGate.classList.contains("is-leaving"))return;
+  if(envelopeScene.classList.contains("is-opening"))return;
+  envelopeScene.classList.add("is-opening");
   musicGate.classList.add("is-leaving");
   await playMusic();
-  await new Promise(resolve=>setTimeout(resolve,650));
+  await new Promise(resolve=>setTimeout(resolve,850));
   musicGate.classList.add("is-hidden");
   document.body.classList.add("music-started");
 }
