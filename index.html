@@ -9,15 +9,25 @@
 <body>
 <audio id="music" loop preload="auto"><source src="assets/music/birthday.mp3" type="audio/mpeg"></audio>
 
-<!-- MUSIC GATE: browser autoplay is blocked until the guest interacts -->
+<!-- ENVELOPE INTRO -->
 <div class="music-gate" id="musicGate">
   <div class="music-gate-card">
-    <div class="music-cover-frame">
-      <img src="assets/noora-cover.webp" alt="کارت پستال نورا">
+    <div class="envelope-scene" id="envelopeScene">
+      <div class="envelope-shadow"></div>
+      <div class="envelope">
+        <div class="envelope-back"></div>
+        <div class="invitation-card">
+          <img src="assets/noora-cover.webp" alt="کارت دعوت نورا">
+        </div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-seal"><span>✦</span></div>
+      </div>
     </div>
+
     <div class="music-greeting" id="musicGreeting">مهمان عزیز</div>
-    <div class="music-instruction">برای ورود و پخش موسیقی، روی کارت کلیک کنید</div>
-    <button class="music-enter" id="musicEnter" type="button"><span>✦</span> ورود به جشن <span>✦</span></button>
+    <div class="music-instruction">با افتخار از شما دعوت می‌کنیم<br>تا در جشن اولین سال تولد نورا جان در کنار ما باشید.</div>
+    <button class="music-enter" id="musicEnter" type="button"><span>✦</span> برای باز کردن دعوت‌نامه کلیک کنید <span>✦</span></button>
   </div>
 </div>
 
@@ -48,11 +58,7 @@
 <section class="reveal">
   <h2 class="section-title">جشن تولد یک سالگی</h2>
   <div class="glass-card event-card">
-    <div class="event-item">پنج‌شنبه ۹ مهر</div>
-    <span class="event-divider">✦</span>
-    <div class="event-item">ساعت ۱۸</div>
-    <span class="event-divider">✦</span>
-    <div class="event-item">تالار دوریکا</div>
+    <div class="event-item">پنج‌شنبه ۹ مهر</div><span class="event-divider">✦</span><div class="event-item">ساعت ۱۸</div><span class="event-divider">✦</span><div class="event-item">تالار دوریکا</div>
   </div>
 </section>
 
@@ -77,11 +83,7 @@
     <div class="guest-count-wrap" id="guestCountWrap">
       <div class="guest-count-title">تعداد نفرات با احتساب خودتان</div>
       <div class="guest-count" role="group" aria-label="تعداد نفرات">
-        <button type="button" class="guest-count-btn" data-count="1">۱</button>
-        <button type="button" class="guest-count-btn is-selected" data-count="2">۲</button>
-        <button type="button" class="guest-count-btn" data-count="3">۳</button>
-        <button type="button" class="guest-count-btn" data-count="4">۴</button>
-        <button type="button" class="guest-count-btn" data-count="5">۵</button>
+        <button type="button" class="guest-count-btn" data-count="1">۱</button><button type="button" class="guest-count-btn is-selected" data-count="2">۲</button><button type="button" class="guest-count-btn" data-count="3">۳</button><button type="button" class="guest-count-btn" data-count="4">۴</button><button type="button" class="guest-count-btn" data-count="5">۵</button>
       </div>
     </div>
     <input id="guestName" type="text" placeholder="نام مهمان" aria-label="نام مهمان">
