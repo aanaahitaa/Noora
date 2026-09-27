@@ -1,4 +1,3 @@
-```javascript
 const RSVP_SHEET = "RSVP";
 const GUESTS_SHEET = "Guests";
 
