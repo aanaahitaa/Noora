@@ -73,6 +73,7 @@ button:disabled{opacity:.55;cursor:wait}
 <script>
 const GS_ENDPOINT=(window.NOORA_CONFIG&&window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL)||"https://script.google.com/macros/s/AKfycbwbAFhiYbNwpqxczEQzeQNbGm1yIYGveTBUvQ-Cu3zfKFKPdS8wcaNI4CdarzSmwolbuA/exec";
 const base=new URL("../",location.href).href;
+const buildGuestUrl=(id,name)=>base+"?g="+encodeURIComponent(id)+"&name="+encodeURIComponent(name);
 const nameEl=document.getElementById("guestName"),result=document.getElementById("result"),linkEl=document.getElementById("link"),statusEl=document.getElementById("status"),createBtn=document.getElementById("create"),saveForm=document.getElementById("saveForm");
 
 function faNum(n){return String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d])}
@@ -130,7 +131,7 @@ createBtn.onclick=async()=>{
   const existing=await findExistingGuest(name);
   if(existing){const existingUrl=existing.url||existing.invitationUrl||"";linkEl.textContent=existingUrl;result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}
   const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");
-  const url=base+"?g="+id;
+  const url=buildGuestUrl(id,name);
   document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;
   saveForm.submit();linkEl.textContent=url;result.classList.add("show");showStatus("در حال ذخیره مهمان در Google Sheets…");
   setTimeout(()=>{createBtn.disabled=false;showStatus("مهمان در شیت ذخیره شد؛ لینک دائمی آماده است.");loadGuests();loadLinks()},1200);
