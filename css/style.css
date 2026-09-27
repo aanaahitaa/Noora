@@ -590,30 +590,34 @@ body.guest-loading .music-greeting{visibility:hidden}
 }
 
 
-/* Opening invitation animation: photo rises, text and button descend */
+/* Opening invitation animation: slow split movement */
 .music-gate.is-leaving .envelope-scene{
-  animation:introPhotoRise 1s cubic-bezier(.2,.8,.2,1) forwards;
+  animation:introPhotoRise 1.8s cubic-bezier(.25,.75,.2,1) forwards;
 }
 .music-gate.is-leaving .music-greeting,
 .music-gate.is-leaving .music-instruction,
 .music-gate.is-leaving .music-enter{
-  animation:introTextDrop 1s cubic-bezier(.2,.8,.2,1) forwards;
+  animation:introTextDrop 1.8s cubic-bezier(.25,.75,.2,1) forwards;
 }
 @keyframes introPhotoRise{
   0%{transform:translateY(0) scale(1);opacity:1}
-  100%{transform:translateY(-115px) scale(1.035);opacity:0}
+  70%{opacity:1}
+  100%{transform:translateY(-150px) scale(1.025);opacity:0}
 }
 @keyframes introTextDrop{
   0%{transform:translateY(0);opacity:1}
-  100%{transform:translateY(115px);opacity:0}
+  70%{opacity:1}
+  100%{transform:translateY(150px);opacity:0}
 }
 @media(max-width:600px){
   @keyframes introPhotoRise{
     0%{transform:translateY(0) scale(1);opacity:1}
-    100%{transform:translateY(-85px) scale(1.025);opacity:0}
+    70%{opacity:1}
+    100%{transform:translateY(-105px) scale(1.02);opacity:0}
   }
   @keyframes introTextDrop{
     0%{transform:translateY(0);opacity:1}
-    100%{transform:translateY(85px);opacity:0}
+    70%{opacity:1}
+    100%{transform:translateY(105px);opacity:0}
   }
 }
