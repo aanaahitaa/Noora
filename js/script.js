@@ -42,8 +42,9 @@ let playing=false;
 music.volume=0.35;
 
 const params=new URLSearchParams(window.location.search);
-const guestName=params.get("guest")||params.get("name");
-if(guestName){musicGreeting.textContent=`${guestName} عزیز، خوش آمدی ✨`;}else{musicGreeting.textContent="مهمان عزیز، خوش آمدی ✨";}
+const guestName=(params.get("guest")||params.get("name")||"").trim();
+const guestId=(params.get("id")||params.get("g")||guestName||"unknown").trim();
+musicGreeting.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
 
 function playMusic(){return music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});}
 
