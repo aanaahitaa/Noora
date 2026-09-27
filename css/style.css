@@ -284,3 +284,16 @@ footer{font-size:58px;line-height:2}
   .music-greeting .greeting-text{font-size:40px}
   .section-scroll{font-size:25px}
 }
+
+
+/* Scroll cue + intro frame refinement */
+.invitation-card{border-width:1.5px!important;border-radius:14px}
+.invitation-card img{border-radius:12.5px}
+.invitation-card{inset:4%}
+.scroll-arrow{width:24px;height:38px;position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.62}
+.scroll-arrow i{display:block;width:9px;height:9px;border-right:2px solid var(--gold-deep);border-bottom:2px solid var(--gold-deep);transform:rotate(45deg);animation:scrollArrow 1.5s ease-in-out infinite}
+.scroll-arrow i:nth-child(2){animation-delay:.18s;opacity:.55}
+@media(max-width:600px){
+  .invitation-card{inset:4%;border-width:1.25px!important;border-radius:12px}
+  .invitation-card img{border-radius:10.5px}
+}
