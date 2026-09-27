@@ -392,3 +392,45 @@ body::before,body::after{z-index:1}
   }
   .rsvp-submit{font-size:34px!important}
 }
+
+
+/* Accessibility-safe pastel teal controls */
+body::before,body::after{z-index:0!important}
+
+.attendance-option.is-selected{
+  color:#123f3d!important;
+  background:linear-gradient(135deg,#b9ddd6,#b4d5df)!important;
+  border-color:#4f817b!important;
+  box-shadow:0 12px 30px rgba(79,129,123,.22);
+}
+
+.guest-count-btn{
+  color:#123f3d!important;
+  background:#c4e3dd!important;
+  border-color:#5f928a!important;
+}
+.guest-count-btn:hover{
+  color:#103b3a!important;
+  background:#b5d9d2!important;
+  border-color:#477c74!important;
+}
+.guest-count-btn.is-selected{
+  color:#103c4a!important;
+  background:#a9cedb!important;
+  border-color:#47798c!important;
+}
+
+.rsvp-submit{
+  color:#123f3d!important;
+  background:linear-gradient(135deg,#b8ddd6,#afd0dc)!important;
+  border:1.5px solid #568982!important;
+  box-shadow:0 10px 28px rgba(79,129,123,.2);
+}
+.rsvp-submit span{color:#285d60!important}
+
+.music-enter{
+  color:#123f3d!important;
+  background:linear-gradient(135deg,#b8ddd6,#afd0dc)!important;
+  border-color:#568982!important;
+}
+
