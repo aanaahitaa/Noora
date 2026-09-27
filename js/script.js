@@ -1,5 +1,5 @@
 // =========================
-// Scroll Reveal
+// REVEAL ANIMATION
 // =========================
 
 
@@ -7,9 +7,7 @@ const observer = new IntersectionObserver(
 
 (entries)=>{
 
-
 entries.forEach(entry=>{
-
 
 if(entry.isIntersecting){
 
@@ -17,9 +15,7 @@ entry.target.classList.add("show");
 
 }
 
-
 });
-
 
 },
 
@@ -27,16 +23,15 @@ entry.target.classList.add("show");
 threshold:0.15
 }
 
-
 );
 
 
 
 document
 .querySelectorAll(".reveal")
-.forEach(item=>{
+.forEach(section=>{
 
-observer.observe(item);
+observer.observe(section);
 
 });
 
@@ -44,52 +39,47 @@ observer.observe(item);
 
 
 
+
 // =========================
-// Countdown
+// COUNTDOWN
 // =========================
 
 
+const targetDate = new Date(
+"2026-10-01T18:00:00"
+);
 
-const targetDate =
-new Date("2026-10-01T18:00:00");
 
 
-
-const day =
+const dayEl =
 document.getElementById("day");
 
 
-const hour =
+const hourEl =
 document.getElementById("hour");
 
 
-const minute =
+const minuteEl =
 document.getElementById("minute");
 
 
-const second =
+const secondEl =
 document.getElementById("second");
 
 
 
 
 
-function persianNumber(number){
+function persianNumber(num){
 
-
-return String(number)
-
+return String(num)
 .padStart(2,"0")
-
 .replace(
 /\d/g,
 d=>"۰۱۲۳۴۵۶۷۸۹"[d]
 );
 
-
 }
-
-
 
 
 
@@ -97,8 +87,7 @@ d=>"۰۱۲۳۴۵۶۷۸۹"[d]
 function updateCountdown(){
 
 
-const now =
-new Date();
+const now = new Date();
 
 
 const distance =
@@ -106,12 +95,11 @@ targetDate - now;
 
 
 
-if(distance <=0){
+if(distance <= 0){
 
 return;
 
 }
-
 
 
 
@@ -126,32 +114,32 @@ Math.floor(distance / 3600000)%24;
 
 
 const minutes =
-Math.floor(distance /60000)%60;
+Math.floor(distance / 60000)%60;
 
 
 
 const seconds =
-Math.floor(distance /1000)%60;
+Math.floor(distance / 1000)%60;
 
 
 
 
-day.innerHTML =
+dayEl.innerHTML =
 persianNumber(days);
 
 
 
-hour.innerHTML =
+hourEl.innerHTML =
 persianNumber(hours);
 
 
 
-minute.innerHTML =
+minuteEl.innerHTML =
 persianNumber(minutes);
 
 
 
-second.innerHTML =
+secondEl.innerHTML =
 persianNumber(seconds);
 
 
@@ -169,19 +157,17 @@ updateCountdown();
 
 
 
-// =========================
-// Music
-// =========================
 
+// =========================
+// MUSIC
+// =========================
 
 
 const music =
 document.getElementById("music");
 
 
-
 let playing=false;
-
 
 
 music.volume = 0.35;
@@ -190,32 +176,7 @@ music.volume = 0.35;
 
 
 
-// تلاش برای شروع بعد از اولین تعامل
-
-document.addEventListener(
-"click",
-startMusic,
-{
-once:true
-}
-);
-
-
-
-document.addEventListener(
-"touchstart",
-startMusic,
-{
-once:true
-}
-);
-
-
-
-
-
-
-function startMusic(){
+function playMusic(){
 
 
 music.play()
@@ -224,22 +185,92 @@ music.play()
 
 playing=true;
 
+console.log("Music started");
 
 })
 
+
 .catch(()=>{
 
-
 console.log(
-"Browser blocked autoplay"
+"Autoplay blocked by browser"
 );
-
 
 });
 
+}
+
+
+
+
+
+// تلاش بعد از ۲ ثانیه
+
+
+setTimeout(()=>{
+
+
+playMusic();
+
+
+},2000);
+
+
+
+
+
+
+
+// اگر مرورگر بلاک کرد
+// اولین تعامل کاربر فعالش می‌کند
+
+
+document.addEventListener(
+
+"click",
+
+()=>{
+
+
+if(!playing){
+
+playMusic();
 
 }
 
+
+},
+
+{
+once:true
+}
+
+);
+
+
+
+
+document.addEventListener(
+
+"touchstart",
+
+()=>{
+
+
+if(!playing){
+
+playMusic();
+
+}
+
+
+},
+
+{
+once:true
+}
+
+);
 
 
 
@@ -249,14 +280,13 @@ console.log(
 function toggleMusic(){
 
 
-
-if(!playing){
-
-
-music.play();
+if(playing){
 
 
-playing=true;
+music.pause();
+
+
+playing=false;
 
 
 
@@ -265,11 +295,7 @@ playing=true;
 else{
 
 
-music.pause();
-
-
-playing=false;
-
+playMusic();
 
 
 }
