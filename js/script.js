@@ -134,6 +134,20 @@ music.volume=0.35;
 const greetingText=musicGreeting.querySelector(".greeting-text");
 greetingText.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
 
+function updateGuestMeta(name){
+  if(!name)return;
+  const title=`${name} عزیز؛ دعوت‌نامه تولد نورا جان`;
+  const description=`${name} عزیز، با دلِ خوش از شما دعوت می‌کنیم تا در جشن یک‌سالگی نورا جان در کنار ما باشید.`;
+  document.title=title;
+  const setMeta=(selector,content)=>{const el=document.querySelector(selector);if(el)el.setAttribute("content",content)};
+  setMeta("meta[name=\"description\"]",description);
+  setMeta("meta[property=\"og:title\"]",title);
+  setMeta("meta[property=\"og:description\"]",description);
+  setMeta("meta[name=\"twitter:title\"]",title);
+  setMeta("meta[name=\"twitter:description\"]",description);
+}
+updateGuestMeta(guestName);
+
 function loadGuestName(){
   if(guestName || !guestId || !RSVP_ENDPOINT || RSVP_ENDPOINT.includes("PASTE_")) return;
   const callback="nooraGuest_"+Date.now();
@@ -141,6 +155,7 @@ function loadGuestName(){
     if(data && data.ok && data.guest){
       guestName=String(data.guest.name||"").trim();
       greetingText.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
+      updateGuestMeta(guestName);
     }
     delete window[callback];
     const old=document.getElementById(callback);if(old)old.remove();
