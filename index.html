@@ -9,10 +9,7 @@
 <title>جشن تولد نورا نیک نفس</title>
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Nastaliq+Arabic:wght@400;700&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Scheherazade+New:wght@400;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 
 <style>
@@ -22,20 +19,28 @@
 --pearl:#fffaf7;
 --milk:#fffdfb;
 
---pink:#f4d7df;
---pink-soft:#fdecef;
+--blush:#f3dce0;
+--pink:#f7cfd9;
 
---blue:#e5f1f8;
---blue-soft:#f2f8fc;
+--rose:#dcaeb7;
+
+--blue:#e6f0f7;
+--blue-soft:#dcecf8;
 
 --gold:#c9a45c;
 --gold-light:#efdcae;
---gold-shine:#f7dfa0;
+--gold-bright:#f5dc91;
 
---text:#66565a;
+--ink:#66565a;
+--muted:#9a8588;
+
+--white:#ffffff;
 
 --shadow:
-0 25px 80px rgba(190,150,120,.18);
+0 25px 70px rgba(185,145,115,.18);
+
+--soft-shadow:
+0 10px 35px rgba(185,145,115,.12);
 
 }
 
@@ -49,6 +54,7 @@ box-sizing:border-box;
 }
 
 
+
 html{
 
 scroll-behavior:smooth;
@@ -59,36 +65,33 @@ scroll-behavior:smooth;
 
 body{
 
-
 background:
 
-radial-gradient(
-circle at 20% 10%,
-rgba(244,215,223,.35),
-transparent 30%
-),
+radial-gradient(circle at 10% 10%,
+rgba(247,207,217,.35),
+transparent 28%),
 
-radial-gradient(
-circle at 80% 30%,
-rgba(229,241,248,.45),
-transparent 35%
-),
+radial-gradient(circle at 90% 20%,
+rgba(220,236,248,.45),
+transparent 30%),
 
 linear-gradient(
 180deg,
 #fffdfb,
-#fff7f4
+#fff7f3
 );
 
 
 font-family:
-"Noto Naskh Arabic",
-serif;
+"Vazirmatn",
+sans-serif;
 
 
-color:var(--text);
+color:var(--ink);
 
 text-align:center;
+
+overflow-x:hidden;
 
 }
 
@@ -98,12 +101,11 @@ text-align:center;
 
 section{
 
+padding:75px 20px;
+
 min-height:60vh;
 
-padding:80px 20px;
-
 }
-
 
 
 
@@ -118,36 +120,23 @@ margin:auto;
 
 
 
-/* HERO */
 
-
-.hero{
-
-min-height:100vh;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-}
-
+/* TITLES */
 
 
 .hero-small-title{
 
 
 font-family:
-"Noto Nastaliq Arabic",
+"Scheherazade New",
 serif;
 
 
-font-size:28px;
+font-size:32px;
+
 
 color:var(--gold);
 
-line-height:2;
 
 margin-bottom:0;
 
@@ -160,14 +149,17 @@ margin-bottom:0;
 
 
 font-family:
-"Noto Nastaliq Arabic",
+"Scheherazade New",
 serif;
 
 
-font-size:90px;
+font-size:95px;
 
 
-line-height:1.8;
+font-weight:700;
+
+
+line-height:1.2;
 
 
 margin-top:0;
@@ -178,7 +170,7 @@ background:
 linear-gradient(
 120deg,
 #b88942,
-#f8df9c,
+#f8dfa0,
 #b88942
 );
 
@@ -186,6 +178,50 @@ linear-gradient(
 -webkit-background-clip:text;
 
 color:transparent;
+
+
+}
+
+
+
+
+
+.section-title{
+
+
+font-family:
+"Scheherazade New",
+serif;
+
+
+font-size:50px;
+
+
+color:var(--gold);
+
+
+}
+
+
+
+
+
+/* HERO */
+
+
+.hero{
+
+
+min-height:100vh;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
 
 
 }
@@ -202,16 +238,17 @@ color:transparent;
 position:relative;
 
 
-width:clamp(280px,70vw,390px);
+width:clamp(280px,70vw,380px);
 
 
 aspect-ratio:.85;
 
 
-margin:25px auto;
+margin:45px auto;
 
 
 display:grid;
+
 
 place-items:center;
 
@@ -226,76 +263,43 @@ place-items:center;
 position:absolute;
 
 
-inset:-70px;
+inset:-60px;
+
+
+z-index:-1;
 
 
 background:
 
 
 radial-gradient(
-
 circle,
-
-rgba(239,220,174,.7),
-
-rgba(244,215,223,.25),
-
+rgba(243,220,225,.8),
+rgba(230,240,247,.45),
 transparent 70%
-
 );
 
 
 filter:blur(35px);
 
 
-animation:
-
-glow 5s infinite alternate;
-
-
 }
-
-
-
-@keyframes glow{
-
-
-from{
-
-transform:scale(.9);
-
-opacity:.7;
-
-}
-
-
-to{
-
-transform:scale(1.1);
-
-opacity:1;
-
-}
-
-}
-
-
 
 
 
 .photo-inner{
 
 
-width:94%;
+width:95%;
 
 
-height:94%;
-
-
-border-radius:50%;
+height:95%;
 
 
 overflow:hidden;
+
+
+border-radius:50%;
 
 
 border:
@@ -305,10 +309,7 @@ border:
 
 box-shadow:
 
-0 30px 90px rgba(185,145,115,.25);
-
-
-z-index:2;
+0 30px 80px rgba(185,145,115,.25);
 
 
 }
@@ -320,6 +321,7 @@ z-index:2;
 
 width:100%;
 
+
 height:100%;
 
 
@@ -327,6 +329,7 @@ object-fit:cover;
 
 
 }
+
 
 
 
@@ -340,7 +343,7 @@ content:"";
 position:absolute;
 
 
-inset:0;
+inset:-8px;
 
 
 border-radius:50%;
@@ -348,13 +351,11 @@ border-radius:50%;
 
 border:
 
-3px solid var(--gold-light);
-
-
-z-index:3;
+2px solid rgba(239,220,174,.9);
 
 
 }
+
 
 
 
@@ -364,103 +365,291 @@ z-index:3;
 
 position:absolute;
 
-z-index:4;
 
-font-size:35px;
+font-size:32px;
+
 
 color:var(--gold);
 
-animation:star 2.5s infinite;
+
+animation:twinkle 2.5s infinite;
 
 
 }
-
 
 
 .star-one{
 
 top:5%;
 
-right:5%;
+right:2%;
 
 }
 
 
 .star-two{
 
-bottom:12%;
+bottom:15%;
 
-left:5%;
+left:0;
 
-color:#df9fb1;
+color:var(--rose);
 
 }
 
 
 .star-three{
 
-right:-8%;
-
 top:45%;
+
+right:-8%;
 
 }
 
 
 
-
-@keyframes star{
+@keyframes twinkle{
 
 
 50%{
 
-opacity:.4;
+opacity:.35;
 
-transform:scale(1.3);
-
-}
+transform:scale(1.35);
 
 }
-
-
-
-
-
-
-.hero-text{
-
-font-size:22px;
-
-margin-top:20px;
 
 }
 
 
 
 
-/* GLASS */
+
+/* QUOTE CARD */
 
 
-.glass{
+.quote-card{
+
+
+width:min(90%,520px);
+
+
+margin:auto;
+
+
+padding:55px 30px;
+
+
+border-radius:35px;
 
 
 background:
 
-rgba(255,255,255,.65);
-
-
-backdrop-filter:
-
-blur(20px);
+linear-gradient(
+145deg,
+rgba(255,255,255,.85),
+rgba(243,220,225,.35)
+);
 
 
 border:
 
-1px solid rgba(255,255,255,.9);
+1px solid rgba(201,164,92,.25);
+
+
+box-shadow:var(--shadow);
+
+
+}
+
+
+
+.quote-mark{
+
+
+font-size:55px;
+
+
+color:var(--gold);
+
+
+}
+
+
+
+.quote-text{
+
+
+font-family:
+"Noto Naskh Arabic",
+serif;
+
+
+font-size:25px;
+
+
+line-height:2.2;
+
+
+}
+
+
+
+
+
+/* SCROLL */
+
+
+.scroll-hint{
+
+
+margin-top:55px;
+
+
+display:flex;
+
+
+flex-direction:column;
+
+
+align-items:center;
+
+
+gap:8px;
+
+
+color:var(--muted);
+
+
+font-size:.85rem;
+
+
+}
+
+
+
+.scroll-arrow{
+
+
+width:32px;
+
+
+height:50px;
+
+
+border:
+
+2px solid var(--gold-light);
+
+
+border-radius:20px;
+
+
+display:flex;
+
+
+justify-content:center;
+
+
+padding-top:8px;
+
+
+}
+
+
+
+.scroll-arrow i{
+
+
+display:block;
+
+
+width:8px;
+
+
+height:8px;
+
+
+border-right:
+
+2px solid var(--gold);
+
+
+border-bottom:
+
+2px solid var(--gold);
+
+
+transform:
+
+rotate(45deg);
+
+
+animation:
+
+scrollMove 1.8s infinite;
+
+
+}
+
+
+.scroll-arrow i:nth-child(2){
+
+animation-delay:.3s;
+
+}
+
+
+
+@keyframes scrollMove{
+
+
+50%{
+
+transform:
+translateY(10px)
+rotate(45deg);
+
+opacity:.2;
+
+}
+
+}
+
+
+
+
+
+
+/* GLASS CARD */
+
+
+.glass-card{
+
+
+background:
+
+rgba(255,255,255,.55);
+
+
+backdrop-filter:
+
+blur(25px);
+
+
+-webkit-backdrop-filter:
+
+blur(25px);
+
+
+border:
+
+1px solid rgba(255,255,255,.8);
 
 
 box-shadow:
 
-var(--shadow);
+var(--soft-shadow);
 
 
 border-radius:35px;
@@ -468,45 +657,6 @@ border-radius:35px;
 
 padding:35px;
 
-
-}
-
-
-
-
-
-/* TITLES */
-
-
-.section-title{
-
-
-font-family:
-
-"Noto Nastaliq Arabic",
-serif;
-
-
-font-size:48px;
-
-
-color:var(--gold);
-
-
-}
-
-
-
-
-
-/* QUOTE */
-
-
-.quote{
-
-font-size:27px;
-
-line-height:2;
 
 }
 
@@ -522,9 +672,12 @@ line-height:2;
 
 display:flex;
 
+
 justify-content:center;
 
+
 gap:15px;
+
 
 flex-wrap:wrap;
 
@@ -536,7 +689,7 @@ flex-wrap:wrap;
 .time-box{
 
 
-width:115px;
+width:110px;
 
 
 }
@@ -546,11 +699,7 @@ width:115px;
 .time-box strong{
 
 
-display:block;
-
-
 font-family:
-
 "Vazirmatn";
 
 
@@ -558,6 +707,9 @@ font-size:40px;
 
 
 color:var(--gold);
+
+
+display:block;
 
 
 }
@@ -569,14 +721,13 @@ color:var(--gold);
 /* TIMELINE */
 
 
-.timeline{
+.timeline-card{
 
 
-max-width:350px;
+max-width:380px;
+
 
 margin:20px auto;
-
-font-size:22px;
 
 
 }
@@ -585,40 +736,156 @@ font-size:22px;
 
 
 
-/* BUTTON */
+/* IOS GLASS BUTTON */
 
 
-.button{
+.buttons{
 
 
-display:inline-flex;
+display:flex;
 
 
-margin:8px;
+justify-content:center;
 
 
-padding:15px 30px;
+flex-wrap:wrap;
 
 
-border-radius:50px;
+}
+
+
+
+.glass-button{
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+gap:10px;
+
+
+min-width:160px;
+
+
+padding:16px 30px;
+
+
+margin:10px;
+
+
+border-radius:30px;
+
+
+border:
+
+1px solid rgba(255,255,255,.8);
 
 
 background:
 
 linear-gradient(
 135deg,
-white,
-#f4dfb0
+rgba(255,255,255,.75),
+rgba(255,255,255,.25)
 );
 
 
-color:var(--text);
+backdrop-filter:
+
+blur(20px);
+
+
+box-shadow:
+
+0 15px 35px rgba(180,150,130,.15),
+inset 0 1px 2px white;
+
+
+color:var(--ink);
 
 
 text-decoration:none;
 
 
-border:1px solid white;
+font-family:
+
+"Vazirmatn";
+
+
+transition:.3s;
+
+
+}
+
+
+
+.glass-button:before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:0;
+
+
+left:-100%;
+
+
+width:70%;
+
+
+height:100%;
+
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.8),
+transparent
+);
+
+
+transform:skewX(-25deg);
+
+
+transition:.8s;
+
+
+}
+
+
+
+.glass-button:hover:before{
+
+
+left:130%;
+
+
+}
+
+
+
+.glass-button:hover{
+
+
+transform:translateY(-4px);
 
 
 }
@@ -647,8 +914,11 @@ gap:18px;
 
 
 input,
-textarea,
-select{
+select,
+textarea{
+
+
+width:100%;
 
 
 padding:15px;
@@ -659,94 +929,47 @@ border-radius:20px;
 
 border:
 
-1px solid #ead9cf;
+1px solid rgba(201,164,92,.2);
 
 
-font-family:inherit;
+background:
+
+rgba(255,255,255,.65);
 
 
-font-size:17px;
+font-family:
+
+"Vazirmatn";
 
 
-text-align:center;
-
-
-}
-
-
-
-
-
-/* SCROLL */
-
-
-.scroll-down{
-
-
-margin-top:40px;
+text-align:right;
 
 
 }
 
 
 
-.scroll-circle{
 
 
-width:50px;
-
-height:50px;
+/* MUSIC */
 
 
-border-radius:50%;
-
-
-border:1px solid var(--gold);
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-margin:auto;
-
-
-animation:bounce 2s infinite;
-
-
-}
-
-
-@keyframes bounce{
-
-
-50%{
-
-transform:translateY(10px);
-
-}
-
-}
-
-
-
-
-.music{
+.music-btn{
 
 
 position:fixed;
 
+
 bottom:25px;
+
 
 left:25px;
 
 
-width:55px;
+width:60px;
 
-height:55px;
+
+height:60px;
 
 
 border-radius:50%;
@@ -755,40 +978,27 @@ border-radius:50%;
 border:none;
 
 
-background:white;
+background:
+
+rgba(255,255,255,.7);
+
+
+backdrop-filter:blur(20px);
 
 
 box-shadow:var(--shadow);
 
 
-z-index:10;
-
-}
-
-
-
-
-
-footer{
-
-
-font-family:
-
-"Noto Nastaliq Arabic";
-
-
-font-size:38px;
-
-
-color:var(--gold);
-
-
-padding:70px;
+z-index:20;
 
 
 }
 
 
+
+
+
+/* REVEAL */
 
 
 .reveal{
@@ -796,7 +1006,9 @@ padding:70px;
 
 opacity:0;
 
+
 transform:translateY(40px);
+
 
 transition:1s;
 
@@ -810,7 +1022,29 @@ transition:1s;
 
 opacity:1;
 
+
 transform:none;
+
+
+}
+
+
+
+
+footer{
+
+
+padding:70px;
+
+
+font-family:
+"Scheherazade New";
+
+
+font-size:40px;
+
+
+color:var(--gold);
 
 
 }
@@ -821,17 +1055,19 @@ transform:none;
 </head>
 
 
+
 <body>
 
 
-<audio id="music" autoplay loop muted>
+
+<audio id="music" loop>
 
 <source src="assets/music/birthday.mp3">
 
 </audio>
 
 
-<button class="music" onclick="toggleMusic()">
+<button class="music-btn" onclick="toggleMusic()">
 
 🎵
 
@@ -839,21 +1075,24 @@ transform:none;
 
 
 
-<section class="hero reveal">
 
+<section class="hero reveal">
 
 <div class="section-inner">
 
 
-<p class="hero-small-title">
+<div class="hero-small-title">
 
 به افتخار اولین سال زندگی
 
-<br>
+</div>
+
+
+<h1 class="hero-title">
 
 نورا جان
 
-</p>
+</h1>
 
 
 
@@ -871,9 +1110,7 @@ transform:none;
 
 
 <span class="photo-star star-one">✦</span>
-
 <span class="photo-star star-two">✧</span>
-
 <span class="photo-star star-three">✦</span>
 
 
@@ -881,38 +1118,23 @@ transform:none;
 
 
 
-<h1 class="hero-title">
+<div class="scroll-hint">
 
-نورا جان
+<div class="scroll-arrow">
 
-</h1>
+<i></i>
 
-
-
-<p class="hero-text">
-
-با عشق منتظر حضور شما هستیم
-
-</p>
-
-
-
-<div class="scroll-down">
-
-<div class="scroll-circle">
-
-↓
+<i></i>
 
 </div>
 
-</div>
 
+</div>
 
 
 </div>
 
 </section>
-
 
 
 
@@ -921,26 +1143,44 @@ transform:none;
 <section class="reveal">
 
 
-<div class="glass quote">
+<div class="quote-card">
 
-❝
+
+<span class="quote-mark">
+
+✦
+
+</span>
+
+
+<p class="quote-text">
+
+
+با افتخار از شما دعوت می‌کنیم
 
 <br>
 
-حضور شما،
+تا در جشن اولین سال تولد
 
 <br>
 
-قشنگ‌ترین قسمت این جشن است.
+نورا جان
 
 <br>
 
-❞
+در کنار ما باشید.
+
+
+</p>
+
+
 
 </div>
 
 
+
 </section>
+
 
 
 
@@ -957,18 +1197,18 @@ transform:none;
 </h2>
 
 
-<div class="glass">
+<div class="glass-card">
 
-
-🎂 تولد نورا
-
-<br><br>
 
 📅 پنج‌شنبه ۹ مهر
 
 <br><br>
 
 🕕 ساعت ۱۸
+
+<br><br>
+
+🎂 تالار دوریکا
 
 
 </div>
@@ -981,12 +1221,13 @@ transform:none;
 
 
 
+
 <section class="reveal">
 
 
 <h2 class="section-title">
 
-شمارش معکوس
+تا شروع جشن
 
 </h2>
 
@@ -994,37 +1235,33 @@ transform:none;
 <div class="countdown">
 
 
-<div class="glass time-box">
+<div class="glass-card time-box">
 
 <strong id="day">۰۰</strong>
-
 روز
 
 </div>
 
 
-<div class="glass time-box">
+<div class="glass-card time-box">
 
 <strong id="hour">۰۰</strong>
-
 ساعت
 
 </div>
 
 
-<div class="glass time-box">
+<div class="glass-card time-box">
 
 <strong id="minute">۰۰</strong>
-
 دقیقه
 
 </div>
 
 
-<div class="glass time-box">
+<div class="glass-card time-box">
 
 <strong id="second">۰۰</strong>
-
 ثانیه
 
 </div>
@@ -1045,29 +1282,42 @@ transform:none;
 
 <h2 class="section-title">
 
-برنامه جشن
+تایید حضور
 
 </h2>
 
 
-<div class="glass timeline">
 
-۱۸:۰۰
-
-<br>
-
-پذیرایی
-
-</div>
+<div class="glass-card rsvp-form">
 
 
-<div class="glass timeline">
+<input placeholder="نام مهمان">
 
-۲۰:۰۰
 
-<br>
+<select>
 
-شام
+<option>تعداد نفرات همراه</option>
+
+<option>۱ نفر</option>
+
+<option>۲ نفر</option>
+
+<option>۳ نفر</option>
+
+<option>۴ نفر</option>
+
+</select>
+
+
+<textarea placeholder="پیام شما"></textarea>
+
+
+<button class="glass-button">
+
+✓ ثبت حضور
+
+</button>
+
 
 </div>
 
@@ -1089,123 +1339,34 @@ transform:none;
 </h2>
 
 
-<a class="button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
+<div class="buttons">
+
+
+<a class="glass-button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
 
 Google Maps
 
 </a>
 
 
-<a class="button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
+<a class="glass-button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
 
 نشان
 
 </a>
 
 
-<a class="button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
+<a class="glass-button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
 
 بلد
 
 </a>
 
 
-</section>
-
-
-
-
-
-
-
-<section class="reveal">
-
-
-<h2 class="section-title">
-
-تایید حضور
-
-</h2>
-
-
-
-<div class="glass">
-
-
-<form class="rsvp-form">
-
-
-<input placeholder="نام شما">
-
-
-<select>
-
-<option>
-
-تعداد نفرات همراه
-
-</option>
-
-
-<option>۱ نفر</option>
-
-<option>۲ نفر</option>
-
-<option>۳ نفر</option>
-
-<option>۴ نفر</option>
-
-
-</select>
-
-
-
-<select>
-
-<option>
-
-وضعیت حضور
-
-</option>
-
-
-<option>
-
-با افتخار می‌آیم
-
-</option>
-
-
-<option>
-
-متأسفانه نمی‌توانم بیایم
-
-</option>
-
-
-</select>
-
-
-
-<textarea placeholder="پیام شما"></textarea>
-
-
-
-<button class="button">
-
-ثبت پاسخ
-
-</button>
-
-
-</form>
-
-
 </div>
 
 
 </section>
-
 
 
 
@@ -1225,11 +1386,11 @@ Google Maps
 
 
 
-
 <script>
 
 
-const observer=new IntersectionObserver(entries=>{
+const observer =
+new IntersectionObserver(entries=>{
 
 entries.forEach(e=>{
 
@@ -1239,43 +1400,17 @@ e.target.classList.add("show");
 
 });
 
-
 });
 
 
 document.querySelectorAll(".reveal")
-.forEach(e=>observer.observe(e));
+.forEach(x=>observer.observe(x));
 
 
 
 
-
-let musicPlaying=false;
-
-
-function toggleMusic(){
-
-
-let audio=document.getElementById("music");
-
-
-audio.muted=false;
-
-
-audio.play();
-
-
-musicPlaying=true;
-
-
-}
-
-
-
-
-
-const target=new Date("2026-10-01T18:00:00");
-
+const target =
+new Date("2026-10-01T18:00:00");
 
 
 function fa(n){
@@ -1285,7 +1420,6 @@ return String(n)
 .replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
 
 }
-
 
 
 function update(){
@@ -1309,27 +1443,41 @@ second.innerHTML=fa(Math.floor(d/1000)%60);
 }
 
 
-
 setInterval(update,1000);
 
 update();
 
 
 
-
-window.addEventListener("load",()=>{
-
-
-let audio=document.getElementById("music");
+let playing=false;
 
 
-audio.muted=true;
+function toggleMusic(){
 
 
-audio.play().catch(()=>{});
+let m=document.getElementById("music");
 
 
-});
+if(!playing){
+
+m.play();
+
+playing=true;
+
+
+}else{
+
+
+m.pause();
+
+playing=false;
+
+
+}
+
+
+}
+
 
 
 </script>
