@@ -453,3 +453,9 @@ body::before,body::after{z-index:0!important}
 .guest-count-btn:hover{background:#f8ffff!important;border-color:#5f928a!important}
 .guest-count-btn.is-selected{color:#103c4a!important;background:#a9cedb!important;border-color:#47798c!important}
 .rsvp-submit span{color:#d6ad58!important}
+
+
+/* Pastel rainbow count buttons, with teal and blue emphasis */
+.guest-count-btn{background:linear-gradient(135deg,#d8f0e9 0%,#d8eaf5 28%,#e5e0f5 52%,#f2ddec 76%,#f6e8d5 100%)!important;border-color:#8eb7b0!important}
+.guest-count-btn:hover{background:linear-gradient(135deg,#c8e8df 0%,#c9e0ef 30%,#ded7ef 55%,#edd4e3 78%,#f2dfc9 100%)!important;border-color:#5f928a!important}
+.guest-count-btn.is-selected{background:linear-gradient(135deg,#a8d8cc 0%,#acd4e6 42%,#c8d8ec 70%,#d8d0e8 100%)!important;border-color:#4f8f89!important}
