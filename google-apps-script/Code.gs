@@ -55,6 +55,7 @@ function doPost(e) {
   try {
     if (action === "create_guest") return createGuest_(p);
     if (action === "rsvp") return saveRsvp_(p);
+    if (action === "reset_all") return resetAll_();
     return json_({ok:false, error:"unknown_action"});
   } catch (err) {
     return json_({ok:false, error:String(err.message || err)});
@@ -186,6 +187,31 @@ function saveRsvp_(p) {
   rsvp.appendRow([new Date(),guestId,invitedName,attendance,count,message,userAgent]);
   guests.getRange(guest.row,6,1,3).setValues([[attendance,count,new Date()]]);
   return json_({ok:true,guestId:guestId,invitedName:invitedName,attendance:attendance,guestCount:count});
+}
+
+function resetAll_() {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var guests = ss.getSheetByName(GUESTS_SHEET);
+    if (guests) {
+      guests.clearContents();
+      guests.getRange(1,1,1,GUEST_HEADERS.length).setValues([GUEST_HEADERS]);
+      guests.setFrozenRows(1);
+    } else {
+      guests = getOrCreateSheet_(GUESTS_SHEET, GUEST_HEADERS);
+    }
+    var rsvp = ss.getSheetByName(RSVP_SHEET);
+    if (rsvp) {
+      rsvp.clearContents();
+      rsvp.getRange(1,1,1,RSVP_HEADERS.length).setValues([RSVP_HEADERS]);
+      rsvp.setFrozenRows(1);
+    }
+    return json_({ok:true,reset:true});
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function setupSheet() {
