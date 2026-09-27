@@ -298,9 +298,10 @@ footer{font-size:58px;line-height:2}
   .invitation-card img{border-radius:10.5px}
 }
 
-.invitation-card{inset:auto!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:auto!important;height:auto!important;transform:translate(-50%,-50%)!important;border-width:1.25px!important;border-radius:14px;background:transparent;overflow:hidden;box-shadow:none}
-.invitation-card img{display:block;width:auto!important;height:auto!important;max-width:92%;max-height:92%;object-fit:contain;border-radius:12.5px}
+.invitation-card{inset:auto!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:100%!important;height:auto!important;transform:translate(-50%,-50%)!important;border:1.25px solid var(--gold)!important;border-radius:14px;background:transparent;overflow:hidden;box-shadow:none;box-sizing:border-box}
+.invitation-card img{display:block;width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:contain;border-radius:12px}
 .envelope-scene.is-opening .invitation-card{transform:translate(-50%,-50%)!important}
+@media(max-width:600px){.invitation-card{width:100%!important;border-radius:12px}.invitation-card img{border-radius:10.5px}}
 .music-btn{width:52px;height:52px;bottom:20px;left:20px;display:flex;align-items:center;justify-content:center;font-size:0;background:rgba(255,255,255,.78);border:1px solid rgba(214,173,88,.28);box-shadow:0 10px 30px rgba(110,80,140,.13)}
 .music-note{font-family:Arial,sans-serif;font-size:25px;line-height:1;color:var(--gold-deep)}
 body::before,body::after{content:"✦";position:fixed;z-index:0;pointer-events:none;color:rgba(214,173,88,.34);font-family:Arial,sans-serif;text-shadow:0 0 12px rgba(255,231,166,.65)}
