@@ -690,3 +690,23 @@ body.guest-loading .music-greeting{visibility:hidden}
 
 
 .music-note{display:block!important;visibility:visible!important;opacity:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;line-height:1!important;color:var(--gold-deep)!important;}
+
+/* Restore music button position */
+.music-btn{
+  position:fixed!important;
+  left:20px!important;
+  right:auto!important;
+  bottom:20px!important;
+  top:auto!important;
+  z-index:10000!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:52px!important;
+  height:52px!important;
+}
+@media(max-width:600px){
+  .music-btn{left:14px!important;bottom:14px!important;width:48px!important;height:48px!important}
+}
