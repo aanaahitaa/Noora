@@ -687,3 +687,6 @@ body.guest-loading .music-greeting{visibility:hidden}
   }
   .music-note{font-size:18px!important}
 }
+
+
+.music-note{display:block!important;visibility:visible!important;opacity:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;line-height:1!important;color:var(--gold-deep)!important;}
