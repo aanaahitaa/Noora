@@ -19,12 +19,10 @@ setInterval(updateCountdown,1000);updateCountdown();
 const RSVP_ENDPOINT=window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL;
 let attendance="yes";
 let guestCount=1;
-
 const params=new URLSearchParams(window.location.search);
 let guestName=(params.get("guest")||params.get("name")||"").trim();
 const guestId=(params.get("id")||params.get("g")||"").trim();
-const maxGuests=5;
-
+const maxGuests=7;
 const attendanceOptions=document.querySelectorAll(".attendance-option");
 const guestCountButtons=document.querySelectorAll(".guest-count-btn");
 const guestCountWrap=document.getElementById("guestCountWrap");
@@ -36,75 +34,18 @@ let toastTimer=null;
 const rsvpButtonHTML='<span>✦</span> ثبت حضور <span>✦</span>';
 const declinedButtonHTML='<span>✦</span> ثبت پاسخ <span>✦</span>';
 
-guestCountButtons.forEach(button=>{
-  const count=Number(button.dataset.count);
-  button.hidden=count>maxGuests;
-  button.addEventListener("click",()=>{
-    guestCount=count;
-    guestCountButtons.forEach(item=>item.classList.toggle("is-selected",item===button));
-  });
-});
-
-attendanceOptions.forEach(button=>{
-  button.addEventListener("click",()=>{
-    attendance=button.dataset.attendance;
-    attendanceOptions.forEach(item=>item.classList.toggle("is-selected",item===button));
-    rsvpForm.classList.toggle("is-declined",attendance==="no");
-    rsvpSubmit.innerHTML=attendance==="yes"?rsvpButtonHTML:declinedButtonHTML;
-  });
-});
-
-function showRsvpToast(message){
-  if(!rsvpToast)return;
-  clearTimeout(toastTimer);
-  rsvpToast.textContent=message;
-  rsvpToast.classList.remove("is-visible");
-  void rsvpToast.offsetWidth;
-  rsvpToast.classList.add("is-visible");
-  toastTimer=setTimeout(()=>rsvpToast.classList.remove("is-visible"),4500);
-}
-
-function submitToGoogleSheet(payload){
-  if(RSVP_ENDPOINT.includes("PASTE_")) return false;
-  let iframe=document.getElementById("rsvpSubmitFrame");
-  if(!iframe){iframe=document.createElement("iframe");iframe.name="rsvpSubmitFrame";iframe.id="rsvpSubmitFrame";iframe.hidden=true;document.body.appendChild(iframe);}
-  let form=document.getElementById("rsvpSubmitForm");
-  if(!form){form=document.createElement("form");form.id="rsvpSubmitForm";form.method="POST";form.target="rsvpSubmitFrame";form.style.display="none";document.body.appendChild(form);}
-  form.action=RSVP_ENDPOINT;form.innerHTML="";
-  Object.entries(payload).forEach(([key,value])=>{const input=document.createElement("input");input.type="hidden";input.name=key;input.value=value==null?"":value;form.appendChild(input);});
-  form.submit();
-  return true;
-}
-
-rsvpSubmit.addEventListener("click",()=>{
-  if(!guestId){rsvpFeedback.textContent="این لینک مهمان معتبر نیست. لطفاً از لینک اختصاصی دعوت‌نامه وارد شوید.";return;}
-  if(!guestName){rsvpFeedback.textContent="نام مهمان این لینک مشخص نشده است.";return;}
-  const message=document.getElementById("guestMessage").value.trim();
-  const payload={action:"rsvp",guestId:guestId,attendance:attendance,guestCount:attendance==="yes"?guestCount:0,message:message,userAgent:navigator.userAgent};
-  if(!submitToGoogleSheet(payload)){rsvpFeedback.textContent="اتصال Google Sheets هنوز فعال نشده است.";return;}
-  if(attendance==="yes"){
-    const successMessage=`ممنون ${guestName} جان؛ حضور شما برای ${persianNumber(guestCount)} نفر ثبت شد ❤️`;
-    rsvpFeedback.textContent="";
-    showRsvpToast(successMessage);
-  }else{
-    const successMessage=`ممنون ${guestName} جان؛ پاسخ شما ثبت شد 🌷`;
-    rsvpFeedback.textContent="";
-    showRsvpToast(successMessage);
-  }
-});
+guestCountButtons.forEach(button=>{const count=Number(button.dataset.count);button.hidden=count>maxGuests;button.addEventListener("click",()=>{guestCount=count;guestCountButtons.forEach(item=>item.classList.toggle("is-selected",item===button));});});
+attendanceOptions.forEach(button=>{button.addEventListener("click",()=>{attendance=button.dataset.attendance;attendanceOptions.forEach(item=>item.classList.toggle("is-selected",item===button));rsvpForm.classList.toggle("is-declined",attendance==="no");rsvpSubmit.innerHTML=attendance==="yes"?rsvpButtonHTML:declinedButtonHTML;});});
+function showRsvpToast(message){if(!rsvpToast)return;clearTimeout(toastTimer);rsvpToast.textContent=message;rsvpToast.classList.remove("show");void rsvpToast.offsetWidth;rsvpToast.classList.add("show");toastTimer=setTimeout(()=>rsvpToast.classList.remove("show"),4500);}
+function submitToGoogleSheet(payload){if(RSVP_ENDPOINT.includes("PASTE_"))return false;let iframe=document.getElementById("rsvpSubmitFrame");if(!iframe){iframe=document.createElement("iframe");iframe.name="rsvpSubmitFrame";iframe.id="rsvpSubmitFrame";iframe.hidden=true;document.body.appendChild(iframe);}let form=document.getElementById("rsvpSubmitForm");if(!form){form=document.createElement("form");form.id="rsvpSubmitForm";form.method="POST";form.target="rsvpSubmitFrame";form.style.display="none";document.body.appendChild(form);}form.action=RSVP_ENDPOINT;form.innerHTML="";Object.entries(payload).forEach(([key,value])=>{const input=document.createElement("input");input.type="hidden";input.name=key;input.value=value==null?"":value;form.appendChild(input);});form.submit();return true;}
+rsvpSubmit.addEventListener("click",()=>{if(!guestId){rsvpFeedback.textContent="این لینک مهمان معتبر نیست. لطفاً از لینک اختصاصی دعوت‌نامه وارد شوید.";return;}if(!guestName){rsvpFeedback.textContent="نام مهمان این لینک مشخص نشده است.";return;}const message=document.getElementById("guestMessage").value.trim();const payload={action:"rsvp",guestId:guestId,attendance:attendance,guestCount:attendance==="yes"?guestCount:0,message:message,userAgent:navigator.userAgent};if(!submitToGoogleSheet(payload)){rsvpFeedback.textContent="اتصال Google Sheets هنوز فعال نشده است.";return;}rsvpFeedback.textContent="";if(attendance==="yes")showRsvpToast(`ممنون ${guestName} جان؛ حضور شما برای ${persianNumber(guestCount)} نفر ثبت شد ❤️`);else showRsvpToast(`ممنون ${guestName} جان؛ پاسخ شما ثبت شد 🌷`);});
 
 // =========================
 // PERSONALIZED ENVELOPE + MUSIC
 // =========================
-const music=document.getElementById("music");
-const musicGate=document.getElementById("musicGate");
-const musicEnter=document.getElementById("musicEnter");
-const musicGreeting=document.getElementById("musicGreeting");
-const envelopeScene=document.getElementById("envelopeScene");
-let playing=false;
-music.volume=0.35;
-const greetingText=musicGreeting.querySelector(".greeting-text");
-greetingText.textContent=guestName ? `${guestName} عزیز` : "مهمان عزیز";
+const music=document.getElementById("music"),musicGate=document.getElementById("musicGate"),musicEnter=document.getElementById("musicEnter"),musicGreeting=document.getElementById("musicGreeting"),envelopeScene=document.getElementById("envelopeScene");
+let playing=false;music.volume=0.35;
+const greetingText=musicGreeting.querySelector(".greeting-text");greetingText.textContent=guestName?`${guestName} عزیز`:"مهمان عزیز";
 function updateGuestMeta(name){if(!name)return;const title=`${name} عزیز؛ دعوت‌نامه تولد نورا جان`;const description=`${name} عزیز، با دلِ خوش از شما دعوت می‌کنیم تا در جشن یک‌سالگی نورا جان در کنار ما باشید.`;document.title=title;const setMeta=(selector,content)=>{const el=document.querySelector(selector);if(el)el.setAttribute("content",content)};setMeta("meta[name=\"description\"]",description);setMeta("meta[property=\"og:title\"]",title);setMeta("meta[property=\"og:description\"]",description);setMeta("meta[name=\"twitter:title\"]",title);setMeta("meta[name=\"twitter:description\"]",description);}
 updateGuestMeta(guestName);
 function loadGuestName(){if(guestName||!guestId||!RSVP_ENDPOINT||RSVP_ENDPOINT.includes("PASTE_"))return;const callback="nooraGuest_"+Date.now();window[callback]=(data)=>{if(data&&data.ok&&data.guest){guestName=String(data.guest.name||"").trim();greetingText.textContent=guestName?`${guestName} عزیز`:"مهمان عزیز";updateGuestMeta(guestName);}delete window[callback];const old=document.getElementById(callback);if(old)old.remove();};const s=document.createElement("script");s.id=callback;s.src=RSVP_ENDPOINT+"?action=get_guest&guestId="+encodeURIComponent(guestId)+"&callback="+callback+"&t="+Date.now();s.onerror=()=>{delete window[callback];s.remove()};document.body.appendChild(s);}
