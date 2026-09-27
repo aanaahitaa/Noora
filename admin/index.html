@@ -49,8 +49,9 @@ button:disabled{opacity:.55;cursor:wait}
   <input name="invitationUrl" id="saveUrl">
 </form>
 
+<script src="../js/config.js"></script>
 <script>
-const GS_ENDPOINT="PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE";
+const GS_ENDPOINT=window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL;
 const base=new URL("../",location.href).href;
 const nameEl=document.getElementById("guestName");
 const maxEl=document.getElementById("maxGuests");
