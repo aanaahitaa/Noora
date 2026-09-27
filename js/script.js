@@ -17,7 +17,7 @@ setInterval(updateCountdown,1000);updateCountdown();
 // RSVP
 // =========================
 let attendance="yes";
-let guestCount=2;
+let guestCount=1;
 const attendanceOptions=document.querySelectorAll(".attendance-option");
 const guestCountButtons=document.querySelectorAll(".guest-count-btn");
 const guestCountWrap=document.getElementById("guestCountWrap");
