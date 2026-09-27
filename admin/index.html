@@ -19,6 +19,8 @@ input,select{width:100%;padding:14px 18px;border-radius:18px;border:1px solid #b
 input:focus,select:focus{border-color:#b69ae8;box-shadow:0 0 0 4px #b9a7e81c}
 .hint{font-size:18px;color:#9b849f;margin-top:6px}
 button{width:100%;border:0;border-radius:22px;padding:15px 20px;font:inherit;font-size:27px;color:white;cursor:pointer;background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 12px 30px #b9a7e84d}
+button:disabled{opacity:.55;cursor:wait}
+.status{display:none;margin:16px 0 0;padding:12px 15px;border-radius:16px;background:#fff4f7;text-align:center;font-size:20px}.status.show{display:block}.status.error{color:#a05a5a}
 .result{display:none;margin-top:24px;padding:20px;border:1px solid #d6ad5866;border-radius:22px;background:#fff9f2b8}.result.show{display:block}
 .result-title{text-align:center;font-size:27px;color:var(--gold-deep);margin-bottom:10px}.linkbox{direction:ltr;word-break:break-all;text-align:left;background:#fff;border-radius:14px;padding:12px;font-family:Arial,sans-serif;font-size:14px;color:#6b5a73;border:1px solid #eee}
 .copy{margin-top:12px;background:linear-gradient(135deg,#d6ad58,#b98b3b);font-size:22px}
@@ -29,23 +31,73 @@ button{width:100%;border:0;border-radius:22px;padding:15px 20px;font:inherit;fon
 <main class="wrap">
   <header class="header"><div class="star">✦　✧　✦</div><h1>پنل مدیریت نورا</h1><p>ساخت لینک اختصاصی مهمان</p></header>
   <section class="card">
-    <div class="field"><label for="guestName">نام مهمان</label><input id="guestName" type="text" placeholder="مثلاً مریم"></div>
+    <div class="field"><label for="guestName">نام مهمان</label><input id="guestName" type="text" placeholder="مثلاً مریم" autocomplete="off"></div>
     <div class="field"><label for="maxGuests">تعداد نفرات مجاز</label><select id="maxGuests"><option value="1" selected>۱ نفر</option><option value="2">۲ نفر</option><option value="3">۳ نفر</option><option value="4">۴ نفر</option><option value="5">۵ نفر</option></select><div class="hint">پیش‌فرض همیشه روی ۱ نفر است.</div></div>
     <button id="create">✦ ساخت لینک اختصاصی ✦</button>
-    <div class="result" id="result"><div class="result-title">لینک مهمان آماده شد ✦</div><div class="linkbox" id="link"></div><button class="copy" id="copy">کپی لینک</button></div>
+    <div class="status" id="status" aria-live="polite"></div>
+    <div class="result" id="result"><div class="result-title">لینک مهمان ذخیره شد ✦</div><div class="linkbox" id="link"></div><button class="copy" id="copy">کپی لینک</button></div>
   </section>
-  <div class="note">این نسخه فعلاً فقط رابط کاربری و ساخت لینک آزمایشی است؛ ذخیره دائمی مهمان‌ها و اتصال به Google Sheets را در مرحله بعد اضافه می‌کنیم.</div>
+  <div class="note">هر لینک با یک شناسه ثابت در Google Sheets ذخیره می‌شود و پاسخ مهمان نیز با همان شناسه ثبت خواهد شد.</div>
 </main>
+
+<iframe name="guestSaveFrame" id="guestSaveFrame" hidden></iframe>
+<form id="saveForm" target="guestSaveFrame" method="POST" style="display:none">
+  <input name="action" value="create_guest">
+  <input name="guestId" id="saveGuestId">
+  <input name="name" id="saveName">
+  <input name="maxGuests" id="saveMax">
+  <input name="invitationUrl" id="saveUrl">
+</form>
+
 <script>
+const GS_ENDPOINT="PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE";
 const base=new URL("../",location.href).href;
-const nameEl=document.getElementById("guestName"),maxEl=document.getElementById("maxGuests"),result=document.getElementById("result"),linkEl=document.getElementById("link");
-document.getElementById("create").onclick=()=>{
- const name=nameEl.value.trim();
- if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";return}
- const id="G"+Math.random().toString(36).slice(2,8).toUpperCase();
- const url=base+"?id="+encodeURIComponent(id)+"&guest="+encodeURIComponent(name)+"&max="+maxEl.value;
- linkEl.textContent=url;result.classList.add("show");
+const nameEl=document.getElementById("guestName");
+const maxEl=document.getElementById("maxGuests");
+const result=document.getElementById("result");
+const linkEl=document.getElementById("link");
+const statusEl=document.getElementById("status");
+const createBtn=document.getElementById("create");
+const saveForm=document.getElementById("saveForm");
+
+function showStatus(message,error=false){
+  statusEl.textContent=message;
+  statusEl.className="status show"+(error?" error":"");
+}
+
+createBtn.onclick=()=>{
+  const name=nameEl.value.trim();
+  if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";showStatus("لطفاً نام مهمان را وارد کنید.",true);return}
+  if(GS_ENDPOINT.includes("PASTE_")){
+    showStatus("آدرس Google Apps Script هنوز در پنل وارد نشده است.",true);
+    return;
+  }
+
+  const id="G"+crypto.randomUUID().replace(/-/g,"").slice(0,10).toUpperCase();
+  const url=base+"?id="+encodeURIComponent(id)+"&guest="+encodeURIComponent(name)+"&max="+maxEl.value;
+
+  document.getElementById("saveGuestId").value=id;
+  document.getElementById("saveName").value=name;
+  document.getElementById("saveMax").value=maxEl.value;
+  document.getElementById("saveUrl").value=url;
+
+  createBtn.disabled=true;
+  showStatus("در حال ذخیره مهمان در Google Sheets…");
+  saveForm.submit();
+
+  linkEl.textContent=url;
+  result.classList.add("show");
+
+  setTimeout(()=>{
+    createBtn.disabled=false;
+    showStatus("مهمان در شیت ذخیره شد؛ لینک دائمی آماده است.");
+  },1200);
 };
-document.getElementById("copy").onclick=async()=>{await navigator.clipboard.writeText(linkEl.textContent);document.getElementById("copy").textContent="✓ لینک کپی شد";setTimeout(()=>document.getElementById("copy").textContent="کپی لینک",1800)};
+
+document.getElementById("copy").onclick=async()=>{
+  await navigator.clipboard.writeText(linkEl.textContent);
+  document.getElementById("copy").textContent="✓ لینک کپی شد";
+  setTimeout(()=>document.getElementById("copy").textContent="کپی لینک",1800);
+};
 </script>
 </body></html>
