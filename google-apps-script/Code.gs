@@ -19,7 +19,9 @@ const GUEST_HEADERS = [
   "لینک دعوت‌نامه",
   "وضعیت پاسخ",
   "تعداد نفرات ثبت‌شده",
-  "آخرین پاسخ"
+  "آخرین پاسخ",
+  "عنوان پیش‌نمایش",
+  "توضیح پیش‌نمایش"
 ];
 
 function getOrCreateSheet_(name, headers) {
@@ -136,6 +138,11 @@ function createGuest_(p) {
     var name = String(p.name || "").trim();
     var guestId = String(p.guestId || "").trim();
     var invitationUrl = String(p.invitationUrl || "").trim();
+    var ogTitle = String(p.ogTitle || "").trim();
+    var ogDescription = String(p.ogDescription || "").trim();
+
+    if (!ogTitle) ogTitle = "تقدیم به " + name + " عزیز";
+    if (!ogDescription) ogDescription = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
 
     if (!name || !guestId || !invitationUrl) {
       return json_({
@@ -172,7 +179,9 @@ function createGuest_(p) {
             guestId: String(rows[i][1] || ""),
             name: String(rows[i][2] || ""),
             maxGuests: 7,
-            invitationUrl: String(rows[i][4] || "")
+            invitationUrl: String(rows[i][4] || ""),
+            ogTitle: String(rows[i][8] || ("تقدیم به " + String(rows[i][2] || "") + " عزیز")),
+            ogDescription: String(rows[i][9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
           });
         }
       }
@@ -197,7 +206,9 @@ function createGuest_(p) {
       invitationUrl,
       "بدون پاسخ",
       "",
-      ""
+      "",
+      ogTitle,
+      ogDescription
     ]);
 
     return json_({
@@ -236,7 +247,9 @@ function getGuest_(callback, guestId) {
     guest: {
       guestId: String(guest.values[1] || ""),
       name: String(guest.values[2] || ""),
-      maxGuests: 7
+      maxGuests: 7,
+      ogTitle: String(guest.values[8] || ("تقدیم به " + String(guest.values[2] || "") + " عزیز")),
+      ogDescription: String(guest.values[9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
     }
   }, callback);
 }
@@ -364,7 +377,9 @@ function findGuestByName_(callback, name) {
           name: String(values[i][2] || ""),
           maxGuests: 7,
           url: String(values[i][4] || ""),
-          invitationUrl: String(values[i][4] || "")
+          invitationUrl: String(values[i][4] || ""),
+          ogTitle: String(values[i][8] || ("تقدیم به " + String(values[i][2] || "") + " عزیز")),
+          ogDescription: String(values[i][9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
         }
       }, callback);
     }
