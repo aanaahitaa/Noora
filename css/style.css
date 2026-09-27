@@ -92,3 +92,54 @@ section{min-height:auto;padding:62px 20px}
   .music-enter{font-size:24px;padding:13px 20px}
   .section-scroll{height:32px;font-size:22px}
 }
+
+
+/* Final mobile-safe typography and intro */
+html,body,#musicGate,.music-gate-card{width:100%;max-width:100%;overflow-x:hidden}
+body{overflow-y:auto}
+.music-gate{overflow:hidden}
+.envelope-scene{width:min(86vw,520px);height:min(70vh,620px);max-width:100%;perspective:none}
+.envelope{display:none!important}
+.envelope-shadow{display:none!important}
+.invitation-card{position:absolute;inset:0;width:100%;height:100%;left:auto;right:auto;bottom:auto;border-radius:24px;box-shadow:0 20px 60px rgba(110,80,140,.2);transform:none!important;transition:none!important;animation:none!important}
+.invitation-card img{width:100%;height:100%;display:block;object-fit:contain;border-radius:24px}
+.music-gate.is-leaving{animation:gateFadeOut .7s ease forwards;pointer-events:none}
+.music-gate.is-leaving .music-gate-card{animation:gateContentFade .55s ease forwards}
+@keyframes gateFadeOut{from{opacity:1}to{opacity:0;visibility:hidden}}
+@keyframes gateContentFade{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.985)}}
+.music-greeting{display:flex;align-items:center;justify-content:center;gap:16px;padding:0 12px}
+.music-greeting>span{flex:0 0 auto;font-family:Arial,sans-serif;font-size:25px;color:var(--gold)}
+.music-greeting .greeting-text{font-family:"NooraNastaliq",serif;font-size:40px;color:var(--gold-deep)}
+.hero-title,.section-title{position:relative;z-index:3;overflow:visible!important;-webkit-text-stroke:.35px rgba(167,122,46,.38);padding:12px 20px 22px;box-sizing:border-box;text-shadow:0 0 16px rgba(214,173,88,.22);width:100%;max-width:100%}
+.hero-title{font-size:112px;line-height:1.38;margin-top:0;margin-bottom:8px}
+.section-title{font-size:68px;line-height:1.9;white-space:normal;margin-bottom:24px}
+.hero-small-title{font-size:42px;line-height:1.9;padding-inline:8px}
+.quote-text{font-size:35px;line-height:2.15;padding-inline:6px}
+.event-item{font-size:36px}
+.event-card{gap:30px;overflow:visible}
+.time-box span{font-size:27px}
+.rsvp-question,.guest-count-title{font-size:32px}
+.attendance-option{font-size:28px}
+input,textarea,select{font-size:27px}
+.glass-button{font-size:31px}
+footer{font-size:58px;line-height:2}
+@media(max-width:600px){
+  .envelope-scene{width:min(88vw,420px);height:min(58vh,500px)}
+  .invitation-card{border-radius:20px}
+  .music-greeting{gap:10px;padding-inline:6px}
+  .music-greeting>span{font-size:21px}
+  .music-greeting .greeting-text{font-size:35px}
+  .hero-title{font-size:78px;line-height:1.48;padding:12px 18px 24px}
+  .hero-small-title{font-size:34px;line-height:1.95;padding-inline:8px}
+  .section-title{font-size:49px;line-height:1.9;padding:12px 14px 22px}
+  .quote-text{font-size:30px;line-height:2.2}
+  .event-card{width:min(94%,760px);flex-direction:column;gap:4px;padding:28px 18px}
+  .event-item{font-size:31px;line-height:1.95;white-space:normal}
+  .event-divider{font-size:19px;line-height:1.2}
+  .time-box span{font-size:26px}
+  .rsvp-question,.guest-count-title{font-size:29px}
+  .attendance-option{font-size:27px}
+  input,textarea,select{font-size:25px}
+  .glass-button{font-size:30px}
+  footer{font-size:49px}
+}
