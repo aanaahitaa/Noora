@@ -519,3 +519,10 @@ body::after{
   body::before{top:12vh;left:2vw;font-size:12px;letter-spacing:18px}
   body::after{top:68vh;right:2vw;font-size:11px;letter-spacing:20px}
 }
+
+
+/* Final background star palette: gold outline with pink, purple and blue glow only */
+body::before,body::after{
+  color:rgba(214,173,88,.58)!important;
+  text-shadow:0 0 10px rgba(255,217,235,.75),0 0 18px rgba(234,220,255,.65),0 0 28px rgba(191,232,255,.55)!important;
+}
