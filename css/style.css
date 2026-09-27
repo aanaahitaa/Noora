@@ -623,6 +623,34 @@ body.guest-loading .music-greeting{visibility:hidden}
 }
 
 
+/* iOS / Safari — explicit Persian Nastaliq shaping and joining */
+@supports (-webkit-touch-callout:none){
+  :lang(fa),
+  .hero-title,
+  .section-title,
+  .hero-small-title,
+  .event-item,
+  .quote-text,
+  .rsvp-question,
+  .guest-count-title,
+  .attendance-option,
+  .glass-button,
+  .music-greeting .greeting-text,
+  .music-enter,
+  footer{
+    direction:rtl!important;
+    unicode-bidi:isolate!important;
+    font-family:"NooraNastaliq",serif!important;
+    font-feature-settings:"isol" 1,"init" 1,"medi" 1,"fina" 1,"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+    -webkit-font-feature-settings:"isol" 1,"init" 1,"medi" 1,"fina" 1,"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+    font-kerning:normal!important;
+    font-variant-ligatures:contextual common-ligatures!important;
+    text-rendering:optimizeLegibility!important;
+    -webkit-font-smoothing:antialiased;
+    font-synthesis:none!important;
+  }
+}
+
 /* Safari / iOS Nastaliq shaping + correct slow opening split */
 @supports (-webkit-touch-callout:none){
   body,button,input,textarea,select,
