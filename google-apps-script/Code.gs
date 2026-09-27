@@ -81,6 +81,24 @@ function jsonp_(data, callback) {
 function doGet(e) {
   var p = e && e.parameter ? e.parameter : {};
 
+  // بعضی درخواست‌های مستقیم/redirect شده ممکن است e.parameter را
+  // کامل منتقل نکنند؛ queryString را هم به‌عنوان fallback می‌خوانیم.
+  if (e && e.queryString) {
+    var qs = String(e.queryString);
+    qs.split("&").forEach(function(part) {
+      var bits = part.split("=");
+      var key = decodeURIComponent(bits[0] || "");
+      if (!key || p[key] !== undefined) return;
+
+      var value = bits.slice(1).join("=");
+      try {
+        value = decodeURIComponent(value.replace(/\+/g, " "));
+      } catch (ignore) {}
+
+      p[key] = value;
+    });
+  }
+
   try {
     if (p.action === "list_guests") {
       return listGuests_(p.callback);
@@ -98,14 +116,16 @@ function doGet(e) {
       return getGuest_(p.callback, p.guestId);
     }
 
-    // پشتیبانی از پاک کردن کامل لیست از طریق JSONP
+    // پاک کردن کامل لیست؛ هم JSON و هم JSONP پشتیبانی می‌شود.
     if (p.action === "reset_all") {
       return resetAll_(p.callback);
     }
 
+    // پاسخ تشخیصی برای درخواست‌های بدون action
     return json_({
       ok: true,
-      service: "Noora guest service"
+      service: "Noora guest service",
+      action: p.action || null
     });
 
   } catch (err) {
