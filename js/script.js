@@ -16,7 +16,7 @@ setInterval(updateCountdown,1000);updateCountdown();
 // =========================
 // RSVP + GUEST LINK
 // =========================
-const RSVP_ENDPOINT="PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE";
+const RSVP_ENDPOINT=window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL;
 let attendance="yes";
 let guestCount=1;
 
