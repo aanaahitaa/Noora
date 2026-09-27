@@ -308,4 +308,4 @@ body::before,body::after{content:"✦";position:fixed;z-index:0;pointer-events:n
 body::before{content:"✦  ·  ✧";top:14vh;left:4vw;font-size:18px;letter-spacing:18px;animation:ambientSparkle 5s ease-in-out infinite}
 body::after{content:"✧  ·  ✦";right:5vw;top:54vh;font-size:16px;letter-spacing:15px;animation:ambientSparkle 6s ease-in-out -2s infinite}
 @keyframes ambientSparkle{0%,100%{opacity:.22;transform:translateY(0) scale(.9)}50%{opacity:.7;transform:translateY(-10px) scale(1.08)}}
-@media(max-width:600px){.invitation-card{border-radius:12px}.invitation-card img{max-width:92%;max-height:92%;border-radius:10.5px}.music-btn{width:46px;height:46px;bottom:16px;left:16px}.music-note{font-size:22px}}
+@media(max-width:600px){.invitation-card{width:100%!important;border-radius:12px}.invitation-card img{width:100%!important;max-width:none!important;height:auto!important;max-height:none!important;border-radius:10.5px}.music-btn{width:46px;height:46px;bottom:16px;left:16px}.music-note{font-size:22px}}
