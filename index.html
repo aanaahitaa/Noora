@@ -9,27 +9,13 @@
 <meta property="og:title" content="دعوت‌نامه جشن تولد یک‌سالگی نورا جان">
 <meta property="og:description" content="دعوت‌نامه جشن اولین سال تولد نورا جان؛ پنج‌شنبه ۹ مهر، ساعت ۱۸.">
 <meta property="og:image" content="https://aanaahitaa.github.io/Noora/assets/noora-cover.webp">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/webp">
-<meta property="og:url" content="https://aanaahitaa.github.io/Noora/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="دعوت‌نامه جشن تولد یک‌سالگی نورا جان">
-<meta name="twitter:description" content="دعوت‌نامه جشن اولین سال تولد نورا جان؛ پنج‌شنبه ۹ مهر، ساعت ۱۸.">
-<meta name="twitter:image" content="https://aanaahitaa.github.io/Noora/assets/noora-cover.webp">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/webp"><meta property="og:url" content="https://aanaahitaa.github.io/Noora/"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="دعوت‌نامه جشن تولد یک‌سالگی نورا جان"><meta name="twitter:description" content="دعوت‌نامه جشن اولین سال تولد نورا جان؛ پنج‌شنبه ۹ مهر، ساعت ۱۸."><meta name="twitter:image" content="https://aanaahitaa.github.io/Noora/assets/noora-cover.webp">
 <link rel="stylesheet" href="css/style.css">
+<style>.rsvp-toast{position:fixed;right:50%;bottom:28px;transform:translate(50%,30px);width:min(92%,520px);padding:16px 22px;border-radius:22px;background:linear-gradient(135deg,#b9a7e8f5,#e6a9cff5);color:#fff;text-align:center;font-size:21px;line-height:1.9;box-shadow:0 16px 45px #8b719b55;opacity:0;pointer-events:none;z-index:9999;transition:opacity .35s ease,transform .35s ease;backdrop-filter:blur(12px)}.rsvp-toast.show{opacity:1;transform:translate(50%,0)}</style>
 </head>
 <body>
 <audio id="music" loop preload="auto"><source src="assets/music/birthday.mp3" type="audio/mpeg"></audio>
-<div class="music-gate" id="musicGate">
-  <div class="music-gate-card">
-    <div class="envelope-scene" id="envelopeScene"><div class="invitation-card"><img src="assets/noora-cover.webp" alt="کارت دعوت نورا"></div></div>
-    <div class="music-greeting" id="musicGreeting"><span>✦</span><span class="greeting-text">مهمان عزیز</span><span>✦</span></div>
-    <div class="music-instruction"></div>
-    <button class="music-enter" id="musicEnter" type="button">برای باز کردن دعوت‌نامه صفحه را لمس کنید</button>
-  </div>
-</div>
+<div class="music-gate" id="musicGate"><div class="music-gate-card"><div class="envelope-scene" id="envelopeScene"><div class="invitation-card"><img src="assets/noora-cover.webp" alt="کارت دعوت نورا"></div></div><div class="music-greeting" id="musicGreeting"><span>✦</span><span class="greeting-text">مهمان عزیز</span><span>✦</span></div><div class="music-instruction"></div><button class="music-enter" id="musicEnter" type="button">برای باز کردن دعوت‌نامه صفحه را لمس کنید</button></div></div>
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="پخش یا توقف موسیقی"><span class="music-note">♪</span></button>
 <section class="hero reveal"><div class="section-inner"><div class="hero-small-title">به مناسبت نخستین سال زندگی</div><h1 class="hero-title">نورا جان</h1><div class="photo-frame" aria-label="تصویر نورا"><div class="photo-glow"></div><div class="photo-inner"><img src="assets/noora-main.webp" alt="Noora"></div><span class="photo-star star-one">✦</span><span class="photo-star star-two">✧</span><span class="photo-star star-three">✦</span></div><div class="scroll-hint"><div class="scroll-arrow"><i></i><i></i></div></div></div></section>
 <div class="scroll-down"><div class="scroll-circle">⇣</div></div>
@@ -37,10 +23,9 @@
 <section class="reveal"><div class="glass-card event-card"><div class="event-item">پنج‌شنبه ۹ مهر</div><span class="event-divider">✦</span><div class="event-item">ساعت ۱۸</div><span class="event-divider">✦</span><div class="event-item">تالار دوریکا</div></div></section>
 <section class="reveal"><h2 class="section-title">تا شروع جشن</h2><div class="countdown"><div class="glass-card time-box"><strong id="day">۰۰</strong><span>روز</span></div><div class="glass-card time-box"><strong id="hour">۰۰</strong><span>ساعت</span></div><div class="glass-card time-box"><strong id="minute">۰۰</strong><span>دقیقه</span></div><div class="glass-card time-box"><strong id="second">۰۰</strong><span>ثانیه</span></div></div></section>
 <div class="section-scroll" aria-hidden="true"><div class="scroll-arrow" aria-hidden="true"><i></i><i></i></div></div>
-<section class="reveal"><h2 class="section-title">تایید حضور</h2><div class="glass-card rsvp-form"><div class="rsvp-question">آیا در جشن ما شرکت می‌کنید؟</div><div class="attendance-options" role="group" aria-label="تایید حضور"><button type="button" class="attendance-option is-selected" data-attendance="yes">بله، با خوشحالی می‌آیم <span>❤️</span></button><button type="button" class="attendance-option" data-attendance="no">متأسفانه نمی‌توانم همراهتان باشم</button></div><div class="guest-count-wrap" id="guestCountWrap"><div class="guest-count-title">تعداد نفرات  ( با احتساب خودتان ):</div><div class="guest-count" role="group" aria-label="تعداد نفرات"><button type="button" class="guest-count-btn is-selected" data-count="1">۱</button><button type="button" class="guest-count-btn" data-count="2">۲</button><button type="button" class="guest-count-btn" data-count="3">۳</button><button type="button" class="guest-count-btn" data-count="4">۴</button><button type="button" class="guest-count-btn" data-count="5">۵</button></div></div><textarea id="guestMessage" placeholder="پیام شما (اختیاری)" aria-label="پیام شما"></textarea><button type="button" class="glass-button rsvp-submit" id="rsvpSubmit"><span>✦</span> ثبت حضور <span>✦</span></button><div class="rsvp-feedback" id="rsvpFeedback" aria-live="polite"></div></div></section>
+<section class="reveal"><h2 class="section-title">تایید حضور</h2><div class="glass-card rsvp-form"><div class="rsvp-question">آیا در جشن ما شرکت می‌کنید؟</div><div class="attendance-options" role="group" aria-label="تایید حضور"><button type="button" class="attendance-option is-selected" data-attendance="yes">بله، با خوشحالی می‌آیم <span>❤️</span></button><button type="button" class="attendance-option" data-attendance="no">متأسفانه نمی‌توانم همراهتان باشم</button></div><div class="guest-count-wrap" id="guestCountWrap"><div class="guest-count-title">تعداد نفرات  ( با احتساب خودتان ):</div><div class="guest-count" role="group" aria-label="تعداد نفرات"><button type="button" class="guest-count-btn is-selected" data-count="1">۱</button><button type="button" class="guest-count-btn" data-count="2">۲</button><button type="button" class="guest-count-btn" data-count="3">۳</button><button type="button" class="guest-count-btn" data-count="4">۴</button><button type="button" class="guest-count-btn" data-count="5">۵</button><button type="button" class="guest-count-btn" data-count="6">۶</button><button type="button" class="guest-count-btn" data-count="7">۷</button></div></div><textarea id="guestMessage" placeholder="پیام شما (اختیاری)" aria-label="پیام شما"></textarea><button type="button" class="glass-button rsvp-submit" id="rsvpSubmit"><span>✦</span> ثبت حضور <span>✦</span></button><div class="rsvp-feedback" id="rsvpFeedback" aria-live="polite"></div></div></section>
 <div class="section-scroll" aria-hidden="true"><div class="scroll-arrow" aria-hidden="true"><i></i><i></i></div></div>
 <section class="reveal"><h2 class="section-title">مسیریابی</h2><div class="buttons"><a class="glass-button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98" target="_blank"><img src="assets/icons/g.png">مشاهده در گوگل مپس</a><a class="glass-button" href="https://nshn.ir/2e_bf-IH5x5Y4D" target="_blank"><img src="assets/icons/n.png">مشاهده در نشان</a><a class="glass-button" href="https://balad.ir/p/7ahglm8ucy5Qjp" target="_blank"><img src="assets/icons/b.png">مشاهده در بلد</a></div></section>
-<footer>به امید دیدار شما<br><span class="footer-names">مهناز و پیمان</span></footer>
-<div class="rsvp-toast" id="rsvpToast" role="status" aria-live="polite"></div>
+<footer>به امید دیدار شما<br><span class="footer-names">مهناز و پیمان</span></footer><div class="rsvp-toast" id="rsvpToast" role="status" aria-live="polite"></div>
 <script src="js/config.js"></script><script src="js/script.js"></script>
 </body></html>
