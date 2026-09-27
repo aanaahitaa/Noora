@@ -143,3 +143,123 @@ footer{font-size:58px;line-height:2}
   .glass-button{font-size:30px}
   footer{font-size:49px}
 }
+
+
+/* Latest intro + responsive layout */
+.envelope-scene{
+  width:min(86vw,520px);
+  height:min(70vh,620px);
+  max-width:100%;
+  perspective:1200px;
+}
+.envelope{
+  display:block!important;
+}
+.envelope-shadow{
+  display:block!important;
+}
+.invitation-card{
+  left:7%;
+  right:7%;
+  bottom:7%;
+  height:88%;
+  border-radius:10px;
+  transform:translateY(0) scale(1)!important;
+  transition:transform .9s cubic-bezier(.2,.8,.2,1),bottom .9s cubic-bezier(.2,.8,.2,1),opacity .9s ease!important;
+  z-index:3;
+}
+.invitation-card img{object-fit:cover}
+.envelope-scene.is-opening .invitation-card{
+  transform:translateY(-105px) scale(1.03)!important;
+  bottom:8%;
+  z-index:6;
+}
+.envelope-scene.is-opening{
+  animation:sceneLift .9s ease forwards;
+}
+.music-gate.is-leaving .music-gate-card{
+  animation:introTextDown .7s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.music-gate.is-leaving .music-greeting,
+.music-gate.is-leaving .music-enter{
+  transform:translateY(90px);
+}
+.music-greeting,.music-enter{
+  transition:transform .7s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes introTextDown{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(90px);opacity:0}
+}
+.music-enter{
+  width:min(86vw,520px);
+  max-width:100%;
+  box-sizing:border-box;
+}
+.event-card{
+  flex-wrap:nowrap;
+}
+.event-item{
+  font-size:38px;
+}
+.countdown{
+  direction:ltr;
+  flex-wrap:nowrap;
+  width:min(96%,760px);
+  gap:8px;
+}
+.time-box{
+  flex:1 1 0;
+  width:auto;
+  min-width:0;
+  padding:16px 8px;
+}
+.time-box strong{font-size:54px}
+.guest-count{
+  gap:6px;
+}
+.guest-count-btn{
+  width:58px;
+  height:58px;
+  aspect-ratio:auto;
+  font-size:30px;
+}
+.rsvp-submit{
+  font-size:36px!important;
+}
+@media(max-width:600px){
+  .envelope-scene{width:min(88vw,420px);height:min(58vh,500px)}
+  .envelope{width:min(88vw,540px);height:min(58vw,300px)}
+  .invitation-card{left:4%;right:4%;height:86%;bottom:7%}
+  .envelope-scene.is-opening .invitation-card{transform:translateY(-135px) scale(1.02)!important}
+  .music-enter{width:min(88vw,420px);font-size:24px}
+  .event-card{
+    width:min(98%,760px);
+    flex-direction:row;
+    gap:7px;
+    padding:24px 8px;
+  }
+  .event-item{
+    font-size:26px;
+    white-space:nowrap;
+    line-height:1.8;
+  }
+  .event-divider{font-size:15px}
+  .countdown{
+    width:100%;
+    gap:5px;
+  }
+  .time-box{
+    flex:1 1 0;
+    min-width:0;
+    padding:12px 4px;
+  }
+  .time-box strong{font-size:40px}
+  .time-box span{font-size:20px}
+  .guest-count-btn{
+    width:48px;
+    height:48px;
+    font-size:25px;
+  }
+  .rsvp-submit{font-size:34px!important}
+}
