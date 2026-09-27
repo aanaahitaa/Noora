@@ -82,7 +82,7 @@ const nameEl=document.getElementById("guestName"),ogTitleEl=document.getElementB
 let ogTitleAuto=true,ogDescriptionAuto=true;
 function fillPreviewDefaults(){
   const n=nameEl.value.trim();
-  if(n&&ogTitleAuto)ogTitleEl.value="دعوت‌نامه اختصاصی "+n+" عزیز برای تولد نورا جان";
+  if(n&&ogTitleAuto)ogTitleEl.value=n+" عزیز، بیا اولین شمع تولد نورا رو با ما روشن کن";
   if(n&&ogDescriptionAuto)ogDescriptionEl.value="با دل خوش از "+n+" عزیز دعوت می‌کنیم تا در جشن اولین سال تولد نورا جان کنار ما باشید.";
 }
 nameEl.addEventListener("input",fillPreviewDefaults);
