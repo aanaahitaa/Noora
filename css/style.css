@@ -543,3 +543,7 @@ body::before,body::after{
 .music-note{display:block!important;font-family:Arial,sans-serif;font-size:25px;line-height:1;color:var(--gold-deep)}
 .rsvp-submit{min-height:64px!important;padding-top:10px!important;padding-bottom:10px!important}
 @media(max-width:600px){.music-btn{width:46px;height:46px;bottom:16px;left:16px}.music-note{font-size:22px}.rsvp-submit{min-height:58px!important;padding-top:8px!important;padding-bottom:8px!important}}
+
+
+/* Prevent the generic greeting from flashing before the personalized guest name loads */
+body.guest-loading .music-greeting{visibility:hidden}
