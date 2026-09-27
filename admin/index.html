@@ -76,7 +76,7 @@ button:disabled{opacity:.55;cursor:wait}
 </section>
 
 <section class="list-card">
-<div class="list-head"><h2>♡ لینک‌های ساخته‌شده ♡</h2><p>برای هر مهمان فقط یک لینک دائمی ساخته می‌شود.</p></div>
+<div class="list-head"><h2>لینک‌های ساخته‌شده</h2>/div>
 <div class="guest-list" id="linkList"><div class="loading">در حال دریافت لینک‌ها…</div></div>
 </section>
 
@@ -159,7 +159,7 @@ createBtn.onclick=async()=>{
   const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");
   const url=buildGuestUrl(id);
   document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;
-  saveForm.submit();linkEl.textContent=url;result.classList.add("show");showStatus("در حال ذخیره مهمان در Google Sheets…");
+  saveForm.submit();linkEl.textContent=url;result.classList.add("show");showStatus("در حال ذخیره مهمان");
   setTimeout(()=>{createBtn.disabled=false;showStatus("مهمان در شیت ذخیره شد؛ لینک دائمی آماده است.");loadGuests();loadLinks()},1200);
  }catch(e){createBtn.disabled=false;showStatus("بررسی مهمان قبلی انجام نشد؛ دوباره تلاش کنید.",true)}
 };
