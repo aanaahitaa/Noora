@@ -1,13 +1,97 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>جشن تولد نورا نیک نفس</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Scheherazade+New:wght@400;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+:root{
+
+--pearl:#fffaf7;
+--milk:#fffdfb;
+
+--blush:#f3dce0;
+--pink:#f7cfd9;
+
+--rose:#dcaeb7;
+
+--blue:#e6f0f7;
+--blue-soft:#dcecf8;
+
+--gold:#c9a45c;
+--gold-light:#efdcae;
+--gold-bright:#f5dc91;
+
+--ink:#66565a;
+--muted:#9a8588;
+
+--white:#ffffff;
+
+--shadow:
+0 25px 70px rgba(185,145,115,.18);
+
+--soft-shadow:
+0 10px 35px rgba(185,145,115,.12);
+
+}
+
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
+
+
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+
+
+body{
+
+background:
+
+radial-gradient(circle at 10% 10%,
+rgba(247,207,217,.35),
+transparent 28%),
+
+radial-gradient(circle at 90% 20%,
+rgba(220,236,248,.45),
+transparent 30%),
+
+linear-gradient(
+180deg,
+#fffdfb,
+#fff7f3
+);
+
+
 /* =========================
    FONT SETUP (local font)
    ========================= */
 
-
+/* بعداً فایل فونت را داخل assets/fonts قرار بده */
 @font-face {
 
-    font-family: "Nastaliq";
+    font-family: "NooraNastaliq";
 
-    src: url("assets/fonts/Iran Nastaliq 1.0.ttf")
+    src: url("assets/fonts/NooraNastaliq.ttf")
     format("truetype");
 
     font-weight: normal;
@@ -28,7 +112,7 @@
 .section-title,
 footer {
 
-    font-family: "Nastaliq",
+    font-family: "NooraNastaliq",
     "Scheherazade New",
     serif;
 
@@ -461,3 +545,441 @@ footer {
 
 
 }
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<audio id="music" loop>
+
+<source src="assets/music/birthday.mp3">
+
+</audio>
+
+
+<button class="music-btn" onclick="toggleMusic()">
+
+🎵
+
+</button>
+
+
+
+
+<section class="hero reveal">
+
+<div class="section-inner">
+
+
+<div class="hero-small-title">
+
+به افتخار اولین سال زندگی
+
+</div>
+
+
+<h1 class="hero-title">
+
+نورا جان
+
+</h1>
+
+
+
+<div class="photo-frame">
+
+
+<div class="photo-glow"></div>
+
+
+<div class="photo-inner">
+
+<img src="assets/noora-main.jpg">
+
+</div>
+
+
+<span class="photo-star star-one">✦</span>
+<span class="photo-star star-two">✧</span>
+<span class="photo-star star-three">✦</span>
+
+
+</div>
+
+
+
+<div class="scroll-hint">
+
+<div class="scroll-arrow">
+
+<i></i>
+
+<i></i>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+<section class="reveal">
+
+
+<div class="quote-card">
+
+
+<span class="quote-mark">
+
+✦
+
+</span>
+
+
+<p class="quote-text">
+
+
+با افتخار از شما دعوت می‌کنیم
+
+<br>
+
+تا در جشن اولین سال تولد
+
+<br>
+
+نورا جان
+
+<br>
+
+در کنار ما باشید.
+
+
+</p>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+جشن تولد یک سالگی
+
+</h2>
+
+
+<div class="glass-card">
+
+
+📅 پنج‌شنبه ۹ مهر
+
+<br><br>
+
+🕕 ساعت ۱۸
+
+<br><br>
+
+🎂 تالار دوریکا
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+تا شروع جشن
+
+</h2>
+
+
+<div class="countdown">
+
+
+<div class="glass-card time-box">
+
+<strong id="day">۰۰</strong>
+روز
+
+</div>
+
+
+<div class="glass-card time-box">
+
+<strong id="hour">۰۰</strong>
+ساعت
+
+</div>
+
+
+<div class="glass-card time-box">
+
+<strong id="minute">۰۰</strong>
+دقیقه
+
+</div>
+
+
+<div class="glass-card time-box">
+
+<strong id="second">۰۰</strong>
+ثانیه
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+تایید حضور
+
+</h2>
+
+
+
+<div class="glass-card rsvp-form">
+
+
+<input placeholder="نام مهمان">
+
+
+<select>
+
+<option>تعداد نفرات همراه</option>
+
+<option>۱ نفر</option>
+
+<option>۲ نفر</option>
+
+<option>۳ نفر</option>
+
+<option>۴ نفر</option>
+
+</select>
+
+
+<textarea placeholder="پیام شما"></textarea>
+
+
+<button class="glass-button">
+
+✓ ثبت حضور
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section class="reveal">
+
+
+<h2 class="section-title">
+
+مسیریابی
+
+</h2>
+
+
+<div class="buttons">
+
+
+<a class="glass-button" href="https://maps.app.goo.gl/fr6qwoFRzFqAugk98">
+
+Google Maps
+
+</a>
+
+
+<a class="glass-button" href="https://nshn.ir/2e_bf-IH5x5Y4D">
+
+نشان
+
+</a>
+
+
+<a class="glass-button" href="https://balad.ir/p/7ahglm8ucy5Qjp">
+
+بلد
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<footer>
+
+به امید دیدار شما
+
+<br>
+
+نورا نیک نفس
+
+</footer>
+
+
+
+
+
+<script>
+
+
+const observer =
+new IntersectionObserver(entries=>{
+
+entries.forEach(e=>{
+
+if(e.isIntersecting)
+
+e.target.classList.add("show");
+
+});
+
+});
+
+
+document.querySelectorAll(".reveal")
+.forEach(x=>observer.observe(x));
+
+
+
+
+const target =
+new Date("2026-10-01T18:00:00");
+
+
+function fa(n){
+
+return String(n)
+.padStart(2,"0")
+.replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+
+}
+
+
+function update(){
+
+
+let d=target-new Date();
+
+
+if(d<0)return;
+
+
+day.innerHTML=fa(Math.floor(d/86400000));
+
+hour.innerHTML=fa(Math.floor(d/3600000)%24);
+
+minute.innerHTML=fa(Math.floor(d/60000)%60);
+
+second.innerHTML=fa(Math.floor(d/1000)%60);
+
+
+}
+
+
+setInterval(update,1000);
+
+update();
+
+
+
+let playing=false;
+
+
+function toggleMusic(){
+
+
+let m=document.getElementById("music");
+
+
+if(!playing){
+
+m.play();
+
+playing=true;
+
+
+}else{
+
+
+m.pause();
+
+playing=false;
+
+
+}
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
