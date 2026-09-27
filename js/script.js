@@ -31,28 +31,32 @@ guestCountButtons.forEach(button=>{button.addEventListener("click",()=>{guestCou
 rsvpSubmit.addEventListener("click",()=>{const name=document.getElementById("guestName").value.trim();if(!name){rsvpFeedback.textContent="لطفاً نام مهمان را وارد کنید 🌸";document.getElementById("guestName").focus();return;}const message=document.getElementById("guestMessage").value.trim();if(attendance==="yes")rsvpFeedback.textContent=`ممنون ${name} جان؛ حضور شما برای ${persianNumber(guestCount)} نفر ثبت شد ❤️`;else rsvpFeedback.textContent=`ممنون ${name} جان؛ پاسخ شما ثبت شد 🌷`;console.log({name,attendance,guestCount,message});});
 
 // =========================
-// PERSONALIZED MUSIC COVER
+// PERSONALIZED ENVELOPE + MUSIC
 // =========================
 const music=document.getElementById("music");
 const musicGate=document.getElementById("musicGate");
 const musicEnter=document.getElementById("musicEnter");
 const musicGreeting=document.getElementById("musicGreeting");
+const envelopeScene=document.getElementById("envelopeScene");
 let playing=false;
 music.volume=0.35;
 
 const params=new URLSearchParams(window.location.search);
 const guestName=params.get("guest")||params.get("name");
-if(guestName){musicGreeting.textContent=`${guestName} عزیز، خوش آمدی ✨`;}
+if(guestName){musicGreeting.textContent=`${guestName} عزیز، خوش آمدی ✨`;}else{musicGreeting.textContent="مهمان عزیز، خوش آمدی ✨";}
 
 function playMusic(){return music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});}
 
 async function enterInvitation(){
+  if(envelopeScene.classList.contains("is-opening"))return;
+  envelopeScene.classList.add("is-opening");
+  await new Promise(resolve=>setTimeout(resolve,850));
   await playMusic();
   musicGate.classList.add("is-hidden");
   document.body.classList.add("music-started");
 }
 
 musicEnter.addEventListener("click",enterInvitation);
-document.querySelector(".music-cover-frame").addEventListener("click",enterInvitation);
+document.querySelector(".envelope-scene").addEventListener("click",enterInvitation);
 
 function toggleMusic(){if(playing){music.pause();playing=false;}else playMusic();}
