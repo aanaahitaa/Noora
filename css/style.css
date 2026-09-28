@@ -1088,3 +1088,14 @@ html{
     100%{transform:translateY(52vh);opacity:0;filter:blur(4px)}
   }
 }
+
+
+/* Match scroll arrow gold with the invitation's main gold accent */
+.scroll-arrow{
+  border-color:rgba(214,173,88,.95)!important;
+  filter:drop-shadow(0 0 6px rgba(214,173,88,.58)) drop-shadow(0 0 12px rgba(214,173,88,.28));
+}
+.scroll-arrow i{
+  border-color:#d6ad58!important;
+  filter:drop-shadow(0 0 5px rgba(214,173,88,.72));
+}
