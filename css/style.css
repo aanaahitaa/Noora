@@ -980,3 +980,15 @@ html{
     transform:translateY(7px);
   }
 }
+
+
+/* Further tighten hero title and photo spacing */
+.hero-small-title{
+  margin-bottom:2px!important;
+}
+.hero-title{
+  margin-bottom:4px!important;
+}
+.hero-photo{
+  margin-top:2px!important;
+}
