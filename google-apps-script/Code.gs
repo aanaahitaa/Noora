@@ -29,6 +29,31 @@ function getOrCreateSheet_(name, headers) {
     sheet = ss.insertSheet(name);
   }
 
+  // Migrate the previous Guests/RSVP structure once, removing guest-count
+  // columns while keeping existing names, links, responses and messages.
+  if (sheet.getLastRow() > 0) {
+    var oldHeaders = sheet.getRange(1, 1, 1, Math.min(sheet.getMaxColumns(), 11)).getValues()[0];
+    if (name === GUESTS_SHEET && String(oldHeaders[3] || "") === "تعداد نفرات مجاز") {
+      var oldLast = sheet.getLastRow();
+      var oldRows = oldLast > 1 ? sheet.getRange(2, 1, oldLast - 1, Math.min(sheet.getMaxColumns(), 11)).getValues() : [];
+      var newRows = oldRows.map(function(row) {
+        return [row[0], row[1], row[2], row[4], row[5], row[7], row[8], row[9]];
+      });
+      sheet.clearContents();
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      if (newRows.length) sheet.getRange(2, 1, newRows.length, headers.length).setValues(newRows);
+    } else if (name === RSVP_SHEET && String(oldHeaders[4] || "") === "تعداد نفرات") {
+      var oldRsvpLast = sheet.getLastRow();
+      var oldRsvpRows = oldRsvpLast > 1 ? sheet.getRange(2, 1, oldRsvpLast - 1, Math.min(sheet.getMaxColumns(), 7)).getValues() : [];
+      var newRsvpRows = oldRsvpRows.map(function(row) {
+        return [row[0], row[1], row[2], row[3], row[5], row[6]];
+      });
+      sheet.clearContents();
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      if (newRsvpRows.length) sheet.getRange(2, 1, newRsvpRows.length, headers.length).setValues(newRsvpRows);
+    }
+  }
+
   if (sheet.getLastRow() === 0) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     sheet.setFrozenRows(1);
@@ -304,9 +329,8 @@ function getGuest_(callback, guestId) {
     guest: {
       guestId: String(guest.values[1] || ""),
       name: String(guest.values[2] || ""),
-      maxGuests: 7,
-      ogTitle: String(guest.values[8] || ("تقدیم به " + String(guest.values[2] || "") + " عزیز")),
-      ogDescription: String(guest.values[9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
+      ogTitle: String(guest.values[6] || ("تقدیم به " + String(guest.values[2] || "") + " عزیز")),
+      ogDescription: String(guest.values[7] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
     }
   }, callback);
 }
@@ -337,8 +361,7 @@ function listGuests_(callback) {
     ).getValues();
 
     rsvpValues.forEach(function(row) {
-      messageByGuest[String(row[1] || "")] =
-        String(row[5] || "");
+      messageByGuest[String(row[1] || "")] = String(row[4] || "");
     });
   }
 
@@ -363,20 +386,10 @@ function listGuests_(callback) {
 
         name: String(row[2] || ""),
 
-        invitationUrl: String(row[4] || ""),
+        invitationUrl: String(row[3] || ""),
 
         attendance:
-          String(row[5] || "بدون پاسخ"),
-
-        guestCount:
-          row[6] === ""
-            ? null
-            : Number(row[6]),
-
-        lastResponse:
-          row[7] instanceof Date
-            ? row[7].toISOString()
-            : String(row[7] || ""),
+          String(row[4] || "بدون پاسخ"),
 
         message:
           messageByGuest[id] || ""
@@ -432,11 +445,10 @@ function findGuestByName_(callback, name) {
         guest: {
           guestId: String(values[i][1] || ""),
           name: String(values[i][2] || ""),
-          maxGuests: 7,
-          url: String(values[i][4] || ""),
-          invitationUrl: String(values[i][4] || ""),
-          ogTitle: String(values[i][8] || ("تقدیم به " + String(values[i][2] || "") + " عزیز")),
-          ogDescription: String(values[i][9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
+          url: String(values[i][3] || ""),
+          invitationUrl: String(values[i][3] || ""),
+          ogTitle: String(values[i][6] || ("تقدیم به " + String(values[i][2] || "") + " عزیز")),
+          ogDescription: String(values[i][7] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
         }
       }, callback);
     }
@@ -467,7 +479,7 @@ function listLinks_(callback) {
 
     values.forEach(function(row) {
       var name = String(row[2] || "").trim();
-      var url = String(row[4] || "").trim();
+      var url = String(row[3] || "").trim();
 
       if (name && url) {
         links.push({
@@ -563,13 +575,11 @@ function saveRsvp_(p) {
       new Date(),
       guestId,
       recoveredName,
-      7,
       recoveredUrl,
       "بدون پاسخ",
       "",
-      "",
       "تقدیم به " + recoveredName + " عزیز",
-      "دعوت‌نامه جشن یک‌سالگی نورا جان",
+      "دعوت‌نامه جشن یک‌سالگی نورا جان"
     ]);
 
     guest = findGuest_(guests, guestId);
@@ -614,7 +624,6 @@ function saveRsvp_(p) {
     guestId: guestId,
     invitedName: invitedName,
     attendance: attendance,
-    guestCount: count,
     message: message
   });
 }
