@@ -42,13 +42,15 @@ export default {
       return proxyRequest(request);
     }
 
-    const guest = await getGuest(guestId);
+    const [guest, originResponse] = await Promise.all([
+      getGuest(guestId),
+      fetch(ORIGIN, {
+        headers: { "User-Agent": "Noora-Preview-Worker" }
+      })
+    ]);
+
     const title = guest?.ogTitle || (guest?.name ? `تقدیم به ${guest.name} عزیز` : FALLBACK_TITLE);
     const description = guest?.ogDescription || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
-
-    const originResponse = await fetch(ORIGIN, {
-      headers: { "User-Agent": "Noora-Preview-Worker" }
-    });
 
     if (!originResponse.ok) return originResponse;
 
