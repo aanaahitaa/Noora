@@ -62,6 +62,7 @@ export default {
       .on("head", {
         element(element) {
           element.prepend(`<base href="${ORIGIN}">`, { html: true });
+          if (guest?.name) element.append(`<script>window.__NOORA_GUEST_NAME=${JSON.stringify(String(guest.name))};</script>`, { html: true });
         }
       })
       .on("title", {
@@ -101,14 +102,7 @@ export default {
           if (guest?.name) element.setInnerContent(guest.name + " عزیز");
         }
       })
-      .on("body", {
-        element(element) {
-          if (guest?.name) {
-            element.append(`<script>window.__NOORA_GUEST_NAME=${JSON.stringify(String(guest.name))};</script>`, { html: true });
-          }
-        }
-      });
-
+      
     return new Response(rewriter.transform(originResponse).body, { headers });
   }
 };
