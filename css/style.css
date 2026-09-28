@@ -946,3 +946,9 @@ html{
 .music-greeting .greeting-text{
   font-size:72px!important;
 }
+
+
+/* Increase spacing between footer photo and signature */
+.footer-divider{
+  margin-top:46px!important;
+}
