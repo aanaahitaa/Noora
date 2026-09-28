@@ -1157,3 +1157,14 @@ html{
     font-size:30px!important;
   }
 }
+
+
+/* Fine-tune hero vertical rhythm */
+.hero-small-title{margin-bottom:-2px!important}
+.hero-title{margin-bottom:0!important}
+.hero-photo{margin-top:-4px!important;margin-bottom:20px!important}
+@media(max-width:600px){
+  .hero-small-title{margin-bottom:-4px!important}
+  .hero-title{margin-bottom:-2px!important}
+  .hero-photo{margin-top:-6px!important;margin-bottom:18px!important}
+}
