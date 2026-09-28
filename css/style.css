@@ -1225,3 +1225,14 @@ html{
   unicode-bidi:isolate;
   white-space:nowrap;
 }
+.signature-anahita .signature-name{
+  font-family:"Gulzar",serif!important;
+  font-size:25px!important;
+  font-weight:400;
+  font-style:normal;
+  font-feature-settings:"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+  -webkit-font-feature-settings:"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+  font-kerning:normal!important;
+  font-variant-ligatures:contextual common-ligatures!important;
+  text-rendering:optimizeLegibility!important;
+}
