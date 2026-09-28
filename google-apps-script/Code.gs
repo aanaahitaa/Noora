@@ -21,7 +21,8 @@ const GUEST_HEADERS = [
   "تعداد نفرات ثبت‌شده",
   "آخرین پاسخ",
   "عنوان پیش‌نمایش",
-  "توضیح پیش‌نمایش"
+  "توضیح پیش‌نمایش",
+  "عدم نمایش عکس خانوادگی"
 ];
 
 function getOrCreateSheet_(name, headers) {
@@ -203,6 +204,7 @@ function createGuest_(p) {
     var invitationUrl = String(p.invitationUrl || "").trim();
     var ogTitle = String(p.ogTitle || "").trim();
     var ogDescription = String(p.ogDescription || "").trim();
+    var hideFamilyPhoto = String(p.hideFamilyPhoto || "").toLowerCase() === "true";
 
     if (!ogTitle) ogTitle = "تقدیم به " + name + " عزیز";
     if (!ogDescription) ogDescription = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
@@ -271,7 +273,8 @@ function createGuest_(p) {
       "",
       "",
       ogTitle,
-      ogDescription
+      ogDescription,
+      hideFamilyPhoto
     ]);
 
     return json_({
@@ -312,7 +315,8 @@ function getGuest_(callback, guestId) {
       name: String(guest.values[2] || ""),
       maxGuests: 7,
       ogTitle: String(guest.values[8] || ("تقدیم به " + String(guest.values[2] || "") + " عزیز")),
-      ogDescription: String(guest.values[9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
+      ogDescription: String(guest.values[9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان"),
+      hideFamilyPhoto: guest.values[10] === true || String(guest.values[10] || "").toLowerCase() === "true"
     }
   }, callback);
 }
@@ -442,7 +446,8 @@ function findGuestByName_(callback, name) {
           url: String(values[i][4] || ""),
           invitationUrl: String(values[i][4] || ""),
           ogTitle: String(values[i][8] || ("تقدیم به " + String(values[i][2] || "") + " عزیز")),
-          ogDescription: String(values[i][9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
+          ogDescription: String(values[i][9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان"),
+          hideFamilyPhoto: values[i][10] === true || String(values[i][10] || "").toLowerCase() === "true"
         }
       }, callback);
     }
@@ -575,7 +580,8 @@ function saveRsvp_(p) {
       "",
       "",
       "تقدیم به " + recoveredName + " عزیز",
-      "دعوت‌نامه جشن یک‌سالگی نورا جان"
+      "دعوت‌نامه جشن یک‌سالگی نورا جان",
+      false
     ]);
 
     guest = findGuest_(guests, guestId);
