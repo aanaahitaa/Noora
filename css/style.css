@@ -862,3 +862,16 @@ html{
   height:20px!important;
   border-width:3px!important;
 }
+
+
+/* Enlarge footer family photo 3x */
+.footer-noora-photo{
+  width:336px!important;
+  height:336px!important;
+}
+@media(max-width:600px){
+  .footer-noora-photo{
+    width:288px!important;
+    height:288px!important;
+  }
+}
