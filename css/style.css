@@ -1043,3 +1043,48 @@ html{
     height:clamp(250px,34vh,340px)!important;
   }
 }
+
+
+/* Refined invitation opening: photo rises to the top, guest text/button drift down and fade cleanly */
+.music-gate.is-leaving{
+  animation:introGateFadeClean 1.9s ease-in-out forwards!important;
+}
+.music-gate.is-leaving .music-gate-card{
+  animation:none!important;
+  transform:none!important;
+}
+.music-gate.is-leaving .envelope-scene{
+  animation:introPhotoRiseClean 1.9s cubic-bezier(.22,.72,.2,1) forwards!important;
+}
+.music-gate.is-leaving .music-greeting,
+.music-gate.is-leaving .music-instruction,
+.music-gate.is-leaving .music-enter{
+  animation:introTextDropClean 1.9s cubic-bezier(.22,.72,.2,1) forwards!important;
+  transform:translateY(-18px);
+}
+@keyframes introGateFadeClean{
+  0%,55%{opacity:1;visibility:visible}
+  100%{opacity:0;visibility:hidden}
+}
+@keyframes introPhotoRiseClean{
+  0%{transform:translateY(0) scale(1);opacity:1;filter:blur(0)}
+  58%{transform:translateY(-24vh) scale(1.015);opacity:1;filter:blur(0)}
+  100%{transform:translateY(-58vh) scale(1.035);opacity:0;filter:blur(5px)}
+}
+@keyframes introTextDropClean{
+  0%{transform:translateY(-18px);opacity:1;filter:blur(0)}
+  58%{transform:translateY(18vh);opacity:1;filter:blur(0)}
+  100%{transform:translateY(58vh);opacity:0;filter:blur(4px)}
+}
+@media(max-width:600px){
+  @keyframes introPhotoRiseClean{
+    0%{transform:translateY(0) scale(1);opacity:1;filter:blur(0)}
+    58%{transform:translateY(-20vh) scale(1.015);opacity:1;filter:blur(0)}
+    100%{transform:translateY(-52vh) scale(1.03);opacity:0;filter:blur(5px)}
+  }
+  @keyframes introTextDropClean{
+    0%{transform:translateY(-18px);opacity:1;filter:blur(0)}
+    58%{transform:translateY(16vh);opacity:1;filter:blur(0)}
+    100%{transform:translateY(52vh);opacity:0;filter:blur(4px)}
+  }
+}
