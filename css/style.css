@@ -550,7 +550,7 @@ body.guest-loading .music-greeting{visibility:hidden}
 
 
 /* Final requested typography, RTL countdown, and gold RSVP palette */
-.event-item{font-size:42px!important}
+.event-item{font-size:40px!important}
 .countdown{direction:rtl!important;flex-direction:row!important}
 .countdown .time-box{direction:rtl}
 .rsvp-submit{font-size:48px!important}
