@@ -1,0 +1,13 @@
+/* Use the same Nastaliq font as the Anahita signature for the event details. */
+.event-card .event-item{
+  font-family:"Noto Nastaliq Urdu","NooraNastaliq",serif!important;
+  font-weight:400;
+  font-style:normal;
+  font-feature-settings:"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+  -webkit-font-feature-settings:"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
+  font-kerning:normal!important;
+  font-variant-ligatures:contextual common-ligatures!important;
+  text-rendering:optimizeLegibility!important;
+  direction:rtl!important;
+  unicode-bidi:isolate!important;
+}
