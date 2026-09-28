@@ -849,3 +849,16 @@ footer{font-size:58px!important}
 html{
   scroll-behavior:auto;
 }
+
+
+/* Refine scroll indicator size and spacing */
+.scroll-arrow{
+  width:54px!important;
+  height:68px!important;
+  margin-top:14px!important;
+}
+.scroll-arrow i{
+  width:20px!important;
+  height:20px!important;
+  border-width:3px!important;
+}
