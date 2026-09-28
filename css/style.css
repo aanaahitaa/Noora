@@ -940,3 +940,9 @@ html{
 .hero-photo{
   margin-top:8px!important;
 }
+
+
+/* Enlarge guest greeting further */
+.music-greeting .greeting-text{
+  font-size:72px!important;
+}
