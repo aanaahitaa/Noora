@@ -555,8 +555,15 @@ function saveRsvp_(p) {
   );
 
   if (!guest) {
-    var recoveredName = String(p.guestName || "").trim() || "مهمان ناشناس";
+    var recoveredName = String(p.guestName || "").trim();
     var recoveredUrl = String(p.invitationUrl || "").trim();
+
+    if (!recoveredName) {
+      return json_({
+        ok: false,
+        error: "missing_guest_name"
+      });
+    }
 
     guests.appendRow([
       new Date(),
@@ -575,7 +582,14 @@ function saveRsvp_(p) {
   }
 
   var invitedName =
-    String(guest.values[2] || String(p.guestName || "").trim() || "مهمان ناشناس");
+    String(guest.values[2] || String(p.guestName || "").trim());
+
+  if (!invitedName) {
+    return json_({
+      ok: false,
+      error: "missing_guest_name"
+    });
+  }
 
   var count =
     attendance === "می‌آید"
