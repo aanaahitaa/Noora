@@ -1209,3 +1209,88 @@ html{
   font-variant-ligatures:contextual common-ligatures!important;
   text-rendering:optimizeLegibility!important;
 }
+
+
+/* RSVP — unified mobile-friendly glass panel */
+.rsvp-form{
+  width:min(92%,760px)!important;
+  gap:18px!important;
+  padding:34px 34px 30px!important;
+  border-radius:32px!important;
+  align-items:stretch!important;
+}
+.rsvp-form #guestMessage{
+  display:block;
+  width:100%;
+  min-height:118px;
+  height:118px;
+  margin:2px 0 0!important;
+  padding:18px 20px!important;
+  border:1px solid rgba(182,154,232,.22)!important;
+  border-radius:22px!important;
+  background:rgba(255,255,255,.68)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 22px rgba(180,150,220,.06)!important;
+  font-size:26px!important;
+  line-height:1.8!important;
+  resize:none!important;
+  text-align:right;
+}
+.rsvp-submit{
+  width:min(92%,760px)!important;
+  margin:18px auto 0!important;
+  border-radius:24px!important;
+}
+.rsvp-feedback{
+  width:min(92%,760px);
+  margin:8px auto 0;
+}
+@media(max-width:600px){
+  .rsvp-form{
+    width:calc(100% - 12px)!important;
+    padding:24px 18px 20px!important;
+    gap:14px!important;
+    border-radius:28px!important;
+  }
+  .rsvp-question{
+    font-size:30px!important;
+    line-height:1.8!important;
+    margin-bottom:2px;
+  }
+  .attendance-options{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+  .attendance-option{
+    min-height:62px!important;
+    padding:10px 14px!important;
+    border-radius:20px!important;
+    font-size:25px!important;
+    line-height:1.8!important;
+  }
+  .rsvp-form #guestMessage{
+    min-height:104px;
+    height:104px;
+    margin-top:2px!important;
+    padding:14px 16px!important;
+    border-radius:19px!important;
+    font-size:24px!important;
+    line-height:1.8!important;
+  }
+  .rsvp-submit{
+    width:calc(100% - 12px)!important;
+    height:68px!important;
+    margin-top:16px!important;
+    padding:5px 18px!important;
+    border-radius:22px!important;
+    font-size:38px!important;
+  }
+  .rsvp-feedback{
+    width:calc(100% - 18px);
+    margin-top:6px;
+    font-size:24px!important;
+    line-height:1.8!important;
+  }
+}
+@media(min-width:601px){
+  .rsvp-form #guestMessage::placeholder{font-size:25px}
+}
