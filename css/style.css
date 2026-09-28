@@ -992,3 +992,25 @@ html{
 .hero-photo{
   margin-top:2px!important;
 }
+
+
+/* Refine guest count circles: smaller frame, larger centered numbers */
+.guest-count-btn{
+  width:50px!important;
+  height:50px!important;
+  min-width:50px!important;
+  min-height:50px!important;
+  padding:0!important;
+  font-size:34px!important;
+  line-height:1!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:600px){
+  .guest-count-btn{
+    width:48px!important;
+    height:48px!important;
+    min-width:48px!important;
+    min-height:48px!important;
+    font-size:33px!important;
+  }
+}
