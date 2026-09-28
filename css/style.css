@@ -747,4 +747,4 @@ body.guest-loading .music-greeting{visibility:hidden}
   .scroll-arrow{width:36px!important;height:50px!important}
   .scroll-arrow i{width:12px!important;height:12px!important}
   .hero .photo-frame{margin-bottom:4px!important}
-}
+}.footer-divider{width:min(220px,55vw);height:1px;margin:22px auto 12px;background:linear-gradient(90deg,transparent,rgba(182,154,232,.55),rgba(214,173,88,.7),rgba(182,154,232,.55),transparent)}.note{font-size:20px;color:#8b719b;text-align:center;line-height:1.8}.note a{color:var(--gold-deep);text-decoration:none}.footer-heart{display:inline-block;font-family:Arial,sans-serif;font-size:22px;margin-inline-start:4px;color:#d6ad58}
