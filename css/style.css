@@ -1031,3 +1031,15 @@ html{
     font-size:46px!important;
   }
 }
+
+
+/* Reduce envelope/cover scene height to lift the guest greeting and enter button */
+.envelope-scene{
+  height:clamp(300px,42vh,440px)!important;
+  min-height:0!important;
+}
+@media(max-width:600px){
+  .envelope-scene{
+    height:clamp(250px,34vh,340px)!important;
+  }
+}
