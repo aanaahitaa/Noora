@@ -748,3 +748,42 @@ body.guest-loading .music-greeting{visibility:hidden}
   .scroll-arrow i{width:12px!important;height:12px!important}
   .hero .photo-frame{margin-bottom:4px!important}
 }.footer-divider{width:min(220px,55vw);height:1px;margin:22px auto 12px;background:linear-gradient(90deg,transparent,rgba(182,154,232,.55),rgba(214,173,88,.7),rgba(182,154,232,.55),transparent)}.note{font-size:20px;color:#8b719b;text-align:center;line-height:1.8}.note a{color:var(--gold-deep);text-decoration:none}.footer-heart{display:inline-block;font-family:Arial,sans-serif;font-size:16px;margin-inline-start:4px;color:#d6ad58}
+
+/* Minimum typography size: 30px across the site */
+body{font-size:30px!important}
+@media(max-width:600px){body{font-size:30px!important}}
+
+.hero-small-title{font-size:42px!important}
+.hero-title{font-size:112px!important}
+.section-title{font-size:68px!important}
+.quote-text{font-size:38px!important}
+.quote-mark{font-size:45px!important}
+.event-item{font-size:42px!important}
+.event-divider{font-size:30px!important;transform:scale(.55);transform-origin:center}
+.time-box strong{font-size:58px!important}
+.time-box span{font-size:30px!important}
+.rsvp-question,.guest-count-title{font-size:32px!important}
+.attendance-option{font-size:30px!important}
+.guest-count-btn{font-size:30px!important}
+input,textarea,select{font-size:30px!important}
+.rsvp-submit{font-size:48px!important}
+.rsvp-feedback{font-size:30px!important}
+.glass-button{font-size:31px!important}
+.music-greeting .greeting-text{font-size:44px!important}
+.music-greeting>span{font-size:30px!important;transform:scale(.7)}
+.music-instruction{font-size:30px!important}
+.music-enter{font-size:30px!important}
+.music-btn{font-size:30px!important}
+.music-note{font-size:30px!important;transform:scale(.72)}
+.photo-star{font-size:30px!important}
+.star-one{transform:scale(.8)}
+.star-two{transform:scale(.8)}
+.star-three{transform:scale(.8)}
+.section-scroll{font-size:30px!important}
+footer{font-size:58px!important}
+.note{font-size:30px!important}
+.footer-heart{font-size:30px!important;transform:scale(.52);transform-origin:center}
+.rsvp-toast{font-size:30px!important}
+.rsvp-toast-close{font-size:30px!important}
+.guest-name-icon{font-size:38px!important}
+.guest-name-title,.guest-name-text,.guest-name-input,.guest-name-actions button,.guest-name-error{font-size:30px!important}
