@@ -884,3 +884,17 @@ html{
 .music-enter{
   font-size:38px!important;
 }
+
+
+/* Refine scroll arrow: slightly smaller and lighter */
+.scroll-arrow{
+  width:50px!important;
+  height:64px!important;
+  border-color:rgba(255,231,166,.9)!important;
+}
+.scroll-arrow i{
+  width:18px!important;
+  height:18px!important;
+  border-width:3px!important;
+  border-color:rgba(255,231,166,.9)!important;
+}
