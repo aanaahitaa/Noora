@@ -875,3 +875,12 @@ html{
     height:288px!important;
   }
 }
+
+
+/* Enlarge invitation gate text */
+.music-greeting .greeting-text{
+  font-size:64px!important;
+}
+.music-enter{
+  font-size:38px!important;
+}
