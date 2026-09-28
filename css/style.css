@@ -1196,6 +1196,7 @@ html{
 /* Anahita signature — Noto Nastaliq option 7 */
 .signature-anahita{
   font-family:"Noto Nastaliq Urdu","NooraNastaliq",serif!important;
+  font-size:52px!important;
   font-weight:400;
   font-style:normal;
   font-feature-settings:"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
