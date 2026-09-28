@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>آزمایش فونت نستعلیق — دوریکا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400&family=Amiri:wght@400&family=Lateef:wght@400&family=Reem+Kufi:wght@400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:IranNastaliqLocal;src:url("assets/fonts/iran-nastaliq.ttf") format("truetype");font-display:swap}
+*{box-sizing:border-box}
+body{margin:0;background:#07101c;color:#f7f4ef;font-family:system-ui,sans-serif;padding:32px 18px 60px}
+h1{font-size:24px;margin:0 0 8px;text-align:center}
+.sub{opacity:.65;text-align:center;margin-bottom:28px;font-size:14px}
+.wrap{max-width:900px;margin:auto}
+.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:22px;margin:14px 0}
+.label{display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.72;margin-bottom:8px;direction:ltr}
+.row{display:flex;align-items:center;justify-content:center;gap:22px;min-height:105px}
+.word{font-size:42px;line-height:1.55;direction:rtl}
+.star{font-family:serif;font-size:26px;line-height:1;position:relative}
+.sample{font-family:inherit}
+.noto{font-family:"Noto Nastaliq Urdu",serif}
+.iran{font-family:IranNastaliqLocal,serif}
+.amiri{font-family:"Amiri",serif}
+.lateef{font-family:"Lateef",serif}
+.reem{font-family:"Reem Kufi",sans-serif}
+.note{font-size:12px;opacity:.5;text-align:center;margin-top:28px;line-height:1.8}
+@media(max-width:600px){body{padding:20px 12px}.card{padding:16px}.row{gap:14px;min-height:92px}.word{font-size:34px}.star{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>تست فونت — «دوریکا»</h1>
+<div class="sub">هر گزینه با همان ستاره‌های سکشن رویداد، برای مقایسهٔ شکل کلمه و تراز عمودی</div>
+
+<div class="card"><div class="label"><span>01</span><span>Noto Nastaliq Urdu — Google Fonts</span></div><div class="row"><span class="star">✦</span><span class="word noto">دوریکا</span><span class="star">✦</span></div></div>
+<div class="card"><div class="label"><span>02</span><span>Iran Nastaliq — local TTF</span></div><div class="row"><span class="star">✦</span><span class="word iran">دوریکا</span><span class="star">✦</span></div></div>
+<div class="card"><div class="label"><span>03</span><span>Amiri — Google Fonts</span></div><div class="row"><span class="star">✦</span><span class="word amiri">دوریکا</span><span class="star">✦</span></div></div>
+<div class="card"><div class="label"><span>04</span><span>Lateef — Google Fonts</span></div><div class="row"><span class="star">✦</span><span class="word lateef">دوریکا</span><span class="star">✦</span></div></div>
+<div class="card"><div class="label"><span>05</span><span>Reem Kufi — Google Fonts (control)</span></div><div class="row"><span class="star">✦</span><span class="word reem">دوریکا</span><span class="star">✦</span></div></div>
+
+<div class="note">گزینهٔ ۰۱ همان فونتی است که الان برای امضای آناهیتا و سکشن رویداد استفاده می‌شود.<br>گزینهٔ ۰۲ از فونت موجود در assets/fonts/ پروژه استفاده می‌کند.</div>
+</div>
+</body>
+</html>
