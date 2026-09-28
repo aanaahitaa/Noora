@@ -958,3 +958,25 @@ html{
 .music-greeting .greeting-text{
   font-size:82px!important;
 }
+
+
+/* Enhance scroll arrow visibility */
+.scroll-arrow{
+  border-color:rgba(255,231,166,.98)!important;
+  filter:drop-shadow(0 0 6px rgba(255,220,120,.72)) drop-shadow(0 0 12px rgba(214,173,88,.42));
+  animation:scrollArrowPulse 1.5s ease-in-out infinite;
+}
+.scroll-arrow i{
+  border-color:#fff0bd!important;
+  filter:drop-shadow(0 0 5px rgba(255,224,130,.9));
+}
+@keyframes scrollArrowPulse{
+  0%,100%{
+    opacity:.72;
+    transform:translateY(0);
+  }
+  50%{
+    opacity:1;
+    transform:translateY(7px);
+  }
+}
