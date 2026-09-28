@@ -1014,3 +1014,20 @@ html{
     font-size:33px!important;
   }
 }
+
+
+/* Make RSVP submit button shorter and slightly more compact */
+.rsvp-submit{
+  min-height:0!important;
+  height:82px!important;
+  padding:8px 28px!important;
+  font-size:52px!important;
+  line-height:1.05!important;
+}
+@media(max-width:600px){
+  .rsvp-submit{
+    height:72px!important;
+    padding:6px 24px!important;
+    font-size:46px!important;
+  }
+}
