@@ -63,7 +63,6 @@ export default {
         element(element) {
           element.prepend(`<base href="${ORIGIN}">`, { html: true });
           if (guest?.name) element.append(`<script>window.__NOORA_GUEST_NAME=${JSON.stringify(String(guest.name))};</script>`, { html: true });
-          if (guest?.hideFamilyPhoto) element.append(`<style>.footer-noora-photo{display:none!important}</style>`, { html: true });
         }
       })
       .on("title", {
