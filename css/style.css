@@ -1181,3 +1181,13 @@ html{
   55%{transform:scale(.96) rotate(-4deg);opacity:.9;filter:drop-shadow(0 0 4px rgba(214,173,88,.35));}
   75%{transform:scale(1.04) rotate(2deg);opacity:1;filter:drop-shadow(0 0 7px rgba(214,173,88,.5));}
 }
+
+/* Push footer signature lower and create a clearer gap after Noora family photo */
+.footer-divider{
+  margin-top:110px!important;
+}
+@media(max-width:600px){
+  .footer-divider{
+    margin-top:90px!important;
+  }
+}
