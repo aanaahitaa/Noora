@@ -67,5 +67,5 @@ async function enterInvitation(){
   window.scrollTo(0,0);
   document.documentElement.scrollTop=0;
   document.body.scrollTop=0;if(envelopeScene.classList.contains("is-opening"))return;envelopeScene.classList.add("is-opening");musicGate.classList.add("is-leaving");musicPlayCount=0;await playMusic();await new Promise(resolve=>setTimeout(resolve,1900));musicGate.classList.add("is-hidden");document.body.classList.add("music-started");}
-musicEnter.addEventListener("click",enterInvitation);document.querySelector(".envelope-scene").addEventListener("click",enterInvitation);musicGate.addEventListener("click",enterInvitation);
+musicEnter.addEventListener("click",enterInvitation);musicEnter.addEventListener("pointerup",enterInvitation);document.querySelector(".envelope-scene").addEventListener("click",enterInvitation);musicGate.addEventListener("click",enterInvitation);musicGate.addEventListener("pointerup",enterInvitation);
 function toggleMusic(){if(playing){music.pause();playing=false;return;}if(musicPlayCount>=2&&music.currentTime===0)musicPlayCount=0;playMusic();}
