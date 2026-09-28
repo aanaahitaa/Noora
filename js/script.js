@@ -49,7 +49,7 @@ rsvpSubmit.addEventListener("click",async()=>{if(!guestId){rsvpFeedback.textCont
 // =========================
 const music=document.getElementById("music"),musicGate=document.getElementById("musicGate"),musicEnter=document.getElementById("musicEnter"),musicGreeting=document.getElementById("musicGreeting"),envelopeScene=document.getElementById("envelopeScene");
 document.body.classList.toggle("guest-loading",!guestName&&!!guestId);
-let playing=false;let musicPlayCount=0;music.loop=false;music.volume=0.35;music.addEventListener("ended",()=>{if(musicPlayCount>=1){music.pause();music.currentTime=0;playing=false;return;}musicPlayCount++;music.currentTime=0;music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});});
+let playing=false;let musicPlayCount=0;music.loop=false;music.volume=0.35;music.addEventListener("ended",()=>{musicPlayCount++;if(musicPlayCount>=2){music.pause();music.currentTime=0;playing=false;return;}music.currentTime=0;music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});});
 function updateGuestNameEverywhere(name){
   const displayName=String(name||"").trim();
   document.querySelectorAll("[data-guest-name], .greeting-text").forEach(el=>{
@@ -65,4 +65,4 @@ loadGuestName();
 function playMusic(){return music.play().then(()=>{playing=true;return true;}).catch(()=>{playing=false;return false;});}
 async function enterInvitation(){if(envelopeScene.classList.contains("is-opening"))return;envelopeScene.classList.add("is-opening");musicGate.classList.add("is-leaving");musicPlayCount=0;await playMusic();await new Promise(resolve=>setTimeout(resolve,1900));musicGate.classList.add("is-hidden");document.body.classList.add("music-started");}
 musicEnter.addEventListener("click",enterInvitation);document.querySelector(".envelope-scene").addEventListener("click",enterInvitation);musicGate.addEventListener("click",enterInvitation);
-function toggleMusic(){if(playing){music.pause();playing=false;}else playMusic();}
+function toggleMusic(){if(playing){music.pause();playing=false;return;}if(musicPlayCount>=2&&music.currentTime===0)musicPlayCount=0;playMusic();}
