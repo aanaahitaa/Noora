@@ -898,3 +898,27 @@ html{
   border-width:3px!important;
   border-color:rgba(255,231,166,.9)!important;
 }
+
+
+/* Make guest count buttons perfectly circular */
+.guest-count-btn{
+  width:58px!important;
+  height:58px!important;
+  min-width:58px!important;
+  min-height:58px!important;
+  padding:0!important;
+  aspect-ratio:1 / 1!important;
+  border-radius:50%!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  line-height:1!important;
+}
+@media(max-width:600px){
+  .guest-count-btn{
+    width:54px!important;
+    height:54px!important;
+    min-width:54px!important;
+    min-height:54px!important;
+  }
+}
