@@ -304,9 +304,9 @@ footer{font-size:58px;line-height:2}
 @media(max-width:600px){.invitation-card{width:100%!important;border-radius:12px}.invitation-card img{border-radius:10.5px}}
 .music-btn{width:52px;height:52px;bottom:20px;left:20px;display:flex;align-items:center;justify-content:center;font-size:0;background:rgba(255,255,255,.78);border:1px solid rgba(214,173,88,.28);box-shadow:0 10px 30px rgba(110,80,140,.13)}
 .music-note{font-family:Arial,sans-serif;font-size:25px;line-height:1;color:var(--gold-deep)}
-body::before,body::after{content:"✦";position:fixed;z-index:0;pointer-events:none;color:rgba(214,173,88,.34);font-family:Arial,sans-serif;text-shadow:0 0 12px rgba(255,231,166,.65)}
-body::before{content:"✦  ·  ✧";top:12vh;left:8vw;font-size:18px;letter-spacing:18px;animation:ambientSparkle 5s ease-in-out infinite}
-body::after{content:"✧  ·  ✦";right:10vw;top:72vh;font-size:16px;letter-spacing:15px;animation:ambientSparkle 6s ease-in-out -2s infinite}
+body::before,body::after{content:"";position:fixed;z-index:0;pointer-events:none;color:rgba(214,173,88,.34);font-family:Arial,sans-serif;text-shadow:0 0 12px rgba(255,231,166,.65);white-space:pre-line;line-height:1}
+body::before{content:"✦\A   ✧\A      ·";top:9vh;left:6vw;font-size:15px;line-height:2.6;letter-spacing:0;animation:ambientSparkle 5s ease-in-out infinite}
+body::after{content:"✧\A    ·\A  ✦";right:7vw;top:66vh;font-size:21px;line-height:2.8;letter-spacing:0;animation:ambientSparkle 6s ease-in-out -2s infinite}
 @keyframes ambientSparkle{0%,100%{opacity:.22;transform:translateY(0) scale(.9)}50%{opacity:.7;transform:translateY(-10px) scale(1.08)}}
 @media(max-width:600px){.invitation-card{width:100%!important;border-radius:12px}.invitation-card img{width:100%!important;max-width:none!important;height:auto!important;max-height:none!important;border-radius:10.5px}.music-btn{width:46px;height:46px;bottom:16px;left:16px}.music-note{font-size:22px}}
 
