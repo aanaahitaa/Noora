@@ -922,3 +922,9 @@ html{
     min-height:54px!important;
   }
 }
+
+
+/* Enlarge RSVP submit button text */
+.rsvp-submit{
+  font-size:56px!important;
+}
