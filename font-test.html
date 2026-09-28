@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تست فونت «آناهیتا» — Noora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400&family=Noto+Nastaliq+Urdu:wght@400&family=Scheherazade+New:wght@400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:NooraNastaliq;src:url("assets/fonts/iran-nastaliq.ttf") format("truetype")}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#fff9fc,#efe8ff);color:#5b4c6f;font-family:Arial,sans-serif;padding:28px}
+.wrap{max-width:900px;margin:auto}
+h1{text-align:center;font-size:34px;margin:0 0 10px;color:#a77a2e}
+.lead{text-align:center;font-size:20px;line-height:1.8;margin:0 0 24px}
+.card{background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.95);border-radius:24px;padding:20px 24px;margin:14px 0;box-shadow:0 12px 35px rgba(120,90,150,.12)}
+.num{font:700 18px Arial,sans-serif;color:#a77a2e;direction:ltr;text-align:left}
+.name{font-size:78px;line-height:1.7;text-align:center;color:#6f521d;margin:2px 0}
+.note{font:16px/1.7 Arial,sans-serif;text-align:center;color:#8b719b}
+.current{font-family:NooraNastaliq,serif}.noto{font-family:"Noto Nastaliq Urdu",serif}.naskh{font-family:"Noto Naskh Arabic",serif}.scheherazade{font-family:"Scheherazade New",serif}
+.sample-row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:8px}.sample-row span{font-size:48px}
+@media(max-width:600px){body{padding:14px}.name{font-size:60px}.card{padding:16px}.lead{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>تست «آناهیتا»</h1>
+<p class="lead">گزینه‌ها را از نظر شکل «ه» مقایسه کن. ۱ تا ۴ فونت‌های مختلف‌اند؛ ۵ تا ۱۰ ترفندهای مختلف برای خودِ حرف «ه» هستند.</p>
+
+<div class="card"><div class="num">01</div><div class="name current">آناهیتا</div><div class="note">فونت فعلی سایت — Iran Nastaliq</div></div>
+<div class="card"><div class="num">02</div><div class="name noto">آناهیتا</div><div class="note">Noto Nastaliq Urdu — نستعلیق Noto/Google</div></div>
+<div class="card"><div class="num">03</div><div class="name naskh">آناهیتا</div><div class="note">Noto Naskh Arabic — برای مقایسه فرم طبیعی «ه»</div></div>
+<div class="card"><div class="num">04</div><div class="name scheherazade">آناهیتا</div><div class="note">Scheherazade New — فرم عربی/فارسی متفاوت</div></div>
+
+<div class="card"><div class="num">05</div><div class="name current">آناهـیتا</div><div class="note">فونت فعلی + کشیده (Tatweel)</div></div>
+<div class="card"><div class="num">06</div><div class="name current">آناه‌یتا</div><div class="note">فونت فعلی + ZWNJ؛ اتصال «ه» و «ی» قطع می‌شود</div></div>
+<div class="card"><div class="num">07</div><div class="name noto">آناهـیتا</div><div class="note">Noto Nastaliq + کشیده</div></div>
+<div class="card"><div class="num">08</div><div class="name noto">آناه‌یتا</div><div class="note">Noto Nastaliq + ZWNJ</div></div>
+
+<div class="card"><div class="num">09</div><div class="name current">آناﻬیتا</div><div class="note">فرم گلیف میانی «ه» (Presentation Form)؛ آزمایشی</div></div>
+<div class="card"><div class="num">10</div><div class="name current">آناﻪیتا</div><div class="note">فرم گلیف نهایی «ه»؛ آزمایشی</div></div>
+
+<div class="card"><div class="num">مقایسه سریع</div>
+<div class="sample-row current"><span>آناهیتا</span><span>آناهـیتا</span><span>آناه‌یتا</span></div>
+<div class="note">هر سه با فونت فعلی</div></div>
+</div>
+</body>
+</html>
