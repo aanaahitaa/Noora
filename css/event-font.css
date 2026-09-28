@@ -17,3 +17,25 @@
     font-size:26px!important;
   }
 }
+
+/* Optical alignment: Nastaliq has different vertical metrics from the Latin star glyph. */
+.event-card{
+  align-items:center!important;
+}
+.event-card .event-item{
+  line-height:1.65!important;
+}
+.event-card .event-divider{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  line-height:1!important;
+  position:relative;
+  top:-3px;
+  flex:0 0 auto;
+}
+@media(max-width:600px){
+  .event-card .event-divider{
+    top:-2px;
+  }
+}
