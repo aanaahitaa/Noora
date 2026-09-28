@@ -787,3 +787,8 @@ footer{font-size:58px!important}
 .rsvp-toast-close{font-size:30px!important}
 .guest-name-icon{font-size:38px!important}
 .guest-name-title,.guest-name-text,.guest-name-input,.guest-name-actions button,.guest-name-error{font-size:30px!important}
+
+
+/* Footer hearts + guest greeting final sizing */
+.footer-names .footer-heart{font-size:30px!important;transform:scale(.7);transform-origin:center}
+.music-greeting .greeting-text{font-size:44px!important}
