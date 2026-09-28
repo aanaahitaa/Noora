@@ -263,10 +263,9 @@ function createGuest_(p) {
             duplicate: true,
             guestId: String(rows[i][1] || ""),
             name: String(rows[i][2] || ""),
-            maxGuests: 7,
-            invitationUrl: String(rows[i][4] || ""),
-            ogTitle: String(rows[i][8] || ("تقدیم به " + String(rows[i][2] || "") + " عزیز")),
-            ogDescription: String(rows[i][9] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
+            invitationUrl: String(rows[i][3] || ""),
+            ogTitle: String(rows[i][6] || ("تقدیم به " + String(rows[i][2] || "") + " عزیز")),
+            ogDescription: String(rows[i][7] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
           });
         }
       }
@@ -297,7 +296,6 @@ function createGuest_(p) {
       ok: true,
       guestId: guestId,
       name: name,
-      maxGuests: 7,
       invitationUrl: invitationUrl
     });
 
@@ -611,13 +609,7 @@ function saveRsvp_(p) {
   ]);
 
   guests
-    .getRange(guest.row, 6, 1, 3)
-    .setValues([
-      [
-        attendance,
-            new Date()
-      ]
-    ]);
+    .getRange(guest.row, 5, 1, 2).setValues([[attendance, new Date()]]);
 
   return json_({
     ok: true,
