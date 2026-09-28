@@ -952,3 +952,9 @@ html{
 .footer-divider{
   margin-top:46px!important;
 }
+
+
+/* Enlarge guest greeting further */
+.music-greeting .greeting-text{
+  font-size:82px!important;
+}
