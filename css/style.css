@@ -1122,6 +1122,22 @@ html{
 .music-gate-card .music-enter{
   flex:0 0 auto;
 }
+.music-gate-card .envelope-scene{
+  transform:translateY(-16px);
+}
+.music-dedication{
+  margin-top:-18px;
+  margin-bottom:2px;
+  font-family:"NooraNastaliq",serif;
+  font-size:30px;
+  line-height:1.8;
+  color:var(--gold-deep);
+  text-shadow:0 0 14px rgba(214,173,88,.16);
+}
+@media(max-width:600px){
+  .music-gate-card .envelope-scene{transform:translateY(-12px)}
+  .music-dedication{font-size:25px;margin-top:-14px;margin-bottom:0}
+}
 @media(max-width:600px){
   .music-gate-card{
     padding:18px 14px;
