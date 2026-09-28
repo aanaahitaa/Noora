@@ -1193,9 +1193,9 @@ html{
 }
 
 
-/* Anahita signature — Noto Nastaliq option 7 */
+/* Anahita signature — Gulzar */
 .signature-anahita{
-  font-family:"Gulzar","NooraNastaliq",serif!important;
+  font-family:"Gulzar",serif!important;
   font-size:52px!important;
   font-weight:400;
   font-style:normal;
