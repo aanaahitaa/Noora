@@ -835,3 +835,17 @@ footer{font-size:58px!important}
   height:22px!important;
   border-width:4px!important;
 }
+
+
+/* Lift the guest greeting and enter button slightly */
+.music-greeting{
+  transform:translateY(-18px);
+}
+.music-enter{
+  transform:translateY(-18px);
+}
+
+/* Always open the invitation from the top */
+html{
+  scroll-behavior:auto;
+}
