@@ -1,6 +1,6 @@
 /* Use the same Nastaliq font as the Anahita signature for the event details. */
 .event-card .event-item{
-  font-family:"Gulzar","NooraNastaliq",serif!important;
+  font-family:"Gulzar",serif!important;
   font-size:32px!important;
   font-weight:400;
   font-style:normal;
