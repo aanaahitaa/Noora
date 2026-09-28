@@ -64,5 +64,11 @@ async function enterInvitation(){
   window.scrollTo(0,0);
   document.documentElement.scrollTop=0;
   document.body.scrollTop=0;if(envelopeScene.classList.contains("is-opening"))return;envelopeScene.classList.add("is-opening");musicGate.classList.add("is-leaving");musicPlayCount=0;await playMusic();await new Promise(resolve=>setTimeout(resolve,1900));musicGate.classList.add("is-hidden");document.body.classList.add("music-started");}
-let invitationOpening=false;\nasync function safeEnterInvitation(event){if(event){event.preventDefault();event.stopPropagation();}if(invitationOpening)return;invitationOpening=true;try{await enterInvitation();}catch(error){console.error("Noora invitation open error:",error);musicGate.classList.remove("is-leaving");envelopeScene.classList.remove("is-opening");invitationOpening=false;}}\nif(musicEnter)musicEnter.addEventListener("click",safeEnterInvitation);\nif(musicEnter)musicEnter.addEventListener("pointerup",safeEnterInvitation);\nif(musicEnter)musicEnter.addEventListener("touchend",safeEnterInvitation,{passive:false});\nif(musicGate)musicGate.addEventListener("pointerdown",safeEnterInvitation);\nif(musicGate)musicGate.addEventListener("touchstart",safeEnterInvitation,{passive:false});
+let invitationOpening=false;
+async function safeEnterInvitation(event){if(event){event.preventDefault();event.stopPropagation();}if(invitationOpening)return;invitationOpening=true;try{await enterInvitation();}catch(error){console.error("Noora invitation open error:",error);musicGate.classList.remove("is-leaving");envelopeScene.classList.remove("is-opening");invitationOpening=false;}}
+if(musicEnter)musicEnter.addEventListener("click",safeEnterInvitation);
+if(musicEnter)musicEnter.addEventListener("pointerup",safeEnterInvitation);
+if(musicEnter)musicEnter.addEventListener("touchend",safeEnterInvitation,{passive:false});
+if(musicGate)musicGate.addEventListener("pointerdown",safeEnterInvitation);
+if(musicGate)musicGate.addEventListener("touchstart",safeEnterInvitation,{passive:false});
 function toggleMusic(){if(playing){music.pause();playing=false;return;}if(musicPlayCount>=2&&music.currentTime===0)musicPlayCount=0;playMusic();}
