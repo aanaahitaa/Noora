@@ -18,14 +18,9 @@ setInterval(updateCountdown,1000);updateCountdown();
 // =========================
 const RSVP_ENDPOINT=window.NOORA_CONFIG.GOOGLE_APPS_SCRIPT_URL;
 let attendance="yes";
-let guestCount=1;
-const params=new URLSearchParams(window.location.search);
-let guestName=(params.get("guest")||params.get("name")||window.__NOORA_GUEST_NAME||"").trim();
-let guestId=(params.get("id")||params.get("g")||"").trim();
-const maxGuests=7;
 const attendanceOptions=document.querySelectorAll(".attendance-option");
-const guestCountButtons=document.querySelectorAll(".guest-count-btn");
-const guestCountWrap=document.getElementById("guestCountWrap");
+const 
+const 
 const rsvpForm=document.querySelector(".rsvp-form");
 const rsvpSubmit=document.getElementById("rsvpSubmit");
 const rsvpFeedback=document.getElementById("rsvpFeedback");
@@ -36,7 +31,7 @@ let toastTimer=null;
 const rsvpButtonHTML='<span>✦</span> ثبت حضور <span>✦</span>';
 const declinedButtonHTML='<span>✦</span> ثبت پاسخ <span>✦</span>';
 
-guestCountButtons.forEach(button=>{const count=Number(button.dataset.count);button.hidden=count>maxGuests;button.addEventListener("click",()=>{guestCount=count;guestCountButtons.forEach(item=>item.classList.toggle("is-selected",item===button));});});
+()=>{item===button));});});
 attendanceOptions.forEach(button=>{button.addEventListener("click",()=>{attendance=button.dataset.attendance;attendanceOptions.forEach(item=>item.classList.toggle("is-selected",item===button));rsvpForm.classList.toggle("is-declined",attendance==="no");rsvpSubmit.innerHTML=attendance==="yes"?rsvpButtonHTML:declinedButtonHTML;});});
 function showRsvpToast(message){if(!rsvpToast)return;clearTimeout(toastTimer);rsvpToast.textContent=message;rsvpToast.classList.remove("show");if(rsvpToastBackdrop)rsvpToastBackdrop.classList.remove("show");void rsvpToast.offsetWidth;rsvpToast.classList.add("show");if(rsvpToastBackdrop)rsvpToastBackdrop.classList.add("show");toastTimer=setTimeout(()=>{rsvpToast.classList.remove("show");if(rsvpToastBackdrop)rsvpToastBackdrop.classList.remove("show");},5000);}
 function hideRsvpToast(){clearTimeout(toastTimer);if(rsvpToast)rsvpToast.classList.remove("show");if(rsvpToastBackdrop)rsvpToastBackdrop.classList.remove("show");}
@@ -44,7 +39,7 @@ if(rsvpToastBackdrop)rsvpToastBackdrop.addEventListener("click",hideRsvpToast);
 function submitToGoogleSheet(payload){if(RSVP_ENDPOINT.includes("PASTE_"))return false;let iframe=document.getElementById("rsvpSubmitFrame");if(!iframe){iframe=document.createElement("iframe");iframe.name="rsvpSubmitFrame";iframe.id="rsvpSubmitFrame";iframe.hidden=true;document.body.appendChild(iframe);}let form=document.getElementById("rsvpSubmitForm");if(!form){form=document.createElement("form");form.id="rsvpSubmitForm";form.method="POST";form.target="rsvpSubmitFrame";form.style.display="none";document.body.appendChild(form);}form.action=RSVP_ENDPOINT;form.innerHTML="";Object.entries(payload).forEach(([key,value])=>{const input=document.createElement("input");input.type="hidden";input.name=key;input.value=value==null?"":value;form.appendChild(input);});form.submit();return true;}
 function showGuestNameModal(){if(!guestNameModal)return Promise.resolve(null);guestNameModalInput.value="";guestNameModalError.hidden=true;guestNameModal.classList.add("show");setTimeout(()=>guestNameModalInput.focus(),120);return new Promise(resolve=>{const finish=name=>{guestNameModal.classList.remove("show");guestNameModalConfirm.onclick=null;guestNameModalSkip.onclick=null;guestNameModalInput.onkeydown=null;resolve(name)};guestNameModalConfirm.onclick=()=>{const name=guestNameModalInput.value.trim();if(!name){guestNameModalError.textContent="لطفاً نام و نام خانوادگی خودتان را وارد کنید.";guestNameModalError.hidden=false;guestNameModalInput.focus();return}finish(name)};guestNameModalSkip.onclick=()=>finish(null);guestNameModalInput.onkeydown=e=>{if(e.key==="Enter")guestNameModalConfirm.click()}})}
 function refreshGuestIdentity(name){guestName=String(name||"").trim();updateGuestNameEverywhere(guestName);updateGuestMeta(guestName);document.body.classList.remove("guest-loading")}
-rsvpSubmit.addEventListener("click",async()=>{if(!guestId)guestId="REC-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,7).toUpperCase();if(!guestName)guestName=await showGuestNameModal();if(!guestName)return;refreshGuestIdentity(guestName);const message=document.getElementById("guestMessage").value.trim();const payload={action:"rsvp",guestId:guestId,guestName:guestName,invitationUrl:window.location.href,attendance:attendance,guestCount:attendance==="yes"?guestCount:0,message:message,userAgent:navigator.userAgent};if(!submitToGoogleSheet(payload)){rsvpFeedback.textContent="اتصال Google Sheets هنوز فعال نشده است.";return}rsvpFeedback.textContent="";if(attendance==="yes")showRsvpToast(`سپاس ${guestName} عزیز؛ حضور شما برای ${persianNumber(guestCount)} نفر ثبت شد ♥️`);else showRsvpToast(`سپاس ${guestName} عزیز؛ پاسخ شما ثبت شد`)});
+rsvpSubmit.addEventListener("click",async()=>{if(!guestId)guestId="REC-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,7).toUpperCase();if(!guestName)guestName=await showGuestNameModal();if(!guestName)return;refreshGuestIdentity(guestName);const message=document.getElementById("guestMessage").value.trim();const payload={action:"rsvp",guestId:guestId,guestName:guestName,invitationUrl:window.location.href,attendance:attendance,message:message,userAgent:navigator.userAgent};if(!submitToGoogleSheet(payload)){rsvpFeedback.textContent="اتصال Google Sheets هنوز فعال نشده است.";return}rsvpFeedback.textContent="";if(attendance==="yes")showRsvpToast(`سپاس ${guestName} عزیز؛ حضور شما برای ${persianNumber(else showRsvpToast(`سپاس ${guestName} عزیز؛ پاسخ شما ثبت شد`)});
 
 // =========================
 // PERSONALIZED ENVELOPE + MUSIC
