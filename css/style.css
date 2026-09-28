@@ -1127,3 +1127,33 @@ html{
     padding:18px 14px;
   }
 }
+
+
+/* Compact RSVP guest-count circles for mobile */
+.guest-count-btn{
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  min-height:46px!important;
+  max-width:46px!important;
+  max-height:46px!important;
+  padding:0!important;
+  font-size:32px!important;
+  line-height:1!important;
+  flex:0 0 46px!important;
+}
+@media(max-width:600px){
+  .guest-count{
+    gap:3px!important;
+  }
+  .guest-count-btn{
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+    max-width:40px!important;
+    max-height:40px!important;
+    flex:0 0 40px!important;
+    font-size:30px!important;
+  }
+}
