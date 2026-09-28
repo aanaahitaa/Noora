@@ -1168,3 +1168,16 @@ html{
   .hero-title{margin-bottom:-2px!important}
   .hero-photo{margin-top:-6px!important;margin-bottom:18px!important}
 }
+
+/* Subtle sparkle animation for the quote star */
+.quote-mark{
+  display:inline-block;
+  transform-origin:center;
+  animation:quoteStarSparkle 2.8s ease-in-out infinite;
+}
+@keyframes quoteStarSparkle{
+  0%,100%{transform:scale(1) rotate(0deg);opacity:.82;filter:drop-shadow(0 0 2px rgba(214,173,88,.2));}
+  35%{transform:scale(1.08) rotate(5deg);opacity:1;filter:drop-shadow(0 0 8px rgba(214,173,88,.62));}
+  55%{transform:scale(.96) rotate(-4deg);opacity:.9;filter:drop-shadow(0 0 4px rgba(214,173,88,.35));}
+  75%{transform:scale(1.04) rotate(2deg);opacity:1;filter:drop-shadow(0 0 7px rgba(214,173,88,.5));}
+}
