@@ -928,3 +928,15 @@ html{
 .rsvp-submit{
   font-size:56px!important;
 }
+
+
+/* Tighten spacing in the hero title and Noora photo */
+.hero-small-title{
+  margin-bottom:8px!important;
+}
+.hero-title{
+  margin-bottom:10px!important;
+}
+.hero-photo{
+  margin-top:8px!important;
+}
