@@ -1056,6 +1056,7 @@ html{
 .music-gate.is-leaving .envelope-scene{
   animation:introPhotoRiseClean 1.9s cubic-bezier(.22,.72,.2,1) forwards!important;
 }
+.music-gate.is-leaving .music-dedication,
 .music-gate.is-leaving .music-greeting,
 .music-gate.is-leaving .music-instruction,
 .music-gate.is-leaving .music-enter{
