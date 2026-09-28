@@ -1099,3 +1099,31 @@ html{
   border-color:#d6ad58!important;
   filter:drop-shadow(0 0 5px rgba(214,173,88,.72));
 }
+
+
+/* Full-screen intro frame: keep the opening animation anchored to the entire viewport */
+.music-gate-card{
+  width:100%!important;
+  max-width:none!important;
+  height:100%!important;
+  min-height:100%!important;
+  margin:0!important;
+  padding:24px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:visible!important;
+}
+.music-gate-card .envelope-scene,
+.music-gate-card .music-greeting,
+.music-gate-card .music-instruction,
+.music-gate-card .music-enter{
+  flex:0 0 auto;
+}
+@media(max-width:600px){
+  .music-gate-card{
+    padding:18px 14px;
+  }
+}
