@@ -36,7 +36,7 @@ export default {
     const description = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
 
     const headers = new Headers(originResponse.headers);
-    headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    headers.set("Cache-Control", "public, max-age=60, s-maxage=300");
     headers.set("Content-Type", "text/html; charset=UTF-8");
 
     const rewriter = new HTMLRewriter()
