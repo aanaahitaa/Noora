@@ -81,7 +81,7 @@ async function handleApi(request) {
   try {
     const response = await fetchWithRetry(upstream.toString(), {
       ...(fresh ? {cache:"no-cache"} : {}),
-      ...(cacheable ? {cf:{cacheTtl:15,cacheEverything:true}} : {})
+      ...(cacheable ? {cf:{cacheTtl:300,cacheEverything:true}} : {})
     }, 2);
 
     const body = await response.text();
@@ -92,7 +92,7 @@ async function handleApi(request) {
         "Access-Control-Allow-Origin":"*",
         "Access-Control-Allow-Methods":"GET, OPTIONS",
         "Access-Control-Allow-Headers":"Content-Type",
-        "Cache-Control":cacheable ? "public, max-age=15" : "no-store"
+        "Cache-Control":cacheable ? "public, max-age=300, stale-while-revalidate=60" : "no-store"
       }
     });
   } catch (error) {
