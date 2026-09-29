@@ -292,6 +292,17 @@ function createGuest_(p) {
       ogDescription
     ]);
 
+    CacheService.getScriptCache().put(
+      "guest:" + guestId,
+      JSON.stringify({
+        guestId: guestId,
+        name: name,
+        ogTitle: ogTitle,
+        ogDescription: ogDescription
+      }),
+      21600
+    );
+
     return json_({
       ok: true,
       guestId: guestId,
@@ -305,15 +316,8 @@ function createGuest_(p) {
 }
 
 function getGuest_(callback, guestId) {
-  var sheet = getOrCreateSheet_(
-    GUESTS_SHEET,
-    GUEST_HEADERS
-  );
-
-  var guest = findGuest_(
-    sheet,
-    String(guestId || "").trim()
-  );
+  var wantedId = String(guestId || "").trim();
+  var guest = getGuestFromCache_(wantedId);
 
   if (!guest) {
     return jsonp_({
@@ -324,13 +328,72 @@ function getGuest_(callback, guestId) {
 
   return jsonp_({
     ok: true,
-    guest: {
-      guestId: String(guest.values[1] || ""),
-      name: String(guest.values[2] || ""),
-      ogTitle: String(guest.values[6] || ("تقدیم به " + String(guest.values[2] || "") + " عزیز")),
-      ogDescription: String(guest.values[7] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
-    }
+    guest: guest
   }, callback);
+}
+
+function getGuestFromCache_(guestId) {
+  if (!guestId) return null;
+
+  var cache = CacheService.getScriptCache();
+  var key = "guest:" + guestId;
+  var cached = cache.get(key);
+
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (ignore) {}
+  }
+
+  // اگر مهمان در Cache نبود، یک بار کل لیست مهمان‌ها را می‌خوانیم
+  // و هر مهمان را جداگانه Cache می‌کنیم تا درخواست‌های بعدی سریع باشند.
+  var sheet = getOrCreateSheet_(
+    GUESTS_SHEET,
+    GUEST_HEADERS
+  );
+  var lastRow = sheet.getLastRow();
+
+  if (lastRow < 2) return null;
+
+  var values = sheet.getRange(
+    2,
+    1,
+    lastRow - 1,
+    GUEST_HEADERS.length
+  ).getValues();
+
+  var found = null;
+  var entries = {};
+
+  values.forEach(function(row) {
+    var id = String(row[1] || "").trim();
+    var name = String(row[2] || "").trim();
+    if (!id || !name) return;
+
+    var item = {
+      guestId: id,
+      name: name,
+      ogTitle: String(row[6] || ("تقدیم به " + name + " عزیز")),
+      ogDescription: String(row[7] || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان")
+    };
+
+    entries[id] = item;
+    if (id === guestId) found = item;
+  });
+
+  Object.keys(entries).forEach(function(id) {
+    try {
+      cache.put("guest:" + id, JSON.stringify(entries[id]), 21600);
+    } catch (ignore) {}
+  });
+
+  return found;
+}
+
+function clearGuestCache_() {
+  CacheService.getScriptCache().removeAll(
+    CacheService.getScriptCache().getKeys()
+  );
 }
 
 function listGuests_(callback) {
@@ -685,6 +748,8 @@ function resetAll_(callback) {
           RSVP_HEADERS
         );
     }
+
+    clearGuestCache_();
 
     var result = {
       ok: true,
