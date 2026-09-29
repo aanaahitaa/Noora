@@ -1,6 +1,7 @@
 const ORIGIN = "https://aanaahitaa.github.io/Noora/";
 const FALLBACK_TITLE = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
 const IMAGE_URL = "https://aanaahitaa.github.io/Noora/assets/noora-cover.webp";
+const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwbAFhiYbNwpqxczEQzeQNbGm1yIYGveTBUvQ-Cu3zfKFKPdS8wcaNI4CdarzSmwolbuA/exec";
 
 function proxyRequest(request) {
   const incoming = new URL(request.url);
@@ -15,64 +16,127 @@ function proxyRequest(request) {
   }));
 }
 
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Cache-Control": "no-store"
+  };
+}
+
+function jsonResponse(data, status = 200, extraHeaders = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      ...corsHeaders(),
+      ...extraHeaders
+    }
+  });
+}
+
+async function fetchWithRetry(url, options = {}, attempts = 2) {
+  let lastError = null;
+  for (let i = 0; i < attempts; i++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 9000);
+    try {
+      const response = await fetch(url, {...options, signal: controller.signal});
+      clearTimeout(timer);
+      if (response.ok) return response;
+      lastError = new Error("upstream_http_" + response.status);
+    } catch (error) {
+      clearTimeout(timer);
+      lastError = error;
+    }
+  }
+  throw lastError || new Error("upstream_failed");
+}
+
+async function handleApi(request) {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {status: 204, headers: corsHeaders()});
+  }
+  if (request.method !== "GET") {
+    return jsonResponse({ok:false, error:"method_not_allowed"},405);
+  }
+
+  const incoming = new URL(request.url);
+  const action = (incoming.searchParams.get("action") || "").trim();
+  const allowedActions = new Set(["list_guests","list_links","find_guest","get_guest","reset_all"]);
+  if (!allowedActions.has(action)) {
+    return jsonResponse({ok:false,error:"invalid_action"},400);
+  }
+
+  const upstream = new URL(GAS_ENDPOINT);
+  for (const [key,value] of incoming.searchParams) {
+    if (key === "callback" || key === "t" || key === "api" || key === "fresh") continue;
+    upstream.searchParams.set(key,value);
+  }
+
+  const fresh = incoming.searchParams.get("fresh") === "1";
+  const cacheable = !fresh && ["list_guests","list_links","find_guest","get_guest"].includes(action);
+
+  try {
+    const response = await fetchWithRetry(upstream.toString(), {
+      ...(fresh ? {cache:"no-cache"} : {}),
+      ...(cacheable ? {cf:{cacheTtl:15,cacheEverything:true}} : {})
+    }, 2);
+
+    const body = await response.text();
+    return new Response(body, {
+      status: response.status,
+      headers: {
+        "Content-Type":"application/json; charset=UTF-8",
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Methods":"GET, OPTIONS",
+        "Access-Control-Allow-Headers":"Content-Type",
+        "Cache-Control":cacheable ? "public, max-age=15" : "no-store"
+      }
+    });
+  } catch (error) {
+    return jsonResponse({
+      ok:false,
+      error:error && error.name === "AbortError" ? "upstream_timeout" : "upstream_unavailable"
+    },504);
+  }
+}
+
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-    const guestId = (url.searchParams.get("g") || url.searchParams.get("guest") || "").trim();
 
-    if (!guestId || request.method !== "GET") {
-      return proxyRequest(request);
+    if (url.pathname === "/api") {
+      return handleApi(request);
     }
 
-    // Guest data is loaded client-side so a slow Google Apps Script call
-    // cannot delay the first HTML response / first paint.
-    const originResponse = await fetch(ORIGIN, {
-      headers: { "User-Agent": "Noora-Preview-Worker" }
-    });
+    const guestId = (url.searchParams.get("g") || url.searchParams.get("guest") || "").trim();
+    if (!guestId || request.method !== "GET") return proxyRequest(request);
 
+    const originResponse = await fetch(ORIGIN, {
+      headers: {"User-Agent":"Noora-Preview-Worker"}
+    });
     if (!originResponse.ok) return originResponse;
 
     const title = FALLBACK_TITLE;
     const description = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
-
     const headers = new Headers(originResponse.headers);
-    headers.set("Cache-Control", "public, max-age=60, s-maxage=300");
-    headers.set("Content-Type", "text/html; charset=UTF-8");
+    headers.set("Cache-Control","public, max-age=60, s-maxage=300");
+    headers.set("Content-Type","text/html; charset=UTF-8");
 
     const rewriter = new HTMLRewriter()
-      .on("head", {
-        element(element) {
-          element.prepend(`<base href="${ORIGIN}">`, { html: true });
-        }
-      })
-      .on("title", {
-        element(element) { element.setInnerContent(title); }
-      })
-      .on('meta[property="og:title"]', {
-        element(element) { element.setAttribute("content", title); }
-      })
-      .on('meta[property="og:description"]', {
-        element(element) { element.setAttribute("content", description); }
-      })
-      .on('meta[property="og:url"]', {
-        element(element) { element.setAttribute("content", url.toString()); }
-      })
-      .on('meta[property="og:image"]', {
-        element(element) { element.setAttribute("content", IMAGE_URL); }
-      })
-      .on('meta[name="description"]', {
-        element(element) { element.setAttribute("content", description); }
-      })
-      .on('meta[name="twitter:title"]', {
-        element(element) { element.setAttribute("content", title); }
-      })
-      .on('meta[name="twitter:description"]', {
-        element(element) { element.setAttribute("content", description); }
-      })
-      .on('meta[name="twitter:image"]', {
-        element(element) { element.setAttribute("content", IMAGE_URL); }
-      });
+      .on("head",{element(element){element.prepend(`<base href="${ORIGIN}">`,{html:true});}})
+      .on("title",{element(element){element.setInnerContent(title);}})
+      .on('meta[property="og:title"]',{element(element){element.setAttribute("content",title);}})
+      .on('meta[property="og:description"]',{element(element){element.setAttribute("content",description);}})
+      .on('meta[property="og:url"]',{element(element){element.setAttribute("content",url.toString());}})
+      .on('meta[property="og:image"]',{element(element){element.setAttribute("content",IMAGE_URL);}})
+      .on('meta[name="description"]',{element(element){element.setAttribute("content",description);}})
+      .on('meta[name="twitter:title"]',{element(element){element.setAttribute("content",title);}})
+      .on('meta[name="twitter:description"]',{element(element){element.setAttribute("content",description);}})
+      .on('meta[name="twitter:image"]',{element(element){element.setAttribute("content",IMAGE_URL);}});
 
-    return new Response(rewriter.transform(originResponse).body, { headers });
+    return new Response(rewriter.transform(originResponse).body,{headers});
   }
 };
