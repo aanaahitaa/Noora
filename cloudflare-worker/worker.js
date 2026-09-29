@@ -1,4 +1,7 @@
 const ORIGIN = "https://aanaahitaa.github.io/Noora/";
+const FALLBACK_TITLE = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
+const IMAGE_URL = "https://aanaahitaa.github.io/Noora/assets/noora-cover.webp";
+
 function proxyRequest(request) {
   const incoming = new URL(request.url);
   const target = new URL(ORIGIN);
@@ -21,16 +24,16 @@ export default {
       return proxyRequest(request);
     }
 
-    // Send the HTML as soon as the origin responds. Guest data is fetched
-    // client-side by script.js so a slow Google Apps Script call cannot block first paint.
+    // Guest data is loaded client-side so a slow Google Apps Script call
+    // cannot delay the first HTML response / first paint.
     const originResponse = await fetch(ORIGIN, {
       headers: { "User-Agent": "Noora-Preview-Worker" }
     });
 
+    if (!originResponse.ok) return originResponse;
+
     const title = FALLBACK_TITLE;
     const description = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
-
-    if (!originResponse.ok) return originResponse;
 
     const headers = new Headers(originResponse.headers);
     headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -40,7 +43,6 @@ export default {
       .on("head", {
         element(element) {
           element.prepend(`<base href="${ORIGIN}">`, { html: true });
-
         }
       })
       .on("title", {
@@ -69,7 +71,7 @@ export default {
       })
       .on('meta[name="twitter:image"]', {
         element(element) { element.setAttribute("content", IMAGE_URL); }
-      })
+      });
 
     return new Response(rewriter.transform(originResponse).body, { headers });
   }
