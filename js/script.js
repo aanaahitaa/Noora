@@ -135,9 +135,8 @@ async function loadGuestName(){
     const url=new URL(apiBase);
     url.searchParams.set("action","get_guest");
     url.searchParams.set("guestId",guestId);
-    url.searchParams.set("t",String(Date.now()));
     const response=await fetch(url.toString(),{
-      cache:"no-store",
+      cache:"default",
       signal:controller.signal,
       headers:{"Accept":"application/json"}
     });
