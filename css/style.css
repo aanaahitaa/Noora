@@ -623,32 +623,6 @@ body.guest-loading .music-greeting{visibility:hidden}
 }
 
 
-/* Persian Nastaliq shaping — Safari / iOS / macOS */
-:lang(fa),
-[dir="rtl"],
-.hero-title,.section-title,.hero-small-title,.event-item,.quote-text,
-.rsvp-question,.guest-count-title,.attendance-option,.glass-button,
-.music-greeting .greeting-text,.music-enter,.music-instruction,
-.music-dedication,.signature-anahita,.note,footer{
-  direction:rtl!important;
-  unicode-bidi:isolate!important;
-  font-family:"NooraNastaliq",serif!important;
-  font-feature-settings:"isol" 1,"init" 1,"medi" 1,"fina" 1,"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
-  -webkit-font-feature-settings:"isol" 1,"init" 1,"medi" 1,"fina" 1,"rlig" 1,"calt" 1,"liga" 1,"kern" 1!important;
-  font-kerning:normal!important;
-  font-variant-ligatures:contextual common-ligatures!important;
-  text-rendering:optimizeLegibility!important;
-  -webkit-font-smoothing:antialiased;
-  font-synthesis:none!important;
-}
-
-/* Keep Latin/system UI controls from being forced into Nastaliq. */
-.music-note,.footer-heart,.rsvp-submit span,.music-greeting>span{
-  font-family:Arial,sans-serif!important;
-  direction:ltr!important;
-  unicode-bidi:isolate!important;
-}
-
 /* iOS / Safari — explicit Persian Nastaliq shaping and joining */
 @supports (-webkit-touch-callout:none){
   :lang(fa),
