@@ -120,11 +120,13 @@ updateGuestMeta(guestName);
 async function loadGuestName(){
   if(guestName||!guestId){
     document.body.classList.remove("guest-loading");
+    scheduleAutoEnterInvitation();
     return;
   }
   const apiBase=(window.NOORA_CONFIG&&window.NOORA_CONFIG.API_BASE_URL)||"";
   if(!apiBase){
     document.body.classList.remove("guest-loading");
+    scheduleAutoEnterInvitation();
     return;
   }
   const controller=new AbortController();
@@ -151,8 +153,26 @@ async function loadGuestName(){
   }finally{
     clearTimeout(timer);
     document.body.classList.remove("guest-loading");
+    scheduleAutoEnterInvitation();
   }
 }
+
+let autoEnterTimer=null;
+let autoEnterScheduled=false;
+function scheduleAutoEnterInvitation(){
+  if(autoEnterScheduled||invitationOpening)return;
+  autoEnterScheduled=true;
+  autoEnterTimer=setTimeout(()=>{
+    autoEnterTimer=null;
+    if(invitationOpening||!musicGate||musicGate.classList.contains("is-hidden")){
+      autoEnterScheduled=false;
+      return;
+    }
+    // باز شدن خودکار مجاز است؛ autoplay موسیقی فقط در صورت اجازه‌ی مرورگر پخش می‌شود.
+    safeEnterInvitation();
+  },10000);
+}
+
 loadGuestName();
 
 function playMusic(){
