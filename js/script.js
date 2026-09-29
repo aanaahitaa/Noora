@@ -44,9 +44,52 @@ rsvpSubmit.addEventListener("click",async()=>{if(!guestId)guestId="REC-"+Date.no
 // =========================
 // PERSONALIZED ENVELOPE + MUSIC
 // =========================
-const music=document.getElementById("music"),musicGate=document.getElementById("musicGate"),musicEnter=document.getElementById("musicEnter"),musicGreeting=document.getElementById("musicGreeting"),envelopeScene=document.getElementById("envelopeScene");
+const music=document.getElementById("music"),musicGate=document.getElementById("musicGate"),musicEnter=document.getElementById("musicEnter"),musicGreeting=document.getElementById("musicGreeting"),envelopeScene=document.getElementById("envelopeScene"),musicBtn=document.getElementById("musicBtn");
 document.body.classList.toggle("guest-loading",!guestName&&!!guestId);
-let playing=false;let musicPlayCount=0;music.loop=false;music.volume=0.35;music.addEventListener("ended",()=>{musicPlayCount++;if(musicPlayCount>=2){music.pause();music.currentTime=0;playing=false;return;}music.currentTime=0;music.play().then(()=>{playing=true;}).catch(()=>{playing=false;});});
+
+let playing=false;
+let musicPlayCount=0;
+let autoMusicActive=false;
+let invitationOpening=false;
+
+if(music){
+  music.loop=false;
+  music.preload="auto";
+  music.volume=0.35;
+
+  music.addEventListener("play",()=>{
+    playing=true;
+    if(musicBtn)musicBtn.setAttribute("aria-label","توقف موسیقی");
+  });
+
+  music.addEventListener("pause",()=>{
+    playing=false;
+    if(musicBtn)musicBtn.setAttribute("aria-label","پخش موسیقی");
+  });
+
+  music.addEventListener("ended",()=>{
+    if(!autoMusicActive)return;
+
+    musicPlayCount++;
+
+    if(musicPlayCount>=2){
+      autoMusicActive=false;
+      playing=false;
+      music.pause();
+      music.currentTime=0;
+      return;
+    }
+
+    // دور دوم را بلافاصله بعد از پایان دور اول شروع کن.
+    music.currentTime=0;
+    music.play().catch(error=>{
+      console.warn("Noora second music playback:",error);
+      autoMusicActive=false;
+      playing=false;
+    });
+  });
+}
+
 function updateGuestNameEverywhere(name){
   const displayName=String(name||"").trim();
   document.querySelectorAll("[data-guest-name], .greeting-text").forEach(el=>{
@@ -54,29 +97,145 @@ function updateGuestNameEverywhere(name){
   });
 }
 updateGuestNameEverywhere(guestName);
+
 const greetingText=musicGreeting.querySelector(".greeting-text");
-function updateGuestMeta(name){if(!name)return;const title=`${name} عزیز؛ دعوت‌نامه تولد نورا جان`;const description=`${name} عزیز، با دلِ خوش از شما دعوت می‌کنیم تا در جشن یک‌سالگی نورا جان در کنار ما باشید.`;document.title=title;const setMeta=(selector,content)=>{const el=document.querySelector(selector);if(el)el.setAttribute("content",content)};setMeta("meta[name=\"description\"]",description);setMeta("meta[property=\"og:title\"]",title);setMeta("meta[property=\"og:description\"]",description);setMeta("meta[name=\"twitter:title\"]",title);setMeta("meta[name=\"twitter:description\"]",description);}
+
+function updateGuestMeta(name){
+  if(!name)return;
+  const title=`${name} عزیز؛ دعوت‌نامه تولد نورا جان`;
+  const description=`${name} عزیز، با دلِ خوش از شما دعوت می‌کنیم تا در جشن یک‌سالگی نورا جان در کنار ما باشید.`;
+  document.title=title;
+  const setMeta=(selector,content)=>{
+    const el=document.querySelector(selector);
+    if(el)el.setAttribute("content",content);
+  };
+  setMeta("meta[name=\"description\"]",description);
+  setMeta("meta[property=\"og:title\"]",title);
+  setMeta("meta[property=\"og:description\"]",description);
+  setMeta("meta[name=\"twitter:title\"]",title);
+  setMeta("meta[name=\"twitter:description\"]",description);
+}
 updateGuestMeta(guestName);
-async function loadGuestName(){if(guestName||!guestId){document.body.classList.remove("guest-loading");return;}const apiBase=(window.NOORA_CONFIG&&window.NOORA_CONFIG.API_BASE_URL)||"";if(!apiBase){document.body.classList.remove("guest-loading");return;}const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),10000);try{const url=new URL(apiBase);url.searchParams.set("action","get_guest");url.searchParams.set("guestId",guestId);url.searchParams.set("t",String(Date.now()));const response=await fetch(url.toString(),{cache:"no-store",signal:controller.signal,headers:{"Accept":"application/json"}});if(!response.ok)throw new Error("http_"+response.status);const data=await response.json();if(data&&data.ok&&data.guest){guestName=String(data.guest.name||"").trim();updateGuestNameEverywhere(guestName);updateGuestMeta(guestName);}}catch(error){console.warn("Noora guest lookup:",error);}finally{clearTimeout(timer);document.body.classList.remove("guest-loading");}}
+
+async function loadGuestName(){
+  if(guestName||!guestId){
+    document.body.classList.remove("guest-loading");
+    return;
+  }
+  const apiBase=(window.NOORA_CONFIG&&window.NOORA_CONFIG.API_BASE_URL)||"";
+  if(!apiBase){
+    document.body.classList.remove("guest-loading");
+    return;
+  }
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),10000);
+  try{
+    const url=new URL(apiBase);
+    url.searchParams.set("action","get_guest");
+    url.searchParams.set("guestId",guestId);
+    url.searchParams.set("t",String(Date.now()));
+    const response=await fetch(url.toString(),{
+      cache:"no-store",
+      signal:controller.signal,
+      headers:{"Accept":"application/json"}
+    });
+    if(!response.ok)throw new Error("http_"+response.status);
+    const data=await response.json();
+    if(data&&data.ok&&data.guest){
+      guestName=String(data.guest.name||"").trim();
+      updateGuestNameEverywhere(guestName);
+      updateGuestMeta(guestName);
+    }
+  }catch(error){
+    console.warn("Noora guest lookup:",error);
+  }finally{
+    clearTimeout(timer);
+    document.body.classList.remove("guest-loading");
+  }
+}
 loadGuestName();
+
 function playMusic(){
   if(!music)return Promise.resolve(false);
-  music.load();
-  return music.play().then(()=>{playing=true;return true;}).catch(error=>{
+
+  // مهم: load() را اینجا صدا نمی‌زنیم؛ play() باید مستقیماً در همان
+  // user gesture اجرا شود تا autoplay policy موبایل آن را مسدود نکند.
+  return music.play().then(()=>{
+    playing=true;
+    return true;
+  }).catch(error=>{
     console.warn("Noora music playback:",error);
     playing=false;
     return false;
   });
 }
+
 async function enterInvitation(){
   window.scrollTo(0,0);
   document.documentElement.scrollTop=0;
-  document.body.scrollTop=0;if(envelopeScene.classList.contains("is-opening"))return;envelopeScene.classList.add("is-opening");musicGate.classList.add("is-leaving");musicPlayCount=0;await playMusic();await new Promise(resolve=>setTimeout(resolve,1900));musicGate.classList.add("is-hidden");document.body.classList.add("music-started");}
-let invitationOpening=false;
-async function safeEnterInvitation(event){if(event){event.preventDefault();event.stopPropagation();}if(invitationOpening)return;invitationOpening=true;try{await enterInvitation();}catch(error){console.error("Noora invitation open error:",error);musicGate.classList.remove("is-leaving");envelopeScene.classList.remove("is-opening");invitationOpening=false;}}
-if(musicEnter)musicEnter.addEventListener("click",safeEnterInvitation);
-if(musicEnter)musicEnter.addEventListener("pointerup",safeEnterInvitation);
-if(musicEnter)musicEnter.addEventListener("touchend",safeEnterInvitation,{passive:false});
-if(musicGate)musicGate.addEventListener("pointerdown",safeEnterInvitation);
-if(musicGate)musicGate.addEventListener("touchstart",safeEnterInvitation,{passive:false});
-function toggleMusic(){if(playing){music.pause();playing=false;return;}if(musicPlayCount>=2&&music.currentTime===0)musicPlayCount=0;playMusic();}
+  document.body.scrollTop=0;
+
+  if(envelopeScene.classList.contains("is-opening"))return;
+
+  envelopeScene.classList.add("is-opening");
+  musicGate.classList.add("is-leaving");
+
+  // این اولین پخش از دو پخش خودکار است.
+  musicPlayCount=0;
+  autoMusicActive=true;
+  if(music){
+    music.loop=false;
+    music.currentTime=0;
+  }
+
+  // play() عمداً قبل از هر await/timeout و داخل زنجیره‌ی gesture اجرا می‌شود.
+  playMusic();
+
+  await new Promise(resolve=>setTimeout(resolve,1900));
+  musicGate.classList.add("is-hidden");
+  document.body.classList.add("music-started");
+}
+
+async function safeEnterInvitation(event){
+  if(event){
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  if(invitationOpening)return;
+
+  invitationOpening=true;
+  try{
+    await enterInvitation();
+  }catch(error){
+    console.error("Noora invitation open error:",error);
+    musicGate.classList.remove("is-leaving");
+    envelopeScene.classList.remove("is-opening");
+    invitationOpening=false;
+  }
+}
+
+// فقط یک listener برای gesture باز کردن کارت؛
+// حذف listenerهای تکراری باعث می‌شود روی موبایل چند بار enterInvitation اجرا نشود.
+if(musicGate)musicGate.addEventListener("pointerup",safeEnterInvitation,{passive:false});
+
+function toggleMusic(){
+  if(!music)return;
+
+  if(!music.paused){
+    // کنترل دستی کاربر، چرخه‌ی خودکار دو-بار-پخش را متوقف می‌کند.
+    autoMusicActive=false;
+    music.pause();
+    return;
+  }
+
+  // پخش دستی مستقل از محدودیت دو بار پخش خودکار است.
+  autoMusicActive=false;
+  musicPlayCount=0;
+  music.loop=true;
+
+  if(music.currentTime>=music.duration||Number.isNaN(music.currentTime)){
+    music.currentTime=0;
+  }
+
+  playMusic();
+}
