@@ -59,7 +59,15 @@ function updateGuestMeta(name){if(!name)return;const title=`${name} عزیز؛ �
 updateGuestMeta(guestName);
 function loadGuestName(){if(guestName||!guestId||!RSVP_ENDPOINT||RSVP_ENDPOINT.includes("PASTE_")){document.body.classList.remove("guest-loading");return;}const callback="nooraGuest_"+Date.now();let settled=false;const finish=()=>{if(settled)return;settled=true;document.body.classList.remove("guest-loading");delete window[callback];const old=document.getElementById(callback);if(old)old.remove();};window[callback]=(data)=>{if(data&&data.ok&&data.guest){guestName=String(data.guest.name||"").trim();updateGuestNameEverywhere(guestName);updateGuestMeta(guestName);}finish();};const s=document.createElement("script");s.id=callback;s.src=RSVP_ENDPOINT+"?action=get_guest&guestId="+encodeURIComponent(guestId)+"&callback="+callback+"&t="+Date.now();s.onerror=finish;document.body.appendChild(s);setTimeout(finish,3000);}
 loadGuestName();
-function playMusic(){return music.play().then(()=>{playing=true;return true;}).catch(()=>{playing=false;return false;});}
+function playMusic(){
+  if(!music)return Promise.resolve(false);
+  music.load();
+  return music.play().then(()=>{playing=true;return true;}).catch(error=>{
+    console.warn("Noora music playback:",error);
+    playing=false;
+    return false;
+  });
+}
 async function enterInvitation(){
   window.scrollTo(0,0);
   document.documentElement.scrollTop=0;
