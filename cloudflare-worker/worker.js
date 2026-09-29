@@ -42,12 +42,11 @@ export default {
       return proxyRequest(request);
     }
 
-    const [guest, originResponse] = await Promise.all([
-      getGuest(guestId),
-      fetch(ORIGIN, {
-        headers: { "User-Agent": "Noora-Preview-Worker" }
-      })
-    ]);
+    // Send the HTML as soon as the origin responds. Guest data is fetched
+    // client-side by script.js so a slow Google Apps Script call cannot block first paint.
+    const originResponse = await fetch(ORIGIN, {
+      headers: { "User-Agent": "Noora-Preview-Worker" }
+    });
 
     const title = guest?.ogTitle || (guest?.name ? `تقدیم به ${guest.name} عزیز` : FALLBACK_TITLE);
     const description = guest?.ogDescription || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
@@ -62,7 +61,7 @@ export default {
       .on("head", {
         element(element) {
           element.prepend(`<base href="${ORIGIN}">`, { html: true });
-          if (guest?.name) element.append(`<script>window.__NOORA_GUEST_NAME=${JSON.stringify(String(guest.name))};</script>`, { html: true });
+
         }
       })
       .on("title", {
@@ -94,7 +93,7 @@ export default {
       })
       .on(".greeting-text", {
         element(element) {
-          if (guest?.name) element.setInnerContent(guest.name + " عزیز");
+
         }
       })
       .on("[data-guest-name]", {
