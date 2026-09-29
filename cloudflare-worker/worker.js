@@ -1,25 +1,4 @@
 const ORIGIN = "https://aanaahitaa.github.io/Noora/";
-const GUEST_API = "https://script.google.com/macros/s/AKfycbwbAFhiYbNwpqxczEQzeQNbGm1yIYGveTBUvQ-Cu3zfKFKPdS8wcaNI4CdarzSmwolbuA/exec";
-const FALLBACK_TITLE = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
-const IMAGE_URL = "https://aanaahitaa.github.io/Noora/assets/noora-cover.webp";
-
-async function getGuest(guestId) {
-  if (!guestId) return null;
-  try {
-    const apiUrl = new URL(GUEST_API);
-    apiUrl.searchParams.set("action", "get_guest");
-    apiUrl.searchParams.set("guestId", guestId);
-    const response = await fetch(apiUrl, {
-      cf: { cacheTtl: 0, cacheEverything: false }
-    });
-    if (!response.ok) return null;
-    const data = await response.json();
-    return data && data.ok && data.guest ? data.guest : null;
-  } catch (_) {
-    return null;
-  }
-}
-
 function proxyRequest(request) {
   const incoming = new URL(request.url);
   const target = new URL(ORIGIN);
@@ -48,8 +27,8 @@ export default {
       headers: { "User-Agent": "Noora-Preview-Worker" }
     });
 
-    const title = guest?.ogTitle || (guest?.name ? `تقدیم به ${guest.name} عزیز` : FALLBACK_TITLE);
-    const description = guest?.ogDescription || "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
+    const title = FALLBACK_TITLE;
+    const description = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
 
     if (!originResponse.ok) return originResponse;
 
@@ -91,17 +70,7 @@ export default {
       .on('meta[name="twitter:image"]', {
         element(element) { element.setAttribute("content", IMAGE_URL); }
       })
-      .on(".greeting-text", {
-        element(element) {
 
-        }
-      })
-      .on("[data-guest-name]", {
-        element(element) {
-          if (guest?.name) element.setInnerContent(guest.name + " عزیز");
-        }
-      })
-      
     return new Response(rewriter.transform(originResponse).body, { headers });
   }
 };
