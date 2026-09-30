@@ -243,6 +243,32 @@ async function updateGuestName(env, guestId, name) {
   return {ok:true, updated:true, guestId:wanted, oldName:String(guest.name || ""), name:newName};
 }
 
+async function resetGuestRsvp(env, guestId) {
+  const wanted = String(guestId || "").trim();
+  if (!wanted) return {ok:false, error:"missing_guest_id"};
+
+  const guest = await env.DB.prepare(
+    "SELECT guest_id, name, rsvp_status, rsvp_count FROM Guests WHERE guest_id = ? LIMIT 1"
+  ).bind(wanted).first();
+
+  if (!guest) return {ok:false, error:"guest_not_found"};
+
+  await env.DB.batch([
+    env.DB.prepare("DELETE FROM RSVP WHERE guest_id = ?").bind(wanted),
+    env.DB.prepare(
+      "UPDATE Guests SET rsvp_status = 'بدون پاسخ', rsvp_count = 0, last_rsvp = NULL WHERE guest_id = ?"
+    ).bind(wanted)
+  ]);
+
+  return {
+    ok:true,
+    reset:true,
+    guestId:wanted,
+    name:String(guest.name || ""),
+    oldStatus:String(guest.rsvp_status || "بدون پاسخ")
+  };
+}
+
 async function deleteGuest(env, guestId) {
   const wanted = String(guestId || "").trim();
   if (!wanted) return {ok:false, error:"missing_guest_id"};
@@ -304,6 +330,8 @@ async function handleApi(request, env) {
       result = await updateGuestName(env, params.guestId || params.g, params.name);
     } else if (action === "delete_guest") {
       result = await deleteGuest(env, params.guestId || params.g);
+    } else if (action === "reset_guest_rsvp") {
+      result = await resetGuestRsvp(env, params.guestId || params.g);
     } else if (action === "reset_all") {
       result = await resetAll(env);
     } else if (action === "get_guest") {
