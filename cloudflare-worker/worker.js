@@ -19,7 +19,7 @@ function proxyRequest(request) {
 function corsHeaders() {
   return {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Cache-Control": "no-store"
   };
@@ -58,12 +58,38 @@ async function handleApi(request) {
   if (request.method === "OPTIONS") {
     return new Response(null, {status: 204, headers: corsHeaders()});
   }
-  if (request.method !== "GET") {
+  if (request.method !== "GET" && request.method !== "POST") {
     return jsonResponse({ok:false, error:"method_not_allowed"},405);
   }
 
   const incoming = new URL(request.url);
   const action = (incoming.searchParams.get("action") || "").trim();
+
+  // Proxy guest creation to Apps Script so the admin panel can use one
+  // stable Worker endpoint instead of posting directly to Google.
+  if (request.method === "POST") {
+    try {
+      const body = await request.text();
+      const response = await fetch(GAS_ENDPOINT, {
+        method: "POST",
+        headers: {"Content-Type": request.headers.get("Content-Type") || "application/x-www-form-urlencoded"},
+        body
+      });
+      const responseBody = await response.text();
+      return new Response(responseBody, {
+        status: response.status,
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Cache-Control": "no-store"
+        }
+      });
+    } catch (error) {
+      return jsonResponse({ok:false,error:"upstream_unavailable"},504);
+    }
+  }
   const allowedActions = new Set(["list_guests","list_links","find_guest","get_guest","reset_all"]);
   if (!allowedActions.has(action)) {
     return jsonResponse({ok:false,error:"invalid_action"},400);
@@ -90,7 +116,7 @@ async function handleApi(request) {
       headers: {
         "Content-Type":"application/json; charset=UTF-8",
         "Access-Control-Allow-Origin":"*",
-        "Access-Control-Allow-Methods":"GET, OPTIONS",
+        "Access-Control-Allow-Methods":"GET, POST, OPTIONS",
         "Access-Control-Allow-Headers":"Content-Type",
         "Cache-Control":cacheable ? "public, max-age=300, stale-while-revalidate=60" : "no-store"
       }
