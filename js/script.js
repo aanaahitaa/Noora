@@ -196,7 +196,7 @@ function scheduleAutoEnterInvitation(){
     }
     // باز شدن خودکار؛ اگر مرورگر autoplay را اجازه بدهد، موسیقی هم همین‌جا شروع می‌شود.
     safeEnterInvitation();
-  },2000);
+  },6000);
 }
 
 loadGuestName();
