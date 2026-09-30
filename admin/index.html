@@ -163,7 +163,7 @@ function loadGuests(forceFresh=false){
   const list=document.getElementById("guestList");
   list.innerHTML='<div class="loading">در حال دریافت فهرست مهمان‌ها…</div>';
 
-  jsonpRequest("list_guests",forceFresh?{fresh:"1"}:{})
+  jsonpRequest("list_guests",{fresh:"1"})
     .then(data=>{
       renderGuestList(data);
     })
