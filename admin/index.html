@@ -177,6 +177,40 @@ function loadGuests(forceFresh=false){
 
 function loadLinks(){const list=document.getElementById("linkList"),callback="nooraLinks_"+Date.now();window[callback]=(data)=>{try{if(!data||!data.ok)throw new Error("load_failed");renderLinkList(data.links||[])}catch(e){list.innerHTML='<div class="empty">دریافت لینک‌ها انجام نشد.</div>'}delete window[callback];const old=document.getElementById(callback);if(old)old.remove()};const script=document.createElement("script");script.id=callback;script.src=GS_ENDPOINT+"?action=list_links&callback="+callback+"&t="+Date.now();script.onerror=()=>{list.innerHTML='<div class="empty">ارتباط با Google Sheets برقرار نشد.</div>';delete window[callback];script.remove()};document.body.appendChild(script)}
 function findExistingGuest(name){return jsonpRequest("find_guest",{name}).then(data=>data.guest||null).catch(e=>{if(e&&e.message==="guest_not_found")return null;throw e})}
-createBtn.onclick=async()=>{const name=nameEl.value.trim();fillPreviewDefaults();if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";showStatus("لطفاً نام مهمان را وارد کنید.",true);return}createBtn.disabled=true;showStatus("در حال بررسی مهمان‌های قبلی…");try{const existing=await findExistingGuest(name);if(existing){const existingUrl=existing.url||existing.invitationUrl||"";linkEl.textContent=existingUrl;resultTitle.textContent="لینک "+name+" ذخیره شد ✦";result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");const url=buildGuestUrl(id);document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;document.getElementById("saveOgTitle").value=ogTitleEl.value.trim();document.getElementById("saveOgDescription").value=ogDescriptionEl.value.trim();saveForm.submit();linkEl.textContent=url;resultTitle.textContent="لینک "+name+" ذخیره شد ✦";result.classList.add("show");showStatus("در حال ذخیره مهمان");setTimeout(()=>{createBtn.disabled=false;showStatus("مهمان در شیت ذخیره شد؛ لینک دائمی آماده است.");loadGuests(true)},1200)}catch(e){createBtn.disabled=false;showStatus("بررسی مهمان قبلی انجام نشد؛ دوباره تلاش کنید.",true)}};
+createBtn.onclick=async()=>{const name=nameEl.value.trim();fillPreviewDefaults();if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";showStatus("لطفاً نام مهمان را وارد کنید.",true);return}createBtn.disabled=true;showStatus("در حال بررسی مهمان‌های قبلی…");try{const existing=await findExistingGuest(name);if(existing){const existingUrl=existing.url||existing.invitationUrl||"";linkEl.textContent=existingUrl;resultTitle.textContent="لینک "+name+" ذخیره شد ✦";result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");const url=buildGuestUrl(id);document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;document.getElementById("saveOgTitle").value=ogTitleEl.value.trim();document.getElementById("saveOgDescription").value=ogDescriptionEl.value.trim();saveForm.submit();linkEl.textContent=url;resultTitle.textContent="در حال ثبت لینک "+name+"…";result.classList.add("show");showStatus("در حال ثبت مهمان در Google Sheets…");
+
+      // The Apps Script POST is sent through a hidden iframe, so the response
+      // itself is cross-origin and cannot be read here. Instead, verify the
+      // write through our API before declaring success.
+      const verifyGuestSaved = async (guestId, maxAttempts = 8) => {
+        let lastError = null;
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+          try {
+            const data = await jsonpRequest("get_guest", {guestId, fresh:"1"}, 10000);
+            if (data && data.ok && data.guest && data.guest.guestId === guestId) {
+              return data.guest;
+            }
+            lastError = new Error("guest_not_found");
+          } catch (error) {
+            lastError = error;
+          }
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        throw lastError || new Error("guest_save_not_confirmed");
+      };
+
+      try {
+        const savedGuest = await verifyGuestSaved(id);
+        createBtn.disabled=false;
+        resultTitle.textContent="لینک "+name+" ذخیره شد ✦";
+        showStatus("مهمان با موفقیت در شیت ثبت شد؛ لینک دائمی آماده است.");
+        loadGuests(true);
+      } catch (verifyError) {
+        console.error("Noora create_guest verification error:", verifyError);
+        createBtn.disabled=false;
+        result.classList.remove("show");
+        const reason = verifyError && verifyError.message ? verifyError.message : "guest_save_not_confirmed";
+        showStatus("ثبت مهمان تأیید نشد. لینک ساخته نشد؛ خطا: " + reason, true);
+      }}catch(e){createBtn.disabled=false;showStatus("بررسی مهمان قبلی انجام نشد؛ دوباره تلاش کنید.",true)}};
 document.getElementById("copy").onclick=async()=>{await navigator.clipboard.writeText(linkEl.textContent);document.getElementById("copy").textContent="✓ لینک کپی شد";setTimeout(()=>document.getElementById("copy").textContent="کپی لینک",1800)};document.getElementById("copyMessage").onclick=async()=>{const name=nameEl.value.trim()||"مهمان عزیز";const url=linkEl.textContent.trim();if(!url)return;const message=name+" عزیز،\nجهت مشاهده دعوت‌نامه تولد نورا جان، لطفا روی لینک زیر کلیک کنید:\n"+url;await navigator.clipboard.writeText(message);document.getElementById("copyMessage").textContent="✓ متن دعوت کپی شد";setTimeout(()=>document.getElementById("copyMessage").textContent="کپی متن دعوت",1800)};document.getElementById("resetList").onclick=async()=>{const firstConfirm=await showResetModalConfirm(1);if(!firstConfirm)return;const secondConfirm=await showResetModalConfirm(2);if(!secondConfirm)return;const btn=document.getElementById("resetList");btn.disabled=true;resetErrorEl.classList.remove("show");resetErrorEl.textContent="";showResetModalLoading();try{await jsonpRequest("reset_all",{fresh:"1"},15000);result.classList.remove("show");nameEl.value="";ogTitleEl.value="";ogDescriptionEl.value="";await new Promise(resolve=>setTimeout(resolve,250));loadGuests(true);showResetModalSuccess();}catch(e){console.error("Noora reset_all error:",e);const reason=e&&e.message?e.message:"unknown_error";resetErrorEl.textContent="خطا در پاک کردن لیست: "+reason;resetErrorEl.classList.add("show");showResetModalError(reason)}finally{btn.disabled=false}};loadGuests();
 </script></body></html>
