@@ -119,8 +119,30 @@ export default {
     });
     if (!originResponse.ok) return originResponse;
 
-    const title = FALLBACK_TITLE;
-    const description = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
+    let title = FALLBACK_TITLE;
+    let description = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
+
+    // Fetch guest-specific Open Graph metadata for link previews.
+    try {
+      const guestApi = new URL(GAS_ENDPOINT);
+      guestApi.searchParams.set("action", "get_guest");
+      guestApi.searchParams.set("guestId", guestId);
+
+      const guestResponse = await fetchWithRetry(guestApi.toString(), {
+        cf: {cacheTtl: 300, cacheEverything: true}
+      }, 2);
+
+      if (guestResponse.ok) {
+        const guestData = await guestResponse.json();
+        if (guestData && guestData.ok && guestData.guest) {
+          const guest = guestData.guest;
+          title = String(guest.ogTitle || "").trim() || ("تقدیم به " + String(guest.name || "").trim() + " عزیز");
+          description = String(guest.ogDescription || "").trim() || description;
+        }
+      }
+    } catch (error) {
+      // Keep the public fallback metadata if the guest lookup is unavailable.
+    }
     const headers = new Headers(originResponse.headers);
     headers.set("Cache-Control","public, max-age=60, s-maxage=300");
     headers.set("Content-Type","text/html; charset=UTF-8");
