@@ -1,7 +1,7 @@
 const ORIGIN = "https://aanaahitaa.github.io/Noora/";
 const FALLBACK_TITLE = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
+const FALLBACK_DESCRIPTION = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
 const IMAGE_URL = "https://aanaahitaa.github.io/Noora/assets/noora-cover.webp";
-const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwbAFhiYbNwpqxczEQzeQNbGm1yIYGveTBUvQ-Cu3zfKFKPdS8wcaNI4CdarzSmwolbuA/exec";
 
 function proxyRequest(request) {
   const incoming = new URL(request.url);
@@ -36,145 +36,304 @@ function jsonResponse(data, status = 200, extraHeaders = {}) {
   });
 }
 
-async function fetchWithRetry(url, options = {}, attempts = 2) {
-  let lastError = null;
-  for (let i = 0; i < attempts; i++) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 9000);
-    try {
-      const response = await fetch(url, {...options, signal: controller.signal});
-      clearTimeout(timer);
-      if (response.ok) return response;
-      lastError = new Error("upstream_http_" + response.status);
-    } catch (error) {
-      clearTimeout(timer);
-      lastError = error;
-    }
-  }
-  throw lastError || new Error("upstream_failed");
+function normalizeName(value) {
+  return String(value || "").trim().replace(/\s+/g, " ");
 }
 
-async function handleApi(request) {
-  if (request.method === "OPTIONS") {
-    return new Response(null, {status: 204, headers: corsHeaders()});
-  }
-  if (request.method !== "GET" && request.method !== "POST") {
-    return jsonResponse({ok:false, error:"method_not_allowed"},405);
-  }
+function guestFromRow(row) {
+  return {
+    guestId: String(row.guest_id || ""),
+    name: String(row.name || ""),
+    invitationUrl: String(row.invitation_url || ""),
+    url: String(row.invitation_url || ""),
+    ogTitle: String(row.og_title || "").trim() || ("تقدیم به " + String(row.name || "").trim() + " عزیز"),
+    ogDescription: String(row.og_description || "").trim() || FALLBACK_DESCRIPTION
+  };
+}
 
-  const incoming = new URL(request.url);
-  const action = (incoming.searchParams.get("action") || "").trim();
+async function createGuest(env, params) {
+  const guestId = String(params.guestId || "").trim();
+  const name = normalizeName(params.name);
+  const invitationUrl = String(params.invitationUrl || "").trim();
+  const ogTitle = String(params.ogTitle || "").trim() || ("تقدیم به " + name + " عزیز");
+  const ogDescription = String(params.ogDescription || "").trim() || FALLBACK_DESCRIPTION;
 
-  // Proxy guest creation to Apps Script so the admin panel can use one
-  // stable Worker endpoint instead of posting directly to Google.
-  if (request.method === "POST") {
-    try {
-      const body = await request.text();
-      const response = await fetch(GAS_ENDPOINT, {
-        method: "POST",
-        headers: {"Content-Type": request.headers.get("Content-Type") || "application/x-www-form-urlencoded"},
-        body
-      });
-      const responseBody = await response.text();
-      return new Response(responseBody, {
-        status: response.status,
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Cache-Control": "no-store"
-        }
-      });
-    } catch (error) {
-      return jsonResponse({ok:false,error:"upstream_unavailable"},504);
+  if (!guestId) return {ok:false, error:"missing_guest_id"};
+  if (!name) return {ok:false, error:"missing_name"};
+  if (!invitationUrl) return {ok:false, error:"missing_invitation_url"};
+
+  const duplicate = await env.DB.prepare(
+    "SELECT guest_id, name, invitation_url, og_title, og_description FROM Guests WHERE guest_id = ? OR name = ? LIMIT 1"
+  ).bind(guestId, name).first();
+
+  if (duplicate) {
+    if (String(duplicate.guest_id) === guestId) {
+      return {
+        ok:true,
+        existing:true,
+        guest:guestFromRow(duplicate)
+      };
     }
-  }
-  const allowedActions = new Set(["list_guests","list_links","find_guest","get_guest","reset_all"]);
-  if (!allowedActions.has(action)) {
-    return jsonResponse({ok:false,error:"invalid_action"},400);
+    return {ok:false, error:"guest_name_exists"};
   }
 
-  const upstream = new URL(GAS_ENDPOINT);
-  for (const [key,value] of incoming.searchParams) {
-    if (key === "callback" || key === "t" || key === "api" || key === "fresh") continue;
-    upstream.searchParams.set(key,value);
+  const result = await env.DB.prepare(
+    `INSERT INTO Guests
+      (guest_id, name, allowed_people, invitation_url, rsvp_status, rsvp_count, last_rsvp, og_title, og_description)
+     VALUES (?, ?, 1, ?, 'بدون پاسخ', 0, NULL, ?, ?)`
+  ).bind(guestId, name, invitationUrl, ogTitle, ogDescription).run();
+
+  return {
+    ok:true,
+    created:true,
+    guestId,
+    name,
+    invitationUrl,
+    ogTitle,
+    ogDescription,
+    dbChanges: result.meta && result.meta.changes || 0
+  };
+}
+
+async function getGuest(env, guestId) {
+  const wanted = String(guestId || "").trim();
+  if (!wanted) return {ok:false, error:"missing_guest_id"};
+
+  const row = await env.DB.prepare(
+    "SELECT guest_id, name, invitation_url, og_title, og_description FROM Guests WHERE guest_id = ? LIMIT 1"
+  ).bind(wanted).first();
+
+  if (!row) return {ok:false, error:"guest_not_found"};
+  return {ok:true, guest:guestFromRow(row)};
+}
+
+async function listGuests(env) {
+  const result = await env.DB.prepare(
+    `SELECT
+       g.created_at,
+       g.guest_id,
+       g.name,
+       g.invitation_url,
+       g.rsvp_status,
+       COALESCE((
+         SELECT r.message
+         FROM RSVP r
+         WHERE r.guest_id = g.guest_id
+         ORDER BY r.id DESC
+         LIMIT 1
+       ), '') AS message
+     FROM Guests g
+     ORDER BY g.id DESC`
+  ).run();
+
+  const guests = (result.results || []).map(row => ({
+    createdAt: String(row.created_at || ""),
+    guestId: String(row.guest_id || ""),
+    name: String(row.name || ""),
+    invitationUrl: String(row.invitation_url || ""),
+    attendance: String(row.rsvp_status || "بدون پاسخ"),
+    message: String(row.message || "")
+  }));
+
+  return {ok:true, count:guests.length, guests};
+}
+
+async function listLinks(env) {
+  const result = await env.DB.prepare(
+    "SELECT guest_id, name, invitation_url FROM Guests ORDER BY id DESC"
+  ).run();
+
+  const links = (result.results || []).map(row => ({
+    name: String(row.name || ""),
+    id: String(row.guest_id || ""),
+    url: String(row.invitation_url || ""),
+    invitationUrl: String(row.invitation_url || "")
+  }));
+
+  return {ok:true, count:links.length, links};
+}
+
+async function findGuest(env, name) {
+  const wanted = normalizeName(name);
+  if (!wanted) return {ok:false, error:"guest_not_found"};
+
+  const rows = await env.DB.prepare(
+    "SELECT guest_id, name, invitation_url, og_title, og_description FROM Guests ORDER BY id DESC"
+  ).run();
+
+  const row = (rows.results || []).find(item => normalizeName(item.name) === wanted);
+  if (!row) return {ok:false, error:"guest_not_found"};
+
+  return {ok:true, guest:guestFromRow(row)};
+}
+
+async function saveRsvp(env, params) {
+  const guestId = String(params.guestId || params.g || "").trim();
+  const attendance = params.attendance === "yes" ? "می‌آید" : "نمی‌آید";
+  const guestCount = Math.max(1, Number(params.guestCount || params.count || 1) || 1);
+  const message = String(params.message || "").trim();
+  const userAgent = String(params.userAgent || "").trim();
+
+  if (!guestId) return {ok:false, error:"missing_guest_id"};
+
+  let guest = await env.DB.prepare(
+    "SELECT id, guest_id, name, invitation_url, og_title, og_description FROM Guests WHERE guest_id = ? LIMIT 1"
+  ).bind(guestId).first();
+
+  if (!guest) {
+    const recoveredName = normalizeName(params.guestName);
+    const recoveredUrl = String(params.invitationUrl || "").trim();
+    if (!recoveredName) return {ok:false, error:"missing_guest_name"};
+
+    const recoveredTitle = "تقدیم به " + recoveredName + " عزیز";
+    const recoveredDescription = FALLBACK_DESCRIPTION;
+
+    await env.DB.prepare(
+      `INSERT INTO Guests
+        (guest_id, name, allowed_people, invitation_url, rsvp_status, rsvp_count, last_rsvp, og_title, og_description)
+       VALUES (?, ?, 1, ?, 'بدون پاسخ', 0, NULL, ?, ?)`
+    ).bind(guestId, recoveredName, recoveredUrl, recoveredTitle, recoveredDescription).run();
+
+    guest = await env.DB.prepare(
+      "SELECT id, guest_id, name, invitation_url, og_title, og_description FROM Guests WHERE guest_id = ? LIMIT 1"
+    ).bind(guestId).first();
   }
 
-  const fresh = incoming.searchParams.get("fresh") === "1";
-  const cacheable = !fresh && ["list_guests","list_links","find_guest","get_guest"].includes(action);
+  const invitedName = normalizeName(guest && guest.name);
+  if (!invitedName) return {ok:false, error:"missing_guest_name"};
+
+  await env.DB.prepare(
+    `INSERT INTO RSVP
+      (guest_id, guest_name, status, people_count, message, user_agent)
+     VALUES (?, ?, ?, ?, ?, ?)`
+  ).bind(guestId, invitedName, attendance, guestCount, message, userAgent).run();
+
+  await env.DB.prepare(
+    `UPDATE Guests
+     SET rsvp_status = ?, rsvp_count = ?, last_rsvp = CURRENT_TIMESTAMP
+     WHERE guest_id = ?`
+  ).bind(attendance, guestCount, guestId).run();
+
+  return {
+    ok:true,
+    guestId,
+    invitedName,
+    attendance,
+    message
+  };
+}
+
+async function resetAll(env) {
+  await env.DB.batch([
+    env.DB.prepare("DELETE FROM RSVP"),
+    env.DB.prepare("DELETE FROM Guests")
+  ]);
+  return {ok:true, reset:true};
+}
+
+async function handleApi(request, env) {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {status:204, headers:corsHeaders()});
+  }
+
+  if (request.method !== "GET" && request.method !== "POST") {
+    return jsonResponse({ok:false,error:"method_not_allowed"},405);
+  }
+
+  const url = new URL(request.url);
+  let params = {};
+
+  if (request.method === "POST") {
+    const contentType = request.headers.get("Content-Type") || "";
+    if (contentType.includes("application/json")) {
+      try {
+        params = await request.json();
+      } catch {
+        return jsonResponse({ok:false,error:"invalid_json"},400);
+      }
+    } else {
+      const body = await request.text();
+      params = Object.fromEntries(new URLSearchParams(body));
+    }
+  } else {
+    params = Object.fromEntries(url.searchParams.entries());
+  }
+
+  const action = String(params.action || "").trim();
 
   try {
-    const response = await fetchWithRetry(upstream.toString(), {
-      ...(fresh ? {cache:"no-cache"} : {}),
-      ...(cacheable ? {cf:{cacheTtl:300,cacheEverything:true}} : {})
-    }, 2);
+    let result;
 
-    const body = await response.text();
-    return new Response(body, {
-      status: response.status,
-      headers: {
-        "Content-Type":"application/json; charset=UTF-8",
-        "Access-Control-Allow-Origin":"*",
-        "Access-Control-Allow-Methods":"GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers":"Content-Type",
-        "Cache-Control":cacheable ? "public, max-age=300, stale-while-revalidate=60" : "no-store"
-      }
-    });
+    if (action === "create_guest" && request.method === "POST") {
+      result = await createGuest(env, params);
+    } else if (action === "rsvp" && request.method === "POST") {
+      result = await saveRsvp(env, params);
+    } else if (action === "reset_all") {
+      result = await resetAll(env);
+    } else if (action === "get_guest") {
+      result = await getGuest(env, params.guestId || params.g);
+    } else if (action === "list_guests") {
+      result = await listGuests(env);
+    } else if (action === "list_links") {
+      result = await listLinks(env);
+    } else if (action === "find_guest") {
+      result = await findGuest(env, params.name);
+    } else {
+      result = {ok:false,error:"invalid_action"};
+    }
+
+    return jsonResponse(result, result.ok === false && result.error === "invalid_action" ? 400 : 200);
   } catch (error) {
+    console.error("Noora D1 API error:", error);
     return jsonResponse({
       ok:false,
-      error:error && error.name === "AbortError" ? "upstream_timeout" : "upstream_unavailable"
-    },504);
+      error:"database_error",
+      detail:String(error && error.message || error)
+    },500);
   }
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const url = new URL(request.url);
 
     if (url.pathname === "/api") {
-      return handleApi(request);
+      return handleApi(request, env);
     }
 
     const guestId = (url.searchParams.get("g") || url.searchParams.get("guest") || "").trim();
-    if (!guestId || request.method !== "GET") return proxyRequest(request);
+    if (!guestId || request.method !== "GET") {
+      return proxyRequest(request);
+    }
 
     const originResponse = await fetch(ORIGIN, {
       headers: {"User-Agent":"Noora-Preview-Worker"}
     });
+
     if (!originResponse.ok) return originResponse;
 
     let title = FALLBACK_TITLE;
-    let description = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
+    let description = FALLBACK_DESCRIPTION;
 
-    // Fetch guest-specific Open Graph metadata for link previews.
     try {
-      const guestApi = new URL(GAS_ENDPOINT);
-      guestApi.searchParams.set("action", "get_guest");
-      guestApi.searchParams.set("guestId", guestId);
-
-      const guestResponse = await fetchWithRetry(guestApi.toString(), {
-        cf: {cacheTtl: 300, cacheEverything: true}
-      }, 2);
-
-      if (guestResponse.ok) {
-        const guestData = await guestResponse.json();
-        if (guestData && guestData.ok && guestData.guest) {
-          const guest = guestData.guest;
-          title = String(guest.ogTitle || "").trim() || ("تقدیم به " + String(guest.name || "").trim() + " عزیز");
-          description = String(guest.ogDescription || "").trim() || description;
-        }
+      const guestData = await getGuest(env, guestId);
+      if (guestData.ok && guestData.guest) {
+        const guest = guestData.guest;
+        title = guest.ogTitle || ("تقدیم به " + guest.name + " عزیز");
+        description = guest.ogDescription || FALLBACK_DESCRIPTION;
       }
     } catch (error) {
-      // Keep the public fallback metadata if the guest lookup is unavailable.
+      console.error("Noora guest metadata error:", error);
     }
+
     const headers = new Headers(originResponse.headers);
-    headers.set("Cache-Control","public, max-age=60, s-maxage=300");
+    headers.set("Cache-Control","no-store");
     headers.set("Content-Type","text/html; charset=UTF-8");
 
     const rewriter = new HTMLRewriter()
-      .on("head",{element(element){element.prepend(`<base href="${ORIGIN}">`,{html:true});}})
+      .on("head",{element(element){
+        element.prepend(`<base href="${ORIGIN}">`,{html:true});
+      }})
       .on("title",{element(element){element.setInnerContent(title);}})
       .on('meta[property="og:title"]',{element(element){element.setAttribute("content",title);}})
       .on('meta[property="og:description"]',{element(element){element.setAttribute("content",description);}})
