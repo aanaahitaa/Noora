@@ -108,6 +108,7 @@ button{font-size:16px!important}
 
 <script src="../js/config.js?v=20260930-1"></script><script>
 const nameEl=document.getElementById("guestName"),ogTitleEl=document.getElementById("ogTitle"),ogDescriptionEl=document.getElementById("ogDescription"),resultTitle=document.getElementById("resultTitle");
+const createBtn=document.getElementById("create"),statusEl=document.getElementById("status"),linkEl=document.getElementById("link"),result=document.getElementById("result");
 let ogTitleAuto=true,ogDescriptionAuto=true;
 function fillPreviewDefaults(){
   const n=nameEl.value.trim();
@@ -175,7 +176,7 @@ function loadGuests(forceFresh=false){
 
 
 function findExistingGuest(name){return jsonpRequest("find_guest",{name}).then(data=>data.guest||null).catch(e=>{if(e&&e.message==="guest_not_found")return null;throw e})}
-createBtn.onclick=async()=>{const name=nameEl.value.trim();fillPreviewDefaults();if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";showStatus("لطفاً نام مهمان را وارد کنید.",true);return}createBtn.disabled=true;showStatus("در حال بررسی مهمان‌های قبلی…");try{const existing=await findExistingGuest(name);if(existing){const existingUrl=existing.url||existing.invitationUrl||"";linkEl.textContent=existingUrl;resultTitle.textContent="لینک "+name+" ذخیره شد ✦";result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");const url=buildGuestUrl(id);document.getElementById("saveGuestId").value=id;document.getElementById("saveName").value=name;document.getElementById("saveUrl").value=url;document.getElementById("saveOgTitle").value=ogTitleEl.value.trim();document.getElementById("saveOgDescription").value=ogDescriptionEl.value.trim();
+createBtn.onclick=async()=>{const name=nameEl.value.trim();fillPreviewDefaults();if(!name){nameEl.focus();nameEl.style.borderColor="#d69a9a";showStatus("لطفاً نام مهمان را وارد کنید.",true);return}createBtn.disabled=true;showStatus("در حال بررسی مهمان‌های قبلی…");try{const existing=await findExistingGuest(name);if(existing){const existingUrl=existing.url||existing.invitationUrl||"";linkEl.textContent=existingUrl;resultTitle.textContent="لینک "+name+" ذخیره شد ✦";result.classList.add("show");showStatus("این مهمان قبلاً لینک گرفته است؛ لینک جدید ساخته نشد.");createBtn.disabled=false;return}const id="N"+Array.from(crypto.getRandomValues(new Uint8Array(5))).map(b=>"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[b%31]).join("");const url=buildGuestUrl(id);
 
       const apiBase=(window.NOORA_CONFIG&&window.NOORA_CONFIG.API_BASE_URL)||"";
       try {
