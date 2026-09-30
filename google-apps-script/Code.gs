@@ -283,6 +283,11 @@ function createGuest_(p) {
       invitationUrl: invitationUrl
     });
 
+  } catch (err) {
+    return json_({
+      ok: false,
+      error: String(err.message || err)
+    });
   }
 }
 
