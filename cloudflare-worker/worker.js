@@ -223,6 +223,18 @@ async function saveRsvp(env, params) {
   };
 }
 
+async function deleteGuest(env, guestId) {
+  const wanted = String(guestId || "").trim();
+  if (!wanted) return {ok:false, error:"missing_guest_id"};
+  const guest = await env.DB.prepare("SELECT guest_id, name, invitation_url FROM Guests WHERE guest_id = ? LIMIT 1").bind(wanted).first();
+  if (!guest) return {ok:false, error:"guest_not_found"};
+  await env.DB.batch([
+    env.DB.prepare("DELETE FROM RSVP WHERE guest_id = ?").bind(wanted),
+    env.DB.prepare("DELETE FROM Guests WHERE guest_id = ?").bind(wanted)
+  ]);
+  return {ok:true, deleted:true, guestId:wanted, name:String(guest.name || "")};
+}
+
 async function resetAll(env) {
   await env.DB.batch([
     env.DB.prepare("DELETE FROM RSVP"),
@@ -268,6 +280,8 @@ async function handleApi(request, env) {
       result = await createGuest(env, params);
     } else if (action === "rsvp" && request.method === "POST") {
       result = await saveRsvp(env, params);
+    } else if (action === "delete_guest") {
+      result = await deleteGuest(env, params.guestId || params.g);
     } else if (action === "reset_all") {
       result = await resetAll(env);
     } else if (action === "get_guest") {
