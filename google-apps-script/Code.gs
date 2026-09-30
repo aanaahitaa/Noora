@@ -189,9 +189,6 @@ function doPost(e) {
 }
 
 function createGuest_(p) {
-  var lock = LockService.getScriptLock();
-  lock.waitLock(10000);
-
   try {
     var name = String(p.name || "").trim();
     var guestId = String(p.guestId || "").trim();
@@ -286,8 +283,6 @@ function createGuest_(p) {
       invitationUrl: invitationUrl
     });
 
-  } finally {
-    lock.releaseLock();
   }
 }
 
