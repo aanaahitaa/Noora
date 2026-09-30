@@ -194,9 +194,9 @@ function scheduleAutoEnterInvitation(){
       autoEnterScheduled=false;
       return;
     }
-    // باز شدن خودکار مجاز است؛ autoplay موسیقی فقط در صورت اجازه‌ی مرورگر پخش می‌شود.
+    // باز شدن خودکار؛ اگر مرورگر autoplay را اجازه بدهد، موسیقی هم همین‌جا شروع می‌شود.
     safeEnterInvitation();
-  },10000);
+  },2000);
 }
 
 loadGuestName();
@@ -263,6 +263,22 @@ async function safeEnterInvitation(event){
 // فقط یک listener برای gesture باز کردن کارت؛
 // حذف listenerهای تکراری باعث می‌شود روی موبایل چند بار enterInvitation اجرا نشود.
 if(musicGate)musicGate.addEventListener("pointerup",safeEnterInvitation,{passive:false});
+
+// اگر کاربر بدون لمس صفحه شروع به اسکرول/gesture کرد، دوباره پخش موسیقی را امتحان کن.
+// خود scroll در همه مرورگرها user activation محسوب نمی‌شود، اما این retry در مرورگرهایی
+// که gesture را پذیرفته‌اند می‌تواند موسیقی را همان لحظه راه بیندازد.
+let musicInteractionRetried=false;
+function retryMusicFromInteraction(){
+  if(musicInteractionRetried||!music||!music.paused||!musicGate)return;
+  musicInteractionRetried=true;
+  playMusic().then(ok=>{
+    if(!ok)musicInteractionRetried=false;
+  });
+}
+window.addEventListener("scroll",retryMusicFromInteraction,{passive:true});
+window.addEventListener("touchstart",retryMusicFromInteraction,{passive:true});
+window.addEventListener("pointerdown",retryMusicFromInteraction,{passive:true});
+window.addEventListener("wheel",retryMusicFromInteraction,{passive:true});
 
 function toggleMusic(){
   if(!music)return;
