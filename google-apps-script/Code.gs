@@ -288,6 +288,7 @@ function createGuest_(p) {
       name,
       invitationUrl,
       "بدون پاسخ",
+      "",
       ogTitle,
       ogDescription
     ]);
@@ -391,9 +392,8 @@ function getGuestFromCache_(guestId) {
 }
 
 function clearGuestCache_() {
-  CacheService.getScriptCache().removeAll(
-    CacheService.getScriptCache().getKeys()
-  );
+  // CacheService does not provide a reliable getKeys() API.
+  // Guest entries are refreshed when created and expire automatically.
 }
 
 function listGuests_(callback) {
