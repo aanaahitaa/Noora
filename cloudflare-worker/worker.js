@@ -115,6 +115,7 @@ async function listGuests(env) {
        g.name,
        g.invitation_url,
        g.og_title,
+       g.og_description,
        g.rsvp_status,
        COALESCE((
          SELECT r.message
@@ -132,6 +133,8 @@ async function listGuests(env) {
     guestId: String(row.guest_id || ""),
     name: String(row.name || ""),
     invitationUrl: String(row.invitation_url || ""),
+    ogTitle: String(row.og_title || "").trim() || ("تقدیم به " + String(row.name || "").trim() + " عزیز"),
+    ogDescription: String(row.og_description || "").trim() || FALLBACK_DESCRIPTION,
     attendance: String(row.rsvp_status || "بدون پاسخ"),
     message: String(row.message || "")
   }));
@@ -248,6 +251,25 @@ async function updateGuestOgTitle(env, guestId, title) {
   };
 }
 
+async function updateGuestDetails(env, guestId, name, ogTitle, ogDescription) {
+  const wanted = String(guestId || "").trim();
+  const newName = normalizeName(name);
+  const newTitle = String(ogTitle || "").trim().replace(/\s+/g, " ");
+  const newDescription = String(ogDescription || "").trim().replace(/\s+/g, " ");
+  if (!wanted) return {ok:false, error:"missing_guest_id"};
+  if (!newName) return {ok:false, error:"missing_name"};
+  if (!newTitle) return {ok:false, error:"missing_og_title"};
+  if (!newDescription) return {ok:false, error:"missing_og_description"};
+  const existing = await env.DB.prepare("SELECT guest_id FROM Guests WHERE name = ? AND guest_id <> ? LIMIT 1").bind(newName, wanted).first();
+  if (existing) return {ok:false, error:"guest_name_exists"};
+  const guest = await env.DB.prepare("SELECT guest_id, name, og_title, og_description FROM Guests WHERE guest_id = ? LIMIT 1").bind(wanted).first();
+  if (!guest) return {ok:false, error:"guest_not_found"};
+  await env.DB.batch([
+    env.DB.prepare("UPDATE Guests SET name = ?, og_title = ?, og_description = ? WHERE guest_id = ?").bind(newName, newTitle, newDescription, wanted),
+    env.DB.prepare("UPDATE RSVP SET guest_name = ? WHERE guest_id = ?").bind(newName, wanted)
+  ]);
+  return {ok:true, updated:true, guestId:wanted, name:newName, ogTitle:newTitle, ogDescription:newDescription};
+}
 async function updateGuestName(env, guestId, name) {
   const wanted = String(guestId || "").trim();
   const newName = normalizeName(name);
@@ -351,6 +373,8 @@ async function handleApi(request, env) {
       result = await createGuest(env, params);
     } else if (action === "rsvp" && request.method === "POST") {
       result = await saveRsvp(env, params);
+    } else if (action === "update_guest_details") {
+      result = await updateGuestDetails(env, params.guestId || params.g, params.name, params.ogTitle, params.ogDescription);
     } else if (action === "update_guest_name") {
       result = await updateGuestName(env, params.guestId || params.g, params.name);
     } else if (action === "update_guest_og_title") {
