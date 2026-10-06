@@ -445,20 +445,34 @@ export default {
     headers.set("Cache-Control","no-store");
     headers.set("Content-Type","text/html; charset=UTF-8");
 
-    const rewriter = new HTMLRewriter()
-      .on("head",{element(element){
-        element.prepend(`<base href="${ORIGIN}">`,{html:true});
-      }})
-      .on("title",{element(element){element.setInnerContent(title);}})
-      .on('meta[property="og:title"]',{element(element){element.setAttribute("content",title);}})
-      .on('meta[property="og:description"]',{element(element){element.setAttribute("content",description);}})
-      .on('meta[property="og:url"]',{element(element){element.setAttribute("content",url.toString());}})
-      .on('meta[property="og:image"]',{element(element){element.setAttribute("content",IMAGE_URL);}})
-      .on('meta[name="description"]',{element(element){element.setAttribute("content",description);}})
-      .on('meta[name="twitter:title"]',{element(element){element.setAttribute("content",title);}})
-      .on('meta[name="twitter:description"]',{element(element){element.setAttribute("content",description);}})
-      .on('meta[name="twitter:image"]',{element(element){element.setAttribute("content",IMAGE_URL);}});
+    // Buffer the final HTML so social crawlers receive one complete document.
+    // Guest-specific title/description and the Noora image URL remain unchanged.
+    const escapeHtml = (value) => String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
 
-    return new Response(rewriter.transform(originResponse).body,{headers});
+    let html = await originResponse.text();
+    const safeTitle = escapeHtml(title);
+    const safeDescription = escapeHtml(description);
+    const safeUrl = escapeHtml(url.toString());
+    const safeImage = escapeHtml(IMAGE_URL);
+
+    html = html.replace(/<title>[\s\S]*?<\/title>/i, "<title>" + safeTitle + "</title>");
+    html = html.replace(/<meta\s+property=["']og:title["'][^>]*>/i, '<meta property="og:title" content="' + safeTitle + '">');
+    html = html.replace(/<meta\s+property=["']og:description["'][^>]*>/i, '<meta property="og:description" content="' + safeDescription + '">');
+    html = html.replace(/<meta\s+property=["']og:url["'][^>]*>/i, '<meta property="og:url" content="' + safeUrl + '">');
+    html = html.replace(/<meta\s+property=["']og:image["'][^>]*>/i, '<meta property="og:image" content="' + safeImage + '">');
+    html = html.replace(/<meta\s+name=["']description["'][^>]*>/i, '<meta name="description" content="' + safeDescription + '">');
+    html = html.replace(/<meta\s+name=["']twitter:title["'][^>]*>/i, '<meta name="twitter:title" content="' + safeTitle + '">');
+    html = html.replace(/<meta\s+name=["']twitter:description["'][^>]*>/i, '<meta name="twitter:description" content="' + safeDescription + '">');
+    html = html.replace(/<meta\s+name=["']twitter:image["'][^>]*>/i, '<meta name="twitter:image" content="' + safeImage + '">');
+
+    if (!/<base\s+href=/i.test(html)) {
+      html = html.replace(/<head([^>]*)>/i, '<head$1><base href="' + escapeHtml(ORIGIN) + '">');
+    }
+
+    return new Response(html,{headers});
   }
 };
