@@ -1,7 +1,7 @@
 const ORIGIN = "https://aanaahitaa.github.io/Noora/";
 const FALLBACK_TITLE = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
 const FALLBACK_DESCRIPTION = "دعوت‌نامه جشن تولد یک‌سالگی نورا جان";
-const IMAGE_URL = "https://aanaahitaa.github.io/Noora/assets/noora-cover.webp";
+const IMAGE_URL = "https://noora.thisisanahita.ir/assets/noora-cover.webp?v=2";
 
 function proxyRequest(request) {
   const incoming = new URL(request.url);
@@ -445,19 +445,54 @@ export default {
     headers.set("Cache-Control","no-store");
     headers.set("Content-Type","text/html; charset=UTF-8");
 
+    const escapeHtml = (value) => String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+
+    const safeTitle = escapeHtml(title);
+    const safeDescription = escapeHtml(description);
+    const safeUrl = escapeHtml(url.toString());
+
     const rewriter = new HTMLRewriter()
       .on("head",{element(element){
         element.prepend(`<base href="${ORIGIN}">`,{html:true});
+        element.append(
+          `<meta property="og:title" content="${safeTitle}">
+           <meta property="og:description" content="${safeDescription}">
+           <meta property="og:image" content="${IMAGE_URL}">
+           <meta property="og:image:secure_url" content="${IMAGE_URL}">
+           <meta property="og:image:type" content="image/webp">
+           <meta property="og:image:width" content="1200">
+           <meta property="og:image:height" content="630">
+           <meta property="og:url" content="${safeUrl}">
+           <meta property="og:type" content="website">
+           <meta name="description" content="${safeDescription}">
+           <meta name="twitter:card" content="summary_large_image">
+           <meta name="twitter:title" content="${safeTitle}">
+           <meta name="twitter:description" content="${safeDescription}">
+           <meta name="twitter:image" content="${IMAGE_URL}">
+           <meta name="twitter:image:alt" content="کارت دعوت تولد نورا">`,
+          {html:true}
+        );
       }})
       .on("title",{element(element){element.setInnerContent(title);}})
-      .on('meta[property="og:title"]',{element(element){element.setAttribute("content",title);}})
-      .on('meta[property="og:description"]',{element(element){element.setAttribute("content",description);}})
-      .on('meta[property="og:url"]',{element(element){element.setAttribute("content",url.toString());}})
-      .on('meta[property="og:image"]',{element(element){element.setAttribute("content",IMAGE_URL);}})
-      .on('meta[name="description"]',{element(element){element.setAttribute("content",description);}})
-      .on('meta[name="twitter:title"]',{element(element){element.setAttribute("content",title);}})
-      .on('meta[name="twitter:description"]',{element(element){element.setAttribute("content",description);}})
-      .on('meta[name="twitter:image"]',{element(element){element.setAttribute("content",IMAGE_URL);}});
+      .on('meta[property="og:title"]',{element(element){element.remove();}})
+      .on('meta[property="og:description"]',{element(element){element.remove();}})
+      .on('meta[property="og:image"]',{element(element){element.remove();}})
+      .on('meta[property="og:image:secure_url"]',{element(element){element.remove();}})
+      .on('meta[property="og:image:type"]',{element(element){element.remove();}})
+      .on('meta[property="og:image:width"]',{element(element){element.remove();}})
+      .on('meta[property="og:image:height"]',{element(element){element.remove();}})
+      .on('meta[property="og:url"]',{element(element){element.remove();}})
+      .on('meta[property="og:type"]',{element(element){element.remove();}})
+      .on('meta[name="description"]',{element(element){element.remove();}})
+      .on('meta[name="twitter:card"]',{element(element){element.remove();}})
+      .on('meta[name="twitter:title"]',{element(element){element.remove();}})
+      .on('meta[name="twitter:description"]',{element(element){element.remove();}})
+      .on('meta[name="twitter:image"]',{element(element){element.remove();}})
+      .on('meta[name="twitter:image:alt"]',{element(element){element.remove();}});
 
     return new Response(rewriter.transform(originResponse).body,{headers});
   }
